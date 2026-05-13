@@ -2,16 +2,26 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>ryopc Global Digital Support</title>
+    
+    <!-- 🎨 ryopc自作ロゴをタブで輝かせるファビコン命令 -->
+    <link rel="icon" type="image/png" href="favicon.ico">
+    
     <style>
         :root {
-            --primary: #0052cc;      /* 進化したテック・ブルー */
+            --primary: #0052cc;      /* テック・ブルー */
             --dark: #0a192f;         /* サイバー・ダークネイビー */
             --accent: #00bfff;       /* サイバー・アクアブルー */
-            --bg: #f8fafc;           /* クリーンな背景グレー */
+            --bg: #f8fafc;           /* 背景グレー */
             --text: #334155;
         }
+        
+        html {
+            scroll-behavior: smooth;
+            -webkit-text-size-adjust: 100%;
+        }
+
         body {
             font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
             margin: 0;
@@ -19,52 +29,55 @@
             background-color: var(--bg);
             color: var(--text);
             line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
         }
+
         header {
             background: linear-gradient(135deg, var(--dark) 0%, #172a45 100%);
             color: white;
-            padding: 6rem 1rem;
+            padding: 4rem 1.2rem;
             text-align: center;
-            position: relative;
             border-bottom: 4px solid var(--accent);
         }
+
         header h1 {
             margin: 0;
-            font-size: 3.5rem;
+            font-size: 2.5rem;
             font-weight: 800;
             letter-spacing: -1px;
             background: linear-gradient(to right, #ffffff, var(--accent));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
+            word-wrap: break-word;
         }
+
         header p {
-            font-size: 1.3rem;
+            font-size: 1.05rem;
             max-width: 600px;
-            margin: 1.5rem auto 0 auto;
+            margin: 1.2rem auto 0 auto;
             color: #94a3b8;
         }
+
         .container {
-            max-width: 900px;
-            margin: 3rem auto;
-            padding: 0 1.5rem;
+            max-width: 800px;
+            margin: 2rem auto;
+            padding: 0 1.2rem;
         }
+
         .card {
             background: white;
-            padding: 2.5rem;
+            padding: 1.8rem;
             border-radius: 16px;
-            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05), 0 8px 10px -6px rgba(0, 0, 0, 0.05);
-            margin-bottom: 2.5rem;
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05);
+            margin-bottom: 1.8rem;
             border: 1px solid #e2e8f0;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            transition: all 0.2s ease;
+            -webkit-tap-highlight-color: transparent;
         }
-        .card:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
-            border-color: var(--accent);
-        }
+
         h2 {
             color: var(--dark);
-            font-size: 1.8rem;
+            font-size: 1.4rem;
             margin-top: 0;
             display: flex;
             align-items: center;
@@ -74,32 +87,60 @@
             content: "⚡";
             color: var(--accent);
         }
-        p {
-            font-size: 1.1rem;
-            color: #475569;
-        }
+
         footer {
             background-color: var(--dark);
             color: #94a3b8;
-            padding: 3rem 1rem;
+            padding: 2.5rem 1.2rem;
             text-align: center;
-            font-size: 0.95rem;
-            border-top: 1px solid #1e293b;
+            font-size: 0.9rem;
         }
-        footer p {
-            color: #64748b;
-            margin: 0.5rem 0;
-        }
+
         .status-badge {
             display: inline-block;
             background-color: #1e293b;
             color: var(--accent);
             padding: 0.4rem 1rem;
             border-radius: 9999px;
-            font-size: 0.85rem;
+            font-size: 0.8rem;
             font-weight: 600;
             border: 1px solid rgba(0, 191, 255, 0.2);
             margin-top: 1rem;
+        }
+
+        /* 🤖 ガチの自動感知テクノロジー（Interaction Media Queries） */
+        @media (hover: hover) and (pointer: fine) {
+            header {
+                padding: 6rem 1rem;
+            }
+            header h1 {
+                font-size: 3.5rem;
+            }
+            header p {
+                font-size: 1.3rem;
+            }
+            .card {
+                padding: 2.5rem;
+                margin-bottom: 2.5rem;
+            }
+            .card:hover {
+                transform: translateY(-5px);
+                box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+                border-color: var(--accent);
+            }
+            h2 {
+                font-size: 1.8rem;
+            }
+        }
+
+        @media (hover: none) {
+            .card:active {
+                border-color: var(--accent);
+                background-color: #f8fafc;
+            }
+            header h1 {
+                font-size: calc(1.8rem + 2vw);
+            }
         }
     </style>
 </head>
