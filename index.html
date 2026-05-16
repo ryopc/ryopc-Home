@@ -21,11 +21,13 @@
             --text: #334155;
             --text-light: #94a3b8;
             --white: #ffffff;
-            --glass: rgba(13, 29, 52, 0.85);
-            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            --glass: rgba(13, 29, 52, 0.9);
+            --transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+            --gradient-accent: linear-gradient(135deg, #00bfff, #0052cc);
+            --gradient-orange: linear-gradient(135deg, #ff5000, #ff8c00);
         }
         
-        * { box-sizing: border-box; }
+        * { box-sizing: border-box; outline: none; }
         html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
         
         body {
@@ -38,49 +40,63 @@
             overflow-x: hidden;
         }
 
-        /* ページ読み込み時のフェードインアニメーション */
+        /* スクロール進行状況バー */
+        #scroll-progress {
+            position: fixed; top: 0; left: 0; width: 0%; height: 4px;
+            background: var(--gradient-accent);
+            z-index: 1000001; transition: width 0.1s;
+        }
+
+        /* アニメーション定義 */
         @keyframes fadeInUp {
-            from { opacity: 0; transform: translateY(20px); }
+            from { opacity: 0; transform: translateY(30px); }
             to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes popIn {
+            0% { opacity: 0; transform: scale(0.8) translateY(20px); }
+            100% { opacity: 1; transform: scale(1) translateY(0); }
+        }
+
+        @keyframes pulse-ring {
+            0% { transform: scale(0.95); opacity: 0.5; }
+            50% { transform: scale(1.1); opacity: 0.3; }
+            100% { transform: scale(1.2); opacity: 0; }
         }
 
         header {
             background: radial-gradient(circle at top right, var(--dark-light), var(--dark));
             color: var(--white);
-            padding: 6rem 1.5rem;
+            padding: 8rem 1.5rem 10rem;
             text-align: center;
-            border-bottom: 4px solid var(--accent);
             position: relative;
             overflow: hidden;
         }
 
-        header::after {
-            content: "";
-            position: absolute;
-            top: 0; left: 0; right: 0; bottom: 0;
+        header::before {
+            content: ""; position: absolute; top: 0; left: 0; right: 0; bottom: 0;
             background: url('https://www.transparenttextures.com/patterns/carbon-fibre.png');
-            opacity: 0.1;
-            pointer-events: none;
+            opacity: 0.15; pointer-events: none;
         }
 
         header h1 {
-            margin: 0; font-size: clamp(2.5rem, 8vw, 3.5rem); font-weight: 800;
+            margin: 0; font-size: clamp(2.8rem, 10vw, 4.5rem); font-weight: 800;
             letter-spacing: -0.05em;
-            background: linear-gradient(135deg, var(--white) 30%, var(--accent));
+            background: linear-gradient(135deg, var(--white) 40%, var(--accent));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             animation: fadeInUp 0.8s ease-out;
         }
 
         header p {
-            font-size: 1.1rem; max-width: 650px; margin: 1.5rem auto 0;
-            color: var(--text-light);
+            font-size: 1.25rem; max-width: 700px; margin: 2rem auto 0;
+            color: var(--text-light); opacity: 0.9;
             animation: fadeInUp 1s ease-out backwards;
         }
 
         .container {
-            max-width: 850px;
-            margin: -3rem auto 4rem;
+            max-width: 900px;
+            margin: -5rem auto 6rem;
             padding: 0 1.5rem;
             position: relative;
             z-index: 10;
@@ -88,117 +104,106 @@
 
         .card {
             background: var(--white);
-            padding: 2.5rem;
-            border-radius: 24px;
-            box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.05);
-            margin-bottom: 2rem;
+            padding: 3rem;
+            border-radius: 32px;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.08);
+            margin-bottom: 2.5rem;
             border: 1px solid rgba(226, 232, 240, 0.8);
             transition: var(--transition);
             animation: fadeInUp 1.2s cubic-bezier(0.22, 1, 0.36, 1) backwards;
         }
 
         .card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 30px 60px -12px rgba(0, 0, 0, 0.1);
+            transform: translateY(-8px);
+            box-shadow: 0 40px 80px -15px rgba(0, 0, 0, 0.12);
             border-color: var(--accent);
         }
 
         h2 {
-            color: var(--dark);
-            font-size: 1.5rem;
-            margin-top: 0;
-            display: flex;
-            align-items: center;
-            gap: 0.75rem;
+            color: var(--dark); font-size: 1.75rem; margin-top: 0;
+            display: flex; align-items: center; gap: 1rem;
         }
 
         h2::before {
-            content: "";
-            display: inline-block;
-            width: 8px;
-            height: 24px;
-            background: var(--accent);
-            border-radius: 4px;
+            content: ""; display: inline-block; width: 6px; height: 28px;
+            background: var(--gradient-accent); border-radius: 10px;
         }
 
+        /* ドキュメントボタン */
         .docs-link-button {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
-            background: linear-gradient(135deg, var(--primary), var(--primary-light));
-            color: var(--white) !important;
-            text-decoration: none;
-            padding: 1.2rem 2rem;
-            border-radius: 16px;
-            font-weight: 700;
-            font-size: 1.2rem;
+            display: flex; align-items: center; justify-content: center;
+            gap: 15px; background: var(--dark);
+            color: var(--white) !important; text-decoration: none;
+            padding: 1.5rem 2.5rem; border-radius: 20px;
+            font-weight: 700; font-size: 1.3rem;
             transition: var(--transition);
-            box-shadow: 0 10px 20px rgba(0, 82, 204, 0.2);
+            box-shadow: 0 15px 35px rgba(10, 25, 47, 0.2);
+            position: relative; overflow: hidden;
             animation: fadeInUp 1.4s ease-out backwards;
         }
 
+        .docs-link-button::after {
+            content: ""; position: absolute; top: 0; left: -75%; width: 50%; height: 100%;
+            background: linear-gradient(to right, rgba(255,255,255,0) 0%, rgba(255,255,255,0.3) 100%);
+            transform: skewX(-25deg); transition: 0.75s;
+        }
+
+        .docs-link-button:hover::after {
+            animation: shine 0.75s forwards;
+        }
+
         .docs-link-button:hover {
-            transform: scale(1.02);
-            box-shadow: 0 15px 30px rgba(0, 82, 204, 0.3);
-            filter: brightness(1.1);
+            background: var(--primary); transform: translateY(-3px) scale(1.01);
+            box-shadow: 0 20px 40px rgba(0, 82, 204, 0.3);
+        }
+
+        @keyframes shine {
+            100% { left: 125%; }
         }
 
         footer {
-            background-color: var(--dark);
-            color: var(--text-light);
-            padding: 4rem 1.5rem 8rem; /* 下部に余裕を持たせる（ボタン対策） */
-            text-align: center;
-            font-size: 0.95rem;
+            background-color: var(--dark); color: var(--text-light);
+            padding: 6rem 1.5rem 10rem; text-align: center;
         }
 
         .status-badge {
-            display: inline-block;
-            background-color: rgba(30, 41, 59, 0.5);
-            color: var(--accent);
-            padding: 0.5rem 1.25rem;
-            border-radius: 100px;
-            font-size: 0.85rem;
-            font-weight: 600;
-            border: 1px solid rgba(0, 191, 255, 0.3);
-            margin-top: 1.5rem;
+            display: inline-flex; align-items: center; gap: 8px;
+            background-color: rgba(30, 41, 59, 0.8);
+            color: var(--accent); padding: 0.7rem 1.5rem;
+            border-radius: 100px; font-size: 0.9rem; font-weight: 600;
+            border: 1px solid rgba(0, 191, 255, 0.25); margin-top: 2rem;
         }
 
-        /* --- クッキーバナー (グラスモフィズム) --- */
+        .status-dot {
+            width: 8px; height: 8px; background: var(--accent);
+            border-radius: 50%; display: inline-block;
+            box-shadow: 0 0 10px var(--accent);
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { opacity: 1; } 50% { opacity: 0.4; } 100% { opacity: 1; }
+        }
+
+        /* クッキーバナー */
         .ch-cookie-banner {
-            position: fixed;
-            bottom: 24px; left: 24px; right: 24px;
-            background: var(--glass);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            color: var(--white);
-            padding: 20px 28px;
-            border-radius: 20px;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-wrap: wrap;
-            gap: 20px;
-            z-index: 1000000;
-            animation: fadeInUp 0.5s ease-out;
+            position: fixed; bottom: 32px; left: 32px; right: 32px;
+            background: var(--glass); backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px);
+            color: var(--white); padding: 24px 32px; border-radius: 24px;
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.4);
+            display: flex; justify-content: space-between; align-items: center;
+            flex-wrap: wrap; gap: 24px; z-index: 1000000;
+            animation: fadeInUp 0.6s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
         .ch-cookie-banner.ch-hidden { display: none !important; }
-
-        .ch-cookie-text { flex: 1; min-width: 280px; font-size: 0.95rem; opacity: 0.9; }
-
-        .ch-cookie-buttons { display: flex; gap: 12px; }
+        .ch-cookie-text { flex: 1; min-width: 300px; font-size: 1rem; line-height: 1.5; }
+        .ch-cookie-buttons { display: flex; gap: 14px; }
 
         .ch-cookie-btn {
-            padding: 12px 24px;
-            border: none;
-            border-radius: 12px;
-            font-weight: 700;
-            font-size: 0.9rem;
-            cursor: pointer;
-            transition: var(--transition);
+            padding: 14px 28px; border: none; border-radius: 14px;
+            font-weight: 700; font-size: 0.95rem; cursor: pointer; transition: var(--transition);
         }
 
         .ch-btn-accept { background: var(--primary); color: var(--white); }
@@ -206,53 +211,102 @@
         .ch-btn-deny { background: rgba(255, 255, 255, 0.1); color: var(--white); }
         .ch-btn-deny:hover { background: rgba(255, 255, 255, 0.2); }
 
-        /* --- モバイル専用フローティングボタン --- */
+        /* フローティングチャットボタン (新デザイン: 右下にコンパクトに浮かぶ) */
         #special-mobile-chat-container {
             display: none;
             position: fixed;
-            bottom: 0; left: 0; width: 100%;
+            bottom: 32px;
+            right: 32px;
             z-index: 999999;
-            transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+            animation: popIn 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+
+        /* 波紋効果 */
+        #special-mobile-chat-container::before {
+            content: "";
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            border-radius: 9999px;
+            background: #ff5000;
+            z-index: -1;
+            animation: pulse-ring 2s cubic-bezier(0.215, 0.61, 0.355, 1) infinite;
+            pointer-events: none;
         }
 
         #special-mobile-chat-btn {
-            width: 100%;
-            padding: 20px;
-            padding-bottom: calc(20px + env(safe-area-inset-bottom));
-            background: linear-gradient(to right, #ff5000, #ff7b00);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 16px 28px;
+            background: var(--gradient-orange);
             color: var(--white);
             border: none;
             font-size: 1.1rem;
             font-weight: 800;
-            letter-spacing: 0.05em;
-            box-shadow: 0 -8px 25px rgba(255, 80, 0, 0.25);
+            border-radius: 9999px;
+            box-shadow: 0 10px 30px rgba(255, 80, 0, 0.4);
             cursor: pointer;
-            border-radius: 24px 24px 0 0;
+            transition: var(--transition);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        #special-mobile-chat-btn:hover {
+            transform: translateY(-4px) scale(1.03);
+            box-shadow: 0 15px 40px rgba(255, 80, 0, 0.5);
+        }
+
+        #special-mobile-chat-btn:active {
+            transform: translateY(-1px) scale(0.98);
         }
 
         #special-mobile-close-btn {
             position: absolute;
-            top: -15px; right: 20px;
-            width: 32px; height: 32px;
+            top: -8px;
+            left: -8px;
+            width: 28px;
+            height: 28px;
             background: var(--dark);
             color: var(--white);
             border-radius: 50%;
-            display: flex; align-items: center; justify-content: center;
-            font-size: 18px;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 16px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
             cursor: pointer;
             border: 2px solid var(--white);
+            transition: var(--transition);
         }
 
-        @media (max-width: 576px) {
-            .ch-cookie-banner { bottom: 10px; left: 10px; right: 10px; padding: 18px; }
+        #special-mobile-close-btn:hover {
+            background: #ff0000;
+            transform: scale(1.1);
+        }
+
+        @media (max-width: 768px) {
+            #special-mobile-chat-container {
+                bottom: 24px;
+                right: 24px;
+            }
+            #special-mobile-chat-btn {
+                padding: 14px 22px;
+                font-size: 0.95rem;
+            }
+        }
+
+        @media (max-width: 600px) {
+            header { padding: 6rem 1.5rem 8rem; }
+            .container { margin-top: -3.5rem; }
+            .card { padding: 2rem; border-radius: 24px; }
+            .ch-cookie-banner { bottom: 12px; left: 12px; right: 12px; padding: 20px; border-radius: 20px; }
             .ch-cookie-buttons { width: 100%; }
             .ch-cookie-btn { flex: 1; }
-            .container { margin-top: -2rem; }
         }
     </style>
 </head>
 <body>
+
+    <div id="scroll-progress"></div>
 
     <header>
         <h1>ryopc org</h1>
@@ -279,26 +333,51 @@
     <div id="chCookieBanner" class="ch-cookie-banner ch-hidden">
         <div class="ch-cookie-text">
             <strong>Cookieの使用について</strong><br>
-            当サイトでは、サポートチャット機能の提供および利便性向上のためにクッキーを使用しています。
+            当サイトでは、サポートチャットの提供および利便性向上のためにCookieを使用します。同意することでチャットサポートをご利用いただけます。
         </div>
         <div class="ch-cookie-buttons">
-            <button class="ch-cookie-btn ch-btn-deny" onclick="chDenyCookie()">拒否する</button>
-            <button class="ch-cookie-btn ch-btn-accept" onclick="chAcceptCookie()">同意する</button>
+            <button class="ch-cookie-btn ch-btn-deny" onclick="chDenyCookie()">拒否</button>
+            <button class="ch-cookie-btn ch-btn-accept" onclick="chAcceptCookie()">同意して利用開始</button>
         </div>
     </div>
 
-    <!-- モバイル用チャットボタン -->
+    <!-- フローティングチャットボタン -->
     <div id="special-mobile-chat-container">
-        <button id="special-mobile-chat-btn">チャットで無料相談する</button>
+        <button id="special-mobile-chat-btn">
+            <!-- 吹き出しのSVGアイコン -->
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="margin-top: 1px;"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
+            チャット相談
+        </button>
         <span id="special-mobile-close-btn" title="閉じる">×</span>
     </div>
 
     <footer>
         <p>&copy; 2026 ryopc Global Initiative. All Rights Reserved.</p>
-        <div class="status-badge">Status: Under application for Open Source Collective (Covina, CA, USA)</div>
+        <div class="status-badge">
+            <span class="status-dot"></span>
+            Status: Under application for Open Source Collective (Covina, CA, USA)
+        </div>
     </footer>
 
     <script>
+    // --- セーフストレージヘルパー (iframe等の環境でlocalStorageがブロックされた際のエラーを自動回避) ---
+    const safeStorage = {
+        get: function(key) {
+            try {
+                return localStorage.getItem(key);
+            } catch (e) {
+                return window['fallback_' + key] || null;
+            }
+        },
+        set: function(key, value) {
+            try {
+                localStorage.setItem(key, value);
+            } catch (e) {
+                window['fallback_' + key] = value;
+            }
+        }
+    };
+
     // --- 1. Channel Talk SDK ---
     (function() {
         var w = window; if (w.ChannelIO) { return; }
@@ -315,35 +394,39 @@
     const CH_PLUGIN_KEY = 'f06bb3b5-5394-4b24-b902-03d4110cfddd';
 
     function chInitTalk() {
-        ChannelIO('boot', { "pluginKey": CH_PLUGIN_KEY });
-        // 起動時にボタン制御を適用
-        setTimeout(initMobileChatButton, 500);
+        ChannelIO('boot', { "pluginKey": CH_PLUGIN_KEY }, function(error) {
+            if (!error) {
+                initMobileChatButton();
+            }
+        });
     }
 
     // --- 2. Cookie Consent Logic ---
     function chAcceptCookie() {
-        localStorage.setItem("ch_cookie_consent", "accepted");
-        document.getElementById("chCookieBanner").classList.add("ch-hidden");
+        safeStorage.set("ch_cookie_consent", "accepted");
+        const banner = document.getElementById("chCookieBanner");
+        if (banner) banner.classList.add("ch-hidden");
         chInitTalk();
     }
 
     function chDenyCookie() {
-        localStorage.setItem("ch_cookie_consent", "denied");
-        document.getElementById("chCookieBanner").classList.add("ch-hidden");
+        safeStorage.set("ch_cookie_consent", "denied");
+        const banner = document.getElementById("chCookieBanner");
+        if (banner) banner.classList.add("ch-hidden");
     }
 
-    // --- 3. Mobile Button Logic ---
+    // --- 3. Mobile/Desktop Button Logic ---
     function initMobileChatButton() {
         const container = document.getElementById('special-mobile-chat-container');
         const mainBtn = document.getElementById('special-mobile-chat-btn');
         const closeBtn = document.getElementById('special-mobile-close-btn');
         
-        const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) 
-                         || (window.innerWidth <= 768);
-
-        if (isMobile && localStorage.getItem("ch_cookie_consent") === "accepted") {
+        if (!container || !mainBtn || !closeBtn) return;
+        
+        // クッキー同意が得られていれば、どのデバイス（PC・スマホ）でもボタンを確実に表示
+        if (safeStorage.get("ch_cookie_consent") === "accepted") {
             container.style.display = 'block';
-            ChannelIO('hideChannelButton');
+            ChannelIO('hideChannelButton'); // デフォルトのボタンを隠し、自作ボタンに統一
 
             mainBtn.onclick = () => ChannelIO('showMessenger');
             closeBtn.onclick = (e) => {
@@ -351,28 +434,40 @@
                 container.style.display = 'none';
             };
 
-            // チャット開閉イベント
+            // チャットメッセンジャーとの表示連動
             ChannelIO('onShowMessenger', () => {
-                container.style.transform = 'translateY(100%)';
-                ChannelIO('hideChannelButton');
+                container.style.opacity = '0';
+                container.style.pointerEvents = 'none';
             });
             ChannelIO('onHideMessenger', () => {
-                if (container.style.display !== 'none') container.style.transform = 'translateY(0)';
-                ChannelIO('hideChannelButton');
+                if (container.style.display !== 'none') {
+                    container.style.opacity = '1';
+                    container.style.pointerEvents = 'auto';
+                }
             });
         }
     }
 
-    // --- 4. App Entry Point ---
+    // --- 4. UX Enhancements (Progress Bar) ---
+    window.addEventListener('scroll', () => {
+        const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+        const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+        const scrolled = (winScroll / height) * 100;
+        const progress = document.getElementById("scroll-progress");
+        if (progress) progress.style.width = scrolled + "%";
+    });
+
+    // --- 5. App Entry Point ---
     window.addEventListener('DOMContentLoaded', () => {
-        const consent = localStorage.getItem("ch_cookie_consent");
+        const consent = safeStorage.get("ch_cookie_consent");
         if (consent === "accepted") {
             chInitTalk();
         } else if (consent === null) {
+            // バナーを少し遅れて表示（1.2秒）
             setTimeout(() => {
                 const banner = document.getElementById("chCookieBanner");
                 if(banner) banner.classList.remove("ch-hidden");
-            }, 1000);
+            }, 1200);
         }
     });
     </script>
