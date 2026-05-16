@@ -211,6 +211,122 @@ function chDenyCookie() {
         <a href="docs/" class="docs-link-button">View Project Documentation (公式ドキュメント閲覧) ➔</a>
     </div>
 
+    <!-- ① 下部固定のスマホ専用カスタムボタン（右上に×ボタン付き） -->
+<div id="special-mobile-chat-container" style="
+  display: none; 
+  position: fixed; 
+  bottom: 0; 
+  left: 0; 
+  width: 100%; 
+  z-index: 999999; 
+  transition: transform 0.3s ease; /* チャット開閉時のアニメーション */
+">
+  <!-- チャットを開くメインボタン -->
+  <button id="special-mobile-chat-btn" style="
+    width: 100%; 
+    padding: 16px 20px; 
+    padding-bottom: calc(16px + env(safe-area-inset-bottom)); 
+    background-color: #ff5000; /* ボタンの色（お好みで変更してください） */
+    color: #fff; 
+    border: none; 
+    font-size: 16px;
+    font-weight: bold; 
+    text-align: center;
+    box-shadow: 0 -4px 12px rgba(0,0,0,0.1); 
+    cursor: pointer;
+    display: block;
+  ">
+   チャットで相談する
+  </button>
+
+  <!-- ボタンを一時的に消すための「×」ボタン -->
+  <span id="special-mobile-close-btn" style="
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    width: 24px;
+    height: 24px;
+    background-color: rgba(0, 0, 0, 0.3);
+    color: #fff;
+    border-radius: 50%;
+    font-size: 14px;
+    line-height: 22px;
+    text-align: center;
+    cursor: pointer;
+    font-weight: bold;
+    z-index: 1000000;
+  ">×</span>
+</div>
+
+<!-- ② 制御スクリプト -->
+<script>
+  (function() {
+    // スクリプトが二重で実行されるのを防ぐ安全弁
+    if (window.hasInitializedMobileChatButton) return;
+    window.hasInitializedMobileChatButton = true;
+
+    function initMobileChatButton() {
+      var container = document.getElementById('special-mobile-chat-container');
+      var mainBtn = document.getElementById('special-mobile-chat-btn');
+      var closeBtn = document.getElementById('special-mobile-close-btn');
+      if (!container || !mainBtn || !closeBtn) return;
+
+      // スマホ（モバイル環境）かどうかを判定
+      var isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) 
+                     || (window.innerWidth <= 768);
+
+      if (isMobile) {
+        // スマホならボタンを表示（再訪問・ページ移動時は必ずここを通るので再表示されます）
+        container.style.display = 'block';
+
+        // チャネルトークの標準丸ボタンを即座に隠す
+        if (window.ChannelIO) {
+          ChannelIO('hideChannelButton');
+        }
+
+        // メインボタンを押したらチャット画面を開く
+        mainBtn.addEventListener('click', function() {
+          if (window.ChannelIO) {
+            ChannelIO('showMessenger');
+          }
+        });
+
+        // 「×」ボタンを押したら、この画面（セッション）の間だけ一時的に非表示にする
+        closeBtn.addEventListener('click', function(e) {
+          e.stopPropagation(); // メインボタンのクリック連動を防ぐ
+          container.style.display = 'none'; // 一時的に非表示
+        });
+
+        // チャネルトークのイベント監視（重複登録されないよう安全に処理）
+        if (window.ChannelIO) {
+          // チャットが開いたら、自作ボタンを下にスライドして隠す
+          ChannelIO('onShowMessenger', function() {
+            container.style.transform = 'translateY(100%)';
+            ChannelIO('hideChannelButton');
+          });
+
+          // チャットを閉じたら、自作ボタンを元の位置に戻す
+          ChannelIO('onHideMessenger', function() {
+            // ユーザーが「×」ボタンで完全に消していない場合のみ、元の位置に戻す
+            if (container.style.display !== 'none') {
+              container.style.transform = 'translateY(0)';
+            }
+            ChannelIO('hideChannelButton');
+          });
+        }
+      }
+    }
+
+    // 読み込みタイミングの制御
+    if (document.readyState === 'complete') {
+      initMobileChatButton();
+    } else {
+      window.addEventListener('load', initMobileChatButton);
+    }
+  })();
+</script>
+
+
     <footer>
         <p>&copy; 2026 ryopc Global Initiative. All Rights Reserved.</p>
         <div class="status-badge">Status: Under application for Open Source Collective (Covina, CA, USA)</div>
