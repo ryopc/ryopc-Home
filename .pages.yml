@@ -1,23 +1,15 @@
-# 1. 画像の保存先を「blog/articles/images」に指定
 media:
   output: /blog/articles/images
 
-# 2. ブログ管理画面の設定
 collections:
   - name: blog
     label: ブログ記事
-    description: ここからブログの記事を追加・編集できます。
     type: folder
-    path: blog/articles # 記事データを保存するフォルダ
-    format: html-frontmatter
-    
-    # ❌ 修正前: slug: "{{slug}}/index"
-    # ⭕️ 修正後: 拡張子を省略したい場合は以下のように指定します
-    slug: "{{title}}" 
-    extension: html
+    path: blog/articles
+    format: frontmatter       # 👈 html-frontmatter から標準の frontmatter に変更
+    extension: md             # 👈 拡張子を明示的に .md（マークダウン）に指定
+    slug: "{{title}}"
 
-    
-    # 3. 入力フォームの項目
     fields:
       - name: title
         label: 記事のタイトル
@@ -28,10 +20,6 @@ collections:
         label: 公開日
         type: date
         required: true
-
-      - name: image
-        label: アイキャッチ画像
-        type: image
 
       - name: body
         label: 記事の本文
