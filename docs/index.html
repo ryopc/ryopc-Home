@@ -5,9 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
     <title>Docs - ryopc Global Digital Support</title>
     <link rel="icon" type="image/png" href="../favicon.png">
-    <link rel="preconnect" href="https://googleapis.com">
-    <link rel="preconnect" href="https://gstatic.com" crossorigin>
-    <link href="https://googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
     <style>
         :root {
             --primary: #0052cc;      /* 進化したテック・ブルー */
@@ -27,7 +27,7 @@
             -webkit-font-smoothing: antialiased;
         }
         #scroll-progress { position: fixed; top: 0; left: 0; width: 0%; height: 4px; background: var(--gradient-accent); z-index: 1000001; }
-        .navbar { position: fixed; top: 0; left: 0; width: 100%; background: var(--glass); backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px); display: flex; justify-content: space-between; align-items: center; padding: 1rem 2.5rem; z-index: 100000; border-bottom: 1px solid rgba(255, 255, 255, 0.1); }
+        .navbar { position: fixed; top: 0; left: 0; width: 100%; background: var(--glass); backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px); display: flex; justify-content: space-between; align-items: center; padding: 1rem 2.5rem; z-index: 100000; border-bottom: 1px solid rgba(255, 255, 255, 0.1); box-sizing: border-box; }
         .nav-logo { color: var(--white); font-weight: 800; font-size: 1.2rem; text-decoration: none; }
         header {
             background: linear-gradient(135deg, var(--dark) 0%, #172a45 100%);
@@ -297,7 +297,7 @@
                 <option value="pt">Português</option>
             </select>
 
-            <button class="menu-toggle" id="menuToggle">
+            <button class="menu-toggle" id="menuToggle" aria-label="Toggle navigation menu">
                 <span></span><span></span><span></span>
             </button>
 
@@ -404,7 +404,7 @@
             docs_sec1_sub: "主要運営原則:",
             docs_sec1_li1: "<strong>障壁ゼロのアクセス:</strong> 地理的または財政的な制限により、デジタルサポートの必要なユーザーが排除されてはなりません。",
             docs_sec1_li2: "<strong>プライバシー保護:</strong> ユーザーおよびコア管理者は、トラッキングを遮断した最高水準の匿名性パラダイム上で行動します。",
-            docs_sec1_li3: "<strong>分散型インフラ:</strong> 100%の可用性を維持するために、グローバル水準のサーバー・コミュニケーション構成を活用します。",
+            docs_sec1_li3: "<strong>分散型インフラ:</strong> 100%の可用性を維持するために、グローバル水準 of サーバー・コミュニケーション構成を活用します。",
             docs_sec2_title: "2. Legal Compliance Agreements (公式規約・方針)",
             docs_sec2_desc1: "国際的な法規制（GDPRガイドラインなど）への準拠を徹底するため、各種の運用規定は特化した独立文書に分散されています。",
             docs_sec2_btn1: "Terms of Service (利用規約) ➔",
@@ -452,7 +452,7 @@
             cookie_accept: "Aceitar",
             cookie_deny: "Recusar",
             chat_btn: "Suporte por Chat",
-            status_text: "Status: Em processo de candidatura para Open Source Collective (Covina, CA, EUA)",
+            status_text: "Status: Em processo de candidatura para Open Source Collective (Covina, CA, USA)",
             
             // ドキュメント特有のテキスト翻訳
             docs_header_title: "Documentação Oficial da ryopc",
@@ -469,9 +469,15 @@
             docs_sec2_btn2: "Privacy Policy (Diretrizes de Privacidade) ➔",
             docs_sec3_title: "3. Automated Infrastructure Stack (技術スタック体系)",
             docs_sec3_desc1: "ryopc utiliza uma matriz automatizada ultra-eficiente para operar globalmente e eliminar custos administrativos excessivos.",
-            docs_sec3_sub: "Matriz de Produção Atual:",
+            docs_sec3_sub: "Matriz de Production Atual:",
             docs_footer_volunteer: "Mantido por ryopcボランティア 運営事務局 | Diretor: game_ryo"
         }
+    };
+
+    // --- セーフストレージ ---
+    const safeStorage = {
+        get: (key) => { try { return localStorage.getItem(key); } catch (e) { return window['fb_' + key] || null; } },
+        set: (key, val) => { try { localStorage.setItem(key, val); } catch (e) { window['fb_' + key] = val; } }
     };
 
     // --- 言語切り替え機能 ---
@@ -487,13 +493,7 @@
         });
     }
 
-    // --- セーフストレージ ---
-    const safeStorage = {
-        get: (key) => { try { return localStorage.getItem(key); } catch (e) { return window['fb_' + key] || null; } },
-        set: (key, val) => { try { localStorage.setItem(key, val); } catch (e) { window['fb_' + key] = val; } }
-    };
-
-    // --- Channel Talk ---
+    // --- Channel Talk SDK Loader & Initializer ---
     (function() {
         var w = window; if (w.ChannelIO) return;
         var ch = function() { ch.c(arguments); }; ch.q = []; ch.c = function(args) { ch.q.push(args); }; w.ChannelIO = ch;
@@ -502,12 +502,21 @@
             var s = document.createElement('script'); s.type = 'text/javascript'; s.async = true; s.src = 'https://cdn.channel.io/plugin/ch-plugin-web.js';
             var x = document.getElementsByTagName('script')[0]; x.parentNode.insertBefore(s, x);
         }
-        if (document.readyState === 'complete') l(); else { w.addEventListener('load', l); }
+        if (document.readyState === 'complete') {
+            l();
+        } else {
+            w.addEventListener('DOMContentLoaded', l, false);
+            w.addEventListener('load', l, false);
+        }
     })();
 
     // 起動処理
     function chInitTalk() {
-        ChannelIO('boot', { "pluginKey": 'f06bb3b5-5394-4b24-b902-03d4110cfddd' }, () => initMobileChatButton());
+        if (window.ChannelIO) {
+            ChannelIO('boot', { "pluginKey": 'f06bb3b5-5394-4b24-b902-03d4110cfddd' }, function() {
+                initMobileChatButton();
+            });
+        }
     }
 
     function chAcceptCookie() {
@@ -523,11 +532,22 @@
 
     function initMobileChatButton() {
         const container = document.getElementById('special-mobile-chat-container');
-        if (safeStorage.get("ch_cookie_consent") === "accepted") {
+        if (safeStorage.get("ch_cookie_consent") === "accepted" && window.ChannelIO) {
             container.style.display = 'block';
             ChannelIO('hideChannelButton');
-            document.getElementById('special-mobile-chat-btn').onclick = () => ChannelIO('showMessenger');
-            document.getElementById('special-mobile-close-btn').onclick = (e) => { e.stopPropagation(); container.style.display = 'none'; };
+            
+            const chatBtn = document.getElementById('special-mobile-chat-btn');
+            const closeBtn = document.getElementById('special-mobile-close-btn');
+
+            if (chatBtn) {
+                chatBtn.onclick = function() { ChannelIO('showMessenger'); };
+            }
+            if (closeBtn) {
+                closeBtn.onclick = function(e) { 
+                    e.stopPropagation(); 
+                    container.style.display = 'none'; 
+                };
+            }
         }
     }
 
@@ -537,26 +557,41 @@
         const browserLang = navigator.language.split('-')[0];
         const defaultLang = savedLang || (translations[browserLang] ? browserLang : 'en');
         
-        document.getElementById('langSelector').value = defaultLang;
+        const langSelector = document.getElementById('langSelector');
+        if (langSelector) {
+            langSelector.value = defaultLang;
+        }
         changeLanguage(defaultLang);
 
         const menuToggle = document.getElementById('menuToggle');
         const navLinks = document.getElementById('navLinks');
         if (menuToggle && navLinks) {
-            menuToggle.onclick = (e) => { e.stopPropagation(); navLinks.classList.toggle('active'); };
+            menuToggle.onclick = (e) => { 
+                e.stopPropagation(); 
+                navLinks.classList.toggle('active'); 
+            };
             document.onclick = () => navLinks.classList.remove('active');
         }
 
         const consent = safeStorage.get("ch_cookie_consent");
-        if (consent === "accepted") chInitTalk();
-        else if (consent === null) setTimeout(() => document.getElementById("chCookieBanner").classList.remove("ch-hidden"), 1200);
+        if (consent === "accepted") {
+            chInitTalk();
+        } else if (consent === null) {
+            setTimeout(() => {
+                const banner = document.getElementById("chCookieBanner");
+                if (banner) banner.classList.remove("ch-hidden");
+            }, 1200);
+        }
 
-        window.onscroll = () => {
+        window.addEventListener('scroll', () => {
             const winScroll = document.documentElement.scrollTop;
             const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-            const scrolled = (winScroll / height) * 100;
-            document.getElementById("scroll-progress").style.width = scrolled + "%";
-        };
+            if (height > 0) {
+                const scrolled = (winScroll / height) * 100;
+                const progressBar = document.getElementById("scroll-progress");
+                if (progressBar) progressBar.style.width = scrolled + "%";
+            }
+        });
     });
     </script>
 </body>
