@@ -47,7 +47,27 @@
 
     <div class="container">
         <div id="blog-container" class="blog-list">
-            <div class="card"><p style="text-align:center; color:var(--text-light);">記事を読み込んでいます...</p></div>
+            
+            <!-- 👇 ここから Eleventy の全自動ループ処理 -->
+            {% for post in collections.blog %}
+            <a href="{{ post.url }}" class="card">
+                <div class="blog-date">{{ post.date | date: "%Y/%m/%d" }}</div>
+                <h2 class="blog-title">{{ post.data.title }}</h2>
+                
+                {% if post.data.image %}
+                <img src="{{ post.data.image }}" alt="{{ post.data.title }}" class="blog-img">
+                {% endif %}
+                
+                <div class="blog-body">{{ post.templateContent | strip_html | truncate: 100 }}</div>
+            </a>
+            {% else %}
+            <!-- 記事が1つもない場合のフォールバック表示 -->
+            <div class="card">
+                <p style="text-align:center; color:var(--text-light);">まだ記事がありません。管理画面から新しい記事を追加してください。</p>
+            </div>
+            {% endfor %}
+            <!-- 👆 ここまで自動処理 -->
+
         </div>
     </div>
 
@@ -56,62 +76,12 @@
     </footer>
 
     <script>
+        // 上部の読込進捗バーのスクリプトだけを残して軽量化
         window.addEventListener('scroll', () => {
             const winScroll = document.documentElement.scrollTop;
             const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
             document.getElementById('scroll-progress').style.width = (winScroll / height) * 100 + '%';
         });
-
-        async function loadBlogs() {
-            const container = document.getElementById('blog-container');
-            
-            // 【重要】あなたのアカウント情報に書き換えてください
-            const OWNER = "ryopc";
-            const REPO  = "ryopc-Home";
-            const PATH  = "blog/articles";
-
-            try {
-                const response = await fetch(`https://github.com{OWNER}/${REPO}/contents/${PATH}`);
-                if (!response.ok) throw new Error();
-                const items = await response.json();
-
-                // 記事が入っている各フォルダだけを取得（imagesフォルダと、index.htmlファイルは除外）
-                const articleDirs = items.filter(item => item.type === 'dir' && item.name !== 'images');
-
-                if (articleDirs.length === 0) {
-                    container.innerHTML = '<div class="card"><p style="text-align:center; color:var(--text-light);">まだ記事がありません。</p></div>';
-                    return;
-                }
-
-                container.innerHTML = '';
-
-                // 各記事フォルダを巡回して中身をパース
-                for (const dir of articleDirs) {
-                    const postRes = await fetch(`https://githubusercontent.com{OWNER}/${REPO}/main/${PATH}/${dir.name}/index.html`);
-                    if (!postRes.ok) continue;
-                    const text = await postRes.json(); 
-
-                    const card = document.createElement('a');
-                    card.className = 'card';
-                    // 拡張子なしのURLを指定（例: /blog/articles/my-post）
-                    card.href = `./articles/${dir.name}`;
-
-                    // 画像パスを階層に合わせて調整（/blog/articles/images/〜 を読み込む）
-                    let imgHtml = text.image ? `<img src="..${text.image}" alt="${text.title}" class="blog-img">` : '';
-
-                    card.innerHTML = `
-                        <div class="blog-date">${text.date || ''}</div>
-                        <h2 class="blog-title">${text.title}</h2>
-                        ${imgHtml}
-                        <div class="blog-body">${text.body.replace(/<[^>]*>/g, '').substring(0, 100)}...</div>
-                    `;
-                    container.appendChild(card);
-                }
-            } catch (error) {
-                container.innerHTML = '<div class="card"><p style="text-align:center; color:red;">記事の読み込みに失敗しました。</p></div>';
-            }
-        }
-        document.addEventListener('DOMContentLoaded', loadBlogs);
     </script>
 </body>
 </html>
