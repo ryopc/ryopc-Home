@@ -1,6 +1,7 @@
 ---
 title: 'We''ve moved our website to Cloudflare Pages! '
 date: 2026-05-18T00:00:00+09:00
+tags: blog  
 ---
 We have officially migrated the ryopc official website to a Cloudflare page.
 
