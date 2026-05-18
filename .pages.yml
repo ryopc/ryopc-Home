@@ -1,0 +1,35 @@
+# 1. 画像などのメディアファイルの保存先
+media:
+  output: /blog/images
+
+# 2. ブログ管理画面の設定
+collections:
+  - name: blog
+    label: ブログ記事
+    description: ここから新しいブログ記事の追加や、過去の記事の編集ができます。
+    type: folder
+    path: blog         # 記事データを保存するフォルダ名
+    format: json       # HTMLから直接読み込めるようにJSON形式で保存
+    slug: "{{year}}-{{month}}-{{day}}-{{slug}}" # ファイル名のルール（例: 2026-05-18-title.json）
+    
+    # 3. 管理画面の入力フォームの項目
+    fields:
+      - name: title
+        label: 記事のタイトル
+        type: string
+        required: true
+
+      - name: date
+        label: 公開日
+        type: date
+        required: true
+
+      - name: image
+        label: アイキャッチ画像
+        type: image
+        description: 記事のトップに表示する画像を選んでください（任意）
+
+      - name: body
+        label: 記事の本文
+        type: rich-text # 太字や見出し、リンクが直感的に使えるエディタ
+        required: true
