@@ -10,7 +10,12 @@ collections:
     type: folder
     path: blog/articles # 記事データを保存するフォルダ
     format: html-frontmatter
-    slug: "{{slug}}/index" # フォルダ/index.html の形式で保存（拡張子を消す仕組み）
+    
+    # ❌ 修正前: slug: "{{slug}}/index"
+    # ⭕️ 修正後: 拡張子を省略したい場合は以下のように指定します
+    slug: "{{title}}" 
+    extension: html
+
     
     # 3. 入力フォームの項目
     fields:
