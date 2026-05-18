@@ -2,9 +2,12 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>ryopc Official Documentation Hub</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <title>Docs - ryopc Global Digital Support</title>
     <link rel="icon" type="image/png" href="../favicon.png">
+    <link rel="preconnect" href="https://googleapis.com">
+    <link rel="preconnect" href="https://gstatic.com" crossorigin>
+    <link href="https://googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
     <style>
         :root {
             --primary: #0052cc;      /* 進化したテック・ブルー */
@@ -12,6 +15,10 @@
             --accent: #00bfff;       /* サイバー・アクアブルー */
             --bg: #f8fafc;           /* クリーンな背景グレー */
             --text: #334155;
+            /* 共通変数も追加定義 */
+            --primary-light: #0764f1; --dark-light: #172a45; --text-light: #94a3b8; --white: #ffffff;
+            --glass: rgba(13, 29, 52, 0.9); --transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+            --gradient-accent: linear-gradient(135deg, #00bfff, #0052cc);
         }
         html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
         body {
@@ -19,9 +26,12 @@
             margin: 0; padding: 0; background-color: var(--bg); color: var(--text); line-height: 1.7;
             -webkit-font-smoothing: antialiased;
         }
+        #scroll-progress { position: fixed; top: 0; left: 0; width: 0%; height: 4px; background: var(--gradient-accent); z-index: 1000001; }
+        .navbar { position: fixed; top: 0; left: 0; width: 100%; background: var(--glass); backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px); display: flex; justify-content: space-between; align-items: center; padding: 1rem 2.5rem; z-index: 100000; border-bottom: 1px solid rgba(255, 255, 255, 0.1); }
+        .nav-logo { color: var(--white); font-weight: 800; font-size: 1.2rem; text-decoration: none; }
         header {
             background: linear-gradient(135deg, var(--dark) 0%, #172a45 100%);
-            color: white; padding: 4rem 1.2rem; text-align: center; border-bottom: 4px solid var(--accent);
+            color: white; padding: 12rem 1.2rem 11rem; text-align: center; border-bottom: 4px solid var(--accent);
         }
         header h1 {
             margin: 0; font-size: 2.5rem; font-weight: 800; letter-spacing: -1px;
@@ -29,7 +39,7 @@
             -webkit-background-clip: text; -webkit-text-fill-color: transparent; word-wrap: break-word;
         }
         header p { font-size: 1.05rem; max-width: 600px; margin: 1.2rem auto 0 auto; color: #94a3b8; }
-        .container { max-width: 850px; margin: 2rem auto; padding: 0 1.2rem; }
+        .container { max-width: 850px; margin: -5rem auto 6rem; padding: 0 1.2rem; position: relative; z-index: 10; }
         .docs-section {
             background: white; padding: 2rem; border-radius: 16px; box-shadow: 0 4px 20px rgba(0, 0, 0, 0.03);
             margin-bottom: 2rem; border: 1px solid #e2e8f0; text-align: left; transition: all 0.2s ease;
@@ -62,51 +72,278 @@
             padding: 0.2rem 0.6rem; border-radius: 6px; font-family: monospace; font-size: 0.85rem;
             border: 1px solid #cbd5e1; margin: 0.2rem;
         }
-        footer { background-color: var(--dark); color: #94a3b8; padding: 2.5rem 1.2rem; text-align: center; font-size: 0.9rem; }
+        footer { background-color: var(--dark); color: #94a3b8; padding: 4rem 1.2rem; text-align: center; font-size: 0.9rem; }
         @media (hover: hover) and (pointer: fine) {
-            header { padding: 5rem 1rem; } header h1 { font-size: 3rem; }
+            header { padding: 13rem 1rem 11rem; } header h1 { font-size: 3rem; }
             .docs-section:hover { border-color: var(--accent); box-shadow: 0 15px 30px rgba(0, 82, 204, 0.08); }
             .doc-link-button:hover { transform: translateY(-2px); box-shadow: 0 6px 12px rgba(0, 82, 204, 0.3); filter: brightness(1.1); }
             h2 { font-size: 1.7rem; }
         }
         @media (hover: none) { header h1 { font-size: calc(1.8rem + 2vw); } }
+
+        /* --- 以下、削除を行わずに追加した各パーツの仕上げ用CSSスタイル --- */
+        .lang-selector {
+            background: rgba(255, 255, 255, 0.1);
+            color: var(--white);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            cursor: pointer;
+            outline: none;
+            transition: var(--transition);
+        }
+        .lang-selector option {
+            background: var(--dark-light);
+            color: var(--white);
+        }
+        .lang-selector:hover {
+            background: rgba(255, 255, 255, 0.2);
+            border-color: var(--accent);
+        }
+        .menu-toggle {
+            display: none;
+            flex-direction: column;
+            gap: 6px;
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 4px;
+            z-index: 100002;
+        }
+        .menu-toggle span {
+            display: block;
+            width: 25px;
+            height: 2px;
+            background-color: var(--white);
+            transition: var(--transition);
+            border-radius: 2px;
+        }
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+            margin: 0;
+            padding: 0;
+            transition: var(--transition);
+        }
+        .nav-links a {
+            color: var(--text-light);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.95rem;
+            transition: var(--transition);
+        }
+        .nav-links a:hover {
+            color: var(--white);
+        }
+        .ch-cookie-banner {
+            position: fixed;
+            bottom: 2rem;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 90%;
+            max-width: 600px;
+            background: var(--dark-light);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            border-radius: 24px;
+            padding: 1.5rem;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+            z-index: 1000000;
+            display: flex;
+            flex-direction: column;
+            gap: 1.25rem;
+            transition: opacity 0.5s ease, transform 0.5s ease;
+        }
+        .ch-cookie-banner.ch-hidden {
+            opacity: 0;
+            transform: translate(-50%, 30px);
+            pointer-events: none;
+        }
+        .ch-cookie-text {
+            color: var(--white);
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+        .ch-cookie-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: flex-end;
+        }
+        .ch-cookie-btn {
+            padding: 0.75rem 1.5rem;
+            border-radius: 12px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: var(--transition);
+            border: none;
+        }
+        .ch-btn-deny {
+            background: rgba(255, 255, 255, 0.1);
+            color: var(--white);
+        }
+        .ch-btn-deny:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+        .ch-btn-accept {
+            background: var(--primary);
+            color: var(--white);
+        }
+        .ch-btn-accept:hover {
+            background: var(--primary-light);
+            box-shadow: 0 0 15px rgba(0, 82, 204, 0.4);
+        }
+        #special-mobile-chat-container {
+            position: fixed;
+            bottom: 1.5rem;
+            right: 1.5rem;
+            z-index: 99999;
+            display: none;
+        }
+        #special-mobile-chat-btn {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            background: var(--gradient-accent);
+            color: var(--white);
+            border: none;
+            padding: 0.8rem 1.5rem;
+            border-radius: 30px;
+            font-weight: 800;
+            font-size: 0.95rem;
+            box-shadow: 0 10px 25px rgba(0, 191, 255, 0.3);
+            cursor: pointer;
+            transition: var(--transition);
+        }
+        #special-mobile-chat-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 12px 30px rgba(0, 191, 255, 0.4);
+        }
+        #special-mobile-close-btn {
+            position: absolute;
+            top: -8px;
+            right: -8px;
+            background: var(--white);
+            color: var(--dark);
+            width: 22px;
+            height: 22px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+            font-weight: bold;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+            cursor: pointer;
+            border: 1px solid rgba(0,0,0,0.05);
+        }
+        .status-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(255, 255, 255, 0.05);
+            padding: 0.5rem 1.2rem;
+            border-radius: 30px;
+            font-size: 0.85rem;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            color: var(--text-light);
+        }
+        .status-dot {
+            width: 8px;
+            height: 8px;
+            background-color: #2ec4b6;
+            border-radius: 50%;
+            box-shadow: 0 0 8px #2ec4b6;
+            animation: pulse 2s infinite;
+        }
+        @keyframes pulse {
+            0% { transform: scale(0.95); opacity: 0.5; }
+            50% { transform: scale(1.1); opacity: 1; }
+            100% { transform: scale(0.95); opacity: 0.5; }
+        }
+        @media (max-width: 768px) {
+            .navbar { padding: 1rem 1.5rem; }
+            .menu-toggle { display: flex; }
+            .nav-links {
+                position: fixed;
+                top: 70px;
+                right: -100%;
+                width: 250px;
+                height: calc(100vh - 70px);
+                background: var(--glass);
+                backdrop-filter: blur(25px);
+                -webkit-backdrop-filter: blur(25px);
+                flex-direction: column;
+                padding: 3rem 2rem;
+                gap: 2rem;
+                border-left: 1px solid rgba(255, 255, 255, 0.1);
+            }
+            .nav-links.active { right: 0; }
+        }
     </style>
 </head>
 <body>
 
+    <div id="scroll-progress"></div>
+
+    <nav class="navbar">
+        <a href="../" class="nav-logo">ryopc org</a>
+        
+        <div class="nav-right" style="display: flex; align-items: center; gap: 1rem;">
+            <select class="lang-selector" id="langSelector" onchange="changeLanguage(this.value)">
+                <option value="ja">日本語</option>
+                <option value="en">English</option>
+                <option value="pt">Português</option>
+            </select>
+
+            <button class="menu-toggle" id="menuToggle">
+                <span></span><span></span><span></span>
+            </button>
+
+            <ul class="nav-links" id="navLinks">
+                <li><a href="../" data-t="nav_home">ホーム</a></li>
+                <li><a href="../#mission" data-t="nav_mission">ミッション</a></li>
+                <li><a href="../#services" data-t="nav_services">サービス</a></li>
+                <li><a href="/blog" data-t="nav_note">note</a></li>
+                <li><a href="/docs" data-t="nav_docs">ドキュメント</a></li>
+            </ul>
+        </div>
+    </nav>
+
     <header>
-        <h1>ryopc Official Documentation</h1>
-        <p>Central blueprint hub for technical architectures, guidelines, and legal frameworks.</p>
+        <h1 data-t="docs_header_title">ryopc Official Documentation</h1>
+        <p data-t="docs_header_desc">Central blueprint hub for technical architectures, guidelines, and legal frameworks.</p>
     </header>
 
     <div class="container">
 
         <!-- SECTION 1 -->
         <div class="docs-section">
-            <h2>1. Global Operational Framework (運営大綱)</h2>
-            <p>Led by ryopcCEO, <strong>ryopc-org</strong> operates as a borderless, decentralized tech initiative. Our structure is built to scale continuously, bypassing traditional bureaucratic latency to achieve immediate global impact.</p>
-            <h3>Core Operating Principles:</h3>
+            <h2 data-t="docs_sec1_title">1. Global Operational Framework (運営大綱)</h2>
+            <p data-t="docs_sec1_desc1">Led by ryopcCEO, <strong>ryopc-org</strong> operates as a borderless, decentralized tech initiative. Our structure is built to scale continuously, bypassing traditional bureaucratic latency to achieve immediate global impact.</p>
+            <h3 data-t="docs_sec1_sub">Core Operating Principles:</h3>
             <ul>
-                <li><strong>Zero-Barrier Access:</strong> No individual should be locked out of essential digital support due to geographic or financial limitations.</li>
-                <li><strong>Privacy First:</strong> Both our users and our core administrators operate within a paradigm that perfectly shields personal tracking data.</li>
-                <li><strong>Decentralized Infrastructure:</strong> Utilizing premier international hosting and communication architectures to maintain 100% uptime and global legitimacy.</li>
+                <li data-t="docs_sec1_li1"><strong>Zero-Barrier Access:</strong> No individual should be locked out of essential digital support due to geographic or financial limitations.</li>
+                <li data-t="docs_sec1_li2"><strong>Privacy First:</strong> Both our users and our core administrators operate within a paradigm that perfectly shields personal tracking data.</li>
+                <li data-t="docs_sec1_li3"><strong>Decentralized Infrastructure:</strong> Utilizing premier international hosting and communication architectures to maintain 100% uptime and global legitimacy.</li>
             </ul>
         </div>
 
-        <!-- SECTION 2: 👑 見栄え最高のクリーンURLへリンク変更 -->
+        <!-- SECTION 2 -->
         <div class="docs-section">
-            <h2>2. Legal Compliance Agreements (公式規約・方針)</h2>
-            <p>To ensure strict corporate and ethical alignment with international regulations (including GDPR guidelines), our regulatory frameworks are distributed across specialized canonical documents.</p>
+            <h2 data-t="docs_sec2_title">2. Legal Compliance Agreements (公式規約・方針)</h2>
+            <p data-t="docs_sec2_desc1">To ensure strict corporate and ethical alignment with international regulations (including GDPR guidelines), our regulatory frameworks are distributed across specialized canonical documents.</p>
             
-            <a href="terms/" class="doc-link-button">Terms of Service (利用規約) ➔</a>
-            <a href="privacy/" class="doc-link-button" style="background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%); border: 1px solid var(--accent);">Privacy Policy (個人情報保護) ➔</a>
+            <a href="terms/" class="doc-link-button" data-t="docs_sec2_btn1">Terms of Service (利用規約) ➔</a>
+            <a href="privacy/" class="doc-link-button" style="background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%); border: 1px solid var(--accent);" data-t="docs_sec2_btn2">Privacy Policy (個人情報保護) ➔</a>
         </div>
 
         <!-- SECTION 3 -->
         <div class="docs-section">
-            <h2>3. Automated Infrastructure Stack (技術スタック体系)</h2>
-            <p>ryopc leverages a hyper-efficient, fully automated management matrix to operate seamlessly across the globe without administrative overhead.</p>
-            <h3>Current Production Matrix:</h3>
+            <h2 data-t="docs_sec3_title">3. Automated Infrastructure Stack (技術スタック体系)</h2>
+            <p data-t="docs_sec3_desc1">ryopc leverages a hyper-efficient, fully automated management matrix to operate seamlessly across the globe without administrative overhead.</p>
+            <h3 data-t="docs_sec3_sub">Current Production Matrix:</h3>
             <div>
                 <span class="tech-badge">GitHub Organization</span>
                 <span class="tech-badge">GitHub Pages (HTML5/CSS3)</span>
@@ -118,10 +355,213 @@
 
     </div>
 
+    <div id="chCookieBanner" class="ch-cookie-banner ch-hidden">
+        <div class="ch-cookie-text" data-t="cookie_text">
+            <strong>About the Use of Cookies</strong><br>
+            This site uses cookies to provide chat support and improve your user experience. By agreeing, you will be able to use our chat support service.
+        </div>
+        <div class="ch-cookie-buttons">
+            <button class="ch-cookie-btn ch-btn-deny" onclick="chDenyCookie()" data-t="cookie_deny">拒否</button>
+            <button class="ch-cookie-btn ch-btn-accept" onclick="chAcceptCookie()" data-t="cookie_accept">同意して利用開始</button>
+        </div>
+    </div>
+
+    <div id="special-mobile-chat-container">
+        <button id="special-mobile-chat-btn">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="margin-top: 1px;"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
+            <span data-t="chat_btn">Chat Support</span>
+        </button>
+        <span id="special-mobile-close-btn">×</span>
+    </div>
+
     <footer>
         <p>&copy; 2026 ryopc Global Initiative. All Rights Reserved.</p>
-        <p>Maintained by ryopcボランティア 運営事務局 | Director: game_ryo</p>
+        <p data-t="docs_footer_volunteer">Maintained by ryopcボランティア 運営事務局 | Director: game_ryo</p>
+        <div class="status-badge" style="margin-top: 1rem;">
+            <span class="status-dot"></span>
+            <span data-t="status_text">Status: Under application for Open Source Collective (Covina, CA, USA)</span>
+        </div>
     </footer>
 
+    <script>
+    // --- 翻訳データ ---
+    const translations = {
+        ja: {
+            nav_home: "ホーム",
+            nav_mission: "ミッション",
+            nav_services: "サービス",
+            nav_docs: "ドキュメント",
+            nav_note: "ブログ",
+            cookie_text: "<strong>クッキーの使用について</strong><br>このサイトでは、チャットサポートの提供や体験向上のためにクッキーを使用します。同意することで、サポートサービスを利用できるようになります。",
+            cookie_accept: "同意して利用開始",
+            cookie_deny: "拒否",
+            chat_btn: "チャットサポート",
+            status_text: "ステータス: Open Source Collective (米国カリフォルニア州) への申請中",
+            
+            // ドキュメント特有のテキスト翻訳
+            docs_header_title: "ryopc 公式ドキュメント",
+            docs_header_desc: "技術アーキテクチャ、ガイドライン、および法的な枠組みの設計図ハブ。",
+            docs_sec1_title: "1. Global Operational Framework (運営大綱)",
+            docs_sec1_desc1: "ryopCEO率いる <strong>ryopc-org</strong> は、国境のない分散型テックイニシアチブとして運営されています。私たちの構造は継続的な拡張を可能にし、従来の官僚的な遅延を完全に排除して迅速なグローバル展開を目指します。",
+            docs_sec1_sub: "主要運営原則:",
+            docs_sec1_li1: "<strong>障壁ゼロのアクセス:</strong> 地理的または財政的な制限により、デジタルサポートの必要なユーザーが排除されてはなりません。",
+            docs_sec1_li2: "<strong>プライバシー保護:</strong> ユーザーおよびコア管理者は、トラッキングを遮断した最高水準の匿名性パラダイム上で行動します。",
+            docs_sec1_li3: "<strong>分散型インフラ:</strong> 100%の可用性を維持するために、グローバル水準のサーバー・コミュニケーション構成を活用します。",
+            docs_sec2_title: "2. Legal Compliance Agreements (公式規約・方針)",
+            docs_sec2_desc1: "国際的な法規制（GDPRガイドラインなど）への準拠を徹底するため、各種の運用規定は特化した独立文書に分散されています。",
+            docs_sec2_btn1: "Terms of Service (利用規約) ➔",
+            docs_sec2_btn2: "Privacy Policy (個人情報保護方針) ➔",
+            docs_sec3_title: "3. Automated Infrastructure Stack (技術スタック体系)",
+            docs_sec3_desc1: "ryopcは事務的なオーバーヘッドなく運営をグローバルで継続するため、高度に自動化された運用環境を活用しています。",
+            docs_sec3_sub: "現在採用されている技術一式:",
+            docs_footer_volunteer: "運営・編集: ryopcボランティア運営事務局 | 統括責任者: game_ryo"
+        },
+        en: {
+            nav_home: "Home",
+            nav_mission: "Mission",
+            nav_services: "Services",
+            nav_docs: "Docs",
+            nav_note: "blog",
+            cookie_text: "<strong>About the Use of Cookies</strong><br>This site uses cookies to provide chat support and improve your experience. By agreeing, you can use our chat service.",
+            cookie_accept: "Accept",
+            cookie_deny: "Deny",
+            chat_btn: "Chat Support",
+            status_text: "Status: Under application for Open Source Collective (Covina, CA, USA)",
+            
+            // ドキュメント特有のテキスト翻訳
+            docs_header_title: "ryopc Official Documentation",
+            docs_header_desc: "Central blueprint hub for technical architectures, guidelines, and legal frameworks.",
+            docs_sec1_title: "1. Global Operational Framework (運営大綱)",
+            docs_sec1_desc1: "Led by ryopcCEO, <strong>ryopc-org</strong> operates as a borderless, decentralized tech initiative. Our structure is built to scale continuously, bypassing traditional bureaucratic latency to achieve immediate global impact.",
+            docs_sec1_sub: "Core Operating Principles:",
+            docs_sec1_li1: "<strong>Zero-Barrier Access:</strong> No individual should be locked out of essential digital support due to geographic or financial limitations.",
+            docs_sec1_li2: "<strong>Privacy First:</strong> Both our users and our core administrators operate within a paradigm that perfectly shields personal tracking data.",
+            docs_sec1_li3: "<strong>Decentralized Infrastructure:</strong> Utilizing premier international hosting and communication architectures to maintain 100% uptime and global legitimacy.",
+            docs_sec2_title: "2. Legal Compliance Agreements (公式規約・方針)",
+            docs_sec2_desc1: "To ensure strict corporate and ethical alignment with international regulations (including GDPR guidelines), our regulatory frameworks are distributed across specialized canonical documents.",
+            docs_sec2_btn1: "Terms of Service (利用規約) ➔",
+            docs_sec2_btn2: "Privacy Policy (個人情報保護) ➔",
+            docs_sec3_title: "3. Automated Infrastructure Stack (技術スタック体系)",
+            docs_sec3_desc1: "ryopc leverages a hyper-efficient, fully automated management matrix to operate seamlessly across the globe without administrative overhead.",
+            docs_sec3_sub: "Current Production Matrix:",
+            docs_footer_volunteer: "Maintained by ryopcボランティア 運営事務局 | Director: game_ryo"
+        },
+        pt: {
+            nav_home: "Início",
+            nav_mission: "Missão",
+            nav_services: "Serviços",
+            nav_docs: "Docs",
+            nav_note: "Blog",
+            cookie_text: "<strong>Sobre o uso de cookies</strong><br>Este site usa cookies para fornecer suporte por chat e melhorar sua experiência. Ao concordar, você poderá usar nosso serviço de chat.",
+            cookie_accept: "Aceitar",
+            cookie_deny: "Recusar",
+            chat_btn: "Suporte por Chat",
+            status_text: "Status: Em processo de candidatura para Open Source Collective (Covina, CA, EUA)",
+            
+            // ドキュメント特有のテキスト翻訳
+            docs_header_title: "Documentação Oficial da ryopc",
+            docs_header_desc: "Hub de blueprints para arquiteturas técnicas, diretrizes e estruturas jurídicas.",
+            docs_sec1_title: "1. Global Operational Framework (運営大綱)",
+            docs_sec1_desc1: "Liderada por ryopcCEO, a <strong>ryopc-org</strong> opera como uma iniciativa tecnológica descentralizada e sem fronteiras. Nossa estrutura é construída para expandir continuamente, superando qualquer lentidão burocrática convencional.",
+            docs_sec1_sub: "Princípios Operacionais Fundamentais:",
+            docs_sec1_li1: "<strong>Acesso sem Barreiras:</strong> Ninguém deve ser excluído do suporte digital essencial devido a limitações geográficas ou financeiras.",
+            docs_sec1_li2: "<strong>Privacidade em Primeiro Lugar:</strong> Nossos usuários e administradores operam sob um modelo que protege totalmente seus dados pessoais.",
+            docs_sec1_li3: "<strong>Infraestrutura Descentralizada:</strong> Uso de servidores de alto nível internacional para garantir 100% de disponibilidade e conformidade.",
+            docs_sec2_title: "2. Legal Compliance Agreements (公式規約・方針)",
+            docs_sec2_desc1: "Para assegurar a conformidade rigorosa com regulações internacionais (incluindo GDPR), nossas estruturas regulatórias são distribuídas em documentos especializados.",
+            docs_sec2_btn1: "Terms of Service (利用規約) ➔",
+            docs_sec2_btn2: "Privacy Policy (Diretrizes de Privacidade) ➔",
+            docs_sec3_title: "3. Automated Infrastructure Stack (技術スタック体系)",
+            docs_sec3_desc1: "ryopc utiliza uma matriz automatizada ultra-eficiente para operar globalmente e eliminar custos administrativos excessivos.",
+            docs_sec3_sub: "Matriz de Produção Atual:",
+            docs_footer_volunteer: "Mantido por ryopcボランティア 運営事務局 | Diretor: game_ryo"
+        }
+    };
+
+    // --- 言語切り替え機能 ---
+    function changeLanguage(lang) {
+        document.documentElement.lang = lang;
+        safeStorage.set("preferred_lang", lang);
+        
+        document.querySelectorAll('[data-t]').forEach(el => {
+            const key = el.getAttribute('data-t');
+            if (translations[lang] && translations[lang][key]) {
+                el.innerHTML = translations[lang][key];
+            }
+        });
+    }
+
+    // --- セーフストレージ ---
+    const safeStorage = {
+        get: (key) => { try { return localStorage.getItem(key); } catch (e) { return window['fb_' + key] || null; } },
+        set: (key, val) => { try { localStorage.setItem(key, val); } catch (e) { window['fb_' + key] = val; } }
+    };
+
+    // --- Channel Talk ---
+    (function() {
+        var w = window; if (w.ChannelIO) return;
+        var ch = function() { ch.c(arguments); }; ch.q = []; ch.c = function(args) { ch.q.push(args); }; w.ChannelIO = ch;
+        function l() {
+            if (w.ChannelIOInitialized) return; w.ChannelIOInitialized = true;
+            var s = document.createElement('script'); s.type = 'text/javascript'; s.async = true; s.src = 'https://cdn.channel.io/plugin/ch-plugin-web.js';
+            var x = document.getElementsByTagName('script')[0]; x.parentNode.insertBefore(s, x);
+        }
+        if (document.readyState === 'complete') l(); else { w.addEventListener('load', l); }
+    })();
+
+    // 起動処理
+    function chInitTalk() {
+        ChannelIO('boot', { "pluginKey": 'f06bb3b5-5394-4b24-b902-03d4110cfddd' }, () => initMobileChatButton());
+    }
+
+    function chAcceptCookie() {
+        safeStorage.set("ch_cookie_consent", "accepted");
+        document.getElementById("chCookieBanner").classList.add("ch-hidden");
+        chInitTalk();
+    }
+
+    function chDenyCookie() {
+        safeStorage.set("ch_cookie_consent", "denied");
+        document.getElementById("chCookieBanner").classList.add("ch-hidden");
+    }
+
+    function initMobileChatButton() {
+        const container = document.getElementById('special-mobile-chat-container');
+        if (safeStorage.get("ch_cookie_consent") === "accepted") {
+            container.style.display = 'block';
+            ChannelIO('hideChannelButton');
+            document.getElementById('special-mobile-chat-btn').onclick = () => ChannelIO('showMessenger');
+            document.getElementById('special-mobile-close-btn').onclick = (e) => { e.stopPropagation(); container.style.display = 'none'; };
+        }
+    }
+
+    // --- 初期化 ---
+    window.addEventListener('DOMContentLoaded', () => {
+        const savedLang = safeStorage.get("preferred_lang");
+        const browserLang = navigator.language.split('-')[0];
+        const defaultLang = savedLang || (translations[browserLang] ? browserLang : 'en');
+        
+        document.getElementById('langSelector').value = defaultLang;
+        changeLanguage(defaultLang);
+
+        const menuToggle = document.getElementById('menuToggle');
+        const navLinks = document.getElementById('navLinks');
+        if (menuToggle && navLinks) {
+            menuToggle.onclick = (e) => { e.stopPropagation(); navLinks.classList.toggle('active'); };
+            document.onclick = () => navLinks.classList.remove('active');
+        }
+
+        const consent = safeStorage.get("ch_cookie_consent");
+        if (consent === "accepted") chInitTalk();
+        else if (consent === null) setTimeout(() => document.getElementById("chCookieBanner").classList.remove("ch-hidden"), 1200);
+
+        window.onscroll = () => {
+            const winScroll = document.documentElement.scrollTop;
+            const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            const scrolled = (winScroll / height) * 100;
+            document.getElementById("scroll-progress").style.width = scrolled + "%";
+        };
+    });
+    </script>
 </body>
 </html>
