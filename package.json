@@ -1,8 +1,11 @@
 {
-  "name": "my-static-site",
+  "name": "ryopc-home",
   "version": "1.0.0",
+  "description": "",
   "scripts": {
-    "build": "node build.js"
+    "build": "npx @11ty/eleventy"
+  },
+  "devDependencies": {
+    "@11ty/eleventy": "^2.0.1"
   }
 }
-
