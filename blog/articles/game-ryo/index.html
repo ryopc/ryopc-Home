@@ -127,6 +127,29 @@ relatedPosts:
             font-weight: 600; border: 2px solid var(--primary);
         }
 
+        /* 相互リンクセクション */
+        .reciprocal-links {
+            margin-top: 4rem; padding-top: 3rem; border-top: 2px solid rgba(226, 232, 240, 0.8);
+        }
+        .reciprocal-links h3 { color: var(--dark); font-size: 1.4rem; margin-bottom: 2rem; }
+        .links-grid {
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 2rem;
+        }
+        .link-card {
+            background: linear-gradient(135deg, #fff9e6, #ffe6cc);
+            padding: 2rem; border-radius: 16px; border: 2px solid rgba(255, 193, 7, 0.3);
+            transition: var(--transition); cursor: pointer;
+            text-decoration: none; color: inherit;
+        }
+        .link-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 40px -12px rgba(255, 193, 7, 0.3);
+            border-color: #ffc107;
+        }
+        .link-card-icon { font-size: 2rem; margin-bottom: 1rem; }
+        .link-card-title { color: var(--dark); font-size: 1.2rem; font-weight: 700; margin-bottom: 0.5rem; }
+        .link-card-desc { color: var(--text-light); font-size: 0.9rem; }
+
         /* 関連記事セクション */
         .related-posts {
             margin-top: 4rem; padding-top: 3rem; border-top: 2px solid rgba(226, 232, 240, 0.8);
@@ -173,6 +196,7 @@ relatedPosts:
             .profile-section { flex-direction: column; text-align: center; gap: 2rem; }
             .profile-avatar { width: 120px; height: 120px; }
             .social-links { justify-content: center; }
+            .links-grid { grid-template-columns: 1fr; }
             .posts-grid { grid-template-columns: 1fr; }
         }
     </style>
@@ -227,6 +251,28 @@ relatedPosts:
 
                 <div class="note-box">
                     <strong>💡 Tip:</strong> game_ryo は ryopc グローバルイニシアティブの開発メンバーとして活躍しています。彼の最新プロジェクトや技術ブログをフォローしてください！
+                </div>
+
+                <!-- 相互リンクセクション -->
+                <div class="reciprocal-links">
+                    <h3>🔗 相互リンク / Reciprocal Links</h3>
+                    <div class="links-grid">
+                        <a href="https://example-site-1.com" class="link-card" target="_blank">
+                            <div class="link-card-icon">🌟</div>
+                            <div class="link-card-title">サンプルサイト 1</div>
+                            <div class="link-card-desc">ここにサイトの説明を入力します</div>
+                        </a>
+                        <a href="https://example-site-2.com" class="link-card" target="_blank">
+                            <div class="link-card-icon">🚀</div>
+                            <div class="link-card-title">サンプルサイト 2</div>
+                            <div class="link-card-desc">ここにサイトの説明を入力します</div>
+                        </a>
+                        <a href="https://example-site-3.com" class="link-card" target="_blank">
+                            <div class="link-card-icon">💎</div>
+                            <div class="link-card-title">サンプルサイト 3</div>
+                            <div class="link-card-desc">ここにサイトの説明を入力します</div>
+                        </a>
+                    </div>
                 </div>
 
                 <!-- 関連記事セクション -->
