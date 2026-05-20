@@ -6,10 +6,84 @@
     <title>Privacy Policy - ryopc Global Digital Support</title>
     
     <!-- 🎨 Global Canonical Favicon Link -->
-    <link rel="icon" type="image/png" href="../favicon.png">
+    <link rel="icon" type="image/png" href=".../favicon.png">
     <link rel="preconnect" href="https://googleapis.com">
     <link rel="preconnect" href="https://gstatic.com" crossorigin>
     <link href="https://googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+
+<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+<link rel="stylesheet" id="silktide-consent-manager-css" href="https://cdn.jsdelivr.net/gh/silktide/consent-manager@v2.0.0/silktide-consent-manager.css" integrity="sha384-IO1E/jCrQXyH5rwcI0SXP7OXw47JFqQNDQcKhbFvqnL2IunBxxwE2Ne5XyAmCqKs" crossorigin="anonymous">
+<script src="https://cdn.jsdelivr.net/gh/silktide/consent-manager@v2.0.0/silktide-consent-manager.js" integrity="sha384-j4NIMOecmtzMWe9GJADIIe5hTlHG63aiTQ/2XorW10RNyQJg+IU+xwFVDy45wBah" crossorigin="anonymous"></script>
+<script>
+window.silktideConsentManager.init({
+  backdrop: {
+    show: true
+  },
+  icon: {
+    position: "bottomLeft"
+  },
+  prompt: {
+    position: "bottomRight"
+  },
+  consentTypes: [
+    {
+      id: "essential",
+      label: "Essential",
+      description: "<p>These cookies are necessary for the website to function properly and cannot be switched off. They help with things like logging in and setting your privacy preferences.</p>",
+      required: true,
+      onAccept: function() {
+        console.log('Add logic for the required Essential consent type here');
+      }
+    },
+    {
+      id: "analytics",
+      label: "Analytics",
+      description: "<p>These cookies help us improve the site by tracking which pages are most popular and how visitors move around the site.</p>",
+      required: false,
+      onAccept: function() {
+        console.log('Add accept logic for Analytics consent type here');
+      },
+      onReject: function() {
+        console.log('Add reject logic for Analytics consent type here');
+      }
+    },
+    {
+      id: "customer_support",
+      label: "Customer Support",
+      description: "<p>This cookie helps us provide you with the best possible support.</p>",
+      required: false,
+      scripts: [
+        {
+          url: "https://rawcdn.githack.com/ryopc/Archive/fc3acd1142e5108dc5263e4b112a768988cccb4d/Channel-Talk.js",
+          load: "async"
+        }
+      ],
+      onAccept: function() {
+        // Custom script loaded: https://rawcdn.githack.com/ryopc/Archive/fc3acd1142e5108dc5263e4b112a768988cccb4d/Channel-Talk.js
+      }
+    }
+  ],
+  text: {
+    prompt: {
+      description: "<p>This site uses cookies to improve the user experience, provide personalized content, and analyze traffic.</p>",
+      acceptAllButtonText: "Accept all",
+      acceptAllButtonAccessibleLabel: "Accept all cookies",
+      rejectNonEssentialButtonText: "Reject non-essential",
+      rejectNonEssentialButtonAccessibleLabel: "Reject all non-essential cookies",
+      preferencesButtonText: "Preferences",
+      preferencesButtonAccessibleLabel: "Toggle preferences"
+    },
+    preferences: {
+      title: "Customize your cookie preferences",
+      description: "<p>We respect your right to privacy. You can choose not to allow some types of cookies. Your cookie preferences will apply across our website.</p>",
+      saveButtonText: "Save and close",
+      saveButtonAccessibleLabel: "Save your cookie preferences",
+      creditLinkText: "Get this banner for free",
+      creditLinkAccessibleLabel: "Get this banner for free"
+    }
+  }
+});
+</script>
     
     <style>
         :root {
@@ -549,71 +623,7 @@
         set: (key, val) => { try { localStorage.setItem(key, val); } catch (e) { window['fb_' + key] = val; } }
     };
 
-    // --- Channel Talk ---
-    (function() {
-        var w = window; if (w.ChannelIO) return;
-        var ch = function() { ch.c(arguments); }; ch.q = []; ch.c = function(args) { ch.q.push(args); }; w.ChannelIO = ch;
-        function l() {
-            if (w.ChannelIOInitialized) return; w.ChannelIOInitialized = true;
-            var s = document.createElement('script'); s.type = 'text/javascript'; s.async = true; s.src = 'https://cdn.channel.io/plugin/ch-plugin-web.js';
-            var x = document.getElementsByTagName('script')[0]; x.parentNode.insertBefore(s, x);
-        }
-        if (document.readyState === 'complete') l(); else { w.addEventListener('load', l); }
-    })();
 
-    // 起動処理
-    function chInitTalk() {
-        ChannelIO('boot', { "pluginKey": 'f06bb3b5-5394-4b24-b902-03d4110cfddd' }, () => initMobileChatButton());
-    }
-
-    function chAcceptCookie() {
-        safeStorage.set("ch_cookie_consent", "accepted");
-        document.getElementById("chCookieBanner").classList.add("ch-hidden");
-        chInitTalk();
-    }
-
-    function chDenyCookie() {
-        safeStorage.set("ch_cookie_consent", "denied");
-        document.getElementById("chCookieBanner").classList.add("ch-hidden");
-    }
-
-    function initMobileChatButton() {
-        const container = document.getElementById('special-mobile-chat-container');
-        if (safeStorage.get("ch_cookie_consent") === "accepted") {
-            container.style.display = 'block';
-            ChannelIO('hideChannelButton');
-            document.getElementById('special-mobile-chat-btn').onclick = () => ChannelIO('showMessenger');
-            document.getElementById('special-mobile-close-btn').onclick = (e) => { e.stopPropagation(); container.style.display = 'none'; };
-        }
-    }
-
-    // --- 初期化 ---
-    window.addEventListener('DOMContentLoaded', () => {
-        const savedLang = safeStorage.get("preferred_lang");
-        const browserLang = navigator.language.split('-')[0];
-        const defaultLang = savedLang || (translations[browserLang] ? browserLang : 'en');
-        
-        document.getElementById('langSelector').value = defaultLang;
-        changeLanguage(defaultLang);
-
-        const menuToggle = document.getElementById('menuToggle');
-        const navLinks = document.getElementById('navLinks');
-        if (menuToggle && navLinks) {
-            menuToggle.onclick = (e) => { e.stopPropagation(); navLinks.classList.toggle('active'); };
-            document.onclick = () => navLinks.classList.remove('active');
-        }
-
-        const consent = safeStorage.get("ch_cookie_consent");
-        if (consent === "accepted") chInitTalk();
-        else if (consent === null) setTimeout(() => document.getElementById("chCookieBanner").classList.remove("ch-hidden"), 1200);
-
-        window.onscroll = () => {
-            const winScroll = document.documentElement.scrollTop;
-            const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-            const scrolled = (winScroll / height) * 100;
-            document.getElementById("scroll-progress").style.width = scrolled + "%";
-        };
-    });
     </script>
 </body>
 </html>
