@@ -16,75 +16,74 @@
 <script src="https://cdn.jsdelivr.net/gh/silktide/consent-manager@v2.0.0/silktide-consent-manager.js" integrity="sha384-j4NIMOecmtzMWe9GJADIIe5hTlHG63aiTQ/2XorW10RNyQJg+IU+xwFVDy45wBah" crossorigin="anonymous"></script>
 <script>
 window.silktideConsentManager.init({
-Background: {
-Display: true
-},
-Icon: {
-Position: "Bottom Left"
-},
-Prompt: {
-Position: "bottomRight"
-},
-Consent Type: [
-{
-id: "essential",
-Label: "Required"
-Description: "<p>These cookies are necessary for the website to function correctly and cannot be disabled. They help with things like logging in and privacy settings."</p>
-Required: true,
-onAccept: function() {
-console.log('Add your logic for the required Essential consent type here');
-}
-},
-{
-id: "analytics",
-Label: "Analytics"
-Description: "<p>These cookies help us improve your site by tracking which pages are most popular and how visitors move around the site.</p>"
-Required: false,
-onAccept: function() {
-console.log('Add your analytics consent type approval logic here');
-},
-onReject: function() {
-console.log('Add your analytics consent type rejection logic here');
-}
-},
-{
-id: "customer_support",
-Label: "Customer Support"
-Description: "<p>These cookies help us provide you with the best support.</p>"
-Required: false,
-Script: [
-{
-URL: "https://rawcdn.githack.com/ryopc/Archive/fc3acd1142e5108dc5263e4b112a768988cccb4d/Channel-Talk.js",
-Load: "Asynchronous"
-}
-],
-onAccept: function() {
-/ Custom script loaded: https://rawcdn.githack.com/ryopc/Archive/fc3acd1142e5108dc5263e4b112a768988cccb4d/Channel-Talk.js
-}
-}
-],
-Text: {
-Prompt: {
-Description: "<p>This site uses cookies to improve user experience, provide personalized content, and analyze traffic.</p>"
-acceptAllButtonText: "Accept All",
-acceptAllButtonAccessibleLabel: "Accept all cookies",
-rejectNonEssentialButtonText: "Reject unnecessary ones",
-rejectNonEssentialButtonAccessibleLabel: "Reject all unnecessary cookies",
-preferencesButtonText: "Preferences",
-preferencesButtonAccessibleLabel: "Toggle preferences"
-},
-Settings: {
-Title: "Customize your cookie settings"
-Description: "<p>We respect your privacy rights. You can choose not to allow certain types of cookies. Your cookie settings apply to our entire website."
-saveButtonText: "Save and close",
-saveButtonAccessibleLabel: "Save cookie settings",
-creditLinkText: "Get this banner for free",
-creditLinkAccessibleLabel: "Get this banner for free"
-}
-}
+  backdrop: {
+    show: true
+  },
+  icon: {
+    position: "bottomLeft"
+  },
+  prompt: {
+    position: "bottomRight"
+  },
+  consentTypes: [
+    {
+      id: "essential",
+      label: "Essential",
+      description: "<p>These cookies are necessary for the website to function properly and cannot be switched off. They help with things like logging in and setting your privacy preferences.</p>",
+      required: true,
+      onAccept: function() {
+        console.log('Add logic for the required Essential consent type here');
+      }
+    },
+    {
+      id: "analytics",
+      label: "Analytics",
+      description: "<p>These cookies help us improve the site by tracking which pages are most popular and how visitors move around the site.</p>",
+      required: false,
+      onAccept: function() {
+        console.log('Add accept logic for Analytics consent type here');
+      },
+      onReject: function() {
+        console.log('Add reject logic for Analytics consent type here');
+      }
+    },
+    {
+      id: "customer_support",
+      label: "Customer Support",
+      description: "<p>This cookie helps us provide you with the best possible support.</p>",
+      required: false,
+      scripts: [
+        {
+          url: "https://rawcdn.githack.com/ryopc/Archive/fc3acd1142e5108dc5263e4b112a768988cccb4d/Channel-Talk.js",
+          load: "async"
+        }
+      ],
+      onAccept: function() {
+        // Custom script loaded: https://rawcdn.githack.com/ryopc/Archive/fc3acd1142e5108dc5263e4b112a768988cccb4d/Channel-Talk.js
+      }
+    }
+  ],
+  text: {
+    prompt: {
+      description: "<p>This site uses cookies to improve the user experience, provide personalized content, and analyze traffic.</p>",
+      acceptAllButtonText: "Accept all",
+      acceptAllButtonAccessibleLabel: "Accept all cookies",
+      rejectNonEssentialButtonText: "Reject non-essential",
+      rejectNonEssentialButtonAccessibleLabel: "Reject all non-essential cookies",
+      preferencesButtonText: "Preferences",
+      preferencesButtonAccessibleLabel: "Toggle preferences"
+    },
+    preferences: {
+      title: "Customize your cookie preferences",
+      description: "<p>We respect your right to privacy. You can choose not to allow some types of cookies. Your cookie preferences will apply across our website.</p>",
+      saveButtonText: "Save and close",
+      saveButtonAccessibleLabel: "Save your cookie preferences",
+      creditLinkText: "Get this banner for free",
+      creditLinkAccessibleLabel: "Get this banner for free"
+    }
+  }
 });
 </script>
-    
     <style>
         :root {
             --primary: #0052cc;
