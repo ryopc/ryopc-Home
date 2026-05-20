@@ -11,12 +11,78 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
 
-    <script type="text/javascript">
-    (function(c,l,a,r,i,t,y){
-        c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
-        t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
-        y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
-    })(window, document, "clarity", "script", "wtrj3y5d1s");
+<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+<link rel="stylesheet" id="silktide-consent-manager-css" href="https://cdn.jsdelivr.net/gh/silktide/consent-manager@v2.0.0/silktide-consent-manager.css" integrity="sha384-IO1E/jCrQXyH5rwcI0SXP7OXw47JFqQNDQcKhbFvqnL2IunBxxwE2Ne5XyAmCqKs" crossorigin="anonymous">
+<script src="https://cdn.jsdelivr.net/gh/silktide/consent-manager@v2.0.0/silktide-consent-manager.js" integrity="sha384-j4NIMOecmtzMWe9GJADIIe5hTlHG63aiTQ/2XorW10RNyQJg+IU+xwFVDy45wBah" crossorigin="anonymous"></script>
+<script>
+window.silktideConsentManager.init({
+  背景: {
+    表示: true
+  },
+  アイコン: {
+    位置: "左下"
+  },
+  プロンプト： {
+    位置: "bottomRight"
+  },
+  同意タイプ: [
+    {
+      id: "essential",
+      ラベル:「必須」
+      説明：「<p>これらのクッキーはウェブサイトが正しく機能するために必要であり、無効にすることはできません。ログインやプライバシー設定などに役立ちます。」</p>
+      必須: true、
+      onAccept: function() {
+        console.log('必須のEssential同意タイプのロジックをここに追加してください');
+      }
+    },
+    {
+      id: "analytics",
+      ラベル:「アナリティクス」
+      説明: "<p>これらのクッキーは、どのページが最も人気があるか、訪問者がサイト内をどのように移動しているかを追跡することで、サイトの改善に役立ちます。</p>"
+      必須: false、
+      onAccept: function() {
+        console.log('ここにアナリティクス同意タイプの承認ロジックを追加してください');
+      },
+      onReject: function() {
+        console.log('ここにアナリティクス同意タイプの拒否ロジックを追加してください');
+      }
+    },
+    {
+      id: "customer_support",
+      ラベル:「カスタマーサポート」
+      説明：「<p>このクッキーは、お客様に最高のサポートを提供するために役立ちます。</p>」
+      必須: false、
+      スクリプト: [
+        {
+          URL: "https://rawcdn.githack.com/ryopc/Archive/fc3acd1142e5108dc5263e4b112a768988cccb4d/Channel-Talk.js",
+          ロード: "非同期"
+        }
+      ],
+      onAccept: function() {
+        // カスタムスクリプトが読み込まれました: https://rawcdn.githack.com/ryopc/Archive/fc3acd1142e5108dc5263e4b112a768988cccb4d/Channel-Talk.js
+      }
+    }
+  ],
+  文章： {
+    プロンプト： {
+      説明: "<p>このサイトでは、ユーザーエクスペリエンスの向上、パーソナライズされたコンテンツの提供、トラフィック分析のためにCookieを使用しています。</p>"
+      acceptAllButtonText: "すべて承認",
+      acceptAllButtonAccessibleLabel: "すべてのクッキーを受け入れる",
+      rejectNonEssentialButtonText: "不要なものを拒否します",
+      rejectNonEssentialButtonAccessibleLabel: "すべての不要なクッキーを拒否します",
+      preferencesButtonText: "設定",
+      preferencesButtonAccessibleLabel: "設定の切り替え"
+    },
+    設定: {
+      タイトル：「クッキーの設定をカスタマイズする」
+      説明：「<p>お客様のプライバシー権を尊重します。一部の種類のクッキーを許可しないことを選択できます。お客様のクッキー設定は、当社のウェブサイト全体に適用されます。」
+      saveButtonText: "保存して閉じる",
+      saveButtonAccessibleLabel: "クッキーの設定を保存します",
+      creditLinkText: "このバナーを無料で入手してください",
+      creditLinkAccessibleLabel: "このバナーを無料で入手"
+    }
+  }
+});
 </script>
     
     <style>
@@ -344,68 +410,7 @@
         set: (key, val) => { try { localStorage.setItem(key, val); } catch (e) { window['fb_' + key] = val; } }
     };
 
-    // --- Channel Talk ---
-    (function() {
-        var w = window; if (w.ChannelIO) return;
-        var ch = function() { ch.c(arguments); }; ch.q = []; ch.c = function(args) { ch.q.push(args); }; w.ChannelIO = ch;
-        function l() {
-            if (w.ChannelIOInitialized) return; w.ChannelIOInitialized = true;
-            var s = document.createElement('script'); s.type = 'text/javascript'; s.async = true; s.src = 'https://cdn.channel.io/plugin/ch-plugin-web.js';
-            var x = document.getElementsByTagName('script')[0]; x.parentNode.insertBefore(s, x);
-        }
-        if (document.readyState === 'complete') l(); else { w.addEventListener('load', l); }
-    })();
-
-    function chInitTalk() {
-        ChannelIO('boot', { "pluginKey": 'f06bb3b5-5394-4b24-b902-03d4110cfddd' }, () => initMobileChatButton());
-    }
-
-    function chAcceptCookie() {
-        safeStorage.set("ch_cookie_consent", "accepted");
-        document.getElementById("chCookieBanner").classList.add("ch-hidden");
-        chInitTalk();
-    }
-
-    function chDenyCookie() {
-        safeStorage.set("ch_cookie_consent", "denied");
-        document.getElementById("chCookieBanner").classList.add("ch-hidden");
-    }
-
-    function initMobileChatButton() {
-        const container = document.getElementById('special-mobile-chat-container');
-        if (safeStorage.get("ch_cookie_consent") === "accepted") {
-            container.style.display = 'block';
-            ChannelIO('hideChannelButton');
-            document.getElementById('special-mobile-chat-btn').onclick = () => ChannelIO('showMessenger');
-            document.getElementById('special-mobile-close-btn').onclick = (e) => { e.stopPropagation(); container.style.display = 'none'; };
-        }
-    }
-
-    // --- 初期化 ---
-    window.addEventListener('DOMContentLoaded', () => {
-        const savedLang = safeStorage.get("preferred_lang");
-        const browserLang = navigator.language.split('-')[0];
-        const defaultLang = savedLang || (translations[browserLang] ? browserLang : 'en');
-        
-        document.getElementById('langSelector').value = defaultLang;
-        changeLanguage(defaultLang);
-
-        const menuToggle = document.getElementById('menuToggle');
-        const navLinks = document.getElementById('navLinks');
-        menuToggle.onclick = (e) => { e.stopPropagation(); navLinks.classList.toggle('active'); };
-        document.onclick = () => navLinks.classList.remove('active');
-
-        const consent = safeStorage.get("ch_cookie_consent");
-        if (consent === "accepted") chInitTalk();
-        else if (consent === null) setTimeout(() => document.getElementById("chCookieBanner").classList.remove("ch-hidden"), 1200);
-
-        window.onscroll = () => {
-            const winScroll = document.documentElement.scrollTop;
-            const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-            const scrolled = (winScroll / height) * 100;
-            document.getElementById("scroll-progress").style.width = scrolled + "%";
-        };
-    });
+ 
     </script>
 </body>
 </html>
