@@ -559,6 +559,7 @@ window.silktideConsentManager.init({
     function changeLanguage(lang) {
         document.documentElement.lang = lang;
         safeStorage.set("preferred_lang", lang);
+        document.getElementById('langSelector').value = lang;
         
         document.querySelectorAll('[data-t]').forEach(el => {
             const key = el.getAttribute('data-t');
@@ -567,6 +568,14 @@ window.silktideConsentManager.init({
             }
         });
     }
+
+    // --- 言語設定の復元 ---
+    (function() {
+        const savedLang = safeStorage.get("preferred_lang");
+        if (savedLang && translations[savedLang]) {
+            changeLanguage(savedLang);
+        }
+    })();
 
 
     </script>
