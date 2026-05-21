@@ -16,6 +16,21 @@
             padding: 2rem;
             background: var(--bg);
         }
+        /* Google ボタンの外側ラッパーを調整 */
+.g_id_signin {
+    transform: scale(1.25); /* ← 拡大率を調整 */
+    transform-origin: center;
+    margin: 0 auto;
+}
+
+/* Google ボタンの親要素に高さを合わせる */
+.oauth-btn-wrapper.google {
+    height: 48px; /* GitHub と LINE に合わせる */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 
         .auth-card {
             width: 100%;
@@ -178,7 +193,7 @@
 
             <div class="oauth-buttons">
 
-    <script src="https://accounts.google.com/gsi/client" async defer></script>
+<div class="oauth-btn-wrapper google">
     <div id="g_id_onload"
         data-client_id="744662410553-97fp8oh13pp62u48isr5ful9297nkaon.apps.googleusercontent.com"
         data-login_uri="https://auth.ryopc.f5.si/login"
@@ -192,6 +207,8 @@
         data-shape="rectangular"
         data-logo_alignment="left">
     </div>
+</div>
+
 
                 <!-- GitHub（あなたのロゴ＋文字入り） -->
                 <a href="https://auth.ryopc.f5.si/login/github" class="github-login-btn">
