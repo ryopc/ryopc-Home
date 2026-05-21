@@ -8,29 +8,17 @@
     <link rel="stylesheet" href="/style.css">
 
     <style>
+        body {
+            background: var(--bg);
+        }
+
         .auth-wrapper {
             min-height: 100vh;
             display: flex;
             justify-content: center;
             align-items: center;
             padding: 2rem;
-            background: var(--bg);
         }
-        /* Google ボタンの外側ラッパーを調整 */
-.g_id_signin {
-    transform: scale(1.25); /* ← 拡大率を調整 */
-    transform-origin: center;
-    margin: 0 auto;
-}
-
-/* Google ボタンの親要素に高さを合わせる */
-.oauth-btn-wrapper.google {
-    height: 48px; /* GitHub と LINE に合わせる */
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
 
         .auth-card {
             width: 100%;
@@ -74,41 +62,34 @@
         }
 
         .oauth-btn-wrapper {
-            background: var(--white);
+            background: #f8f9fa;
             border-radius: 16px;
             padding: 0.8rem 1rem;
             border: 1px solid rgba(0,0,0,0.08);
             box-shadow: 0 8px 20px rgba(0,0,0,0.05);
             transition: var(--transition);
             cursor: pointer;
+            display: flex;
+            justify-content: center;
         }
         .oauth-btn-wrapper:hover {
             transform: translateY(-4px);
-            box-shadow: 0 12px 28px rgba(0,0,0,0.08);
+            box-shadow: 0 12px 28px rgba(0,0,0,0.12);
         }
 
         .oauth-btn-wrapper img {
-            width: 100%;
+            width: 240px;
             display: block;
         }
-        /* LINE ボタンだけサイズ調整 */
-.line-login-btn img,
-.oauth-btn-wrapper.line img {
-    width: 240px;
-    margin: 0 auto;
-    display: block;
-}
-
 
         /* GitHub ボタン（文字入り） */
         .github-login-btn {
+            max-width: 240px;
+            margin: 0 auto;
             display: flex;
             align-items: center;
             justify-content: center;
             gap: 12px;
-            width: 100%;
-            max-width: 320px;
-            margin: 0 auto;
             padding: 0.9rem 1.2rem;
             background: #24292e;
             border-radius: 16px;
@@ -116,8 +97,8 @@
             color: #ffffff;
             font-weight: 700;
             font-size: 1rem;
-            transition: var(--transition);
             box-shadow: 0 12px 28px rgba(0,0,0,0.08);
+            transition: var(--transition);
         }
         .github-login-btn img {
             height: 26px;
@@ -126,10 +107,6 @@
         .github-login-btn:hover {
             filter: brightness(1.1);
             transform: translateY(-3px);
-        }
-        .github-login-btn:active {
-            filter: brightness(1.2);
-            transform: translateY(0px);
         }
 
         .divider {
@@ -151,6 +128,43 @@
             background: rgba(0,0,0,0.1);
         }
 
+        /* パスワードログインのカード */
+        .password-card {
+            background: #f8f9fa;
+            padding: 1.8rem;
+            border-radius: 20px;
+            border: 1px solid rgba(0,0,0,0.08);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.05);
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.2rem;
+        }
+
+        .form-group label {
+            font-weight: 600;
+            color: var(--dark);
+            margin-bottom: 0.4rem;
+            display: block;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 0.9rem 1rem;
+            border-radius: 12px;
+            border: 1px solid rgba(0,0,0,0.15);
+            background: #ffffff;
+            font-size: 1rem;
+            transition: var(--transition);
+        }
+
+        .form-control:focus {
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(0,123,255,0.15);
+            outline: none;
+        }
+
         .login-btn {
             width: 100%;
             padding: 1rem;
@@ -168,12 +182,12 @@
             transform: translateY(-3px);
         }
 
-        .register-text {
+        .login-text {
             margin-top: 1.5rem;
             text-align: center;
             color: var(--text-light);
         }
-        .register-text a {
+        .login-text a {
             color: var(--primary);
             font-weight: 700;
             text-decoration: none;
@@ -193,55 +207,44 @@
 
             <div class="oauth-buttons">
 
-<div class="oauth-btn-wrapper google">
-    <div id="g_id_onload"
-        data-client_id="744662410553-97fp8oh13pp62u48isr5ful9297nkaon.apps.googleusercontent.com"
-        data-login_uri="https://auth.ryopc.f5.si/login"
-        data-auto_prompt="false">
-    </div>
-<div class="g_id_signin"
-    data-type="standard"
-    data-size="large"
-    data-theme="filled_black"   <!-- ここを変更 -->
-    data-text="signin_with"
-    data-shape="rectangular"
-    data-logo_alignment="left">
-</div>
+                <!-- Google（SVG） -->
+                <div class="oauth-btn-wrapper" onclick="location.href='https://auth.ryopc.f5.si/login'">
+                    <img src="https://developers.google.com/identity/images/branding_guideline_sample_lt_rd_lg.svg" alt="Googleでログイン">
+                </div>
 
-</div>
-
-
-                <!-- GitHub（あなたのロゴ＋文字入り） -->
+                <!-- GitHub -->
                 <a href="https://auth.ryopc.f5.si/login/github" class="github-login-btn">
                     <img src="https://res.cloudinary.com/dt0zmgv8k/image/upload/v1779401761/GitHub_Invertocat_Black_oaz8ko.svg">
                     <span>Sign in with GitHub</span>
                 </a>
 
-                <!-- LINE（あなたの公式画像） -->
-              <div class="oauth-btn-wrapper line" onclick="location.href='https://auth.ryopc.f5.si/login/line'">
-    <img src="https://res.cloudinary.com/dt0zmgv8k/image/upload/v1779401678/btn_login_base_hjy4gn.png" alt="LINEでログイン">
-</div>
-
+                <!-- LINE -->
+                <div class="oauth-btn-wrapper" onclick="location.href='https://auth.ryopc.f5.si/login/line'">
+                    <img src="https://res.cloudinary.com/dt0zmgv8k/image/upload/v1779401678/btn_login_base_hjy4gn.png" alt="LINEでログイン">
+                </div>
 
             </div>
 
             <div class="divider"><span>または</span></div>
 
-            <form id="login-form">
-                <div class="form-group">
-                    <label>メールアドレス</label>
-                    <input type="email" name="email" class="form-control" required>
-                </div>
+            <!-- パスワードログイン（カード式） -->
+            <div class="password-card">
+                <form id="login-form">
+                    <div class="form-group">
+                        <label>メールアドレス</label>
+                        <input type="email" name="email" class="form-control" required>
+                    </div>
 
-                <div class="form-group">
-                    <label>パスワード</label>
-                    <input type="password" name="password" class="form-control" required>
-                </div>
+                    <div class="form-group">
+                        <label>パスワード</label>
+                        <input type="password" name="password" class="form-control" required>
+                    </div>
 
-                <button type="submit" class="login-btn">ログイン</button>
-            </form>
+                    <button type="submit" class="login-btn">ログイン</button>
+                </form>
+            </div>
 
-            <p class="register-text">
+            <p class="login-text">
                 アカウントをお持ちでないですか？  
                 <a href="/register.html">新規登録はこちら</a>
             </p>
@@ -260,16 +263,17 @@ document.getElementById("login-form").addEventListener("submit", async (e) => {
         body: JSON.stringify({
             email: form.get("email"),
             password: form.get("password")
-        })
+        }),
+        credentials: "include"
     });
 
-    if (res.redirected) {
-        window.location.href = res.url;
-        return;
-    }
-
     const json = await res.json();
-    alert(JSON.stringify(json));
+
+    if (json.success) {
+        window.location.href = "/dashboard.html";
+    } else {
+        alert(JSON.stringify(json));
+    }
 });
 </script>
 
