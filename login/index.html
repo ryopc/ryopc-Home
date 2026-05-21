@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ログイン - ryopc</title>
 
-    <!-- あなたのメインCSSを読み込む -->
     <link rel="stylesheet" href="/style.css">
 
     <style>
@@ -24,14 +23,20 @@
             background: var(--white);
             padding: 3rem;
             border-radius: 32px;
-            box-shadow: 0 25px 50px -12px rgba(0,0,0,0.08);
+            box-shadow: 0 25px 50px -12px rgba(0,0,0,0.12);
             border: 1px solid rgba(226,232,240,0.8);
+            animation: fadeIn 0.5s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
         .auth-card h2 {
             margin-top: 0;
             margin-bottom: 2rem;
-            font-size: 1.8rem;
+            font-size: 1.9rem;
             color: var(--dark);
             display: flex;
             align-items: center;
@@ -45,26 +50,64 @@
             border-radius: 10px;
         }
 
+        /* OAuth ボタン共通 */
         .oauth-buttons {
             display: flex;
             flex-direction: column;
-            gap: 1rem;
-            margin-bottom: 2rem;
+            gap: 1.2rem;
+            margin-bottom: 2.5rem;
         }
-        .oauth-btn {
-            display: block;
-            text-align: center;
-            padding: 1rem;
-            border-radius: 14px;
-            font-weight: 700;
-            color: var(--white);
-            text-decoration: none;
+
+        .oauth-btn-wrapper {
+            background: var(--white);
+            border-radius: 16px;
+            padding: 0.8rem 1rem;
+            border: 1px solid rgba(0,0,0,0.08);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.05);
             transition: var(--transition);
+            cursor: pointer;
         }
-        .oauth-btn.google { background: #DB4437; }
-        .oauth-btn.github { background: #24292e; }
-        .oauth-btn.line { background: #06C755; }
-        .oauth-btn:hover { opacity: 0.85; transform: translateY(-3px); }
+        .oauth-btn-wrapper:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 28px rgba(0,0,0,0.08);
+        }
+
+        .oauth-btn-wrapper img {
+            width: 100%;
+            display: block;
+        }
+
+        /* GitHub ボタン（文字入り） */
+        .github-login-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            width: 100%;
+            max-width: 320px;
+            margin: 0 auto;
+            padding: 0.9rem 1.2rem;
+            background: #24292e;
+            border-radius: 16px;
+            text-decoration: none;
+            color: #ffffff;
+            font-weight: 700;
+            font-size: 1rem;
+            transition: var(--transition);
+            box-shadow: 0 12px 28px rgba(0,0,0,0.08);
+        }
+        .github-login-btn img {
+            height: 26px;
+            width: 26px;
+        }
+        .github-login-btn:hover {
+            filter: brightness(1.1);
+            transform: translateY(-3px);
+        }
+        .github-login-btn:active {
+            filter: brightness(1.2);
+            transform: translateY(0px);
+        }
 
         .divider {
             text-align: center;
@@ -117,7 +160,6 @@
 
 <body>
 
-    <!-- ナビバー（トップページと同じ） -->
     <div class="navbar">
         <div class="nav-logo" onclick="location.href='/'">ryopc</div>
     </div>
@@ -126,10 +168,8 @@
         <div class="auth-card">
             <h2>ログイン</h2>
 
-            <!-- OAuth -->
-      <div class="oauth-buttons">
+            <div class="oauth-buttons">
 
-    <!-- Google 公式 -->
     <script src="https://accounts.google.com/gsi/client" async defer></script>
     <div id="g_id_onload"
         data-client_id="744662410553-97fp8oh13pp62u48isr5ful9297nkaon.apps.googleusercontent.com"
@@ -145,24 +185,21 @@
         data-logo_alignment="left">
     </div>
 
-    <!-- GitHub 公式 -->
-    <a href="https://auth.ryopc.f5.si/login/github">
-        <img src="https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png"
-             alt="Sign in with GitHub"
-             style="height: 40px;">
-    </a>
+                <!-- GitHub（あなたのロゴ＋文字入り） -->
+                <a href="https://auth.ryopc.f5.si/login/github" class="github-login-btn">
+                    <img src="https://res.cloudinary.com/dt0zmgv8k/image/upload/v1779401761/GitHub_Invertocat_Black_oaz8ko.svg">
+                    <span>Sign in with GitHub</span>
+                </a>
 
-    <!-- LINE 公式 -->
-    <a href="https://auth.ryopc.f5.si/login/line">
-        <img src="https://scdn.line-apps.com/n/line_login/buttons/linebutton_rounded_32.png"
-             alt="LINEでログイン"
-             style="height: 40px;">
-    </a>
+                <!-- LINE（あなたの公式画像） -->
+                <div class="oauth-btn-wrapper" onclick="location.href='https://auth.ryopc.f5.si/login/line'">
+                    <img src="https://res.cloudinary.com/dt0zmgv8k/image/upload/v1779401678/btn_login_base_hjy4gn.png">
+                </div>
 
-</div>
+            </div>
 
+            <div class="divider"><span>または</span></div>
 
-            <!-- パスワードログイン -->
             <form id="login-form">
                 <div class="form-group">
                     <label>メールアドレス</label>
