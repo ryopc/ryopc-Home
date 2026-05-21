@@ -1,89 +1,29 @@
+---
+title: game_ryo - Developer Profile / 開発者プロフィール
+slug: game-ryo
+date: 2026-05-20T00:00:00Z
+tags:
+  - blog
+  - profile
+  - developer
+type: profile
+author: game_ryo
+relatedPosts:
+  - we-ve-moved-our-website-to-cloudflare-pages
+  - announcing-our-new-cookie-consent-banner
+---
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-    <meta name="robots" content="noindex, nofollow">
-    <title>ryopc Global Digital Support</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
+    <title>game_ryo - Developer Profile | ryopc Global Digital Support</title>
     
-    <link rel="icon" type="image/png" href="./favicon.png">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
-
-<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
-<link rel="stylesheet" id="silktide-consent-manager-css" href="https://cdn.jsdelivr.net/gh/silktide/consent-manager@v2.0.0/silktide-consent-manager.css" integrity="sha384-IO1E/jCrQXyH5rwcI0SXP7OXw47JFqQNDQcKhbFvqnL2IunBxxwE2Ne5XyAmCqKs" crossorigin="anonymous">
-<script src="https://cdn.jsdelivr.net/gh/silktide/consent-manager@v2.0.0/silktide-consent-manager.js" integrity="sha384-j4NIMOecmtzMWe9GJADIIe5hTlHG63aiTQ/2XorW10RNyQJg+IU+xwFVDy45wBah" crossorigin="anonymous"></script>
-<script>
-window.silktideConsentManager.init({
-  backdrop: {
-    show: true
-  },
-  icon: {
-    position: "bottomLeft"
-  },
-  prompt: {
-    position: "bottomRight"
-  },
-  consentTypes: [
-    {
-      id: "essential",
-      label: "Essential",
-      description: "<p>These cookies are necessary for the website to function properly and cannot be switched off. They help with things like logging in and setting your privacy preferences.</p>",
-      required: true,
-      onAccept: function() {
-        console.log('Add logic for the required Essential consent type here');
-      }
-    },
-    {
-      id: "analytics",
-      label: "Analytics",
-      description: "<p>These cookies help us improve the site by tracking which pages are most popular and how visitors move around the site.</p>",
-      required: false,
-      onAccept: function() {
-        console.log('Add accept logic for Analytics consent type here');
-      },
-      onReject: function() {
-        console.log('Add reject logic for Analytics consent type here');
-      }
-    },
-    {
-      id: "customer_support",
-      label: "Customer Support",
-      description: "<p>This cookie helps us provide you with the best possible support.</p>",
-      required: false,
-      scripts: [
-        {
-          url: "https://rawcdn.githack.com/ryopc/Archive/fc3acd1142e5108dc5263e4b112a768988cccb4d/Channel-Talk.js",
-          load: "async"
-        }
-      ],
-      onAccept: function() {
-        // Custom script loaded: https://rawcdn.githack.com/ryopc/Archive/fc3acd1142e5108dc5263e4b112a768988cccb4d/Channel-Talk.js
-      }
-    }
-  ],
-  text: {
-    prompt: {
-      description: "<p>This site uses cookies to improve the user experience, provide personalized content, and analyze traffic.</p>",
-      acceptAllButtonText: "Accept all",
-      acceptAllButtonAccessibleLabel: "Accept all cookies",
-      rejectNonEssentialButtonText: "Reject non-essential",
-      rejectNonEssentialButtonAccessibleLabel: "Reject all non-essential cookies",
-      preferencesButtonText: "Preferences",
-      preferencesButtonAccessibleLabel: "Toggle preferences"
-    },
-    preferences: {
-      title: "Customize your cookie preferences",
-      description: "<p>We respect your right to privacy. You can choose not to allow some types of cookies. Your cookie preferences will apply across our website.</p>",
-      saveButtonText: "Save and close",
-      saveButtonAccessibleLabel: "Save your cookie preferences",
-      creditLinkText: "Get this banner for free",
-      creditLinkAccessibleLabel: "Get this banner for free"
-    }
-  }
-});
-</script>
+    <link rel="icon" type="image/png" href="./favicon.png" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet" />
+    
     <style>
         :root {
             --primary: #0052cc;
@@ -98,20 +38,18 @@ window.silktideConsentManager.init({
             --glass: rgba(13, 29, 52, 0.9);
             --transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
             --gradient-accent: linear-gradient(135deg, #00bfff, #0052cc);
-            --gradient-orange: linear-gradient(135deg, #ff5000, #ff8c00);
         }
         
         * { box-sizing: border-box; outline: none; }
-        html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+        html { scroll-behavior: smooth; }
         
         body {
             font-family: 'Inter', system-ui, -apple-system, sans-serif;
             margin: 0; padding: 0;
             background-color: var(--bg);
             color: var(--text);
-            line-height: 1.6;
+            line-height: 1.8;
             -webkit-font-smoothing: antialiased;
-            overflow-x: hidden;
         }
 
         #scroll-progress {
@@ -120,7 +58,6 @@ window.silktideConsentManager.init({
             z-index: 1000001; transition: width 0.1s;
         }
 
-        /* --- ナビゲーションバー --- */
         .navbar {
             position: fixed; top: 0; left: 0; width: 100%;
             background: var(--glass); backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px);
@@ -128,117 +65,154 @@ window.silktideConsentManager.init({
             padding: 1rem 2.5rem; z-index: 100000;
             border-bottom: 1px solid rgba(255, 255, 255, 0.1);
         }
-        .nav-logo { color: var(--white); font-weight: 800; font-size: 1.2rem; cursor: pointer; }
-        
-        .nav-right { display: flex; align-items: center; gap: 2rem; }
-        .nav-links { display: flex; gap: 2rem; list-style: none; margin: 0; padding: 0; }
-        .nav-links a { color: var(--white); text-decoration: none; font-weight: 600; font-size: 0.95rem; transition: var(--transition); opacity: 0.8; }
-        .nav-links a:hover { color: var(--accent); opacity: 1; }
+        .nav-logo { color: var(--white); font-weight: 800; font-size: 1.2rem; text-decoration: none; }
+        .nav-back { color: var(--accent); text-decoration: none; font-weight: 600; font-size: 0.95rem; }
 
-        /* 言語セレクター */
-        .lang-selector {
-            background: rgba(255, 255, 255, 0.1);
-            color: var(--white);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            padding: 6px 12px;
-            border-radius: 10px;
-            font-size: 0.85rem;
-            font-weight: 600;
-            cursor: pointer;
-            transition: var(--transition);
-        }
-        .lang-selector:hover { background: rgba(255, 255, 255, 0.2); }
-        .lang-selector option { background: var(--dark); color: var(--white); }
-        
-        .menu-toggle { display: none; flex-direction: column; gap: 5px; background: none; border: none; cursor: pointer; padding: 5px; }
-        .menu-toggle span { display: block; width: 22px; height: 2px; background: var(--white); border-radius: 2px; transition: var(--transition); }
-
-        /* ヘッダー */
         header {
             background: radial-gradient(circle at top right, var(--dark-light), var(--dark));
             color: var(--white);
-            padding: 12rem 1.5rem 11rem;
+            padding: 11rem 1.5rem 8rem;
             text-align: center;
-            position: relative;
-            overflow: hidden;
         }
-
+        .post-meta { color: var(--accent); font-weight: 600; font-size: 0.95rem; margin-bottom: 1rem; }
         header h1 {
-            margin: 0; font-size: clamp(2.8rem, 10vw, 4.5rem); font-weight: 800;
-            background: linear-gradient(135deg, var(--white) 40%, var(--accent));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+            margin: 0 auto; font-size: clamp(2rem, 6vw, 3.2rem); font-weight: 800; max-width: 800px;
+            line-height: 1.3;
         }
 
-        header p {
-            font-size: 1.25rem; max-width: 700px; margin: 2rem auto 0;
-            color: var(--text-light); opacity: 0.9;
+        .container { max-width: 850px; margin: -4rem auto 6rem; padding: 0 1.5rem; position: relative; z-index: 10; }
+        .blog-card {
+            background: var(--white); padding: 4rem 3.5rem; border-radius: 32px;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.08);
+            border: 1px solid rgba(226, 232, 240, 0.8);
         }
 
-        /* コンテンツ */
-        .container { max-width: 900px; margin: -5rem auto 6rem; padding: 0 1.5rem; position: relative; z-index: 10; }
-        .card {
-            background: var(--white); padding: 3rem; border-radius: 32px;
-            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.08); margin-bottom: 2.5rem;
-            border: 1px solid rgba(226, 232, 240, 0.8); transition: var(--transition);
+        .profile-section {
+            display: flex; gap: 3rem; align-items: center; margin-bottom: 3rem;
         }
-        .card:hover { transform: translateY(-8px); border-color: var(--accent); }
-
-        h2 { color: var(--dark); font-size: 1.75rem; margin-top: 0; display: flex; align-items: center; gap: 1rem; }
-        h2::before { content: ""; display: inline-block; width: 6px; height: 28px; background: var(--gradient-accent); border-radius: 10px; }
-
-        .docs-link-button {
-            display: flex; align-items: center; justify-content: center; gap: 15px;
-            background: var(--dark); color: var(--white) !important; text-decoration: none;
-            padding: 1.5rem 2.5rem; border-radius: 20px; font-weight: 700; font-size: 1.3rem;
-            transition: var(--transition); box-shadow: 0 15px 35px rgba(10, 25, 47, 0.2);
+        .profile-avatar {
+            width: 150px; height: 150px; border-radius: 20px;
+            background: var(--gradient-accent); display: flex; align-items: center; justify-content: center;
+            font-size: 3rem; flex-shrink: 0;
         }
-        .docs-link-button:hover { background: var(--primary); transform: translateY(-3px); }
-
-        footer { background-color: var(--dark); color: var(--text-light); padding: 6rem 1.5rem 10rem; text-align: center; }
-        .status-badge {
-            display: inline-flex; align-items: center; gap: 8px; background-color: rgba(30, 41, 59, 0.8);
-            color: var(--accent); padding: 0.7rem 1.5rem; border-radius: 100px; font-size: 0.9rem; font-weight: 600;
+        .profile-info h2 { margin-top: 0; color: var(--dark); font-size: 2rem; }
+        .profile-info .role { color: var(--accent); font-weight: 600; font-size: 1rem; }
+        .profile-info p { margin: 1rem 0 0 0; }
+        .social-links { display: flex; gap: 1rem; margin-top: 1.5rem; flex-wrap: wrap; }
+        .social-links a {
+            display: inline-flex; align-items: center; gap: 0.5rem;
+            color: var(--primary); text-decoration: none; font-weight: 600;
+            padding: 0.75rem 1.5rem; border: 2px solid var(--primary); border-radius: 12px;
+            transition: var(--transition);
         }
-        .status-dot { width: 8px; height: 8px; background: var(--accent); border-radius: 50%; box-shadow: 0 0 10px var(--accent); animation: pulse 2s infinite; }
+        .social-links a:hover { background: var(--primary); color: var(--white); }
 
-        /* クッキーバナー */
-        .ch-cookie-banner {
-            position: fixed; bottom: 32px; left: 32px; right: 32px;
-            background: var(--glass); backdrop-filter: blur(15px); color: var(--white);
-            padding: 24px 32px; border-radius: 24px; z-index: 1000000;
-            display: flex; justify-content: space-between; align-items: center; gap: 24px; flex-wrap: wrap;
-        }
-        .ch-cookie-banner.ch-hidden { display: none !important; }
-        .ch-cookie-buttons { display: flex; gap: 14px; }
-        .ch-cookie-btn { padding: 14px 28px; border: none; border-radius: 14px; font-weight: 700; cursor: pointer; }
-        .ch-btn-accept { background: var(--primary); color: var(--white); }
-        .ch-btn-deny { background: rgba(255, 255, 255, 0.1); color: var(--white); }
-
-        /* チャットボタン */
-        #special-mobile-chat-container { display: none; position: fixed; bottom: 32px; right: 32px; z-index: 99999; }
-        #special-mobile-chat-btn {
-            display: flex; align-items: center; gap: 10px; padding: 16px 28px;
-            background: var(--gradient-orange); color: var(--white); border: none;
-            font-size: 1.1rem; font-weight: 800; border-radius: 9999px; cursor: pointer;
-        }
-        #special-mobile-close-btn {
-            position: absolute; top: -8px; left: -8px; width: 28px; height: 28px;
-            background: var(--dark); color: var(--white); border-radius: 50%;
-            display: flex; align-items: center; justify-content: center; border: 2px solid var(--white);
-        }
-
+        .blog-body p { margin-bottom: 1.8rem; font-size: 1.1rem; color: #334155; }
+        .blog-body h2 { color: var(--dark); font-size: 1.6rem; margin: 3rem 0 1.5rem; display: flex; align-items: center; gap: 0.8rem; }
+        .blog-body h2::before { content: ""; display: inline-block; width: 6px; height: 24px; background: var(--gradient-accent); border-radius: 10px; }
+        .blog-body h3 { color: var(--dark); font-size: 1.3rem; margin: 2rem 0 1rem; }
+        .blog-body strong { color: var(--primary); }
         
-        @keyframes pulse { 0% { opacity: 1; } 50% { opacity: 0.4; } 100% { opacity: 1; } }
+        .spotify-widget {
+            margin: 2rem 0; width: 100%;
+        }
+        
+        .spotify-widget img {
+            max-width: 100%; height: auto; border-radius: 12px;
+        }
 
-        @media (max-width: 900px) {
-            .nav-right { gap: 1rem; }
-            .nav-links { display: none; }
-            .nav-links.active {
-                display: flex; position: absolute; top: 100%; left: 0; width: 100%;
-                background: var(--dark); flex-direction: column; padding: 2rem 0;
-            }
-            .menu-toggle { display: flex; }
+        .skills-grid {
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 1rem; margin: 2rem 0;
+        }
+        .skill-tag {
+            background: linear-gradient(135deg, #e0f2fe, #dbeafe); 
+            color: var(--primary); padding: 1rem; border-radius: 12px; text-align: center;
+            font-weight: 600; border: 2px solid var(--primary);
+        }
+
+        .reciprocal-links {
+            margin-top: 4rem; padding-top: 3rem; border-top: 2px solid rgba(226, 232, 240, 0.8);
+        }
+        .reciprocal-links h3 { color: var(--dark); font-size: 1.4rem; margin-bottom: 2rem; }
+        .links-grid {
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 2rem;
+        }
+        .link-card {
+            background: linear-gradient(135deg, #fff9e6, #ffe6cc);
+            padding: 2rem; border-radius: 16px; border: 2px solid rgba(255, 193, 7, 0.3);
+            transition: var(--transition); cursor: pointer;
+            text-decoration: none; color: inherit;
+            display: block;
+        }
+        .link-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 40px -12px rgba(255, 193, 7, 0.3);
+            border-color: #ffc107;
+        }
+        .link-card-image {
+            width: 100%;
+            height: auto;
+            margin-bottom: 1rem;
+            border-radius: 8px;
+            object-fit: cover;
+            display: block;
+        }
+        .link-card-image.circle {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            margin: 0 auto 1rem;
+            display: block;
+        }
+        .link-card-icon { font-size: 2rem; margin-bottom: 1rem; }
+        .link-card-title { color: var(--dark); font-size: 1.2rem; font-weight: 700; margin-bottom: 0.5rem; }
+        .link-card-desc { color: var(--text-light); font-size: 0.9rem; }
+
+        .related-posts {
+            margin-top: 4rem; padding-top: 3rem; border-top: 2px solid rgba(226, 232, 240, 0.8);
+        }
+        .related-posts h3 { color: var(--dark); font-size: 1.4rem; margin-bottom: 2rem; }
+        .posts-grid {
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 2rem;
+        }
+        .post-card {
+            background: linear-gradient(135deg, #f8fafc, #f1f5f9);
+            padding: 2rem; border-radius: 16px; border: 2px solid rgba(226, 232, 240, 0.8);
+            transition: var(--transition); cursor: pointer;
+            text-decoration: none; color: inherit;
+        }
+        .post-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 40px -12px rgba(0, 0, 0, 0.12);
+            border-color: var(--primary);
+        }
+        .post-card-tag { color: var(--accent); font-size: 0.85rem; font-weight: 600; margin-bottom: 0.5rem; }
+        .post-card-title { color: var(--dark); font-size: 1.2rem; font-weight: 700; margin-bottom: 1rem; }
+        .post-card-date { color: var(--text-light); font-size: 0.9rem; }
+
+        .note-box {
+            background: #f0f7ff; border-left: 4px solid var(--primary);
+            padding: 1.5rem; border-radius: 0 16px 16px 0; margin: 2rem 0;
+        }
+
+        .back-button {
+            display: inline-flex; align-items: center; justify-content: center; gap: 10px;
+            background: var(--dark); color: var(--white); text-decoration: none;
+            padding: 1rem 2rem; border-radius: 16px; font-weight: 700; margin-top: 3rem;
+            transition: var(--transition);
+        }
+        .back-button:hover { background: var(--primary); transform: translateY(-2px); }
+
+        footer { background-color: var(--dark); color: var(--text-light); padding: 4rem 1.5rem; text-align: center; }
+
+        @media (max-width: 768px) {
+            .blog-card { padding: 2.5rem 1.5rem; border-radius: 24px; }
+            header { padding: 9rem 1.5rem 6rem; }
+            .profile-section { flex-direction: column; text-align: center; gap: 2rem; }
+            .profile-avatar { width: 120px; height: 120px; }
+            .social-links { justify-content: center; }
+            .links-grid { grid-template-columns: 1fr; }
+            .posts-grid { grid-template-columns: 1fr; }
         }
     </style>
 </head>
@@ -247,174 +221,96 @@ window.silktideConsentManager.init({
     <div id="scroll-progress"></div>
 
     <nav class="navbar">
-        <div class="nav-logo">ryopc org</div>
-        
-        <div class="nav-right">
-            <select class="lang-selector" id="langSelector" onchange="changeLanguage(this.value)">
-                <option value="ja">日本語</option>
-                <option value="en">English</option>
-                <option value="pt">Português</option>
-            </select>
-
-            <button class="menu-toggle" id="menuToggle">
-                <span></span><span></span><span></span>
-            </button>
-
-            <ul class="nav-links" id="navLinks">
-                <li><a href="#" data-t="nav_home">ホーム</a></li>
-                <li><a href="/blog/articles/game-ryo/" data-t="About-the-Operator">運営者について</a></li>
-                <li><a href="#mission" data-t="nav_mission">ミッション</a></li>
-                <li><a href="#services" data-t="nav_services">サービス</a></li>
-                <li><a href="/blog" data-t="nav_note">note</a></li>
-                <li><a href="/docs" data-t="nav_docs">ドキュメント</a></li>
-            </ul>
-        </div>
+        <a href="/" class="nav-logo">ryopc org</a>
+        <a href="/" class="nav-back">➔ ホームに戻る</a>
     </nav>
 
     <header>
-        <h1 data-t="hero_title">ryopc org</h1>
-        <p data-t="hero_desc">Ensuring everyone, everywhere, has access to legitimate support for digital devices.</p>
+        <div class="post-meta">2026.05.20 / Developer Profile / 開発者プロフィール</div>
+        <h1>game_ryo</h1>
     </header>
 
-    <div class="container" id="contentContainer">
-        <!-- [ミッション] -->
-        <section class="card" id="mission">
-            <h2 data-t="mission_title">Our Mission</h2>
-            <p data-t="mission_body">Led by <strong>ryopcCEO</strong>, ryopc is a digital-first global initiative. We believe that access to technology is a fundamental right, and fair, transparent support is essential to maintain it. We protect users from fraudulent support practices worldwide.</p>
-        </section>
+    <div class="container">
+        <article class="blog-card">
+            <div class="blog-body">
+                
+                <div class="profile-section">
+<div class="profile-avatar">
+  <img src="https://res.cloudinary.com/dt0zmgv8k/image/upload/v1778741836/game_ryo%E6%96%B0%E3%81%97%E3%81%84%E3%83%AD%E3%82%B4-1-300x300_mvzzy9.png" alt="プロフィール画像">
+</div>
+                    <div class="profile-info">
+                        <h2>game_ryo</h2>
+                        <div class="role">小学生エンジニア</div>
+                        <p>パソコンとかスマホいじるのが好きで、サーバー作ったりアプリ作ったりしてる人。Scratchでいろいろやったり、チャットとかSNSアプリを開発しています。最新のプロジェクトについては、公式ブログをチェックしてください。</p>
+                        <div class="social-links">
+                            <a href="https://github.com/ryotagtagtag-wq" target="_blank">GitHub</a>
+                            <a href="mailto:ryotagtagtag@gmail.com">メール</a>
+                            <a href="https://open.spotify.com/user/31ixwiodsajlges5jolu2aa66quy" target="_blank">Spotify</a>
+                            <a href="https://codepen.io/game_ryo" target="_blank">CodePen</a>
+                            <a href="https://scratch.mit.edu/users/game_ryo/" target="_blank">Scratch</a>
+                        </div>
+                    </div>
+                </div>
 
-        <!-- [サービス] -->
-        <section class="card" id="services">
-            <h2 data-t="services_title">Our Services</h2>
-            <p data-t="services_body">We provide a multi-layered ecosystem including legitimate device guidance and digital literacy advocacy. We plan to sequentially launch diverse digital solutions to meet the evolving needs of the global community.</p>
-        </section>
+                <h2>Spotify</h2>
+                <div class="spotify-widget">
+                    <img src="https://spotify-recently-played-readme.vercel.app/api?user=31ixwiodsajlges5jolu2aa66quy" alt="Recently Played on Spotify">
+                </div>
 
-        <!-- [ここから新しい内容を追加できます]
-        <section class="card" id="new-section">
-            <h2 data-t="new_title">New Section Title</h2>
-            <p data-t="new_body">New content description here...</p>
-        </section>
-        -->
+                <h2>スキル・興味 / Skills & Interests</h2>
+                <div class="skills-grid">
+                    <div class="skill-tag">Scratch</div>
+                    <div class="skill-tag">Python</div>
+                    <div class="skill-tag">JavaScript</div>
+                    <div class="skill-tag">Web Dev</div>
+                    <div class="skill-tag">AI/ML</div>
+                    <div class="skill-tag">サーバー構築</div>
+                    <div class="skill-tag">アプリ開発</div>
+                    <div class="skill-tag">チャット・SNS</div>
+                </div>
 
-        <a href="/docs" class="docs-link-button">
-            <span data-t="btn_docs">View Project Documentation</span> <span>➔</span>
-        </a>
+                <h2>活動内容 / Activities</h2>
+                <p>AIとかも好きで、いろいろ試して「これ動くじゃん」ってなるのが楽しいタイプ。プログラミング学習を通じて、新しい技術に挑戦し、ryopcグループの活動に貢献しています。</p>
+
+                <div class="note-box">
+                    <strong>💡 Tip:</strong> game_ryo は ryopc グローバルイニシアティブの開発メンバーとして活躍しています。彼の最新プロジェクトや技術ブログについては、公式ウェブサイトを参照してください。
+                </div>
+
+                <div class="reciprocal-links">
+                    <h3>🔗 相互リンク / Reciprocal Links</h3>
+                    <div class="links-grid">
+                        <a href="https://drsb.f5.si/" class="link-card" target="_blank">
+                            <img src="https://drsb.f5.si/img/banner.png" alt="ゆーのホームページ" class="link-card-image">
+                            <div class="link-card-title">ゆーのホームページ</div>
+                            <div class="link-card-desc">サイトがおしゃれ。しかもダークモードがある。</div>
+                        </a>
+                        <a href="https://nakasyou.how" class="link-card" target="_blank">
+                            <img src="https://nakasyou.how/assets/BkpmfslA-profile.webp" alt="Shotaro Nakamura" class="link-card-image circle">
+                            <div class="link-card-title">Shotaro Nakamura / nakasyou</div>
+                            <div class="link-card-desc">大会で賞状色々持っているすごい人</div>
+                        </a>
+                    </div>
+                </div>
+
+            </div>
+        </article>
     </div>
 
-    <div id="chCookieBanner" class="ch-cookie-banner ch-hidden">
-        <div class="ch-cookie-text" data-t="cookie_text">
-            <strong>About the Use of Cookies</strong><br>
-            This site uses cookies to provide chat support and improve your user experience. By agreeing, you will be able to use our chat support service.
-        </div>
-        <div class="ch-cookie-buttons">
-            <button class="ch-cookie-btn ch-btn-deny" onclick="chDenyCookie()" data-t="cookie_deny">拒否</button>
-            <button class="ch-cookie-btn ch-btn-accept" onclick="chAcceptCookie()" data-t="cookie_accept">同意して利用開始</button>
-        </div>
-    </div>
-
-    <div id="special-mobile-chat-container">
-        <button id="special-mobile-chat-btn">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="margin-top: 1px;"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
-            <span data-t="chat_btn">Chat Support</span>
-        </button>
-        <span id="special-mobile-close-btn">×</span>
-    </div>
+    <a href="/" class="back-button">
+        <span>➔ 記事一覧へ戻る</span>
+    </a>
 
     <footer>
         <p>&copy; 2026 ryopc Global Initiative. All Rights Reserved.</p>
-        <div class="status-badge">
-            <span class="status-dot"></span>
-            <span data-t="status_text">Status: Under application for Open Source Collective (Covina, CA, USA)</span>
-        </div>
     </footer>
 
     <script>
-    // --- 翻訳データ ---
-    // カンマ（,）の不足により発生していた構文エラーをすべて修正しました。
-    const translations = {
-        ja: {
-            nav_home: "ホーム",
-            About-the-Operator: "運営者について",
-            nav_mission: "ミッション",
-            nav_services: "サービス",
-            nav_docs: "ドキュメント",
-            hero_title: "ryopc org",
-            hero_desc: "世界中の誰もが、デジタルデバイスの正当なサポートを受けられる社会を目指します。",
-            mission_title: "私たちのミッション",
-            mission_body: "ryopCEO率いるryopcは、デジタル優先のグローバルな取り組みです。私たちはテクノロジーへのアクセスが基本的人権であると信じており、それを維持するためには公平で透明性のあるサポートが不可欠です。世界中の不正なサポート行為からユーザーを保護します。",
-            services_title: "提供するサービス",
-            services_body: "正当なデバイスガイダンスやデジタルリテラシーの提唱を含む、多層的なエコシステムを提供します。グローバルコミュニティの進化するニーズに応えるため、多様なデジタルソリューションを順次展開していく予定です。",
-            btn_docs: "プロジェクトドキュメントを見る",
-            cookie_text: "<strong>クッキーの使用について</strong><br>このサイトでは、チャットサポートの提供や体験向上のためにクッキーを使用します。同意することで、サポートサービスを利用できるようになります。",
-            cookie_accept: "同意して利用開始",
-            cookie_deny: "拒否",
-            chat_btn: "チャットサポート",
-            status_text: "ステータス: Open Source Collective (米国カリフォルニア州) への申請中",
-            nav_note: "ブログ"
-        },
-        en: {
-            nav_home: "Home",
-            nav_mission: "Mission",
-            nav_services: "Services",
-            About-the-Operator: "About the Operator",
-            nav_docs: "Docs",
-            hero_title: "ryopc org",
-            hero_desc: "Ensuring everyone, everywhere, has access to legitimate support for digital devices.",
-            mission_title: "Our Mission",
-            mission_body: "Led by ryopcCEO, ryopc is a digital-first global initiative. We believe that access to technology is a fundamental right, and fair, transparent support is essential to maintain it. We protect users from fraudulent support practices worldwide.",
-            services_title: "Our Services",
-            services_body: "We provide a multi-layered ecosystem including legitimate device guidance and digital literacy advocacy. We plan to sequentially launch diverse digital solutions to meet the evolving needs of the global community.",
-            btn_docs: "View Project Documentation",
-            cookie_text: "<strong>About the Use of Cookies</strong><br>This site uses cookies to provide chat support and improve your experience. By agreeing, you can use our chat service.",
-            cookie_accept: "Accept",
-            cookie_deny: "Deny",
-            chat_btn: "Chat Support",
-            status_text: "Status: Under application for Open Source Collective (Covina, CA, USA)",
-            nav_note: "blog"
-        },
-        pt: {
-            nav_home: "Início",
-            nav_mission: "Missão",
-            
-        nav_services: "Serviços",
-            About-the-Operator: "O operatorze",
-            nav_docs: "Docs",
-            hero_title: "ryopc org",
-            hero_desc: "Garantindo que todos, em todos os lugares, tenham acesso a suporte legítimo para dispositivos digitais.",
-            mission_title: "Nossa Missão",
-            mission_body: "Liderada por ryopcCEO, a ryopc é uma iniciativa global focada no digital. Acreditamos que o acesso à tecnologia é um direito fundamental, e o suporte justo e transparente é essencial para mantê-lo. Protegemos os usuários de práticas de suporte fraudulentas em todo o mundo.",
-            services_title: "Nossos Serviços",
-            services_body: "Oferecemos um ecossistema multifacetado que inclui orientação legítima de dispositivos e defesa da alfabetização digital. Planejamos lançar sequencialmente diversas soluções digitais para atender às necessidades da comunidade global.",
-            btn_docs: "Ver Documentação do Projeto",
-            cookie_text: "<strong>Sobre o uso de cookies</strong><br>Este site usa cookies para fornecer suporte por chat e melhorar sua experiência. Ao concordar, você poderá usar nosso serviço de chat.",
-            cookie_accept: "Aceitar",
-            cookie_deny: "Recusar",
-            chat_btn: "Suporte por Chat",
-            status_text: "Status: Em processo de candidatura para Open Source Collective (Covina, CA, EUA)",
-            nav_note: "Blog"
-        }
-    };
-
-    // --- 言語切り替え機能 ---
-    function changeLanguage(lang) {
-        document.documentElement.lang = lang;
-        safeStorage.set("preferred_lang", lang);
-        
-        document.querySelectorAll('[data-t]').forEach(el => {
-            const key = el.getAttribute('data-t');
-            if (translations[lang] && translations[lang][key]) {
-                el.innerHTML = translations[lang][key];
-            }
-        });
-    }
-
-    // --- セーフストレージ ---
-    const safeStorage = {
-        get: (key) => { try { return localStorage.getItem(key); } catch (e) { return window['fb_' + key] || null; } },
-        set: (key, val) => { try { localStorage.setItem(key, val); } catch (e) { window['fb_' + key] = val; } }
-    };
-
- 
+        window.onscroll = () => {
+            const winScroll = document.documentElement.scrollTop;
+            const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            const scrolled = (winScroll / height) * 100;
+            document.getElementById("scroll-progress").style.width = scrolled + "%";
+        };
     </script>
 </body>
 </html>
