@@ -245,6 +245,17 @@
                         <input type="password" name="password" class="form-control" required>
                     </div>
 
+                    <div id="error-box"
+     style="display:none;
+            background:#fee2e2;
+            color:#b91c1c;
+            padding:0.8rem 1rem;
+            border-radius:12px;
+            margin-bottom:1rem;
+            font-weight:600;">
+</div>
+
+
                     <button type="submit" class="register-btn">新規登録</button>
                 </form>
             </div>
@@ -278,10 +289,13 @@ document.getElementById("register-form").addEventListener("submit", async (e) =>
     if (json.success) {
         window.location.href = "/dashboard/";
     } else {
-        alert(JSON.stringify(json));
+        const errorBox = document.getElementById("error-box");
+        errorBox.textContent = json.message || "登録に失敗しました。";
+        errorBox.style.display = "block";
     }
 });
 </script>
+
 
 </body>
 </html>
