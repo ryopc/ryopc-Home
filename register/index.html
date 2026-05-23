@@ -58,24 +58,29 @@
         }
 
         /* OAuth ボタン共通 */
-        .oauth-buttons {
-            display: flex;
-            flex-direction: column;
-            gap: 1.2rem;
-            margin-bottom: 2.5rem;
-        }
+.oauth-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 1.2rem;
+    margin-bottom: 2.5rem;
+    align-items: center; /* ← これ */
+}
 
-        .oauth-btn-wrapper {
-            background: #f8f9fa;
-            border-radius: 16px;
-            padding: 0.8rem 1rem;
-            border: 1px solid rgba(0,0,0,0.08);
-            box-shadow: 0 8px 20px rgba(0,0,0,0.05);
-            transition: var(--transition);
-            cursor: pointer;
-            display: flex;
-            justify-content: center;
-        }
+.oauth-btn-wrapper {
+    background: #f8f9fa;
+    border-radius: 16px;
+    padding: 0.8rem 1rem;
+    border: 1px solid rgba(0,0,0,0.08);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.05);
+    transition: var(--transition);
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+
+    /* ← 追加したい修正はここにまとめる */
+    width: fit-content;
+    margin: 0 auto;
+}
         .oauth-btn-wrapper:hover {
             transform: translateY(-4px);
             box-shadow: 0 12px 28px rgba(0,0,0,0.12);
