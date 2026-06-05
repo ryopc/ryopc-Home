@@ -50,7 +50,7 @@ jobs:
           jq -n --arg msg "$PROMPT" '{"contents": [{"parts": [{"text": $msg}]}]}' > payload.json
           
           # Gemini APIを呼び出し
-          RESPONSE=$(curl -s -X POST "https://googleapis.com{GEMINI_KEY}" \
+          RESPONSE=$(curl -s -X POST "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.5-flash:generateContent?key={GEMINI_KEY}" \
             -H "Content-Type: application/json" \
             -d @payload.json)
           
