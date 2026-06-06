@@ -1,4 +1,4 @@
-const CACHE_NAME = 'ryopc-pwa-cache-v1';
+const CACHE_NAME = 'ryopc-pwa;
 const ASSETS_TO_CACHE = [
   './pwa.html',
   './manifest.json',
