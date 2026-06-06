@@ -369,6 +369,30 @@
     line-height: 1.6;
     color: #444444;
 }
+        .btn-container {
+  text-align: center;
+  margin-top: 25px;
+}
+
+.install-button {
+  background-color: #0076ff; /* タイトルの縦線と同じ鮮やかなブルー */
+  color: #ffffff;
+  border: none;
+  padding: 12px 30px;
+  font-size: 1rem;
+  font-weight: bold;
+  border-radius: 30px;
+  cursor: pointer;
+  box-shadow: 0 4px 15px rgba(0, 118, 255, 0.2);
+  transition: all 0.2s ease-in-out;
+}
+
+.install-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(0, 118, 255, 0.4);
+  background-color: #0062d6;
+}
+
     </style>
 </head>
 <body>
@@ -419,7 +443,7 @@
             <p data-t="services_body">We provide a multi-layered ecosystem including legitimate device guidance and digital literacy advocacy. We plan to sequentially launch diverse digital solutions to meet the evolving needs of the global community.</p>
         </section>
 
-<div class="announcement-card">
+  <div class="announcement-card">
     <h2 class="announcement-title">
       <span class="accent-bar"></span>
       公式アプリリリースのお知らせ
@@ -428,9 +452,9 @@
       公式モバイルアプリ「ryopc-app」の提供を開始いたしました。当社のデジタルエコシステムをスマートフォンの画面から直接ご利用いただけるようになり、シームレスなデバイスガイダンスやデジタルリテラシー向上のための便利なツールをいつでもどこでもご活用いただけます。
     </p>
     
-    <!-- PWAインストールボタン（カードの内部に綺麗に収まる配置） -->
+    <!-- 普通に表示されるインストールボタン -->
     <div class="btn-container">
-      <button id="pwa-install-btn" class="install-button" style="display: none;">
+      <button id="pwa-install-btn" class="install-button">
         📱 アプリをインストール
       </button>
     </div>
@@ -754,28 +778,23 @@
       });
     }
 
-    // PWAインストールボタンの制御ロジック
+    // ブラウザの標準インストール要求イベントを捕まえる
     let deferredPrompt;
-    const installBtn = document.getElementById('pwa-install-btn');
-
     window.addEventListener('beforeinstallprompt', (e) => {
-      e.preventDefault();
+      // イベントを保存して、ボタンを押したときに使えるようにする
       deferredPrompt = e;
-      installBtn.style.display = 'inline-block'; // インストール可能ならボタンを表示
     });
 
-    installBtn.addEventListener('click', async () => {
-      if (!deferredPrompt) return;
-      deferredPrompt.prompt();
-      const { outcome } = await deferredPrompt.userChoice;
-      console.log(`ユーザーの選択: ${outcome}`);
-      deferredPrompt = null;
-      installBtn.style.display = 'none';
-    });
-
-    window.addEventListener('appinstalled', () => {
-      installBtn.style.display = 'none';
-      deferredPrompt = null;
+    // ボタンを押したら、ブラウザ標準のインストール画面を出す
+    document.getElementById('pwa-install-btn').addEventListener('click', async () => {
+      if (deferredPrompt) {
+        // 保存しておいたブラウザ標準のプロンプトをそのまま表示
+        deferredPrompt.prompt();
+        deferredPrompt = null;
+      } else {
+        // すでにインストール済み、またはブラウザが未対応の場合の案内
+        alert('ブラウザのメニュー（縦の３点リーダー等）から「ホーム画面に追加」または「アプリをインストール」を選択してください。');
+      }
     });
     </script>
 </body>
