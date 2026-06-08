@@ -16,4 +16,10 @@ We are developing a borderless, multi-layered ecosystem starting with legitimate
 * **Live Chat Support:** Powered by **Channel Talk** (Integrated)
 
 ---
+
+
+## license
+license by **Apache-2.0** 
+
+---
 *“Ensuring global digital equity, one device at a time.” — ryopcCEO*
