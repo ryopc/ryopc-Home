@@ -453,12 +453,11 @@
     </p>
     
     <!-- 普通に表示されるインストールボタン -->
-    <div class="btn-container">
-      <button id="pwa-install-btn" class="install-button">
-        📱 アプリをインストール
-      </button>
-    </div>
-  </div>
+<div class="btn-container">
+  <a href="https://app.ryopc.f5.si" class="install-button" style="text-decoration: none; display: inline-block; text-align: center;">
+    📱 アプリをインストール
+  </a>
+</div>
 
         <!-- [お問い合わせフォーム] -->
         <section class="card" id="contact">
@@ -772,31 +771,6 @@
         const scrolled = (winScroll / height) * 100;
         const progress = document.getElementById("scroll-progress");
         if (progress) progress.style.width = scrolled + "%";
-    });
-    // サービスワーカーの登録
-    if ('serviceWorker' in navigator) {
-      window.addEventListener('load', () => {
-        navigator.serviceWorker.register('/sw.js');
-      });
-    }
-
-    // ブラウザの標準インストール要求イベントを捕まえる
-    let deferredPrompt;
-    window.addEventListener('beforeinstallprompt', (e) => {
-      // イベントを保存して、ボタンを押したときに使えるようにする
-      deferredPrompt = e;
-    });
-
-    // ボタンを押したら、ブラウザ標準のインストール画面を出す
-    document.getElementById('pwa-install-btn').addEventListener('click', async () => {
-      if (deferredPrompt) {
-        // 保存しておいたブラウザ標準のプロンプトをそのまま表示
-        deferredPrompt.prompt();
-        deferredPrompt = null;
-      } else {
-        // すでにインストール済み、またはブラウザが未対応の場合の案内
-        alert('ブラウザのメニュー（縦の３点リーダー等）から「ホーム画面に追加」または「アプリをインストール」を選択してください。');
-      }
     });
     </script>
 </body>
