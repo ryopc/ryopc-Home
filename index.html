@@ -6,7 +6,6 @@
     <meta name="robots" content="noindex, nofollow">
     <title>ryopc Global Digital Support</title>
 
-    
     <link rel="icon" type="image/png" href="https://cdn.jsdelivr.net/gh/ryopc/ryopc-Home@main/favicon.png">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -60,7 +59,7 @@
                     }
                 ],
                 onAccept: function() {
-                    // Custom script loaded: https://rawcdn.githack.com/ryopc/Archive/fc3acd1142e5108dc5263e4b112a768988cccb4d/Channel-Talk.js
+                    // Custom script loaded
                 }
             }
         ],
@@ -96,7 +95,7 @@
             --text: #334155;
             --text-light: #94a3b8;
             --white: #ffffff;
-            --glass: rgba(13, 29, 52, 0.9);
+            --glass: rgba(10, 25, 47, 0.9);
             --transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
             --gradient-accent: linear-gradient(135deg, #00bfff, #0052cc);
             --gradient-orange: linear-gradient(135deg, #ff5000, #ff8c00);
@@ -189,6 +188,7 @@
 
         /* コンテンツ */
         .container { max-width: 900px; margin: -5rem auto 6rem; padding: 0 1.5rem; position: relative; z-index: 10; }
+        
         .card {
             background: var(--white); padding: 3rem; border-radius: 32px;
             box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.08); margin-bottom: 2.5rem;
@@ -197,7 +197,34 @@
         .card:hover { transform: translateY(-8px); border-color: var(--accent); }
 
         h2 { color: var(--dark); font-size: 1.75rem; margin-top: 0; display: flex; align-items: center; gap: 1rem; }
-        h2::before { content: ""; display: inline-block; width: 6px; height: 28px; background: var(--gradient-accent); border-radius: 10px; }
+        h2::before { content: ""; display: inline-block; width: 6px; height: 28px; background: var(--gradient-accent); border-radius: 10px; flex-shrink: 0; }
+
+        .btn-container {
+            text-align: center;
+            margin-top: 25px;
+        }
+
+        .install-button {
+            display: inline-block;
+            background-color: #0076ff;
+            color: #ffffff !important;
+            border: none;
+            padding: 14px 32px;
+            font-size: 1rem;
+            font-weight: bold;
+            border-radius: 30px;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(0, 118, 255, 0.2);
+            transition: all 0.2s ease-in-out;
+            text-decoration: none;
+            text-align: center;
+        }
+
+        .install-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0, 118, 255, 0.4);
+            background-color: #0062d6;
+        }
 
         .docs-link-button {
             display: flex; align-items: center; justify-content: center; gap: 15px;
@@ -207,55 +234,7 @@
         }
         .docs-link-button:hover { background: var(--primary); transform: translateY(-3px); }
 
-        footer { background-color: var(--dark); color: var(--text-light); padding: 6rem 1.5rem 10rem; text-align: center; }
-        .status-badge {
-            display: inline-flex; align-items: center; gap: 8px; background-color: rgba(30, 41, 59, 0.8);
-            color: var(--accent); padding: 0.7rem 1.5rem; border-radius: 100px; font-size: 0.9rem; font-weight: 600;
-        }
-        .status-dot { width: 8px; height: 8px; background: var(--accent); border-radius: 50%; box-shadow: 0 0 10px var(--accent); animation: pulse 2s infinite; }
-
-        /* クッキーバナー */
-        .ch-cookie-banner {
-            position: fixed; bottom: 32px; left: 32px; right: 32px;
-            background: var(--glass); backdrop-filter: blur(15px); color: var(--white);
-            padding: 24px 32px; border-radius: 24px; z-index: 1000000;
-            display: flex; justify-content: space-between; align-items: center; gap: 24px; flex-wrap: wrap;
-        }
-        .ch-cookie-banner.ch-hidden { display: none !important; }
-        .ch-cookie-buttons { display: flex; gap: 14px; }
-        .ch-cookie-btn { padding: 14px 28px; border: none; border-radius: 14px; font-weight: 700; cursor: pointer; }
-        .ch-btn-accept { background: var(--primary); color: var(--white); }
-        .ch-btn-deny { background: rgba(255, 255, 255, 0.1); color: var(--white); }
-
-        /* チャットボタン */
-        #special-mobile-chat-container { display: none; position: fixed; bottom: 32px; right: 32px; z-index: 99999; }
-        #special-mobile-chat-btn {
-            display: flex; align-items: center; gap: 10px; padding: 16px 28px;
-            background: var(--gradient-orange); color: var(--white); border: none;
-            font-size: 1.1rem; font-weight: 800; border-radius: 9999px; cursor: pointer;
-        }
-        #special-mobile-close-btn {
-            position: absolute; top: -8px; left: -8px; width: 28px; height: 28px;
-            background: var(--dark); color: var(--white); border-radius: 50%;
-            display: flex; align-items: center; justify-content: center; border: 2px solid var(--white);
-        }
-
-        
-        @keyframes pulse { 0% { opacity: 1; } 50% { opacity: 0.4; } 100% { opacity: 1; } }
-
-        @media (max-width: 900px) {
-            .nav-right { gap: 1rem; }
-            .nav-links { display: none; }
-            .nav-links.active {
-                display: flex; position: absolute; top: 100%; left: 0; width: 100%;
-                background: var(--dark); flex-direction: column; padding: 2rem 0;
-                align-items: center;
-                gap: 1.5rem;
-                box-shadow: 0 10px 15px rgba(0,0,0,0.3);
-            }
-            .menu-toggle { display: flex; }
-        }
-
+        /* お問い合わせフォーム */
         .form-group {
             margin-bottom: 1.5rem;
             text-align: left;
@@ -317,82 +296,58 @@
             transform: translateY(-3px);
             box-shadow: 0 15px 35px rgba(0, 82, 204, 0.25);
         }
-        /* ボタンエリアの配置 */
-.app-buttons {
-    margin: 24px 0;
-    text-align: center;
-}
-.install-button {
-  background-color: #64ffda; /* アクセント用の明るいグリーン */
-  color: #0a192f;            /* 文字色は背景と同じネイビー */
-  border: none;
-  padding: 12px 24px;
-  font-size: 1rem;
-  font-weight: bold;
-  border-radius: 30px;
-  cursor: pointer;
-  box-shadow: 0 4px 15px rgba(100, 255, 218, 0.3);
-  transition: all 0.2s ease-in-out;
-  margin-top: 20px;
-}
 
-.install-button:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(100, 255, 218, 0.5);
-  background-color: #52e0bd;
-}
+        footer { background-color: var(--dark); color: var(--text-light); padding: 6rem 1.5rem 10rem; text-align: center; }
+        
+        .status-badge {
+            display: inline-flex; align-items: center; gap: 8px; background-color: rgba(30, 41, 59, 0.8);
+            color: var(--accent); padding: 0.7rem 1.5rem; border-radius: 100px; font-size: 0.9rem; font-weight: 600;
+        }
+        .status-dot { width: 8px; height: 8px; background: var(--accent); border-radius: 50%; box-shadow: 0 0 10px var(--accent); animation: pulse 2s infinite; }
 
-.install-button:active {
-  transform: translateY(1px);
-}
+        /* クッキーバナー */
+        .ch-cookie-banner {
+            position: fixed; bottom: 32px; left: 32px; right: 32px;
+            background: var(--glass); backdrop-filter: blur(15px); color: var(--white);
+            padding: 24px 32px; border-radius: 24px; z-index: 1000000;
+            display: flex; justify-content: space-between; align-items: center; gap: 24px; flex-wrap: wrap;
+        }
+        .ch-cookie-banner.ch-hidden { display: none !important; }
+        .ch-cookie-buttons { display: flex; gap: 14px; }
+        .ch-cookie-btn { padding: 14px 28px; border: none; border-radius: 14px; font-weight: 700; cursor: pointer; }
+        .ch-btn-accept { background: var(--primary); color: var(--white); }
+        .ch-btn-deny { background: rgba(255, 255, 255, 0.1); color: var(--white); }
 
+        /* チャットボタン */
+        #special-mobile-chat-container { display: none; position: fixed; bottom: 32px; right: 32px; z-index: 99999; }
+        #special-mobile-chat-btn {
+            display: flex; align-items: center; gap: 10px; padding: 16px 28px;
+            background: var(--gradient-orange); color: var(--white); border: none;
+            font-size: 1.1rem; font-weight: 800; border-radius: 9999px; cursor: pointer;
+        }
+        #special-mobile-close-btn {
+            position: absolute; top: -8px; left: -8px; width: 28px; height: 28px;
+            background: var(--dark); color: var(--white); border-radius: 50%;
+            display: flex; align-items: center; justify-content: center; border: 2px solid var(--white);
+        }
 
-/* ボタンのホバー効果 */
-.btn-apk:hover {
-    background-color: #1e6f10;
-    transform: translateY(-1px);
-}
+        @keyframes pulse { 0% { opacity: 1; } 50% { opacity: 0.4; } 100% { opacity: 1; } }
 
-/* 注意事項ボックスのデザイン */
-.app-notice {
-    margin-top: 20px;
-    padding: 16px;
-    border-left: 4px solid #ffcc00; /* 警告を促す黄色ライン */
-    background-color: #fff9e6; /* 薄い黄色の背景 */
-    border-radius: 0 6px 6px 0;
-}
-
-/* 注意事項のテキスト装飾 */
-.app-notice p {
-    margin: 0;
-    font-size: 0.9em;
-    line-height: 1.6;
-    color: #444444;
-}
-        .btn-container {
-  text-align: center;
-  margin-top: 25px;
-}
-
-.install-button {
-  background-color: #0076ff; /* タイトルの縦線と同じ鮮やかなブルー */
-  color: #ffffff;
-  border: none;
-  padding: 12px 30px;
-  font-size: 1rem;
-  font-weight: bold;
-  border-radius: 30px;
-  cursor: pointer;
-  box-shadow: 0 4px 15px rgba(0, 118, 255, 0.2);
-  transition: all 0.2s ease-in-out;
-}
-
-.install-button:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(0, 118, 255, 0.4);
-  background-color: #0062d6;
-}
-
+        @media (max-width: 900px) {
+            .navbar { padding: 1rem 1.5rem; }
+            .nav-right { gap: 1rem; }
+            .nav-links { display: none; }
+            .nav-links.active {
+                display: flex; position: absolute; top: 100%; left: 0; width: 100%;
+                background: var(--dark); flex-direction: column; padding: 2rem 0;
+                align-items: center;
+                gap: 1.5rem;
+                box-shadow: 0 10px 15px rgba(0,0,0,0.3);
+            }
+            .menu-toggle { display: flex; }
+            .card { padding: 2rem 1.5rem; border-radius: 24px; }
+            .ch-cookie-banner { bottom: 16px; left: 16px; right: 16px; padding: 16px; gap: 16px; }
+        }
     </style>
 </head>
 <body>
@@ -415,7 +370,7 @@
 
             <ul class="nav-links" id="navLinks">
                 <li><a href="#" data-t="nav_home">ホーム</a></li>
-                <li><a href="https://game-ryo.is-a.dev" data-t="About-the-Operator">運営者について</a></li>
+                <li><a href="https://game-ryo.is-a.dev" data-t="nav_operator">運営者について</a></li>
                 <li><a href="/blog" data-t="nav_note">note</a></li>
                 <li><a href="/docs" data-t="nav_docs">ドキュメント</a></li>
                 <li><a href="https://st.ryopc.f5.si" data-t="nav_st">ステータス</a></li>
@@ -444,23 +399,20 @@
             <p data-t="services_body">We provide a multi-layered ecosystem including legitimate device guidance and digital literacy advocacy. We plan to sequentially launch diverse digital solutions to meet the evolving needs of the global community.</p>
         </section>
 
-<section class="card" id="mission">
-  <div class="announcement-card">
-    <h2 class="announcement-title">
-      <span class="accent-bar"></span>
-      公式アプリリリースのお知らせ
-    </h2>
-    <p class="announcement-desc">
-      公式モバイルアプリ「ryopc-app」の提供を開始いたしました。当社のデジタルエコシステムをスマートフォンの画面から直接ご利用いただけるようになり、シームレスなデバイスガイダンスやデジタルリテラシー向上のための便利なツールをいつでもどこでもご活用いただけます。
-    </p>
-      
-    <!-- 普通に表示されるインストールボタン -->
-<div class="btn-container">
-  <a href="https://app.ryopc.f5.si" class="install-button" style="text-decoration: none; display: inline-block; text-align: center;">
-    📱 アプリをインストール
-  </a>
-</div>
-<section class="card" id="mission">
+        <!-- [公式アプリリリース] -->
+        <section class="card" id="app-release">
+            <h2 class="announcement-title">
+                📱 公式アプリリリースのお知らせ
+            </h2>
+            <p class="announcement-desc">
+                公式モバイルアプリ「ryopc-app」の提供を開始いたしました。当社のデジタルエコシステムをスマートフォンの画面から直接ご利用いただけるようになり、シームレスなデバイスガイダンスやデジタルリテラシー向上のための便利なツールをいつでもどこでもご活用いただけます。
+            </p>
+            <div class="btn-container">
+                <a href="https://app.ryopc.f5.si" class="install-button">
+                    アプリをインストール
+                </a>
+            </div>
+        </section>
 
         <!-- [お問い合わせフォーム] -->
         <section class="card" id="contact">
@@ -468,7 +420,6 @@
             <p data-t="contact_body" style="color: var(--text-light); margin-bottom: 2rem;">プロジェクトに関するご質問やご相談は、以下のフォームよりお気軽にお問い合わせください。</p>
             
             <form action="https://form-api.ryopc.f5.si" method="POST" id="contactForm">
-                
                 <input type="hidden" name="_redirect" value="https://ryopc.f5.si">
 
                 <div class="form-group">
@@ -526,13 +477,17 @@
     </div>
 
     <footer>
-        <p>&copy; 2026 ryopc Global Initiative. All Rights Reserved.</p>
-<a href="https://www.bestpractices.dev/projects/13120"><img src="https://www.bestpractices.dev/projects/13120/baseline"></a>
-<!-- Web TrustMark Badge with Popup -->
-<a href="https://webtrustmark.com/verify/11" target="_blank" rel="noopener noreferrer" class="wtm-badge">
-  <img src="https://webtrustmark.com/api/badge/11?style=compact" alt="ryopc-org - Web TrustMark Verified" />
-</a>
-<script src="https://webtrustmark.com/api/verification-popup/11.js" async></script>
+        <div style="margin-bottom: 2rem;">
+            <p>&copy; 2026 ryopc Global Initiative. All Rights Reserved.</p>
+        </div>
+        <div style="display: flex; justify-content: center; align-items: center; gap: 15px; flex-wrap: wrap;">
+            <a href="https://www.bestpractices.dev/projects/13120"><img src="https://www.bestpractices.dev/projects/13120/baseline" alt="CII Best Practices"></a>
+            <!-- Web TrustMark Badge with Popup -->
+            <a href="https://webtrustmark.com/verify/11" target="_blank" rel="noopener noreferrer" class="wtm-badge">
+                <img src="https://webtrustmark.com/api/badge/11?style=compact" alt="ryopc-org - Web TrustMark Verified" />
+            </a>
+        </div>
+        <script src="https://webtrustmark.com/api/verification-popup/11.js" async></script>
     </footer>
 
     <script>
@@ -545,7 +500,7 @@
         nav_services: "サービス",
         nav_docs: "ドキュメント",
         nav_st: "ステータス",
-        nav_it: "小学生向けit検定",
+        nav_it: "小学生向けIT検定",
         register: "登録",
         login: "ログイン",
         hero_title: "ryopc org",
@@ -648,12 +603,11 @@
 
     if (menuToggle && navLinks) {
         menuToggle.addEventListener('click', (e) => {
-            e.stopPropagation(); // ナビゲーションバー外クリックイベントの干渉を避ける
+            e.stopPropagation();
             menuToggle.classList.toggle('active');
             navLinks.classList.toggle('active');
         });
 
-        // メニューリンクをクリックした際に自動で閉じる
         const links = navLinks.querySelectorAll('a');
         links.forEach(link => {
             link.addEventListener('click', () => {
@@ -662,7 +616,6 @@
             });
         });
 
-        // 展開したメニュー外のエリアをタップ/クリックしたときに閉じる
         document.addEventListener('click', (e) => {
             if (!navLinks.contains(e.target) && !menuToggle.contains(e.target)) {
                 menuToggle.classList.remove('active');
@@ -683,7 +636,6 @@
             }
         });
 
-        // プレースホルダー等の翻訳も設定
         const nameInput = document.getElementById('form_name');
         const emailInput = document.getElementById('form_email');
         const msgInput = document.getElementById('form_message');
@@ -709,7 +661,6 @@
         set: (key, val) => { try { localStorage.setItem(key, val); } catch (e) { window['fb_' + key] = val; } }
     };
 
-    // 初期化時に保存された言語設定を読み込む
     window.addEventListener('DOMContentLoaded', () => {
         const savedLang = safeStorage.get("preferred_lang") || 'ja';
         const langSelector = document.getElementById('langSelector');
@@ -721,14 +672,12 @@
 
     // --- お問い合わせフォームの送信制御 ---
     document.getElementById('contactForm')?.addEventListener('submit', async function(e) {
-        // 通常の画面が白くなるページ遷移（デフォルトの挙動）を防止
         e.preventDefault();
 
         const form = this;
         const submitBtn = form.querySelector('.form-submit-btn');
         const originalBtnHtml = submitBtn.innerHTML;
 
-        // 送信ボタンの二重送信防止設定
         submitBtn.innerHTML = '<span>Sending...</span>';
         submitBtn.style.opacity = '0.6';
         submitBtn.style.pointerEvents = 'none';
@@ -736,14 +685,12 @@
         const formData = new FormData(form);
 
         try {
-            // バックエンドへ非同期送信
             const response = await fetch(form.action, {
                 method: 'POST',
                 body: formData,
-                mode: 'no-cors' // クロスドメイン制限を回避して確実に到達させる
+                mode: 'no-cors'
             });
 
-            // 送信完了演出
             const cardSection = document.getElementById('contact');
             if (cardSection) {
                 cardSection.style.opacity = '0';
@@ -763,7 +710,6 @@
             console.error('Submission Error:', error);
             alert('送信中にエラーが発生しました。時間を置いて再度お試しください。');
             
-            // エラー時は送信ボタンを再度有効にする
             submitBtn.innerHTML = originalBtnHtml;
             submitBtn.style.opacity = '1';
             submitBtn.style.pointerEvents = 'auto';
