@@ -345,36 +345,25 @@ window.silktideConsentManager.init({
         <h1 data-t="blog_header">Blog</h1>
     </header>
 
-    <div class="container">
-        <div id="blog-container" class="blog-list">
-            
-            <!-- 👇 ここから Eleventy の全自動ループ処理 -->
+<!-- 👇 ここからデバッグ用ループ処理 -->
             {% if collections.blog.length > 0 %}
                 {% for post in collections.blog %}
-                <a href="{{ post.url }}" class="card">
-                    <!-- 投稿日（Eleventy側で設定された日付） -->
-                    <div class="blog-date">{{ post.date }}</div>
+                <div class="card" style="text-align: left; background: #f4f4f4; color: #333; padding: 15px; margin-bottom: 20px;">
+                    <h3>【デバッグ】Eleventyが認識している変数の中身</h3>
+                    <p><strong>post.url:</strong> {{ post.url }}</p>
+                    <p><strong>post.date:</strong> {{ post.date }}</p>
                     
-                    <!-- タイトル（microCMSの title フィールド） -->
-                    <h2 class="blog-title">{{ post.data.title }}</h2>
-                    
-                    <!-- アイキャッチ画像（microCMSの eyecatch フィールド） -->
-                    {% if post.data.eyecatch.url %}
-                    <img src="{{ post.data.eyecatch.url }}" alt="{{ post.data.title }}" class="blog-img">
-                    {% endif %}
-                    
-                    <!-- 本文の抜粋（microCMSの content フィールドからタグを除去して100文字） -->
-                    <div class="blog-body">{{ post.data.content | striptags | truncate(100) }}</div>
-                </a>
+                    <hr>
+                    <p><strong>利用可能なキー一覧:</strong></p>
+                    <pre><code>{{ post.data | dump }}</code></pre>
+                </div>
                 {% endfor %}
             {% else %}
-                <!-- 記事が1つもない場合のフォールバック表示 -->
                 <div class="card">
-                    <p id="empty-fallback-text" style="text-align:center; color:var(--text-light);" data-t="empty_blog_msg">まだ記事がありません。管理画面から新しい記事を追加してください。</p>
+                    <p>まだ記事がありません。</p>
                 </div>
             {% endif %}
-            <!-- 👆 ここまで自動処理 -->
-
+            <!-- 👆 ここまでデバッグ用処理 -->
 
 
 
