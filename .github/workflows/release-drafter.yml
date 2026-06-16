@@ -3,9 +3,9 @@ name: Release Drafter
 on:
   push:
     branches:
-      - main # PRがmainにマージされた時に下書きを自動更新
+      - main
   release:
-    types: [published] # 自分でリリースを公開した時にも自動実行
+    types: [published]
 
 jobs:
   update_release_draft:
@@ -17,5 +17,7 @@ jobs:
       - uses: release-drafter/release-drafter@v6
         with:
           publish: ${{ github.event_name == 'release' }}
+          # 👇 この一行を追加すると、設定ファイルにあるラベルをGitHub上に自動で全部作ってくれます！
+          with-labels: true 
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
