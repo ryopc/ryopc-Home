@@ -352,14 +352,19 @@ window.silktideConsentManager.init({
             {% if collections.blog.length > 0 %}
                 {% for post in collections.blog %}
                 <a href="{{ post.url }}" class="card">
+                    <!-- 投稿日（Eleventy側で設定された日付） -->
                     <div class="blog-date">{{ post.date }}</div>
+                    
+                    <!-- タイトル（microCMSの title フィールド） -->
                     <h2 class="blog-title">{{ post.data.title }}</h2>
                     
-                    {% if post.data.image %}
-                    <img src="{{ post.data.image }}" alt="{{ post.data.title }}" class="blog-img">
+                    <!-- アイキャッチ画像（microCMSの eyecatch フィールド） -->
+                    {% if post.data.eyecatch.url %}
+                    <img src="{{ post.data.eyecatch.url }}" alt="{{ post.data.title }}" class="blog-img">
                     {% endif %}
                     
-                    <div class="blog-body">{{ post.templateContent | striptags | truncate(100) }}</div>
+                    <!-- 本文の抜粋（microCMSの content フィールドからタグを除去して100文字） -->
+                    <div class="blog-body">{{ post.data.content | striptags | truncate(100) }}</div>
                 </a>
                 {% endfor %}
             {% else %}
@@ -369,6 +374,7 @@ window.silktideConsentManager.init({
                 </div>
             {% endif %}
             <!-- 👆 ここまで自動処理 -->
+
 
 
 
