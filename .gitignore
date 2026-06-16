@@ -1,0 +1,17 @@
+# Eleventyのビルド出力フォルダ（必須）
+_site/
+
+# Node.jsの依存関係フォルダ（必須）
+node_modules/
+
+# ログファイル
+*.log
+npm-debug.log*
+
+# OSが自動生成するシステムファイル
+.DS_Store
+Thumbs.db
+
+# ローカルの開発環境用設定ファイル（環境変数などがある場合）
+.env
+.env.local
