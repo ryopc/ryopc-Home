@@ -344,38 +344,39 @@ window.silktideConsentManager.init({
     <header>
         <h1 data-t="blog_header">Blog</h1>
     </header>
-<!-- 👇 ここから Eleventy の全自動ループ処理 -->
-            {% if blogs and blogs.length > 0 %}
-                {% for post in blogs %}
-                <!-- 
-                  microCMSの独自ルーティングや詳細ページのURL設計に合わせて 
-                  href の中身（例: /blog/articles/{{ post.id }}/ など）を適宜調整してください。
-                -->
-                <a href="/blog/articles/{{ post.id }}/" class="card">
-                    <!-- 投稿日（microCMSのデフォルトの公開日時、またはカスタム日付。ここでは一旦 createdAt を指定） -->
-                    <div class="blog-date">{{ post.createdAt | truncate(10) }}</div>
-                    
-                    <!-- タイトル（microCMS: title） -->
-                    <h2 class="blog-title">{{ post.title }}</h2>
-                    
-                    <!-- アイキャッチ画像（microCMS: eyecatch） -->
+<!-- 👇 ここから新しいブログ表示レイアウト -->
+<div class="blog-grid-container">
+    {% if blogs and blogs.length > 0 %}
+        {% for post in blogs %}
+        <article class="blog-card-modern">
+            <a href="/blog/articles/{{ post.id }}/" class="blog-card-link">
+                <!-- アイキャッチ画像エリア -->
+                <div class="blog-card-thumbnail">
                     {% if post.eyecatch.url %}
-                    <img src="{{ post.eyecatch.url }}" alt="{{ post.title }}" class="blog-img">
+                    <img src="{{ post.eyecatch.url }}" alt="{{ post.title }}" loading="lazy">
+                    {% else %}
+                    <!-- 画像がない場合のプレースホルダー（必要に応じて） -->
+                    <div class="no-image-placeholder">No Image</div>
                     {% endif %}
-                    
-                    <!-- 本文の抜粋（microCMS: content からHTMLタグを除去して100文字） -->
-                    <div class="blog-body">{{ post.content | striptags | truncate(100) }}</div>
-                </a>
-                {% endfor %}
-            {% else %}
-                <!-- 記事が1つもない場合のフォールバック表示 -->
-                <div class="card">
-                    <p id="empty-fallback-text" style="text-align:center; color:var(--text-light);" data-t="empty_blog_msg">まだ記事がありません。管理画面から新しい記事を追加してください。</p>
                 </div>
-            {% endif %}
-            <!-- 👆 ここまで自動処理 -->
-
-
+                
+                <!-- テキストコンテンツエリア -->
+                <div class="blog-card-content">
+                    <span class="blog-card-date">{{ post.createdAt | truncate(10) }}</span>
+                    <h2 class="blog-card-title">{{ post.title }}</h2>
+                    <p class="blog-card-body">{{ post.content | striptags | truncate(80) }}</p>
+                </div>
+            </a>
+        </article>
+        {% endfor %}
+    {% else %}
+        <!-- 記事が1つもない場合のフォールバック表示 -->
+        <div class="blog-empty-card">
+            <p id="empty-fallback-text" data-t="empty_blog_msg">まだ記事がありません。管理画面から新しい記事を追加してください。</p>
+        </div>
+    {% endif %}
+</div>
+<!-- 👆 ここまで新しいレイアウト -->
 
         </div>
     </div>
