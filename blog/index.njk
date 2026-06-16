@@ -345,22 +345,26 @@ window.silktideConsentManager.init({
         <h1 data-t="blog_header">Blog</h1>
     </header>
 <!-- 👇 ここから Eleventy の全自動ループ処理 -->
-            {% if collections.blog.length > 0 %}
-                {% for article in collections.blog %}
-                <a href="{{ article.url }}" class="card">
-                    <!-- 投稿日 -->
-                    <div class="blog-date">{{ article.date }}</div>
+            {% if blogs and blogs.length > 0 %}
+                {% for post in blogs %}
+                <!-- 
+                  microCMSの独自ルーティングや詳細ページのURL設計に合わせて 
+                  href の中身（例: /blog/articles/{{ post.id }}/ など）を適宜調整してください。
+                -->
+                <a href="/blog/articles/{{ post.id }}/" class="card">
+                    <!-- 投稿日（microCMSのデフォルトの公開日時、またはカスタム日付。ここでは一旦 createdAt を指定） -->
+                    <div class="blog-date">{{ post.createdAt | truncate(10) }}</div>
                     
-                    <!-- タイトル（blogs 階層から取得） -->
-                    <h2 class="blog-title">{{ article.data.blogs.title }}</h2>
+                    <!-- タイトル（microCMS: title） -->
+                    <h2 class="blog-title">{{ post.title }}</h2>
                     
-                    <!-- アイキャッチ画像（blogs 階層から取得） -->
-                    {% if article.data.blogs.eyecatch.url %}
-                    <img src="{{ article.data.blogs.eyecatch.url }}" alt="{{ article.data.blogs.title }}" class="blog-img">
+                    <!-- アイキャッチ画像（microCMS: eyecatch） -->
+                    {% if post.eyecatch.url %}
+                    <img src="{{ post.eyecatch.url }}" alt="{{ post.title }}" class="blog-img">
                     {% endif %}
                     
-                    <!-- 本文の抜粋（blogs 階層から取得） -->
-                    <div class="blog-body">{{ article.data.blogs.content | striptags | truncate(100) }}</div>
+                    <!-- 本文の抜粋（microCMS: content からHTMLタグを除去して100文字） -->
+                    <div class="blog-body">{{ post.content | striptags | truncate(100) }}</div>
                 </a>
                 {% endfor %}
             {% else %}
@@ -370,6 +374,7 @@ window.silktideConsentManager.init({
                 </div>
             {% endif %}
             <!-- 👆 ここまで自動処理 -->
+
 
 
         </div>
