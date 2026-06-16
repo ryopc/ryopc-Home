@@ -349,24 +349,27 @@ window.silktideConsentManager.init({
         <div id="blog-container" class="blog-list">
             
             <!-- 👇 ここから Eleventy の全自動ループ処理 -->
-            {% for post in collections.blog %}
-            <a href="{{ post.url }}" class="card">
-                <div class="blog-date">{{ post.date | date: "%Y/%m/%d" }}</div>
-                <h2 class="blog-title">{{ post.data.title }}</h2>
-                
-                {% if post.data.image %}
-                <img src="{{ post.data.image }}" alt="{{ post.data.title }}" class="blog-img">
-                {% endif %}
-                
-                <div class="blog-body">{{ post.templateContent | strip_html | truncate: 100 }}</div>
-            </a>
+            {% if collections.blog.length > 0 %}
+                {% for post in collections.blog %}
+                <a href="{{ post.url }}" class="card">
+                    <div class="blog-date">{{ post.date | date: "%Y/%m/%d" }}</div>
+                    <h2 class="blog-title">{{ post.data.title }}</h2>
+                    
+                    {% if post.data.image %}
+                    <img src="{{ post.data.image }}" alt="{{ post.data.title }}" class="blog-img">
+                    {% endif %}
+                    
+                    <div class="blog-body">{{ post.templateContent | strip_html | truncate: 100 }}</div>
+                </a>
+                {% endfor %}
             {% else %}
-            <!-- 記事が1つもない場合のフォールバック表示 -->
-            <div class="card">
-                <p id="empty-fallback-text" style="text-align:center; color:var(--text-light);" data-t="empty_blog_msg">まだ記事がありません。管理画面から新しい記事を追加してください。</p>
-            </div>
-            {% endfor %}
+                <!-- 記事が1つもない場合のフォールバック表示 -->
+                <div class="card">
+                    <p id="empty-fallback-text" style="text-align:center; color:var(--text-light);" data-t="empty_blog_msg">まだ記事がありません。管理画面から新しい記事を追加してください。</p>
+                </div>
+            {% endif %}
             <!-- 👆 ここまで自動処理 -->
+
 
         </div>
     </div>
