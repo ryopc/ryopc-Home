@@ -14,13 +14,33 @@ We welcome contributions from everyone, whether you are a developer, designer, w
 * Before opening a new issue, please search the existing issues to see if it has already been reported.
 * Use our **Issue Templates** to provide clear descriptions, steps to reproduce, or clear problem statements.
 
-### 2. Contributing Code
+### 2. Contributing Code & Joining as a Member
 * Look for issues labeled `good first issue` or `help wanted` if you are looking for a place to start.
 * Fork the repository, create a new branch for your feature or fix, and submit a **Pull Request (PR)**.
 * Please fill out the PR template completely so our maintainers can review your changes efficiently.
 
-### 3. Becoming a Regular Member
-* If you are interested in becoming a regular contributor, maintainer, or core team member, please check the corresponding option in your **Pull Request template** or reach out to **ryopcCEO**.
+### 3. How to Register as a Member (`member.json`)
+If you want to join our team or become an official contributor, please add your information to the `member.json` file in your PR. 
+
+**Format Example:**
+```json
+{
+  "members": [
+    {
+      "id": "admin-1",
+      "nickname": "game-ryo",
+      "email": "ryotagtagtag@gmail.com"
+    },
+    {
+      "id": "M001",
+      "nickname": "YOUR_NICKNAME",
+      "email": "YOUR_EMAIL@example.com"
+    }
+  ]
+}
+```
+* Ensure your JSON file remains valid and formatted correctly before submitting.
+* Don't forget to check the **Future Contribution** checkbox in your Pull Request template!
 
 ---
 
