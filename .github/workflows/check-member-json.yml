@@ -1,0 +1,23 @@
+name: Check member.json Syntax
+
+on:
+  pull_request:
+    paths:
+      - 'member.json'
+
+jobs:
+  validate-json:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Validate member.json syntax
+        run: |
+          if [ -f member.json ]; then
+            echo "Checking member.json syntax..."
+            jq . member.json > /dev/null
+            echo "✅ member.json syntax is valid!"
+          else
+            echo "⚠️ member.json not found, skipping check."
+          fi
