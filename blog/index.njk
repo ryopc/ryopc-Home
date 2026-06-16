@@ -344,38 +344,33 @@ window.silktideConsentManager.init({
     <header>
         <h1 data-t="blog_header">Blog</h1>
     </header>
-<!-- 👇 ここから安全なデバッグ用ループ処理 -->
+<!-- 👇 ここから Eleventy の全自動ループ処理 -->
             {% if collections.blog.length > 0 %}
-                {% for post in collections.blog %}
-                <div class="card" style="text-align: left; background: #f4f4f4; color: #333; padding: 15px; margin-bottom: 20px;">
-                    <h3>【デバッグ】安全な変数チェック</h3>
-                    <p><strong>post.url:</strong> {{ post.url }}</p>
+                {% for article in collections.blog %}
+                <a href="{{ article.url }}" class="card">
+                    <!-- 投稿日 -->
+                    <div class="blog-date">{{ article.date }}</div>
                     
-                    <hr>
-                    <!-- microCMSの独自データは通常ここにパースされます -->
-                    <p><strong>1. post.data.title の中身:</strong> {{ post.data.title }}</p>
-                    <p><strong>2. post.data.content の中身:</strong> {{ post.data.content | striptags | truncate(30) }}</p>
+                    <!-- タイトル（blogs 階層から取得） -->
+                    <h2 class="blog-title">{{ article.data.blogs.title }}</h2>
                     
-                    <hr>
-                    <!-- プラグインによっては microCMS というキーに直接データが入ることがあります -->
-                    <p><strong>3. post.data.microCMS の中身:</strong></p>
-                    <pre><code>{{ post.data.microCMS | dump }}</code></pre>
-
-                    <!-- 万が一のために生データオブジェクトの最上位キーだけを抽出 -->
-                    <p><strong>4. post.data の直下にあるキーの一覧:</strong></p>
-                    <ul>
-                    {% for key, val in post.data %}
-                        <li>{{ key }}</li>
-                    {% endfor %}
-                    </ul>
-                </div>
+                    <!-- アイキャッチ画像（blogs 階層から取得） -->
+                    {% if article.data.blogs.eyecatch.url %}
+                    <img src="{{ article.data.blogs.eyecatch.url }}" alt="{{ article.data.blogs.title }}" class="blog-img">
+                    {% endif %}
+                    
+                    <!-- 本文の抜粋（blogs 階層から取得） -->
+                    <div class="blog-body">{{ article.data.blogs.content | striptags | truncate(100) }}</div>
+                </a>
                 {% endfor %}
             {% else %}
+                <!-- 記事が1つもない場合のフォールバック表示 -->
                 <div class="card">
-                    <p>まだ記事がありません。</p>
+                    <p id="empty-fallback-text" style="text-align:center; color:var(--text-light);" data-t="empty_blog_msg">まだ記事がありません。管理画面から新しい記事を追加してください。</p>
                 </div>
             {% endif %}
-            <!-- 👆 ここまでデバッグ用処理 -->
+            <!-- 👆 ここまで自動処理 -->
+
 
         </div>
     </div>
