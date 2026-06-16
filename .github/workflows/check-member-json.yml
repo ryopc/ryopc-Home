@@ -2,8 +2,8 @@ name: Check member.json Syntax
 
 on:
   pull_request:
-    paths:
-      - 'member.json'
+    # どのファイルの変更でもトリガーさせて、マージブロックを防ぐ
+    branches: [ main ]
 
 jobs:
   validate-json:
@@ -16,8 +16,9 @@ jobs:
         run: |
           if [ -f member.json ]; then
             echo "Checking member.json syntax..."
+            # jqで構文チェック。エラーならここで処理が落ちて不合格になります
             jq . member.json > /dev/null
             echo "✅ member.json syntax is valid!"
           else
-            echo "⚠️ member.json not found, skipping check."
+            echo "ℹ️ member.json was not modified or found. Skipping check."
           fi
