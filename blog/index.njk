@@ -352,14 +352,14 @@ window.silktideConsentManager.init({
             {% if collections.blog.length > 0 %}
                 {% for post in collections.blog %}
                 <a href="{{ post.url }}" class="card">
-                    <div class="blog-date">{{ post.date | date: "%Y/%m/%d" }}</div>
+                    <div class="blog-date">{{ post.date }}</div>
                     <h2 class="blog-title">{{ post.data.title }}</h2>
                     
                     {% if post.data.image %}
                     <img src="{{ post.data.image }}" alt="{{ post.data.title }}" class="blog-img">
                     {% endif %}
                     
-                    <div class="blog-body">{{ post.templateContent | strip_html | truncate: 100 }}</div>
+                    <div class="blog-body">{{ post.templateContent | striptags | truncate(100) }}</div>
                 </a>
                 {% endfor %}
             {% else %}
@@ -369,6 +369,7 @@ window.silktideConsentManager.init({
                 </div>
             {% endif %}
             <!-- 👆 ここまで自動処理 -->
+
 
 
 
