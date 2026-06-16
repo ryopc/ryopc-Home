@@ -10,5 +10,10 @@
       "nickname": "example",
       "email": "admin@example.com"
     }
+    {
+      "id": "M002",
+      "nickname": "test",
+      "email": "test@example.com"
+    }
   ]
 }
