@@ -1,0 +1,69 @@
+name-template: 'v$RESOLVED_VERSION'
+tag-template: 'v$RESOLVED_VERSION'
+
+# バージョンの自動カウントアップルール
+version-resolver:
+  major:
+    labels:
+      - 'major'
+      - 'breaking-change'
+  minor:
+    labels:
+      - 'minor'
+      - 'feature'
+  patch:
+    labels:
+      - 'patch'
+      - 'bug'
+  default: patch
+
+# 英語の多機能テンプレート
+template: |
+  ## 🚀 What's Changed
+  
+  $CHANGES
+  
+  ## 🤝 New Contributors
+  *Thank you so much for your contributions!* 🙌
+  $CONTRIBUTORS
+  
+  ---
+  **Full Changelog**: https://github.com
+
+# 超詳細なカテゴリ分類
+categories:
+  - title: '✨ New Features'
+    labels:
+      - 'feature'
+      - 'enhancement'
+  - title: '🐛 Bug Fixes'
+    labels:
+      - 'bug'
+      - 'fix'
+  - title: '🔒 Security Updates'
+    labels:
+      - 'security'
+  - title: '⚡ Performance Improvements'
+    labels:
+      - 'performance'
+      - 'speed'
+  - title: '🧰 Maintenance & Refactoring'
+    labels:
+      - 'chore'
+      - 'refactor'
+      - 'dependencies'
+  - title: '📝 Documentation'
+    labels:
+      - 'documentation'
+      - 'docs'
+
+# リリースノートに載せない除外設定
+exclude-labels:
+  - 'skip-changelog'
+  - 'duplicate'
+  - 'wontfix'
+
+# PR一行ずつの表示フォーマット
+change-template: '- $TITLE by @$AUTHOR in #$NUMBER'
+# 貢献者一覧の表示フォーマット
+contributor-template: '- @$AUTHOR'
