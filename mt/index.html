@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>メンテナンス中 | ryopc Global Digital Support</title>
+  <style>
+    /* 全体のモダンなダークモード風スタイル */
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      background: linear-gradient(135deg, #0f172a 0%, #1e1b4b 100%);
+      color: #f8fafc;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      overflow: hidden;
+      padding: 20px;
+    }
+    /* 中央のカードコンテナ */
+    .container {
+      text-align: center;
+      max-width: 500px;
+      width: 100%;
+      background: rgba(255, 255, 255, 0.03);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1px rgba(255, 255, 255, 0.08) solid;
+      padding: 40px 30px;
+      border-radius: 24px;
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
+      animation: fadeIn 0.8s ease-out;
+    }
+    /* くるくる回るおしゃれなローディングアニメーション */
+    .icon-wrapper {
+      position: relative;
+      width: 80px;
+      height: 80px;
+      margin: 0 auto 30px;
+    }
+    .spinner {
+      width: 100%;
+      height: 100%;
+      border: 4px rgba(255, 255, 255, 0.1) solid;
+      border-top: 4px #6366f1 solid;
+      border-radius: 50%;
+      animation: spin 1.5s linear infinite;
+    }
+    /* メインタイトル */
+    h1 {
+      font-size: 1.8rem;
+      font-weight: 700;
+      margin-bottom: 16px;
+      letter-spacing: -0.025em;
+      background: linear-gradient(to right, #ffffff, #cbd5e1);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    /* 説明テキスト */
+    p {
+      color: #94a3b8;
+      font-size: 0.95rem;
+      line-height: 1.6;
+      margin-bottom: 32px;
+    }
+    /* Uptimeflareへの誘導ボタン */
+    .status-btn {
+      display: inline-block;
+      background: #6366f1;
+      color: #ffffff;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 0.9rem;
+      padding: 12px 28px;
+      border-radius: 12px;
+      transition: all 0.2s ease;
+      box-shadow: 0 4px 20px rgba(99, 102, 241, 0.3);
+    }
+    .status-btn:hover {
+      background: #4f46e5;
+      transform: translateY(-2px);
+      box-shadow: 0 6px 24px rgba(99, 102, 241, 0.4);
+    }
+    /* フッターテキスト */
+    .footer {
+      margin-top: 40px;
+      font-size: 0.8rem;
+      color: #64748b;
+      letter-spacing: 0.05em;
+    }
+    /* アニメーションの定義 */
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <div class="icon-wrapper">
+      <div class="spinner"></div>
+    </div>
+    
+    <h1>只今メンテナンス中です</h1>
+    
+    <p>
+      ryopc Global Digital Support をご利用いただきありがとうございます。<br>
+      現在、新機能の追加およびシステム品質向上のためのアップデートを行っています。完了までしばらくお待ちください。
+    </p>
+    
+    <!-- UptimeflareのURL（statusサブドメイン）へジャンプするボタン -->
+    <a href="https://st.ryopc.f5.si" class="status-btn" target="_blank" rel="noopener noreferrer">
+      現在の稼働状況を確認する ↗
+    </a>
+    
+    <div class="footer">
+      © ryopc Global Digital Support / ryopcCEO
+    </div>
+  </div>
+
+</body>
+</html>
