@@ -9,6 +9,7 @@ Fixes # (issue number)
 - [ ] New feature
 - [ ] Documentation update
 - [ ] Refactoring / Maintenance
+- [ ] Other
 
 ## 🧪 How Has This Been Tested?
 Please describe the tests that you ran to verify your changes.
