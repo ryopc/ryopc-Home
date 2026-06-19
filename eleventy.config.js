@@ -33,6 +33,8 @@ module.exports = function(eleventyConfig) {
   // ルート直下にあるCNAMEファイルをそのまま出力フォルダにコピー
   eleventyConfig.addPassthroughCopy("CNAME");
   eleventyConfig.addPassthroughCopy("_redirects");
+  eleventyConfig.addPassthroughCopy("_headers"); // 👈 💡ここにこの1行を追加しました！
+  
   // アセット類（ルート直下にある各フォルダをそのままコピー）
   eleventyConfig.addPassthroughCopy("css");
   eleventyConfig.addPassthroughCopy("images");
@@ -58,4 +60,3 @@ module.exports = function(eleventyConfig) {
     }
   };
 };
-
