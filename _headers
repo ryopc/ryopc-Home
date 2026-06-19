@@ -1,4 +1,7 @@
 /*
+  Strict-Transport-Security: max-age=63072000; includeSubDomains; preload
   X-Frame-Options: SAMEORIGIN
-  Content-Security-Policy: frame-ancestors 'self'
-
+  X-Content-Type-Options: nosniff
+  Referrer-Policy: strict-origin-when-cross-origin
+  Permissions-Policy: geolocation=(), camera=(), microphone=()
+  Content-Security-Policy: default-src 'self'; frame-ancestors 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://jsdelivr.net https://githack.com https://channel.io https://*.channel.io; style-src 'self' 'unsafe-inline' https://jsdelivr.net https://channel.io https://*.channel.io; img-src 'self' data: blob: https://channel.io https://*.channel.io; font-src 'self' data: https://channel.io https://*.channel.io; connect-src 'self' wss://*.channel.io https://*.channel.io; frame-src 'self' https://*.channel.io;
