@@ -1563,7 +1563,7 @@ class SilktideConsentManager {
                 required: false,
                 scripts: [
                     {
-                        url: "https://rawcdn.githack.com/ryopc/Archive/fc3acd1142e5108dc5263e4b112a768988cccb4d/Channel-Talk.js",
+                        url: "https://raw.githack.com/ryopc/Archive/fc3acd1142e5108dc5263e4b112a768988cccb4d/Channel-Talk.js",
                         load: "async"
                     }
                 ],
