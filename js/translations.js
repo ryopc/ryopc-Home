@@ -162,18 +162,27 @@
         }
     }
 
-    // --- セーフストレージ ---
+// --- セーフストレージ ---
     const safeStorage = {
         get: (key) => { try { return localStorage.getItem(key); } catch (e) { return window['fb_' + key] || null; } },
         set: (key, val) => { try { localStorage.setItem(key, val); } catch (e) { window['fb_' + key] = val; } }
     };
 
+    // 画面が読み込まれたときの処理
     window.addEventListener('DOMContentLoaded', () => {
         const savedLang = safeStorage.get("preferred_lang") || 'ja';
         const langSelector = document.getElementById('langSelector');
+        
         if (langSelector) {
             langSelector.value = savedLang;
+            
+            // メニューが切り替わったら、その言語に変える命令
+            langSelector.addEventListener('change', (e) => {
+                changeLanguage(e.target.value);
+            });
         }
+        
+        // 最初に保存されている言語で文字を表示する命令
         changeLanguage(savedLang);
     });
 
