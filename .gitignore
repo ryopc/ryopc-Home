@@ -4,6 +4,9 @@ _site/
 # Node.jsの依存関係フォルダ（必須）
 node_modules/
 
+# Cloudflare / Wrangler のキャッシュや一時ファイル（必須）
+.wrangler/
+
 # ログファイル
 *.log
 npm-debug.log*
