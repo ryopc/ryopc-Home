@@ -24,7 +24,7 @@ We are developing a borderless, multi-layered ecosystem starting with legitimate
 
 ---
 ## license
-license by **Apache-2.0** 
+license by **MIT** 
 
 ---
-*“Ensuring global digital equity, one device at a time.” — ryopcCEO*
+*“Ensuring global digital equity, one device at a time.” — ryopcCEO*MIT
