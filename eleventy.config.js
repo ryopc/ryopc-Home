@@ -1,9 +1,5 @@
 module.exports = function(eleventyConfig) {
   
-  // ==========================================
-  // 【新設定】ビルド前に出力フォルダ（_site）を自動で綺麗にする
-  // ==========================================
-  eleventyConfig.setCleanOutputDir(true);
 
   // ==========================================
   // microCMSから安全にデータを取得
@@ -39,11 +35,19 @@ module.exports = function(eleventyConfig) {
   eleventyConfig.addPassthroughCopy("js");
   eleventyConfig.addPassthroughCopy("fonts");
 
+ // ==========================================
+  // 2. ディレクトリ・ルートパス設定
+  // ==========================================
   return {
     pathPrefix: "/", 
+
     markdownTemplateEngine: "njk",
     htmlTemplateEngine: "njk",
     dataTemplateEngine: "njk",
+
+    // 【11ty v2用】ビルド前に出力フォルダを空にする設定
+    emptyOutputDir: true, 
+
     dir: {
       input: ".",
       includes: "_includes",
@@ -51,4 +55,3 @@ module.exports = function(eleventyConfig) {
       output: "_site"
     }
   };
-};
