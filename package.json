@@ -2,8 +2,8 @@
   "name": "ryopc-home",
   "version": "1.0.0",
   "description": "",
-  "scripts": {
-    "build": "npx @11ty/eleventy --clean",
+"scripts": {
+    "build": "npx @11ty/eleventy",
     "test": "npm run build && npx eslint ."
   },
   "engines": {
