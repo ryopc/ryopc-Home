@@ -2,15 +2,16 @@
   "name": "ryopc-home",
   "version": "1.0.0",
   "description": "",
-"scripts": {
+  "scripts": {
     "build": "npx @11ty/eleventy",
     "test": "npm run build && npx eslint ."
   },
   "engines": {
     "node": ">=18.18.0"
   },
-"devDependencies": {
+  "devDependencies": {
     "@11ty/eleventy": "^3.0.0",
+    "dotenv": "^17.4.2",
     "eslint": "^9.0.0"
   }
 }
