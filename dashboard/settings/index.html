@@ -1,219 +1,224 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="ja">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>設定 - ryopc</title>
 
-    <link rel="stylesheet" href="/style.css">
+    <link rel="stylesheet" href="/style.css" />
 
     <style>
-        body {
-            background: var(--bg);
-        }
+      body {
+        background: var(--bg);
+      }
 
-        .settings-wrapper {
-            max-width: 900px;
-            margin: 4rem auto;
-            padding: 0 2rem;
-        }
+      .settings-wrapper {
+        max-width: 900px;
+        margin: 4rem auto;
+        padding: 0 2rem;
+      }
 
-        .settings-card {
-            background: var(--white);
-            padding: 2.5rem;
-            border-radius: 32px;
-            box-shadow: 0 25px 50px -12px rgba(0,0,0,0.12);
-            border: 1px solid rgba(226,232,240,0.8);
-            margin-bottom: 2rem;
-            animation: fadeIn 0.5s ease;
-        }
+      .settings-card {
+        background: var(--white);
+        padding: 2.5rem;
+        border-radius: 32px;
+        box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.12);
+        border: 1px solid rgba(226, 232, 240, 0.8);
+        margin-bottom: 2rem;
+        animation: fadeIn 0.5s ease;
+      }
 
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+          transform: translateY(20px);
         }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
 
-        .settings-title {
-            font-size: 2rem;
-            font-weight: 800;
-            color: var(--dark);
-            margin-bottom: 1rem;
-        }
+      .settings-title {
+        font-size: 2rem;
+        font-weight: 800;
+        color: var(--dark);
+        margin-bottom: 1rem;
+      }
 
-        .settings-sub {
-            color: var(--text-light);
-            font-size: 1.1rem;
-            margin-bottom: 2rem;
-        }
+      .settings-sub {
+        color: var(--text-light);
+        font-size: 1.1rem;
+        margin-bottom: 2rem;
+      }
 
-        /* セクション */
-        .section {
-            margin-bottom: 2.5rem;
-        }
+      /* セクション */
+      .section {
+        margin-bottom: 2.5rem;
+      }
 
-        .section-title {
-            font-size: 1.3rem;
-            font-weight: 700;
-            margin-bottom: 1rem;
-        }
+      .section-title {
+        font-size: 1.3rem;
+        font-weight: 700;
+        margin-bottom: 1rem;
+      }
 
-        .section-desc {
-            color: var(--text-light);
-            margin-bottom: 1.2rem;
-        }
+      .section-desc {
+        color: var(--text-light);
+        margin-bottom: 1.2rem;
+      }
 
-        /* トグルスイッチ */
-        .toggle {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            background: #f8f9fa;
-            padding: 1rem 1.4rem;
-            border-radius: 16px;
-            border: 1px solid rgba(0,0,0,0.08);
-            margin-bottom: 1rem;
-            cursor: pointer;
-            transition: var(--transition);
-        }
-        .toggle:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 12px 28px rgba(0,0,0,0.12);
-        }
+      /* トグルスイッチ */
+      .toggle {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        background: #f8f9fa;
+        padding: 1rem 1.4rem;
+        border-radius: 16px;
+        border: 1px solid rgba(0, 0, 0, 0.08);
+        margin-bottom: 1rem;
+        cursor: pointer;
+        transition: var(--transition);
+      }
+      .toggle:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 12px 28px rgba(0, 0, 0, 0.12);
+      }
 
-        .toggle label {
-            font-weight: 600;
-            color: var(--dark);
-        }
+      .toggle label {
+        font-weight: 600;
+        color: var(--dark);
+      }
 
-        .toggle input {
-            transform: scale(1.4);
-        }
+      .toggle input {
+        transform: scale(1.4);
+      }
 
-        /* 保存ボタン */
-        .save-btn {
-            width: 100%;
-            padding: 1rem;
-            background: var(--primary);
-            color: var(--white);
-            border: none;
-            border-radius: 14px;
-            font-size: 1.1rem;
-            font-weight: 700;
-            cursor: pointer;
-            transition: var(--transition);
-            margin-top: 1rem;
-        }
-        .save-btn:hover {
-            background: var(--primary-light);
-            transform: translateY(-3px);
-        }
+      /* 保存ボタン */
+      .save-btn {
+        width: 100%;
+        padding: 1rem;
+        background: var(--primary);
+        color: var(--white);
+        border: none;
+        border-radius: 14px;
+        font-size: 1.1rem;
+        font-weight: 700;
+        cursor: pointer;
+        transition: var(--transition);
+        margin-top: 1rem;
+      }
+      .save-btn:hover {
+        background: var(--primary-light);
+        transform: translateY(-3px);
+      }
     </style>
-</head>
+  </head>
 
-<body>
-
+  <body>
     <div class="navbar">
-        <div class="nav-logo" onclick="location.href='/'">ryopc</div>
+      <div class="nav-logo" onclick="location.href = '/'">ryopc</div>
     </div>
 
     <div class="settings-wrapper">
-
-        <div class="settings-card">
-            <div class="settings-title">設定</div>
-            <div class="settings-sub">通知・セキュリティ・アカウント設定を管理できます。</div>
-
-            <!-- 通知設定 -->
-            <div class="section">
-                <div class="section-title">通知</div>
-                <div class="section-desc">メール通知やシステム通知の設定を変更できます。</div>
-
-                <div class="toggle">
-                    <label>ログイン通知</label>
-                    <input type="checkbox" id="loginNotify">
-                </div>
-
-                <div class="toggle">
-                    <label>セキュリティアラート</label>
-                    <input type="checkbox" id="securityAlert">
-                </div>
-
-                <div class="toggle">
-                    <label>お知らせメール</label>
-                    <input type="checkbox" id="newsMail">
-                </div>
-            </div>
-
-            <!-- セキュリティ設定 -->
-            <div class="section">
-                <div class="section-title">セキュリティ</div>
-                <div class="section-desc">アカウントの安全性を高める設定です。</div>
-
-                <div class="toggle">
-                    <label>2段階認証（2FA）</label>
-                    <input type="checkbox" id="twoFactor">
-                </div>
-
-                <div class="toggle">
-                    <label>ログイン履歴を保存</label>
-                    <input type="checkbox" id="saveHistory">
-                </div>
-            </div>
-
-            <!-- 保存ボタン -->
-            <button class="save-btn" onclick="saveSettings()">保存する</button>
-
+      <div class="settings-card">
+        <div class="settings-title">設定</div>
+        <div class="settings-sub">
+          通知・セキュリティ・アカウント設定を管理できます。
         </div>
 
+        <!-- 通知設定 -->
+        <div class="section">
+          <div class="section-title">通知</div>
+          <div class="section-desc">
+            メール通知やシステム通知の設定を変更できます。
+          </div>
+
+          <div class="toggle">
+            <label>ログイン通知</label>
+            <input type="checkbox" id="loginNotify" />
+          </div>
+
+          <div class="toggle">
+            <label>セキュリティアラート</label>
+            <input type="checkbox" id="securityAlert" />
+          </div>
+
+          <div class="toggle">
+            <label>お知らせメール</label>
+            <input type="checkbox" id="newsMail" />
+          </div>
+        </div>
+
+        <!-- セキュリティ設定 -->
+        <div class="section">
+          <div class="section-title">セキュリティ</div>
+          <div class="section-desc">アカウントの安全性を高める設定です。</div>
+
+          <div class="toggle">
+            <label>2段階認証（2FA）</label>
+            <input type="checkbox" id="twoFactor" />
+          </div>
+
+          <div class="toggle">
+            <label>ログイン履歴を保存</label>
+            <input type="checkbox" id="saveHistory" />
+          </div>
+        </div>
+
+        <!-- 保存ボタン -->
+        <button class="save-btn" onclick="saveSettings()">保存する</button>
+      </div>
     </div>
 
-<script>
-async function loadSettings() {
-    const res = await fetch("https://auth.ryopc.f5.si/settings", {
-        credentials: "include"
-    });
+    <script>
+      async function loadSettings() {
+        const res = await fetch("https://auth.ryopc.f5.si/settings", {
+          credentials: "include",
+        });
 
-    const json = await res.json();
+        const json = await res.json();
 
-    if (!json.success) {
-        location.href = "/login.html";
-        return;
-    }
+        if (!json.success) {
+          location.href = "/login.html";
+          return;
+        }
 
-    // 設定を反映
-    document.getElementById("loginNotify").checked = json.loginNotify;
-    document.getElementById("securityAlert").checked = json.securityAlert;
-    document.getElementById("newsMail").checked = json.newsMail;
-    document.getElementById("twoFactor").checked = json.twoFactor;
-    document.getElementById("saveHistory").checked = json.saveHistory;
-}
+        // 設定を反映
+        document.getElementById("loginNotify").checked = json.loginNotify;
+        document.getElementById("securityAlert").checked = json.securityAlert;
+        document.getElementById("newsMail").checked = json.newsMail;
+        document.getElementById("twoFactor").checked = json.twoFactor;
+        document.getElementById("saveHistory").checked = json.saveHistory;
+      }
 
-async function saveSettings() {
-    const body = {
-        loginNotify: document.getElementById("loginNotify").checked,
-        securityAlert: document.getElementById("securityAlert").checked,
-        newsMail: document.getElementById("newsMail").checked,
-        twoFactor: document.getElementById("twoFactor").checked,
-        saveHistory: document.getElementById("saveHistory").checked
-    };
+      async function saveSettings() {
+        const body = {
+          loginNotify: document.getElementById("loginNotify").checked,
+          securityAlert: document.getElementById("securityAlert").checked,
+          newsMail: document.getElementById("newsMail").checked,
+          twoFactor: document.getElementById("twoFactor").checked,
+          saveHistory: document.getElementById("saveHistory").checked,
+        };
 
-    const res = await fetch("https://auth.ryopc.f5.si/settings/update", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(body),
-        credentials: "include"
-    });
+        const res = await fetch("https://auth.ryopc.f5.si/settings/update", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(body),
+          credentials: "include",
+        });
 
-    const json = await res.json();
+        const json = await res.json();
 
-    if (json.success) {
-        alert("保存しました！");
-    } else {
-        alert(JSON.stringify(json));
-    }
-}
+        if (json.success) {
+          alert("保存しました！");
+        } else {
+          alert(JSON.stringify(json));
+        }
+      }
 
-loadSettings();
-</script>
-
-</body>
+      loadSettings();
+    </script>
+  </body>
 </html>

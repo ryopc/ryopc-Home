@@ -5,178 +5,184 @@
 
 /* ---------- Root Variables ---------- */
 :root {
-    --bg: #f5f7fa;
-    --white: #ffffff;
-    --dark: #1a1a1a;
-    --text: #2d3748;
-    --text-light: #6b7280;
+  --bg: #f5f7fa;
+  --white: #ffffff;
+  --dark: #1a1a1a;
+  --text: #2d3748;
+  --text-light: #6b7280;
 
-    --primary: #007bff;
-    --primary-light: #339dff;
-    --accent: #00bfff;
+  --primary: #007bff;
+  --primary-light: #339dff;
+  --accent: #00bfff;
 
-    --gradient-accent: linear-gradient(90deg, #00bfff, #007bff);
+  --gradient-accent: linear-gradient(90deg, #00bfff, #007bff);
 
-    --transition: all 0.25s ease;
-    --radius: 20px;
-    --shadow: 0 25px 50px -12px rgba(0,0,0,0.12);
+  --transition: all 0.25s ease;
+  --radius: 20px;
+  --shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.12);
 }
 
 /* ---------- Base Reset ---------- */
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
 body {
-    font-family: "Inter", "Noto Sans JP", sans-serif;
-    background: var(--bg);
-    color: var(--text);
-    line-height: 1.7;
+  font-family: "Inter", "Noto Sans JP", sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.7;
 }
 
 /* ---------- Navbar ---------- */
 .navbar {
-    width: 100%;
-    padding: 1.2rem 2rem;
-    background: var(--white);
-    border-bottom: 1px solid rgba(0,0,0,0.05);
-    box-shadow: 0 4px 20px rgba(0,0,0,0.05);
-    display: flex;
-    align-items: center;
+  width: 100%;
+  padding: 1.2rem 2rem;
+  background: var(--white);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+  display: flex;
+  align-items: center;
 }
 
 .nav-logo {
-    font-size: 1.6rem;
-    font-weight: 800;
-    cursor: pointer;
-    background: var(--gradient-accent);
-    -webkit-background-clip: text;
-    color: transparent;
+  font-size: 1.6rem;
+  font-weight: 800;
+  cursor: pointer;
+  background: var(--gradient-accent);
+  -webkit-background-clip: text;
+  color: transparent;
 }
 
 /* ---------- Cards ---------- */
 .card,
 .auth-card,
 .support-card {
-    background: var(--white);
-    padding: 2.5rem;
-    border-radius: 32px;
-    border: 1px solid rgba(226,232,240,0.8);
-    box-shadow: var(--shadow);
-    animation: fadeIn 0.5s ease;
+  background: var(--white);
+  padding: 2.5rem;
+  border-radius: 32px;
+  border: 1px solid rgba(226, 232, 240, 0.8);
+  box-shadow: var(--shadow);
+  animation: fadeIn 0.5s ease;
 }
 
 .password-card {
-    background: #f8f9fa;
-    padding: 1.8rem;
-    border-radius: var(--radius);
-    border: 1px solid rgba(0,0,0,0.08);
-    box-shadow: 0 8px 20px rgba(0,0,0,0.05);
+  background: #f8f9fa;
+  padding: 1.8rem;
+  border-radius: var(--radius);
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.05);
 }
 
 /* ---------- Form Elements ---------- */
 .form-group {
-    margin-bottom: 1.2rem;
+  margin-bottom: 1.2rem;
 }
 
 .form-group label {
-    font-weight: 600;
-    color: var(--dark);
-    margin-bottom: 0.4rem;
-    display: block;
+  font-weight: 600;
+  color: var(--dark);
+  margin-bottom: 0.4rem;
+  display: block;
 }
 
 .form-control {
-    width: 100%;
-    padding: 0.9rem 1rem;
-    border-radius: 12px;
-    border: 1px solid rgba(0,0,0,0.15);
-    background: #ffffff;
-    font-size: 1rem;
-    transition: var(--transition);
+  width: 100%;
+  padding: 0.9rem 1rem;
+  border-radius: 12px;
+  border: 1px solid rgba(0, 0, 0, 0.15);
+  background: #ffffff;
+  font-size: 1rem;
+  transition: var(--transition);
 }
 
 .form-control:focus {
-    border-color: var(--primary);
-    box-shadow: 0 0 0 3px rgba(0,123,255,0.15);
-    outline: none;
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.15);
+  outline: none;
 }
 
 /* ---------- Buttons ---------- */
 button,
 .login-btn,
 .form-submit-btn {
-    width: 100%;
-    padding: 1rem;
-    background: var(--primary);
-    color: var(--white);
-    border: none;
-    border-radius: 14px;
-    font-size: 1.1rem;
-    font-weight: 700;
-    cursor: pointer;
-    transition: var(--transition);
+  width: 100%;
+  padding: 1rem;
+  background: var(--primary);
+  color: var(--white);
+  border: none;
+  border-radius: 14px;
+  font-size: 1.1rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: var(--transition);
 }
 
 button:hover,
 .login-btn:hover,
 .form-submit-btn:hover {
-    background: var(--primary-light);
-    transform: translateY(-3px);
+  background: var(--primary-light);
+  transform: translateY(-3px);
 }
 
 /* ---------- Support Grid ---------- */
 .support-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-    gap: 1.5rem;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 1.5rem;
 }
 
 .support-item {
-    background: #f8f9fa;
-    padding: 1.8rem;
-    border-radius: 24px;
-    border: 1px solid rgba(0,0,0,0.08);
-    box-shadow: 0 8px 20px rgba(0,0,0,0.05);
-    transition: var(--transition);
-    cursor: pointer;
+  background: #f8f9fa;
+  padding: 1.8rem;
+  border-radius: 24px;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.05);
+  transition: var(--transition);
+  cursor: pointer;
 }
 
 .support-item:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 12px 28px rgba(0,0,0,0.12);
+  transform: translateY(-4px);
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.12);
 }
 
 /* ---------- FAQ ---------- */
 .faq-item {
-    background: #f8f9fa;
-    padding: 1.4rem;
-    border-radius: 16px;
-    border: 1px solid rgba(0,0,0,0.08);
-    margin-bottom: 1rem;
-    cursor: pointer;
-    transition: var(--transition);
+  background: #f8f9fa;
+  padding: 1.4rem;
+  border-radius: 16px;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  margin-bottom: 1rem;
+  cursor: pointer;
+  transition: var(--transition);
 }
 
 .faq-item:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 12px 28px rgba(0,0,0,0.12);
+  transform: translateY(-3px);
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.12);
 }
 
 .faq-q {
-    font-weight: 700;
-    margin-bottom: 0.4rem;
+  font-weight: 700;
+  margin-bottom: 0.4rem;
 }
 
 .faq-a {
-    color: var(--text-light);
-    font-size: 0.95rem;
+  color: var(--text-light);
+  font-size: 0.95rem;
 }
 
 /* ---------- Animations ---------- */
 @keyframes fadeIn {
-    from { opacity: 0; transform: translateY(20px); }
-    to { opacity: 1; transform: translateY(0); }
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }

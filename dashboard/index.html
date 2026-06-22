@@ -1,163 +1,179 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="ja">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>ダッシュボード - ryopc</title>
-<link rel="icon" type="image/png" href="https://cdn.jsdelivr.net/gh/ryopc/ryopc-Home@main/favicon.png">
-    <link rel="stylesheet" href="/style.css">
+    <link
+      rel="icon"
+      type="image/png"
+      href="https://cdn.jsdelivr.net/gh/ryopc/ryopc-Home@main/favicon.png"
+    />
+    <link rel="stylesheet" href="/style.css" />
 
     <style>
-        body {
-            background: var(--bg);
-        }
+      body {
+        background: var(--bg);
+      }
 
-        .dashboard-wrapper {
-            max-width: 900px;
-            margin: 4rem auto;
-            padding: 0 2rem;
-        }
+      .dashboard-wrapper {
+        max-width: 900px;
+        margin: 4rem auto;
+        padding: 0 2rem;
+      }
 
-        .welcome-card {
-            background: var(--white);
-            padding: 2.5rem;
-            border-radius: 32px;
-            box-shadow: 0 25px 50px -12px rgba(0,0,0,0.12);
-            border: 1px solid rgba(226,232,240,0.8);
-            margin-bottom: 2rem;
-            animation: fadeIn 0.5s ease;
-        }
+      .welcome-card {
+        background: var(--white);
+        padding: 2.5rem;
+        border-radius: 32px;
+        box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.12);
+        border: 1px solid rgba(226, 232, 240, 0.8);
+        margin-bottom: 2rem;
+        animation: fadeIn 0.5s ease;
+      }
 
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+          transform: translateY(20px);
         }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
 
-        .welcome-title {
-            font-size: 2rem;
-            font-weight: 800;
-            color: var(--dark);
-            margin-bottom: 1rem;
-        }
+      .welcome-title {
+        font-size: 2rem;
+        font-weight: 800;
+        color: var(--dark);
+        margin-bottom: 1rem;
+      }
 
-        .welcome-sub {
-            color: var(--text-light);
-            font-size: 1.1rem;
-            margin-bottom: 2rem;
-        }
+      .welcome-sub {
+        color: var(--text-light);
+        font-size: 1.1rem;
+        margin-bottom: 2rem;
+      }
 
-        .logout-btn {
-            padding: 0.9rem 1.4rem;
-            background: #ef4444;
-            color: #fff;
-            border: none;
-            border-radius: 14px;
-            font-size: 1rem;
-            font-weight: 700;
-            cursor: pointer;
-            transition: var(--transition);
-        }
-        .logout-btn:hover {
-            background: #dc2626;
-            transform: translateY(-3px);
-        }
+      .logout-btn {
+        padding: 0.9rem 1.4rem;
+        background: #ef4444;
+        color: #fff;
+        border: none;
+        border-radius: 14px;
+        font-size: 1rem;
+        font-weight: 700;
+        cursor: pointer;
+        transition: var(--transition);
+      }
+      .logout-btn:hover {
+        background: #dc2626;
+        transform: translateY(-3px);
+      }
 
-        /* 機能カード */
-        .feature-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-            gap: 1.5rem;
-        }
+      /* 機能カード */
+      .feature-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+        gap: 1.5rem;
+      }
 
-        .feature-card {
-            background: #f8f9fa;
-            padding: 1.8rem;
-            border-radius: 24px;
-            border: 1px solid rgba(0,0,0,0.08);
-            box-shadow: 0 8px 20px rgba(0,0,0,0.05);
-            transition: var(--transition);
-            cursor: pointer;
-        }
-        .feature-card:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 12px 28px rgba(0,0,0,0.12);
-        }
+      .feature-card {
+        background: #f8f9fa;
+        padding: 1.8rem;
+        border-radius: 24px;
+        border: 1px solid rgba(0, 0, 0, 0.08);
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.05);
+        transition: var(--transition);
+        cursor: pointer;
+      }
+      .feature-card:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 12px 28px rgba(0, 0, 0, 0.12);
+      }
 
-        .feature-title {
-            font-size: 1.3rem;
-            font-weight: 700;
-            margin-bottom: 0.5rem;
-        }
+      .feature-title {
+        font-size: 1.3rem;
+        font-weight: 700;
+        margin-bottom: 0.5rem;
+      }
 
-        .feature-desc {
-            color: var(--text-light);
-            font-size: 0.95rem;
-        }
+      .feature-desc {
+        color: var(--text-light);
+        font-size: 0.95rem;
+      }
     </style>
-</head>
+  </head>
 
-<body>
-
+  <body>
     <div class="navbar">
-        <div class="nav-logo" onclick="location.href='/'">ryopc</div>
+      <div class="nav-logo" onclick="location.href = '/'">ryopc</div>
     </div>
 
     <div class="dashboard-wrapper">
+      <div class="welcome-card">
+        <div class="welcome-title" id="username">こんにちは！</div>
+        <div class="welcome-sub">ryopc ダッシュボードへようこそ。</div>
+        <a href="https://auth.ryopc.f5.si/logout" class="logout-btn"
+          >ログアウト</a
+        >
+      </div>
 
-        <div class="welcome-card">
-            <div class="welcome-title" id="username">こんにちは！</div>
-            <div class="welcome-sub">ryopc ダッシュボードへようこそ。</div>
-        <a href="https://auth.ryopc.f5.si/logout" class="logout-btn">ログアウト</a>
+      <div class="feature-grid">
+        <div
+          class="feature-card"
+          onclick="location.href = '/dashboard/profile'"
+        >
+          <div class="feature-title">プロフィール</div>
+          <div class="feature-desc">アカウント情報を確認・編集できます。</div>
         </div>
 
-        <div class="feature-grid">
-
-            <div class="feature-card" onclick="location.href='/dashboard/profile'">
-                <div class="feature-title">プロフィール</div>
-                <div class="feature-desc">アカウント情報を確認・編集できます。</div>
-            </div>
-
-            <div class="feature-card" onclick="location.href='/dashboard/settings'">
-                <div class="feature-title">設定</div>
-                <div class="feature-desc">通知・セキュリティ・連携サービスなど。</div>
-            </div>
-
-            <div class="feature-card" onclick="location.href='/dashboard/support'">
-                <div class="feature-title">サポート</div>
-                <div class="feature-desc">お問い合わせやヘルプセンター。</div>
-            </div>
-
+        <div
+          class="feature-card"
+          onclick="location.href = '/dashboard/settings'"
+        >
+          <div class="feature-title">設定</div>
+          <div class="feature-desc">通知・セキュリティ・連携サービスなど。</div>
         </div>
 
+        <div
+          class="feature-card"
+          onclick="location.href = '/dashboard/support'"
+        >
+          <div class="feature-title">サポート</div>
+          <div class="feature-desc">お問い合わせやヘルプセンター。</div>
+        </div>
+      </div>
     </div>
 
-<script>
-async function loadUser() {
-    const res = await fetch("https://auth.ryopc.f5.si/me", {
-        credentials: "include"
-    });
+    <script>
+      async function loadUser() {
+        const res = await fetch("https://auth.ryopc.f5.si/me", {
+          credentials: "include",
+        });
 
-    const json = await res.json();
+        const json = await res.json();
 
-    if (!json.success) {
+        if (!json.success) {
+          location.href = "/login/";
+          return;
+        }
+
+        document.getElementById("username").textContent =
+          json.name + " さん、こんにちは！";
+      }
+
+      async function logout() {
+        await fetch("https://auth.ryopc.f5.si/logout", {
+          method: "POST",
+          credentials: "include",
+        });
+
         location.href = "/login/";
-        return;
-    }
+      }
 
-    document.getElementById("username").textContent = json.name + " さん、こんにちは！";
-}
-
-async function logout() {
-    await fetch("https://auth.ryopc.f5.si/logout", {
-        method: "POST",
-        credentials: "include"
-    });
-
-    location.href = "/login/";
-}
-
-loadUser();
-</script>
-
-</body>
+      loadUser();
+    </script>
+  </body>
 </html>

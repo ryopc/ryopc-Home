@@ -1,291 +1,315 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="ja">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>ログイン - ryopc</title>
-<link rel="icon" type="image/png" href="https://cdn.jsdelivr.net/gh/ryopc/ryopc-Home@main/favicon.png">
-    <link rel="stylesheet" href="/style.css">
+    <link
+      rel="icon"
+      type="image/png"
+      href="https://cdn.jsdelivr.net/gh/ryopc/ryopc-Home@main/favicon.png"
+    />
+    <link rel="stylesheet" href="/style.css" />
 
     <style>
-        :root {
-    --transition: all 0.25s ease;
-}
+      :root {
+        --transition: all 0.25s ease;
+      }
 
-        body {
-            background: var(--bg);
-        }
+      body {
+        background: var(--bg);
+      }
 
-        .auth-wrapper {
-            min-height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            padding: 2rem;
-        }
+      .auth-wrapper {
+        min-height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 2rem;
+      }
 
-        .auth-card {
-            width: 100%;
-            max-width: 480px;
-            background: var(--white);
-            padding: 3rem;
-            border-radius: 32px;
-            box-shadow: 0 25px 50px -12px rgba(0,0,0,0.12);
-            border: 1px solid rgba(226,232,240,0.8);
-            animation: fadeIn 0.5s ease;
-        }
+      .auth-card {
+        width: 100%;
+        max-width: 480px;
+        background: var(--white);
+        padding: 3rem;
+        border-radius: 32px;
+        box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.12);
+        border: 1px solid rgba(226, 232, 240, 0.8);
+        animation: fadeIn 0.5s ease;
+      }
 
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+          transform: translateY(20px);
         }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
 
-        .auth-card h2 {
-            margin-top: 0;
-            margin-bottom: 2rem;
-            font-size: 1.9rem;
-            color: var(--dark);
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-        }
-        .auth-card h2::before {
-            content: "";
-            width: 6px;
-            height: 28px;
-            background: var(--gradient-accent);
-            border-radius: 10px;
-        }
+      .auth-card h2 {
+        margin-top: 0;
+        margin-bottom: 2rem;
+        font-size: 1.9rem;
+        color: var(--dark);
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+      }
+      .auth-card h2::before {
+        content: "";
+        width: 6px;
+        height: 28px;
+        background: var(--gradient-accent);
+        border-radius: 10px;
+      }
 
-        /* OAuth ボタン共通 */
-.oauth-buttons {
-    display: flex;
-    flex-direction: column;
-    gap: 1.2rem;
-    margin-bottom: 2.5rem;
-    align-items: center;
+      /* OAuth ボタン共通 */
+      .oauth-buttons {
+        display: flex;
+        flex-direction: column;
+        gap: 1.2rem;
+        margin-bottom: 2.5rem;
+        align-items: center;
 
-    /* ← 追加 */
-    padding: 0;
-    height: auto;
-}
+        /* ← 追加 */
+        padding: 0;
+        height: auto;
+      }
 
+      .oauth-btn-wrapper {
+        background: #f8f9fa;
+        border-radius: 16px;
+        padding: 0.8rem 1rem;
+        border: 1px solid rgba(0, 0, 0, 0.08);
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.05);
+        transition: var(--transition);
+        cursor: pointer;
+        display: flex;
+        justify-content: center;
 
-.oauth-btn-wrapper {
-    background: #f8f9fa;
-    border-radius: 16px;
-    padding: 0.8rem 1rem;
-    border: 1px solid rgba(0,0,0,0.08);
-    box-shadow: 0 8px 20px rgba(0,0,0,0.05);
-    transition: var(--transition);
-    cursor: pointer;
-    display: flex;
-    justify-content: center;
+        /* ← 追加したい修正はここにまとめる */
+        width: fit-content;
+        margin: 0 auto;
+      }
 
-    /* ← 追加したい修正はここにまとめる */
-    width: fit-content;
-    margin: 0 auto;
-}
+      .oauth-btn-wrapper:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 12px 28px rgba(0, 0, 0, 0.12);
+      }
 
-        .oauth-btn-wrapper:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 12px 28px rgba(0,0,0,0.12);
-        }
+      .oauth-btn-wrapper img {
+        width: 240px;
+        display: block;
+      }
 
-        .oauth-btn-wrapper img {
-            width: 240px;
-            display: block;
-        }
+      /* GitHub ボタン（文字入り） */
+      .github-login-btn {
+        max-width: 240px;
+        margin: 0 auto;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 12px;
+        padding: 0.9rem 1.2rem;
+        background: #24292e;
+        border-radius: 16px;
+        text-decoration: none;
+        color: #ffffff;
+        font-weight: 700;
+        font-size: 1rem;
+        box-shadow: 0 12px 28px rgba(0, 0, 0, 0.08);
+        transition: var(--transition);
+      }
+      .github-login-btn img {
+        height: 26px;
+        width: 26px;
+      }
+      .github-login-btn:hover {
+        filter: brightness(1.1);
+        transform: translateY(-3px);
+      }
 
-        /* GitHub ボタン（文字入り） */
-        .github-login-btn {
-            max-width: 240px;
-            margin: 0 auto;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 12px;
-            padding: 0.9rem 1.2rem;
-            background: #24292e;
-            border-radius: 16px;
-            text-decoration: none;
-            color: #ffffff;
-            font-weight: 700;
-            font-size: 1rem;
-            box-shadow: 0 12px 28px rgba(0,0,0,0.08);
-            transition: var(--transition);
-        }
-        .github-login-btn img {
-            height: 26px;
-            width: 26px;
-        }
-        .github-login-btn:hover {
-            filter: brightness(1.1);
-            transform: translateY(-3px);
-        }
+      .divider {
+        text-align: center;
+        margin: 2rem 0;
+        position: relative;
+      }
+      .divider span {
+        background: var(--white);
+        padding: 0 1rem;
+        color: var(--text-light);
+        font-weight: 600;
+      }
+      .divider::before {
+        content: "";
+        position: absolute;
+        top: 50%;
+        left: 0;
+        right: 0;
+        height: 1px;
+        background: rgba(0, 0, 0, 0.1);
+      }
 
-        .divider {
-            text-align: center;
-            margin: 2rem 0;
-            position: relative;
-        }
-        .divider span {
-            background: var(--white);
-            padding: 0 1rem;
-            color: var(--text-light);
-            font-weight: 600;
-        }
-        .divider::before {
-            content: "";
-            position: absolute;
-            top: 50%; left: 0; right: 0;
-            height: 1px;
-            background: rgba(0,0,0,0.1);
-        }
+      /* パスワードログインのカード */
+      .password-card {
+        background: #f8f9fa;
+        padding: 1.8rem;
+        border-radius: 20px;
+        border: 1px solid rgba(0, 0, 0, 0.08);
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.05);
+        margin-bottom: 1.5rem;
+      }
 
-        /* パスワードログインのカード */
-        .password-card {
-            background: #f8f9fa;
-            padding: 1.8rem;
-            border-radius: 20px;
-            border: 1px solid rgba(0,0,0,0.08);
-            box-shadow: 0 8px 20px rgba(0,0,0,0.05);
-            margin-bottom: 1.5rem;
-        }
+      .form-group {
+        margin-bottom: 1.2rem;
+      }
 
-        .form-group {
-            margin-bottom: 1.2rem;
-        }
+      .form-group label {
+        font-weight: 600;
+        color: var(--dark);
+        margin-bottom: 0.4rem;
+        display: block;
+      }
 
-        .form-group label {
-            font-weight: 600;
-            color: var(--dark);
-            margin-bottom: 0.4rem;
-            display: block;
-        }
+      .form-control {
+        width: 100%;
+        padding: 0.9rem 1rem;
+        border-radius: 12px;
+        border: 1px solid rgba(0, 0, 0, 0.15);
+        background: #ffffff;
+        font-size: 1rem;
+        transition: var(--transition);
+      }
 
-        .form-control {
-            width: 100%;
-            padding: 0.9rem 1rem;
-            border-radius: 12px;
-            border: 1px solid rgba(0,0,0,0.15);
-            background: #ffffff;
-            font-size: 1rem;
-            transition: var(--transition);
-        }
+      .form-control:focus {
+        border-color: var(--primary);
+        box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.15);
+        outline: none;
+      }
 
-        .form-control:focus {
-            border-color: var(--primary);
-            box-shadow: 0 0 0 3px rgba(0,123,255,0.15);
-            outline: none;
-        }
+      .login-btn {
+        width: 100%;
+        padding: 1rem;
+        background: var(--primary);
+        color: var(--white);
+        border: none;
+        border-radius: 14px;
+        font-size: 1.1rem;
+        font-weight: 700;
+        cursor: pointer;
+        transition: var(--transition);
+      }
+      .login-btn:hover {
+        background: var(--primary-light);
+        transform: translateY(-3px);
+      }
 
-        .login-btn {
-            width: 100%;
-            padding: 1rem;
-            background: var(--primary);
-            color: var(--white);
-            border: none;
-            border-radius: 14px;
-            font-size: 1.1rem;
-            font-weight: 700;
-            cursor: pointer;
-            transition: var(--transition);
-        }
-        .login-btn:hover {
-            background: var(--primary-light);
-            transform: translateY(-3px);
-        }
-
-        .login-text {
-            margin-top: 1.5rem;
-            text-align: center;
-            color: var(--text-light);
-        }
-        .login-text a {
-            color: var(--primary);
-            font-weight: 700;
-            text-decoration: none;
-        }
+      .login-text {
+        margin-top: 1.5rem;
+        text-align: center;
+        color: var(--text-light);
+      }
+      .login-text a {
+        color: var(--primary);
+        font-weight: 700;
+        text-decoration: none;
+      }
     </style>
-</head>
+  </head>
 
-<body>
-
+  <body>
     <div class="navbar">
-        <div class="nav-logo" onclick="location.href='/'">ryopc</div>
+      <div class="nav-logo" onclick="location.href = '/'">ryopc</div>
     </div>
 
     <div class="auth-wrapper">
-        <div class="auth-card">
-            <h2>ログイン</h2>
+      <div class="auth-card">
+        <h2>ログイン</h2>
 
-            <div class="oauth-buttons">
+        <div class="oauth-buttons">
+          <!-- Google（SVG） -->
+          <div
+            class="oauth-btn-wrapper"
+            onclick="location.href = 'https://auth.ryopc.f5.si/login'"
+          >
+            <img
+              src="https://developers.google.com/identity/images/branding_guideline_sample_lt_rd_lg.svg"
+              alt="Googleでログイン"
+            />
+          </div>
 
-                <!-- Google（SVG） -->
-                <div class="oauth-btn-wrapper" onclick="location.href='https://auth.ryopc.f5.si/login'">
-                    <img src="https://developers.google.com/identity/images/branding_guideline_sample_lt_rd_lg.svg" alt="Googleでログイン">
-                </div>
+          <!-- GitHub -->
+          <a
+            href="https://auth.ryopc.f5.si/login/github"
+            class="github-login-btn"
+          >
+            <img
+              src="https://res.cloudinary.com/dt0zmgv8k/image/upload/v1779401761/GitHub_Invertocat_Black_oaz8ko.svg"
+            />
+            <span>Sign in with GitHub</span>
+          </a>
 
-                <!-- GitHub -->
-                <a href="https://auth.ryopc.f5.si/login/github" class="github-login-btn">
-                    <img src="https://res.cloudinary.com/dt0zmgv8k/image/upload/v1779401761/GitHub_Invertocat_Black_oaz8ko.svg">
-                    <span>Sign in with GitHub</span>
-                </a>
-
-                <!-- LINE -->
-                <div class="oauth-btn-wrapper" onclick="location.href='https://auth.ryopc.f5.si/login/line'">
-                    <img src="https://res.cloudinary.com/dt0zmgv8k/image/upload/v1779401678/btn_login_base_hjy4gn.png" alt="LINEでログイン">
-                </div>
-
-            </div>
-
-            <div class="divider"><span>ソーシャルアカウントでのログインのみとなっております。</span></div>
-
-            <p class="login-text">
-                アカウントをお持ちでないですか？  
-                <a href="/register/">新規登録はこちら</a>
-            </p>
+          <!-- LINE -->
+          <div
+            class="oauth-btn-wrapper"
+            onclick="location.href = 'https://auth.ryopc.f5.si/login/line'"
+          >
+            <img
+              src="https://res.cloudinary.com/dt0zmgv8k/image/upload/v1779401678/btn_login_base_hjy4gn.png"
+              alt="LINEでログイン"
+            />
+          </div>
         </div>
+
+        <div class="divider">
+          <span>ソーシャルアカウントでのログインのみとなっております。</span>
+        </div>
+
+        <p class="login-text">
+          アカウントをお持ちでないですか？
+          <a href="/register/">新規登録はこちら</a>
+        </p>
+      </div>
     </div>
 
-<script>
-document.addEventListener("DOMContentLoaded", () => {
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        const formEl = document.getElementById("login-form");
+        if (!formEl) {
+          console.error("login-form が見つからない");
+          return;
+        }
 
-    const formEl = document.getElementById("login-form");
-    if (!formEl) {
-        console.error("login-form が見つからない");
-        return;
-    }
+        formEl.addEventListener("submit", async (e) => {
+          e.preventDefault();
 
-    formEl.addEventListener("submit", async (e) => {
-        e.preventDefault();
+          const form = new FormData(e.target);
 
-        const form = new FormData(e.target);
-
-        const res = await fetch("https://auth.ryopc.f5.si/login/password", {
+          const res = await fetch("https://auth.ryopc.f5.si/login/password", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({
-                email: form.get("email"),
-                password: form.get("password")
+              email: form.get("email"),
+              password: form.get("password"),
             }),
-            credentials: "include"
-        });
+            credentials: "include",
+          });
 
-        const json = await res.json();
+          const json = await res.json();
 
-        if (json.success) {
+          if (json.success) {
             window.location.href = "/dashboard/";
-        } else {
+          } else {
             const errorBox = document.getElementById("error-box");
             errorBox.textContent = json.message || "ログインに失敗しました。";
             errorBox.style.display = "block";
-        }
-    });
-
-});
-</script>
-
-</body>
+          }
+        });
+      });
+    </script>
+  </body>
 </html>
