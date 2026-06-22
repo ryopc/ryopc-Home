@@ -18,6 +18,6 @@ jobs:
         with:
           publish: ${{ github.event_name == 'release' }}
           # 👇 この一行を追加すると、設定ファイルにあるラベルをGitHub上に自動で全部作ってくれます！
-          with-labels: true 
+          with-labels: true
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

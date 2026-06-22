@@ -1,691 +1,1026 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover"
+    />
     <title>Terms of Service - ryopc Global Digital Support</title>
-    
-    <!-- 🎨 Global Canonical Favicon Link -->
-    <link rel="icon" type="image/png" href="https://cdn.jsdelivr.net/gh/ryopc/ryopc-Home@main/favicon.png">
-    <link rel="preconnect" href="https://googleapis.com">
-    <link rel="preconnect" href="https://gstatic.com" crossorigin>
-    <link href="https://googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
 
-<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
-<link rel="stylesheet" id="silktide-consent-manager-css" href="https://cdn.jsdelivr.net/gh/silktide/consent-manager@v2.0.0/silktide-consent-manager.css" integrity="sha384-IO1E/jCrQXyH5rwcI0SXP7OXw47JFqQNDQcKhbFvqnL2IunBxxwE2Ne5XyAmCqKs" crossorigin="anonymous">
-<script src="https://cdn.jsdelivr.net/gh/silktide/consent-manager@v2.0.0/silktide-consent-manager.js" integrity="sha384-j4NIMOecmtzMWe9GJADIIe5hTlHG63aiTQ/2XorW10RNyQJg+IU+xwFVDy45wBah" crossorigin="anonymous"></script>
-<script>
-window.silktideConsentManager.init({
-  backdrop: {
-    show: true
-  },
-  icon: {
-    position: "bottomLeft"
-  },
-  prompt: {
-    position: "bottomRight"
-  },
-  consentTypes: [
-    {
-      id: "essential",
-      label: "Essential",
-      description: "<p>These cookies are necessary for the website to function properly and cannot be switched off. They help with things like logging in and setting your privacy preferences.</p>",
-      required: true,
-      onAccept: function() {
-        console.log('Add logic for the required Essential consent type here');
-      }
-    },
-    {
-      id: "analytics",
-      label: "Analytics",
-      description: "<p>These cookies help us improve the site by tracking which pages are most popular and how visitors move around the site.</p>",
-      required: false,
-      onAccept: function() {
-        console.log('Add accept logic for Analytics consent type here');
-      },
-      onReject: function() {
-        console.log('Add reject logic for Analytics consent type here');
-      }
-    },
-    {
-      id: "customer_support",
-      label: "Customer Support",
-      description: "<p>This cookie helps us provide you with the best possible support.</p>",
-      required: false,
-      scripts: [
-        {
-          url: "https://rawcdn.githack.com/ryopc/Archive/fc3acd1142e5108dc5263e4b112a768988cccb4d/Channel-Talk.js",
-          load: "async"
-        }
-      ],
-      onAccept: function() {
-        // Custom script loaded: https://rawcdn.githack.com/ryopc/Archive/fc3acd1142e5108dc5263e4b112a768988cccb4d/Channel-Talk.js
-      }
-    }
-  ],
-  text: {
-    prompt: {
-      description: "<p>This site uses cookies to improve the user experience, provide personalized content, and analyze traffic.</p>",
-      acceptAllButtonText: "Accept all",
-      acceptAllButtonAccessibleLabel: "Accept all cookies",
-      rejectNonEssentialButtonText: "Reject non-essential",
-      rejectNonEssentialButtonAccessibleLabel: "Reject all non-essential cookies",
-      preferencesButtonText: "Preferences",
-      preferencesButtonAccessibleLabel: "Toggle preferences"
-    },
-    preferences: {
-      title: "Customize your cookie preferences",
-      description: "<p>We respect your right to privacy. You can choose not to allow some types of cookies. Your cookie preferences will apply across our website.</p>",
-      saveButtonText: "Save and close",
-      saveButtonAccessibleLabel: "Save your cookie preferences",
-      creditLinkText: "Get this banner for free",
-      creditLinkAccessibleLabel: "Get this banner for free"
-    }
-  }
-});
-</script>
-    
+    <!-- 🎨 Global Canonical Favicon Link -->
+    <link
+      rel="icon"
+      type="image/png"
+      href="https://cdn.jsdelivr.net/gh/ryopc/ryopc-Home@main/favicon.png"
+    />
+    <link rel="preconnect" href="https://googleapis.com" />
+    <link rel="preconnect" href="https://gstatic.com" crossorigin />
+    <link
+      href="https://googleapis.com/css2?family=Inter:wght@400;600;800&display=swap"
+      rel="stylesheet"
+    />
+
+    <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin />
+    <link
+      rel="stylesheet"
+      id="silktide-consent-manager-css"
+      href="https://cdn.jsdelivr.net/gh/silktide/consent-manager@v2.0.0/silktide-consent-manager.css"
+      integrity="sha384-IO1E/jCrQXyH5rwcI0SXP7OXw47JFqQNDQcKhbFvqnL2IunBxxwE2Ne5XyAmCqKs"
+      crossorigin="anonymous"
+    />
+    <script
+      src="https://cdn.jsdelivr.net/gh/silktide/consent-manager@v2.0.0/silktide-consent-manager.js"
+      integrity="sha384-j4NIMOecmtzMWe9GJADIIe5hTlHG63aiTQ/2XorW10RNyQJg+IU+xwFVDy45wBah"
+      crossorigin="anonymous"
+    ></script>
+    <script>
+      window.silktideConsentManager.init({
+        backdrop: {
+          show: true,
+        },
+        icon: {
+          position: "bottomLeft",
+        },
+        prompt: {
+          position: "bottomRight",
+        },
+        consentTypes: [
+          {
+            id: "essential",
+            label: "Essential",
+            description:
+              "<p>These cookies are necessary for the website to function properly and cannot be switched off. They help with things like logging in and setting your privacy preferences.</p>",
+            required: true,
+            onAccept: function () {
+              console.log(
+                "Add logic for the required Essential consent type here",
+              );
+            },
+          },
+          {
+            id: "analytics",
+            label: "Analytics",
+            description:
+              "<p>These cookies help us improve the site by tracking which pages are most popular and how visitors move around the site.</p>",
+            required: false,
+            onAccept: function () {
+              console.log("Add accept logic for Analytics consent type here");
+            },
+            onReject: function () {
+              console.log("Add reject logic for Analytics consent type here");
+            },
+          },
+          {
+            id: "customer_support",
+            label: "Customer Support",
+            description:
+              "<p>This cookie helps us provide you with the best possible support.</p>",
+            required: false,
+            scripts: [
+              {
+                url: "https://rawcdn.githack.com/ryopc/Archive/fc3acd1142e5108dc5263e4b112a768988cccb4d/Channel-Talk.js",
+                load: "async",
+              },
+            ],
+            onAccept: function () {
+              // Custom script loaded: https://rawcdn.githack.com/ryopc/Archive/fc3acd1142e5108dc5263e4b112a768988cccb4d/Channel-Talk.js
+            },
+          },
+        ],
+        text: {
+          prompt: {
+            description:
+              "<p>This site uses cookies to improve the user experience, provide personalized content, and analyze traffic.</p>",
+            acceptAllButtonText: "Accept all",
+            acceptAllButtonAccessibleLabel: "Accept all cookies",
+            rejectNonEssentialButtonText: "Reject non-essential",
+            rejectNonEssentialButtonAccessibleLabel:
+              "Reject all non-essential cookies",
+            preferencesButtonText: "Preferences",
+            preferencesButtonAccessibleLabel: "Toggle preferences",
+          },
+          preferences: {
+            title: "Customize your cookie preferences",
+            description:
+              "<p>We respect your right to privacy. You can choose not to allow some types of cookies. Your cookie preferences will apply across our website.</p>",
+            saveButtonText: "Save and close",
+            saveButtonAccessibleLabel: "Save your cookie preferences",
+            creditLinkText: "Get this banner for free",
+            creditLinkAccessibleLabel: "Get this banner for free",
+          },
+        },
+      });
+    </script>
+
     <style>
-        :root {
-            --primary: #0052cc;      /* Tech Blue */
-            --dark: #0a192f;         /* Cyber Dark Navy */
-            --accent: #00bfff;       /* Cyber Aqua Blue */
-            --bg: #f8fafc;           /* Clean Gray Base */
-            --text: #334155;
-            /* 共通変数も追加定義 */
-            --primary-light: #0764f1; --dark-light: #172a45; --text-light: #94a3b8; --white: #ffffff;
-            --glass: rgba(13, 29, 52, 0.9); --transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
-            --gradient-accent: linear-gradient(135deg, #00bfff, #0052cc);
-        }
-        html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
-        body {
-            font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
-            margin: 0; padding: 0; background-color: var(--bg); color: var(--text); line-height: 1.7;
-            -webkit-font-smoothing: antialiased;
-        }
-        #scroll-progress { position: fixed; top: 0; left: 0; width: 0%; height: 4px; background: var(--gradient-accent); z-index: 1000001; }
-        .navbar { position: fixed; top: 0; left: 0; width: 100%; background: var(--glass); backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px); display: flex; justify-content: space-between; align-items: center; padding: 1rem 2.5rem; z-index: 100000; border-bottom: 1px solid rgba(255, 255, 255, 0.1); box-sizing: border-box; }
-        .nav-logo { color: var(--white); font-weight: 800; font-size: 1.2rem; text-decoration: none; }
+      :root {
+        --primary: #0052cc; /* Tech Blue */
+        --dark: #0a192f; /* Cyber Dark Navy */
+        --accent: #00bfff; /* Cyber Aqua Blue */
+        --bg: #f8fafc; /* Clean Gray Base */
+        --text: #334155;
+        /* 共通変数も追加定義 */
+        --primary-light: #0764f1;
+        --dark-light: #172a45;
+        --text-light: #94a3b8;
+        --white: #ffffff;
+        --glass: rgba(13, 29, 52, 0.9);
+        --transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+        --gradient-accent: linear-gradient(135deg, #00bfff, #0052cc);
+      }
+      html {
+        scroll-behavior: smooth;
+        -webkit-text-size-adjust: 100%;
+      }
+      body {
+        font-family: "Inter", "Segoe UI", system-ui, sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: var(--bg);
+        color: var(--text);
+        line-height: 1.7;
+        -webkit-font-smoothing: antialiased;
+      }
+      #scroll-progress {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 0%;
+        height: 4px;
+        background: var(--gradient-accent);
+        z-index: 1000001;
+      }
+      .navbar {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        background: var(--glass);
+        backdrop-filter: blur(15px);
+        -webkit-backdrop-filter: blur(15px);
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 1rem 2.5rem;
+        z-index: 100000;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        box-sizing: border-box;
+      }
+      .nav-logo {
+        color: var(--white);
+        font-weight: 800;
+        font-size: 1.2rem;
+        text-decoration: none;
+      }
+      header {
+        background: linear-gradient(135deg, var(--dark) 0%, #172a45 100%);
+        color: white;
+        padding: 12rem 1.2rem 11rem;
+        text-align: center;
+        border-bottom: 4px solid var(--accent);
+      }
+      header h1 {
+        margin: 0;
+        font-size: 2.5rem;
+        font-weight: 800;
+        letter-spacing: -1px;
+        background: linear-gradient(to right, #ffffff, var(--accent));
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        word-wrap: break-word;
+      }
+      header p {
+        font-size: 1.05rem;
+        max-width: 600px;
+        margin: 1.2rem auto 0 auto;
+        color: #94a3b8;
+      }
+      .container {
+        max-width: 850px;
+        margin: -5rem auto 6rem;
+        padding: 0 1.2rem;
+        position: relative;
+        z-index: 10;
+      }
+      .docs-section {
+        background: white;
+        padding: 2rem;
+        border-radius: 16px;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.03);
+        margin-bottom: 2rem;
+        border: 1px solid #e2e8f0;
+        text-align: left;
+        transition: all 0.2s ease;
+      }
+      h2 {
+        color: var(--dark);
+        font-size: 1.5rem;
+        margin-top: 0;
+        border-bottom: 2px solid #e2e8f0;
+        padding-bottom: 0.5rem;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+      }
+      h2::before {
+        content: "🔷";
+        color: var(--accent);
+        font-size: 1.1rem;
+      }
+      h3 {
+        color: var(--primary);
+        font-size: 1.15rem;
+        margin-top: 1.5rem;
+        margin-bottom: 0.5rem;
+      }
+      p,
+      ul {
+        font-size: 1rem;
+        color: #475569;
+      }
+      ul {
+        padding-left: 1.2rem;
+      }
+      li {
+        margin-bottom: 0.5rem;
+      }
+
+      .back-button {
+        display: inline-block;
+        background: #1e293b;
+        color: #94a3b8 !important;
+        text-decoration: none;
+        padding: 0.6rem 1.2rem;
+        border-radius: 8px;
+        font-weight: 600;
+        font-size: 0.9rem;
+        margin-top: 1.5rem;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        transition: all 0.2s ease;
+      }
+      footer {
+        background-color: var(--dark);
+        color: #94a3b8;
+        padding: 4rem 1.2rem;
+        text-align: center;
+        font-size: 0.9rem;
+      }
+
+      @media (hover: hover) and (pointer: fine) {
         header {
-            background: linear-gradient(135deg, var(--dark) 0%, #172a45 100%);
-            color: white; padding: 12rem 1.2rem 11rem; text-align: center; border-bottom: 4px solid var(--accent);
+          padding: 13rem 1rem 11rem;
         }
         header h1 {
-            margin: 0; font-size: 2.5rem; font-weight: 800; letter-spacing: -1px;
-            background: linear-gradient(to right, #ffffff, var(--accent));
-            -webkit-background-clip: text; -webkit-text-fill-color: transparent; word-wrap: break-word;
+          font-size: 3rem;
         }
-        header p { font-size: 1.05rem; max-width: 600px; margin: 1.2rem auto 0 auto; color: #94a3b8; }
-        .container { max-width: 850px; margin: -5rem auto 6rem; padding: 0 1.2rem; position: relative; z-index: 10; }
-        .docs-section {
-            background: white; padding: 2rem; border-radius: 16px; box-shadow: 0 4px 20px rgba(0, 0, 0, 0.03);
-            margin-bottom: 2rem; border: 1px solid #e2e8f0; text-align: left; transition: all 0.2s ease;
+        .docs-section:hover {
+          border-color: var(--accent);
+          box-shadow: 0 15px 30px rgba(0, 82, 204, 0.08);
+        }
+        .back-button:hover {
+          background: #334155;
+          color: white !important;
+          transform: translateX(-2px);
         }
         h2 {
-            color: var(--dark); font-size: 1.5rem; margin-top: 0; border-bottom: 2px solid #e2e8f0;
-            padding-bottom: 0.5rem; display: flex; align-items: center; gap: 0.5rem;
+          font-size: 1.7rem;
         }
-        h2::before { content: "🔷"; color: var(--accent); font-size: 1.1rem; }
-        h3 { color: var(--primary); font-size: 1.15rem; margin-top: 1.5rem; margin-bottom: 0.5rem; }
-        p, ul { font-size: 1rem; color: #475569; }
-        ul { padding-left: 1.2rem; } li { margin-bottom: 0.5rem; }
-        
-        .back-button {
-            display: inline-block;
-            background: #1e293b;
-            color: #94a3b8 !important;
-            text-decoration: none;
-            padding: 0.6rem 1.2rem;
-            border-radius: 8px;
-            font-weight: 600;
-            font-size: 0.9rem;
-            margin-top: 1.5rem;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            transition: all 0.2s ease;
+      }
+      @media (hover: none) {
+        header h1 {
+          font-size: calc(1.8rem + 2vw);
         }
-        footer { background-color: var(--dark); color: #94a3b8; padding: 4rem 1.2rem; text-align: center; font-size: 0.9rem; }
-        
-        @media (hover: hover) and (pointer: fine) {
-            header { padding: 13rem 1rem 11rem; } header h1 { font-size: 3rem; }
-            .docs-section:hover { border-color: var(--accent); box-shadow: 0 15px 30px rgba(0, 82, 204, 0.08); }
-            .back-button:hover { background: #334155; color: white !important; transform: translateX(-2px); }
-            h2 { font-size: 1.7rem; }
-        }
-        @media (hover: none) { header h1 { font-size: calc(1.8rem + 2vw); } }
+      }
 
-        /* --- 以下、削除を行わずに追加した各パーツの仕上げ用CSSスタイル --- */
-        .lang-selector {
-            background: rgba(255, 255, 255, 0.1);
-            color: var(--white);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            padding: 0.5rem 1rem;
-            border-radius: 20px;
-            font-size: 0.9rem;
-            cursor: pointer;
-            outline: none;
-            transition: var(--transition);
+      /* --- 以下、削除を行わずに追加した各パーツの仕上げ用CSSスタイル --- */
+      .lang-selector {
+        background: rgba(255, 255, 255, 0.1);
+        color: var(--white);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        padding: 0.5rem 1rem;
+        border-radius: 20px;
+        font-size: 0.9rem;
+        cursor: pointer;
+        outline: none;
+        transition: var(--transition);
+      }
+      .lang-selector option {
+        background: var(--dark-light);
+        color: var(--white);
+      }
+      .lang-selector:hover {
+        background: rgba(255, 255, 255, 0.2);
+        border-color: var(--accent);
+      }
+      .menu-toggle {
+        display: none;
+        flex-direction: column;
+        gap: 6px;
+        background: none;
+        border: none;
+        cursor: pointer;
+        padding: 4px;
+        z-index: 100002;
+      }
+      .menu-toggle span {
+        display: block;
+        width: 25px;
+        height: 2px;
+        background-color: var(--white);
+        transition: var(--transition);
+        border-radius: 2px;
+      }
+      .nav-links {
+        display: flex;
+        list-style: none;
+        gap: 2rem;
+        margin: 0;
+        padding: 0;
+        transition: var(--transition);
+      }
+      .nav-links a {
+        color: var(--text-light);
+        text-decoration: none;
+        font-weight: 600;
+        font-size: 0.95rem;
+        transition: var(--transition);
+      }
+      .nav-links a:hover {
+        color: var(--white);
+      }
+      .ch-cookie-banner {
+        position: fixed;
+        bottom: 2rem;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 90%;
+        max-width: 600px;
+        background: var(--dark-light);
+        border: 1px solid rgba(255, 255, 255, 0.15);
+        border-radius: 24px;
+        padding: 1.5rem;
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+        z-index: 1000000;
+        display: flex;
+        flex-direction: column;
+        gap: 1.25rem;
+        transition:
+          opacity 0.5s ease,
+          transform 0.5s ease;
+      }
+      .ch-cookie-banner.ch-hidden {
+        opacity: 0;
+        transform: translate(-50%, 30px);
+        pointer-events: none;
+      }
+      .ch-cookie-text {
+        color: var(--white);
+        font-size: 0.95rem;
+        line-height: 1.6;
+      }
+      .ch-cookie-buttons {
+        display: flex;
+        gap: 1rem;
+        justify-content: flex-end;
+      }
+      .ch-cookie-btn {
+        padding: 0.75rem 1.5rem;
+        border-radius: 12px;
+        font-weight: 600;
+        font-size: 0.9rem;
+        cursor: pointer;
+        transition: var(--transition);
+        border: none;
+      }
+      .ch-btn-deny {
+        background: rgba(255, 255, 255, 0.1);
+        color: var(--white);
+      }
+      .ch-btn-deny:hover {
+        background: rgba(255, 255, 255, 0.2);
+      }
+      .ch-btn-accept {
+        background: var(--primary);
+        color: var(--white);
+      }
+      .ch-btn-accept:hover {
+        background: var(--primary-light);
+        box-shadow: 0 0 15px rgba(0, 82, 204, 0.4);
+      }
+      #special-mobile-chat-container {
+        position: fixed;
+        bottom: 1.5rem;
+        right: 1.5rem;
+        z-index: 99999;
+        display: none;
+      }
+      #special-mobile-chat-btn {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        background: var(--gradient-accent);
+        color: var(--white);
+        border: none;
+        padding: 0.8rem 1.5rem;
+        border-radius: 30px;
+        font-weight: 800;
+        font-size: 0.95rem;
+        box-shadow: 0 10px 25px rgba(0, 191, 255, 0.3);
+        cursor: pointer;
+        transition: var(--transition);
+      }
+      #special-mobile-chat-btn:hover {
+        transform: scale(1.05);
+        box-shadow: 0 12px 30px rgba(0, 191, 255, 0.4);
+      }
+      #special-mobile-close-btn {
+        position: absolute;
+        top: -8px;
+        right: -8px;
+        background: var(--white);
+        color: var(--dark);
+        width: 22px;
+        height: 22px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 14px;
+        font-weight: bold;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+        cursor: pointer;
+        border: 1px solid rgba(0, 0, 0, 0.05);
+      }
+      .status-badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        background: rgba(255, 255, 255, 0.05);
+        padding: 0.5rem 1.2rem;
+        border-radius: 30px;
+        font-size: 0.85rem;
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        color: var(--text-light);
+      }
+      .status-dot {
+        width: 8px;
+        height: 8px;
+        background-color: #2ec4b6;
+        border-radius: 50%;
+        box-shadow: 0 0 8px #2ec4b6;
+        animation: pulse 2s infinite;
+      }
+      @keyframes pulse {
+        0% {
+          transform: scale(0.95);
+          opacity: 0.5;
         }
-        .lang-selector option {
-            background: var(--dark-light);
-            color: var(--white);
+        50% {
+          transform: scale(1.1);
+          opacity: 1;
         }
-        .lang-selector:hover {
-            background: rgba(255, 255, 255, 0.2);
-            border-color: var(--accent);
+        100% {
+          transform: scale(0.95);
+          opacity: 0.5;
+        }
+      }
+      @media (max-width: 768px) {
+        .navbar {
+          padding: 1rem 1.5rem;
         }
         .menu-toggle {
-            display: none;
-            flex-direction: column;
-            gap: 6px;
-            background: none;
-            border: none;
-            cursor: pointer;
-            padding: 4px;
-            z-index: 100002;
-        }
-        .menu-toggle span {
-            display: block;
-            width: 25px;
-            height: 2px;
-            background-color: var(--white);
-            transition: var(--transition);
-            border-radius: 2px;
+          display: flex;
         }
         .nav-links {
-            display: flex;
-            list-style: none;
-            gap: 2rem;
-            margin: 0;
-            padding: 0;
-            transition: var(--transition);
+          position: fixed;
+          top: 70px;
+          right: -100%;
+          width: 250px;
+          height: calc(100vh - 70px);
+          background: var(--glass);
+          backdrop-filter: blur(25px);
+          -webkit-backdrop-filter: blur(25px);
+          flex-direction: column;
+          padding: 3rem 2rem;
+          gap: 2rem;
+          border-left: 1px solid rgba(255, 255, 255, 0.1);
         }
-        .nav-links a {
-            color: var(--text-light);
-            text-decoration: none;
-            font-weight: 600;
-            font-size: 0.95rem;
-            transition: var(--transition);
+        .nav-links.active {
+          right: 0;
         }
-        .nav-links a:hover {
-            color: var(--white);
-        }
-        .ch-cookie-banner {
-            position: fixed;
-            bottom: 2rem;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 90%;
-            max-width: 600px;
-            background: var(--dark-light);
-            border: 1px solid rgba(255, 255, 255, 0.15);
-            border-radius: 24px;
-            padding: 1.5rem;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
-            z-index: 1000000;
-            display: flex;
-            flex-direction: column;
-            gap: 1.25rem;
-            transition: opacity 0.5s ease, transform 0.5s ease;
-        }
-        .ch-cookie-banner.ch-hidden {
-            opacity: 0;
-            transform: translate(-50%, 30px);
-            pointer-events: none;
-        }
-        .ch-cookie-text {
-            color: var(--white);
-            font-size: 0.95rem;
-            line-height: 1.6;
-        }
-        .ch-cookie-buttons {
-            display: flex;
-            gap: 1rem;
-            justify-content: flex-end;
-        }
-        .ch-cookie-btn {
-            padding: 0.75rem 1.5rem;
-            border-radius: 12px;
-            font-weight: 600;
-            font-size: 0.9rem;
-            cursor: pointer;
-            transition: var(--transition);
-            border: none;
-        }
-        .ch-btn-deny {
-            background: rgba(255, 255, 255, 0.1);
-            color: var(--white);
-        }
-        .ch-btn-deny:hover {
-            background: rgba(255, 255, 255, 0.2);
-        }
-        .ch-btn-accept {
-            background: var(--primary);
-            color: var(--white);
-        }
-        .ch-btn-accept:hover {
-            background: var(--primary-light);
-            box-shadow: 0 0 15px rgba(0, 82, 204, 0.4);
-        }
-        #special-mobile-chat-container {
-            position: fixed;
-            bottom: 1.5rem;
-            right: 1.5rem;
-            z-index: 99999;
-            display: none;
-        }
-        #special-mobile-chat-btn {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            background: var(--gradient-accent);
-            color: var(--white);
-            border: none;
-            padding: 0.8rem 1.5rem;
-            border-radius: 30px;
-            font-weight: 800;
-            font-size: 0.95rem;
-            box-shadow: 0 10px 25px rgba(0, 191, 255, 0.3);
-            cursor: pointer;
-            transition: var(--transition);
-        }
-        #special-mobile-chat-btn:hover {
-            transform: scale(1.05);
-            box-shadow: 0 12px 30px rgba(0, 191, 255, 0.4);
-        }
-        #special-mobile-close-btn {
-            position: absolute;
-            top: -8px;
-            right: -8px;
-            background: var(--white);
-            color: var(--dark);
-            width: 22px;
-            height: 22px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 14px;
-            font-weight: bold;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.15);
-            cursor: pointer;
-            border: 1px solid rgba(0,0,0,0.05);
-        }
-        .status-badge {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            background: rgba(255, 255, 255, 0.05);
-            padding: 0.5rem 1.2rem;
-            border-radius: 30px;
-            font-size: 0.85rem;
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            color: var(--text-light);
-        }
-        .status-dot {
-            width: 8px;
-            height: 8px;
-            background-color: #2ec4b6;
-            border-radius: 50%;
-            box-shadow: 0 0 8px #2ec4b6;
-            animation: pulse 2s infinite;
-        }
-        @keyframes pulse {
-            0% { transform: scale(0.95); opacity: 0.5; }
-            50% { transform: scale(1.1); opacity: 1; }
-            100% { transform: scale(0.95); opacity: 0.5; }
-        }
-        @media (max-width: 768px) {
-            .navbar { padding: 1rem 1.5rem; }
-            .menu-toggle { display: flex; }
-            .nav-links {
-                position: fixed;
-                top: 70px;
-                right: -100%;
-                width: 250px;
-                height: calc(100vh - 70px);
-                background: var(--glass);
-                backdrop-filter: blur(25px);
-                -webkit-backdrop-filter: blur(25px);
-                flex-direction: column;
-                padding: 3rem 2rem;
-                gap: 2rem;
-                border-left: 1px solid rgba(255, 255, 255, 0.1);
-            }
-            .nav-links.active { right: 0; }
-        }
+      }
     </style>
-</head>
-<body>
-
+  </head>
+  <body>
     <div id="scroll-progress"></div>
 
     <nav class="navbar">
-        <a href="../" class="nav-logo">ryopc org</a>
-        
-        <div class="nav-right" style="display: flex; align-items: center; gap: 1rem;">
-            <select class="lang-selector" id="langSelector" onchange="changeLanguage(this.value)">
-                <option value="ja">日本語</option>
-                <option value="en">English</option>
-                <option value="pt">Português</option>
-            </select>
+      <a href="../" class="nav-logo">ryopc org</a>
 
-            <button class="menu-toggle" id="menuToggle">
-                <span></span><span></span><span></span>
-            </button>
+      <div
+        class="nav-right"
+        style="display: flex; align-items: center; gap: 1rem"
+      >
+        <select
+          class="lang-selector"
+          id="langSelector"
+          onchange="changeLanguage(this.value)"
+        >
+          <option value="ja">日本語</option>
+          <option value="en">English</option>
+          <option value="pt">Português</option>
+        </select>
 
-            <ul class="nav-links" id="navLinks">
-                <li><a href="../" data-t="nav_home">ホーム</a></li>
-                <li><a href="../#mission" data-t="nav_mission">ミッション</a></li>
-                <li><a href="../#services" data-t="nav_services">サービス</a></li>
-                <li><a href="/blog" data-t="nav_note">note</a></li>
-                <li><a href="/docs" data-t="nav_docs">ドキュメント</a></li>
-            </ul>
-        </div>
+        <button class="menu-toggle" id="menuToggle">
+          <span></span><span></span><span></span>
+        </button>
+
+        <ul class="nav-links" id="navLinks">
+          <li><a href="../" data-t="nav_home">ホーム</a></li>
+          <li><a href="../#mission" data-t="nav_mission">ミッション</a></li>
+          <li><a href="../#services" data-t="nav_services">サービス</a></li>
+          <li><a href="/blog" data-t="nav_note">note</a></li>
+          <li><a href="/docs" data-t="nav_docs">ドキュメント</a></li>
+        </ul>
+      </div>
     </nav>
 
     <header>
-        <h1 data-t="tos_header_title">Terms of Service</h1>
-        <p data-t="tos_header_desc">ryopc Global Initiative - Official User Agreement</p>
+      <h1 data-t="tos_header_title">Terms of Service</h1>
+      <p data-t="tos_header_desc">
+        ryopc Global Initiative - Official User Agreement
+      </p>
     </header>
 
     <div class="container">
-        <div class="docs-section">
-            <h2 data-t="tos_section_title">Terms of Service (利用規約)</h2>
-            
-            <h3 data-t="tos_art1_title">Article 1 (General Provisions & Mission Statement)</h3>
-            <p data-t="tos_art1_p1">1. These Terms of Service define the terms and conditions for using the PC support services (hereinafter referred to as the "Service") provided online by the ryopc Volunteer Group (hereinafter referred to as "the Group").</p>
-            <p data-t="tos_art1_p2">2. The Group is a non-profit volunteer initiative aimed at bridging the digital divide and ensuring safe PC utilization. Services are provided exclusively to users (hereinafter referred to as "Users") who fully agree to these Terms.</p>
-            <p data-t="tos_art1_p3">3. Users are deemed to have fully agreed to all provisions of these Terms upon registering an account or submitting a technical support request.</p>
+      <div class="docs-section">
+        <h2 data-t="tos_section_title">Terms of Service (利用規約)</h2>
 
-            <h3 data-t="tos_art2_title">Article 2 (Strict Non-Profit & 100% Free Policy)</h3>
-            <p data-t="tos_art2_p1">1. This service will not forcibly collect any money under any circumstances or pretexts, including as compensation or gratuities. (Voluntary donations will be accepted at the user's discretion.)</p>
-            <p data-t="tos_art2_p2">2. No third-party advertisements will be displayed within the Group's communication channels, platforms, or sent emails.</p>
-            <p data-t="tos_art2_p3">3. Staff members are strictly prohibited from soliciting, coercing, or advising Users to purchase specific products or subscribe to paid external contracts.</p>
+        <h3 data-t="tos_art1_title">
+          Article 1 (General Provisions & Mission Statement)
+        </h3>
+        <p data-t="tos_art1_p1">
+          1. These Terms of Service define the terms and conditions for using
+          the PC support services (hereinafter referred to as the "Service")
+          provided online by the ryopc Volunteer Group (hereinafter referred to
+          as "the Group").
+        </p>
+        <p data-t="tos_art1_p2">
+          2. The Group is a non-profit volunteer initiative aimed at bridging
+          the digital divide and ensuring safe PC utilization. Services are
+          provided exclusively to users (hereinafter referred to as "Users") who
+          fully agree to these Terms.
+        </p>
+        <p data-t="tos_art1_p3">
+          3. Users are deemed to have fully agreed to all provisions of these
+          Terms upon registering an account or submitting a technical support
+          request.
+        </p>
 
-            <h3 data-t="tos_art3_title">Article 3 (Scope of Support & Delivery Methods)</h3>
-            <p data-t="tos_art3_p1">1. Technical assistance is conducted entirely online via live chat networks, email correspondence, or remote desktop infrastructure (screen sharing and remote operation). In-person or on-site support is strictly unavailable.</p>
-            <p data-t="tos_art3_p2">2. Initiating a remote desktop interaction requires explicit, mandatory verbal or text chat consent from the User immediately before the session begins.</p>
-            <p data-t="tos_art3_p3">3. Users acknowledge that the Service does not guarantee an absolute resolution; support is provided as advisory guidance and altruistic cooperation within the scope of our volunteer staff's knowledge base.</p>
+        <h3 data-t="tos_art2_title">
+          Article 2 (Strict Non-Profit & 100% Free Policy)
+        </h3>
+        <p data-t="tos_art2_p1">
+          1. This service will not forcibly collect any money under any
+          circumstances or pretexts, including as compensation or gratuities.
+          (Voluntary donations will be accepted at the user's discretion.)
+        </p>
+        <p data-t="tos_art2_p2">
+          2. No third-party advertisements will be displayed within the Group's
+          communication channels, platforms, or sent emails.
+        </p>
+        <p data-t="tos_art2_p3">
+          3. Staff members are strictly prohibited from soliciting, coercing, or
+          advising Users to purchase specific products or subscribe to paid
+          external contracts.
+        </p>
 
-            <h3 data-t="tos_art4_title">Article 4 (User Obligations & Mandatory Data Backup)</h3>
-            <p data-t="tos_art4_p1">1. Users must securely backup all critical machine parameters, configuration profiles, and data files (photographs, documents, configurations, etc.) to external hardware media or cloud architectures at their own risk prior to interacting with our support infrastructure.</p>
-            <p data-t="tos_art4_p2">2. The Group holds zero liability for database corruption, files loss, or subsequent software anomalies that occur during assistance windows if the user omitted proper backup operations.</p>
+        <h3 data-t="tos_art3_title">
+          Article 3 (Scope of Support & Delivery Methods)
+        </h3>
+        <p data-t="tos_art3_p1">
+          1. Technical assistance is conducted entirely online via live chat
+          networks, email correspondence, or remote desktop infrastructure
+          (screen sharing and remote operation). In-person or on-site support is
+          strictly unavailable.
+        </p>
+        <p data-t="tos_art3_p2">
+          2. Initiating a remote desktop interaction requires explicit,
+          mandatory verbal or text chat consent from the User immediately before
+          the session begins.
+        </p>
+        <p data-t="tos_art3_p3">
+          3. Users acknowledge that the Service does not guarantee an absolute
+          resolution; support is provided as advisory guidance and altruistic
+          cooperation within the scope of our volunteer staff's knowledge base.
+        </p>
 
-            <h3 data-t="tos_art5_title">Article 5 (Prohibited Activities & Account Termination)</h3>
-            <p data-t="tos_art5_desc">The Group reserves the absolute right to suspend system access and delete User credentials without prior warning if a User executes any of the following infractions:</p>
-            <ul>
-                <li data-t="tos_art5_li1">Defamatory language, hostile interactions, sexual harassment, or disruptive operations targeting volunteer staff members.</li>
-                <li data-t="tos_art5_li2">Attempts to maliciously intercept, extract, or expose internal passwords or personal identification datasets.</li>
-                <li data-t="tos_art5_li3">Impersonating the official name or insignia of the Group to inflict harm or deception on third parties.</li>
-                <li data-t="tos_art5_li4">Flooding communication nodes with spam protocols, excessive repetitive ticket logging, or automated scripts.</li>
-            </ul>
+        <h3 data-t="tos_art4_title">
+          Article 4 (User Obligations & Mandatory Data Backup)
+        </h3>
+        <p data-t="tos_art4_p1">
+          1. Users must securely backup all critical machine parameters,
+          configuration profiles, and data files (photographs, documents,
+          configurations, etc.) to external hardware media or cloud
+          architectures at their own risk prior to interacting with our support
+          infrastructure.
+        </p>
+        <p data-t="tos_art4_p2">
+          2. The Group holds zero liability for database corruption, files loss,
+          or subsequent software anomalies that occur during assistance windows
+          if the user omitted proper backup operations.
+        </p>
 
-            <h3 data-t="tos_art6_title">Article 6 (Disclaimers & Limitation of Volunteer Liability)</h3>
-            <p data-t="tos_art6_p1">1. The Group and its volunteer staff shall not be liable for any direct, indirect, incidental, or special damages (including systemic device breakdowns, business operational interruptions, or profile corruptions) arising from the use or inability to use this Service, unless caused by intentional malice or gross negligence.</p>
-            <p data-t="tos_art6_p2">2. We disclaim all liabilities for sudden service disconnects or data anomalies resulting from infrastructure-level vulnerability, host latency, or outages caused by our zero-cost web hosting providers (InfinityFree).</p>
-            <p data-t="tos_art6_p3">3. Users accept full sovereign responsibility for any system inconsistencies, software registration mismatches, or system faults arising from OS re-installations or deep configuration adjustments required during the technical troubleshooting process.</p>
+        <h3 data-t="tos_art5_title">
+          Article 5 (Prohibited Activities & Account Termination)
+        </h3>
+        <p data-t="tos_art5_desc">
+          The Group reserves the absolute right to suspend system access and
+          delete User credentials without prior warning if a User executes any
+          of the following infractions:
+        </p>
+        <ul>
+          <li data-t="tos_art5_li1">
+            Defamatory language, hostile interactions, sexual harassment, or
+            disruptive operations targeting volunteer staff members.
+          </li>
+          <li data-t="tos_art5_li2">
+            Attempts to maliciously intercept, extract, or expose internal
+            passwords or personal identification datasets.
+          </li>
+          <li data-t="tos_art5_li3">
+            Impersonating the official name or insignia of the Group to inflict
+            harm or deception on third parties.
+          </li>
+          <li data-t="tos_art5_li4">
+            Flooding communication nodes with spam protocols, excessive
+            repetitive ticket logging, or automated scripts.
+          </li>
+        </ul>
 
-            <h3 data-t="tos_art7_title">Article 7 (Staff Compliance Governance & Whistleblower Protections)</h3>
-            <p data-t="tos_art7_p1">1. All onboarded volunteer staff are legally and structurally mandated to enforce rigorous user privacy protections and are strictly prohibited from ever demanding or logging User account passwords.</p>
-            <p data-t="tos_art7_p2">2. If a User suspects non-compliant behavior, unethical conduct, or policy violations by a staff member, they are encouraged to submit an instant flag via the dedicated "Staff Review Report" input module.</p>
-            <p data-t="tos_art7_p3">3. The administrative team evaluates all logged reports from a neutral standing. Verified infractions result in immediate revocation of server credentials, full expulsion, and permanent blacklisting from the Group.</p>
+        <h3 data-t="tos_art6_title">
+          Article 6 (Disclaimers & Limitation of Volunteer Liability)
+        </h3>
+        <p data-t="tos_art6_p1">
+          1. The Group and its volunteer staff shall not be liable for any
+          direct, indirect, incidental, or special damages (including systemic
+          device breakdowns, business operational interruptions, or profile
+          corruptions) arising from the use or inability to use this Service,
+          unless caused by intentional malice or gross negligence.
+        </p>
+        <p data-t="tos_art6_p2">
+          2. We disclaim all liabilities for sudden service disconnects or data
+          anomalies resulting from infrastructure-level vulnerability, host
+          latency, or outages caused by our zero-cost web hosting providers
+          (InfinityFree).
+        </p>
+        <p data-t="tos_art6_p3">
+          3. Users accept full sovereign responsibility for any system
+          inconsistencies, software registration mismatches, or system faults
+          arising from OS re-installations or deep configuration adjustments
+          required during the technical troubleshooting process.
+        </p>
 
-            <h3 data-t="tos_art8_title">Article 8 (Amendments to the Terms)</h3>
-            <p data-t="tos_art8_desc">The Group reserves the right to modify or restructure these Terms without seeking prior User confirmation to align with evolving digital landscapes. Revisions apply globally and instantaneously across all access nodes upon public web deployment.</p>
+        <h3 data-t="tos_art7_title">
+          Article 7 (Staff Compliance Governance & Whistleblower Protections)
+        </h3>
+        <p data-t="tos_art7_p1">
+          1. All onboarded volunteer staff are legally and structurally mandated
+          to enforce rigorous user privacy protections and are strictly
+          prohibited from ever demanding or logging User account passwords.
+        </p>
+        <p data-t="tos_art7_p2">
+          2. If a User suspects non-compliant behavior, unethical conduct, or
+          policy violations by a staff member, they are encouraged to submit an
+          instant flag via the dedicated "Staff Review Report" input module.
+        </p>
+        <p data-t="tos_art7_p3">
+          3. The administrative team evaluates all logged reports from a neutral
+          standing. Verified infractions result in immediate revocation of
+          server credentials, full expulsion, and permanent blacklisting from
+          the Group.
+        </p>
 
-            <h3 data-t="tos_art9_title">Article 9 (Credential Security & Open Authentication)</h3>
-            <p data-t="tos_art9_desc">Users leveraging external Open Authentication methods (Google, GitHub, LINE OAuth, etc.) to access the Service explicitly agree to the following protocols:</p>
-            <ul>
-                <li data-t="tos_art9_li1">The security and management of external account credentials remain the exclusive responsibility of the User; the Group is not liable for data breaches caused by local credential mismanagement.</li>
-                <li data-t="tos_art9_li2">The Group holds no liability for service access issues stemming from maintenance windows, structural API changes, or server out-ages on third-party authentication platforms.</li>
-                <li data-t="tos_art9_li3">Our technical environment handles only the minimum cryptographic tokens required for authentication; we never capture, record, or retain your raw third-party passwords.</li>
-                <li data-t="tos_art9_li4">Users accept that deletion, restriction, or suspension of their primary third-party account may automatically invalidate their access to ryopc system records.</li>
-            </ul>
-            
-            <a href="../" class="back-button" data-t="tos_back_btn">⬅ Return to Document Hub</a>
-        </div>
+        <h3 data-t="tos_art8_title">Article 8 (Amendments to the Terms)</h3>
+        <p data-t="tos_art8_desc">
+          The Group reserves the right to modify or restructure these Terms
+          without seeking prior User confirmation to align with evolving digital
+          landscapes. Revisions apply globally and instantaneously across all
+          access nodes upon public web deployment.
+        </p>
+
+        <h3 data-t="tos_art9_title">
+          Article 9 (Credential Security & Open Authentication)
+        </h3>
+        <p data-t="tos_art9_desc">
+          Users leveraging external Open Authentication methods (Google, GitHub,
+          LINE OAuth, etc.) to access the Service explicitly agree to the
+          following protocols:
+        </p>
+        <ul>
+          <li data-t="tos_art9_li1">
+            The security and management of external account credentials remain
+            the exclusive responsibility of the User; the Group is not liable
+            for data breaches caused by local credential mismanagement.
+          </li>
+          <li data-t="tos_art9_li2">
+            The Group holds no liability for service access issues stemming from
+            maintenance windows, structural API changes, or server out-ages on
+            third-party authentication platforms.
+          </li>
+          <li data-t="tos_art9_li3">
+            Our technical environment handles only the minimum cryptographic
+            tokens required for authentication; we never capture, record, or
+            retain your raw third-party passwords.
+          </li>
+          <li data-t="tos_art9_li4">
+            Users accept that deletion, restriction, or suspension of their
+            primary third-party account may automatically invalidate their
+            access to ryopc system records.
+          </li>
+        </ul>
+
+        <a href="../" class="back-button" data-t="tos_back_btn"
+          >⬅ Return to Document Hub</a
+        >
+      </div>
     </div>
 
     <div id="chCookieBanner" class="ch-cookie-banner ch-hidden">
-        <div class="ch-cookie-text" data-t="cookie_text">
-            <strong>About the Use of Cookies</strong><br>
-            This site uses cookies to provide chat support and improve your user experience. By agreeing, you will be able to use our chat support service.
-        </div>
-        <div class="ch-cookie-buttons">
-            <button class="ch-cookie-btn ch-btn-deny" onclick="chDenyCookie()" data-t="cookie_deny">拒否</button>
-            <button class="ch-cookie-btn ch-btn-accept" onclick="chAcceptCookie()" data-t="cookie_accept">同意して利用開始</button>
-        </div>
+      <div class="ch-cookie-text" data-t="cookie_text">
+        <strong>About the Use of Cookies</strong><br />
+        This site uses cookies to provide chat support and improve your user
+        experience. By agreeing, you will be able to use our chat support
+        service.
+      </div>
+      <div class="ch-cookie-buttons">
+        <button
+          class="ch-cookie-btn ch-btn-deny"
+          onclick="chDenyCookie()"
+          data-t="cookie_deny"
+        >
+          拒否
+        </button>
+        <button
+          class="ch-cookie-btn ch-btn-accept"
+          onclick="chAcceptCookie()"
+          data-t="cookie_accept"
+        >
+          同意して利用開始
+        </button>
+      </div>
     </div>
 
     <div id="special-mobile-chat-container">
-        <button id="special-mobile-chat-btn">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="margin-top: 1px;"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
-            <span data-t="chat_btn">Chat Support</span>
-        </button>
-        <span id="special-mobile-close-btn">×</span>
+      <button id="special-mobile-chat-btn">
+        <svg
+          width="20"
+          height="20"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2.5"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          style="margin-top: 1px"
+        >
+          <path
+            d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"
+          ></path>
+        </svg>
+        <span data-t="chat_btn">Chat Support</span>
+      </button>
+      <span id="special-mobile-close-btn">×</span>
     </div>
 
     <footer>
-        <p>&copy; 2026 ryopc Global Initiative. All Rights Reserved.</p>
-        <p data-t="tos_footer_meta">Enacted: April 22, 2026 | Updated: April 30, 2026<br>Formulated by: ryopc Volunteer Operations Bureau<br><strong>Director: game_ryo (ryopcCEO)</strong></p>
-        <div class="status-badge" style="margin-top: 1rem;">
-            <span class="status-dot"></span>
-            <span data-t="status_text">Status: Under application for Open Source Collective (Covina, CA, USA)</span>
-        </div>
+      <p>&copy; 2026 ryopc Global Initiative. All Rights Reserved.</p>
+      <p data-t="tos_footer_meta">
+        Enacted: April 22, 2026 | Updated: April 30, 2026<br />Formulated by:
+        ryopc Volunteer Operations Bureau<br /><strong
+          >Director: game_ryo (ryopcCEO)</strong
+        >
+      </p>
+      <div class="status-badge" style="margin-top: 1rem">
+        <span class="status-dot"></span>
+        <span data-t="status_text"
+          >Status: Under application for Open Source Collective (Covina, CA,
+          USA)</span
+        >
+      </div>
     </footer>
 
     <script>
-    // --- 翻訳データ ---
-    const translations = {
-        ja: {
-            nav_home: "ホーム",
-            nav_mission: "ミッション",
-            nav_services: "サービス",
-            nav_docs: "ドキュメント",
-            nav_note: "ブログ",
-            cookie_text: "<strong>クッキーの使用について</strong><br>このサイトでは、チャットサポートの提供や体験向上のためにクッキーを使用します。同意することで、サポートサービスを利用できるようになります。",
-            cookie_accept: "同意して利用開始",
-            cookie_deny: "拒否",
-            chat_btn: "チャットサポート",
-            status_text: "ステータス: Open Source Collective (米国カリフォルニア州) への申請中",
-            
-            // 利用規約の日本語翻訳データ
-            tos_header_title: "利用規約",
-            tos_header_desc: "ryopc グローバルイニシアチブ - 公式利用規約",
-            tos_section_title: "Terms of Service (利用規約)",
-            tos_back_btn: "⬅ ドキュメントハブに戻る",
-            tos_footer_meta: "制定: 2026年4月22日 | 改訂: 2026年4月30日<br>企画策定: ryopcボランティア運営事務局<br><strong>代表: game_ryo (ryopcCEO)</strong>",
-            
-            tos_art1_title: "第1条（総則と活動趣旨）",
-            tos_art1_p1: "1. 本利用規約は、ryopcボランティアグループ（以下「当グループ」）がオンラインで提供するPCサポートサービス（以下「本サービス」）の利用条件を定めるものです。",
-            tos_art1_p2: "2. 当グループは、デジタルデバイドの解消と安全なPC活用を目的とした非営利のボランティア活動であり、本規約に完全に同意したユーザー（以下「ユーザー」）に対してのみ本サービスを提供します。",
-            tos_art1_p3: "3. ユーザーが当システムへのアカウント登録またはテクニカルサポートの申請を送信した時点で、本利用規約のすべての条項に同意したものとみなされます。",
-            
-            tos_art2_title: "第2条（非営利原則と完全無料方針の徹底）",
-            tos_art2_p1: "1. 本サービスは、いかなる場合や名目（サポート費用、謝礼金など）であっても、強制的に対価を回収・請求することはありません（自主的な寄付はこの限りではありません）。",
-            tos_art2_p2: "2. 当グループのコミュニケーションプラットフォーム、チャネル、または送信メール内において、サードパーティの商業広告は一切表示されません。",
-            tos_art2_p3: "3. サポートスタッフは、特定の製品の購入や有料の外部サービス契約などをユーザーに強要、勧誘、またはこれを誘導する推奨行為を行ってはなりません。",
-            
-            tos_art3_title: "第3条（サポート範囲および提供方法）",
-            tos_art3_p1: "1. テクニカルサポートは、オンラインライブチャット、メール、またはリモートデスクトップ接続（画面共有・リモート操作）を通じて完全オンラインで完結します。対面または現地訪問によるサポートは行いません。",
-            tos_art3_p2: "2. リモートデスクトップセッションを開始する際は、操作直前に口頭またはチャット上でユーザーによる明確な承諾を必須とします。",
-            tos_art3_p3: "3. 本サービスは問題の解決を完全に保証するものではありません。あくまでボランティアスタッフの知識範囲におけるアドバイスおよび無償の技術協力として提供されます。",
-            
-            tos_art4_title: "第4条（ユーザーの義務とデータの自己バックアップ義務）",
-            tos_art4_p1: "1. ユーザーは、当グループのサポートを受ける前に、自己の責任において、すべての重要な構成情報、システムパラメータ、および個人用データファイル（写真、ドキュメント、設定など）を外部メディアやクラウドストレージ等にバックアップする必要があります。",
-            tos_art4_p2: "2. バックアップ作業を怠ったことによりサポート中に発生したデータベースの破損、ファイル消失、またはソフトウェアの動作不具合について、当グループは一切の責任を負いません。",
-            
-            tos_art5_title: "第5条（禁止事項および利用制限）",
-            tos_art5_desc: "ユーザーが以下の各号に該当する行為を行った場合、当グループは事前の警告なく直ちにシステムアクセス権限の停止およびアカウント削除を行う権利を留保します。",
-            tos_art5_li1: "ボランティアスタッフに対する誹謗中傷、敵対的な言動、ハラスメント行為、または活動を著しく妨害する行為。",
-            tos_art5_li2: "内部パスワードや他のユーザーの個人識別情報を不正に傍受、抽出、または漏洩しようとする試み。",
-            tos_art5_li3: "当グループの名称やロゴマークを不正に模倣・偽装し、第三者に不利益や混乱を与える行為。",
-            tos_art5_li4: "自動スクリプトを用いたチャットシステムの連投、大量のスパムメッセージ送信、またはサポートチケットの過度な連続投稿行為。",
-            
-            tos_art6_title: "第6条（免責事項と限定的ボランティア責任）",
-            tos_art6_p1: "1. 当グループおよびボランティアスタッフは、故意または重過失による場合を除き、本サービスの使用または使用不能から生じた直接的、間接的、付随的、または特別な損害（デバイスの物理的故障、ビジネス損失、システムデータの改変を含むがこれらに限定されない）について、一切の賠償責任を負わないものとします。",
-            tos_art6_p2: "2. 無料ホスティング事業者（InfinityFree）のシステム障害、接続遅延、またはメンテナンスに起因するサポートの突然の中断やデータ損失について、当グループは一切の責任を負いません。",
-            tos_art6_p3: "3. 技術サポート中に発生したOS再インストールや深いレジストリ構成の調整に伴うシステム不整合、またはソフトウェアライセンスの登録不一致については、ユーザーがすべての自己責任を負うことに同意するものとします。",
-            
-            tos_art7_title: "第7条（スタッフ行動規範および内部不正通報保護）",
-            tos_art7_p1: "1. 当グループに登録するすべてのボランティアスタッフは、ユーザーのプライバシー保護を遵守する法的な宣誓を行っており、いかなる場合もユーザーに対して生のアクセスパスワードを直接要求または保存することを厳格に禁じられています。",
-            tos_art7_p2: "2. ユーザーは、スタッフによるポリシー違反、不誠実な言動、または不適切な金銭要求等を検知した場合、公式ウェブ上の「スタッフ行動通報フォーム」より即時通報することができます。",
-            tos_art7_p3: "3. 運営事務局は報告された事案を厳正に調査し、違反が認定されたスタッフのアカウント資格を即時に無効化、永続的追放およびブラックリスト登録を行い、必要に応じて法的措置を速やかに実施します。",
-            
-            tos_art8_title: "第8条（本規約の改訂・変更）",
-            tos_art8_desc: "当グループは、デジタル環境の変化に対応するため、ユーザーに個別の確認を求めることなく本規約を随時改訂または再構築できるものとします。改訂後の規約は、当サイト上に公開された時点をもって即座にグローバルに有効となります。",
-            
-            tos_art9_title: "第9条（アカウント認証とオープン認証方式への同意）",
-            tos_art9_desc: "外部の認証プロバイダ（Google、GitHub、LINE OAuth等）を使用したオープン認証を用いてログインするユーザーは、以下の事項に同意したものとします。",
-            tos_art9_li1: "外部連携アカウントの管理およびセキュリティ保持は、完全にユーザー自己の責任であり、ローカルでの資格情報の管理不十分による損害について当グループは一切責任を負いません。",
-            tos_art9_li2: "サードパーティ側のアカウントサーバー障害やAPI仕様変更により生じたログイン障害について、当グループは責任を負いません。",
-            tos_art9_li3: "当グループのシステムは認証トークンのみを安全に処理し、ユーザーが連携した外部サイトの生パスワードを取得、保持することは一切ありません。",
-            tos_art9_li4: "ユーザーは、サードパーティ側のアカウントが削除または制限された場合、自動的にryopcのシステム情報にもアクセスできなくなるリスクがあることを同意します。"
-        },
-        en: {
-            nav_home: "Home",
-            nav_mission: "Mission",
-            nav_services: "Services",
-            nav_docs: "Docs",
-            nav_note: "blog",
-            cookie_text: "<strong>About the Use of Cookies</strong><br>This site uses cookies to provide chat support and improve your experience. By agreeing, you can use our chat service.",
-            cookie_accept: "Accept",
-            cookie_deny: "Deny",
-            chat_btn: "Chat Support",
-            status_text: "Status: Under application for Open Source Collective (Covina, CA, USA)",
-            
-            // English Translation
-            tos_header_title: "Terms of Service",
-            tos_header_desc: "ryopc Global Initiative - Official User Agreement",
-            tos_section_title: "Terms of Service (利用規約)",
-            tos_back_btn: "⬅ Return to Document Hub",
-            tos_footer_meta: "Enacted: April 22, 2026 | Updated: April 30, 2026<br>Formulated by: ryopc Volunteer Operations Bureau<br><strong>Director: game_ryo (ryopcCEO)</strong>",
-            
-            tos_art1_title: "Article 1 (General Provisions & Mission Statement)",
-            tos_art1_p1: "1. These Terms of Service define the terms and conditions for using the PC support services (hereinafter referred to as the \"Service\") provided online by the ryopc Volunteer Group (hereinafter referred to as \"the Group\").",
-            tos_art1_p2: "2. The Group is a non-profit volunteer initiative aimed at bridging the digital divide and ensuring safe PC utilization. Services are provided exclusively to users (hereinafter referred to as \"Users\") who fully agree to these Terms.",
-            tos_art1_p3: "3. Users are deemed to have fully agreed to all provisions of these Terms upon registering an account or submitting a technical support request.",
-            
-            tos_art2_title: "Article 2 (Strict Non-Profit & 100% Free Policy)",
-            tos_art2_p1: "1. This service will not forcibly collect any money under any circumstances or pretexts, including as compensation or gratuities. (Voluntary donations will be accepted at the user's discretion.)",
-            tos_art2_p2: "2. No third-party advertisements will be displayed within the Group's communication channels, platforms, or sent emails.",
-            tos_art2_p3: "3. Staff members are strictly prohibited from soliciting, coercing, or advising Users to purchase specific products or subscribe to paid external contracts.",
-            
-            tos_art3_title: "Article 3 (Scope of Support & Delivery Methods)",
-            tos_art3_p1: "1. Technical assistance is conducted entirely online via live chat networks, email correspondence, or remote desktop infrastructure (screen sharing and remote operation). In-person or on-site support is strictly unavailable.",
-            tos_art3_p2: "2. Initiating a remote desktop interaction requires explicit, mandatory verbal or text chat consent from the User immediately before the session begins.",
-            tos_art3_p3: "3. Users acknowledge that the Service does not guarantee an absolute resolution; support is provided as advisory guidance and altruistic cooperation within the scope of our volunteer staff's knowledge base.",
-            
-            tos_art4_title: "Article 4 (User Obligations & Mandatory Data Backup)",
-            tos_art4_p1: "1. Users must securely backup all critical machine parameters, configuration profiles, and data files (photographs, documents, configurations, etc.) to external hardware media or cloud architectures at their own risk prior to interacting with our support infrastructure.",
-            tos_art4_p2: "2. The Group holds zero liability for database corruption, files loss, or subsequent software anomalies that occur during assistance windows if the user omitted proper backup operations.",
-            
-            tos_art5_title: "Article 5 (Prohibited Activities & Account Termination)",
-            tos_art5_desc: "The Group reserves the absolute right to suspend system access and delete User credentials without prior warning if a User executes any of the following infractions:",
-            tos_art5_li1: "Defamatory language, hostile interactions, sexual harassment, or disruptive operations targeting volunteer staff members.",
-            tos_art5_li2: "Attempts to maliciously intercept, extract, or expose internal passwords or personal identification datasets.",
-            tos_art5_li3: "Impersonating the official name or insignia of the Group to inflict harm or deception on third parties.",
-            tos_art5_li4: "Flooding communication nodes with spam protocols, excessive repetitive ticket logging, or automated scripts.",
-            
-            tos_art6_title: "Article 6 (Disclaimers & Limitation of Volunteer Liability)",
-            tos_art6_p1: "1. The Group and its volunteer staff shall not be liable for any direct, indirect, incidental, or special damages (including systemic device breakdowns, business operational interruptions, or profile corruptions) arising from the use or inability to use this Service, unless caused by intentional malice or gross negligence.",
-            tos_art6_p2: "2. We disclaim all liabilities for sudden service disconnects or data anomalies resulting from infrastructure-level vulnerability, host latency, or outages caused by our zero-cost web hosting providers (InfinityFree).",
-            tos_art6_p3: "3. Users accept full sovereign responsibility for any system inconsistencies, software registration mismatches, or system faults arising from OS re-installations or deep configuration adjustments required during the technical troubleshooting process.",
-            
-            tos_art7_title: "Article 7 (Staff Compliance Governance & Whistleblower Protections)",
-            tos_art7_p1: "1. All onboarded volunteer staff are legally and structurally mandated to enforce rigorous user privacy protections and are strictly prohibited from ever demanding or logging User account passwords.",
-            tos_art7_p2: "2. If a User suspects non-compliant behavior, unethical conduct, or policy violations by a staff member, they are encouraged to submit an instant flag via the dedicated \"Staff Review Report\" input module.",
-            tos_art7_p3: "3. The administrative team evaluates all logged reports from a neutral standing. Verified infractions result in immediate revocation of server credentials, full expulsion, and permanent blacklisting from the Group.",
-            
-            tos_art8_title: "Article 8 (Amendments to the Terms)",
-            tos_art8_desc: "The Group reserves the right to modify or restructure these Terms without seeking prior User confirmation to align with evolving digital landscapes. Revisions apply globally and instantaneously across all access nodes upon public web deployment.",
-            
-            tos_art9_title: "Article 9 (Credential Security & Open Authentication)",
-            tos_art9_desc: "Users leveraging external Open Authentication methods (Google, GitHub, LINE OAuth, etc.) to access the Service explicitly agree to the following protocols:",
-            tos_art9_li1: "The security and management of external account credentials remain the exclusive responsibility of the User; the Group is not liable for data breaches caused by local credential mismanagement.",
-            tos_art9_li2: "The Group holds no liability for service access issues stemming from maintenance windows, structural API changes, or server out-ages on third-party authentication platforms.",
-            tos_art9_li3: "Our technical environment handles only the minimum cryptographic tokens required for authentication; we never capture, record, or retain your raw third-party passwords.",
-            tos_art9_li4: "Users accept that deletion, restriction, or suspension of their primary third-party account may automatically invalidate their access to ryopc system records."
-        },
-        pt: {
-            nav_home: "Início",
-            nav_mission: "Missão",
-            nav_services: "Serviços",
-            nav_docs: "Docs",
-            nav_note: "Blog",
-            cookie_text: "<strong>Sobre o uso de cookies</strong><br>Este site usa cookies para fornecer suporte por chat e melhorar sua experiência. Ao concordar, você poderá usar nosso serviço de chat.",
-            cookie_accept: "Aceitar",
-            cookie_deny: "Recusar",
-            chat_btn: "Suporte por Chat",
-            status_text: "Status: Em processo de candidatura para Open Source Collective (Covina, CA, EUA)",
-            
-            // Portuguese Translation
-            tos_header_title: "Termos de Serviço",
-            tos_header_desc: "ryopc Global Initiative - Acordo de Usuário Oficial",
-            tos_section_title: "Termos de Serviço (利用規約)",
-            tos_back_btn: "⬅ Retornar ao Hub de Documentos",
-            tos_footer_meta: "Promulgado: 22 de Abril de 2026 | Atualizado: 30 de Abril de 2026<br>Operação e Gestão: ryopc Bureau de Operações Voluntárias<br><strong>Diretor: game_ryo (ryopcCEO)</strong>",
-            
-            tos_art1_title: "Artigo 1 (Provisões Gerais e Missão)",
-            tos_art1_p1: "1. Estes Termos de Serviço definem as condições de uso para o suporte de computadores (doravante denominado \"o Serviço\") fornecido de forma online pelo Grupo Voluntário ryopc (doravante \"o Grupo\").",
-            tos_art1_p2: "2. O Grupo é uma iniciativa sem fins lucrativos de trabalho voluntário focado na eliminação do abismo digital e na garantia de uso seguro de computadores. O suporte é fornecido apenas aos usuários que concordam integralmente com estes Termos.",
-            tos_art1_p3: "3. Os usuários são considerados concordantes com estes termos no momento em que registram contas ou abrem tickets de solicitação de suporte técnico.",
-            
-            tos_art2_title: "Artigo 2 (Princípio Sem Fins Lucrativos e Política 100% Gratuita)",
-            tos_art2_p1: "1. Este serviço nunca irá cobrar qualquer quantia financeira em nenhuma circunstância ou pretexto, incluindo pagamentos ou gratificações. (Doações voluntárias serão aceitas ao critério do usuário).",
-            tos_art2_p2: "2. Nenhum anúncio de terceiros será exibido nas plataformas de comunicações oficiais ou e-mails enviados pelo Grupo.",
-            tos_art2_p3: "3. Os membros voluntários do suporte técnico são proibidos de recomendar, direcionar ou coagir usuários a adquirirem produtos ou assinaturas pagas.",
-            
-            tos_art3_title: "Artigo 3 (Escopo do Suporte e Meios de Fornecimento)",
-            tos_art3_p1: "1. A assistência técnica é operada de forma inteiramente online via chat, e-mail ou infraestrutura de acesso remoto. Suporte presencial não está disponível.",
-            tos_art3_p2: "2. Iniciar conexões remotas exige consentimento textual expresso do usuário imediatamente antes de cada sessão.",
-            tos_art3_p3: "3. O usuário reconhece que o serviço não garante solução definitiva; o suporte é consultivo baseado no escopo e no conhecimento da equipe voluntária.",
-            
-            tos_art4_title: "Artigo 4 (Deveres do Usuário e Backup Obrigatório)",
-            tos_art4_p1: "1. Os usuários devem garantir backups de todos os parâmetros importantes de máquina, perfis de sistemas e arquivos (fotos, documentos, configurações) em mídias físicas externas ou servidores cloud antes do contato com nosso suporte.",
-            tos_art4_p2: "2. O Grupo tem zero responsabilidade por corrupção de dados ou falhas subsequentes geradas durante a assistência caso o usuário tenha ignorado backups seguros.",
-            
-            tos_art5_title: "Artigo 5 (Atividades Proibidas e Suspensão de Acesso)",
-            tos_art5_desc: "O Grupo reserva o direito de suspender os acessos aos sistemas e banir contas de usuários imediatamente caso realizem as seguintes infrações:",
-            tos_art5_li1: "Condutas de ódio, xingamentos, preconceito ou importunação sexual direcionadas aos membros do time de voluntários.",
-            tos_art5_li2: "Tentativas de interceptar dados confidenciais de rede, senhas internas ou dados de identificação pessoal.",
-            tos_art5_li3: "Fingir ser parte da equipe ou usar as insígnias do Grupo para realizar golpes ou induzir terceiros ao erro.",
-            tos_art5_li4: "Lançamento de spam, múltiplos acessos repetitivos ou scripts de automação nos chats de suporte.",
-            
-            tos_art6_title: "Artigo 6 (Exclusão e Limitações de Responsabilidade)",
-            tos_art6_p1: "1. O Grupo e sua equipe voluntária não serão responsabilizados por quaisquer danos diretos, indiretos ou acidentais decorrentes do uso da assistência técnica, exceto se houver negligência gravíssima comprovada.",
-            tos_art6_p2: "2. Não possuímos responsabilidades por desconexões inesperadas decorrentes de limitações físicas do host provedor (InfinityFree).",
-            tos_art6_p3: "3. Usuários assumem total autonomia operacional caso haja alterações de registros de sistemas operacionais ou configurações profundas aplicadas durante reparos ativos.",
-            
-            tos_art7_title: "Artigo 7 (Código de Conduta da Equipe e Denúncias)",
-            tos_art7_p1: "1. Todo o time de suporte opera sob conformidade e proteção à privacidade, sendo rigorosamente proibido solicitar ou salvar senhas de contas pessoais dos usuários.",
-            tos_art7_p2: "2. Caso suspeite de violações e desvios morais de membros do suporte, o usuário pode reportar o fato no link de \"Denúncia de Conduta\".",
-            tos_art7_p3: "3. O setor administrativo avalia as violações com isonomia. Casos validados de abuso geram demissões do suporte com suspensão permanente de credenciais do Grupo.",
-            
-            tos_art8_title: "Artigo 8 (Alterações das Condições)",
-            tos_art8_desc: "O Grupo tem autonomia para reestruturar as presentes condições sem notificações prévias para se ajustar às demandas de segurança de rede.",
-            
-            tos_art9_title: "Artigo 9 (Uso de Credenciais OAuth)",
-            tos_art9_desc: "Usuários acessando o site por meio de integrações (Google, GitHub, LINE OAuth) concordam com os seguintes critérios:",
-            tos_art9_li1: "A guarda e segurança do token são de responsabilidade do usuário; o Grupo não se responsabiliza por invasões externas causadas por descuidos com credenciais locais.",
-            tos_art9_li2: "Não garantimos estabilidade caso haja indisponibilidade temporária de rotas canônicas de acesso nas APIs de login parceiras.",
-            tos_art9_li3: "Nosso banco de dados rastreia apenas os metadados e tokens criptografados mínimos; nunca guardamos ou solicitamos senhas puras de suas respectivas plataformas OAuth.",
-            tos_art9_li4: "A exclusão de sua respectiva conta de autenticação primária OAuth gera invalidade automática na integridade dos históricos de acessos no sistema ryopc."
-        }
-    };
+      // --- 翻訳データ ---
+      const translations = {
+          ja: {
+              nav_home: "ホーム",
+              nav_mission: "ミッション",
+              nav_services: "サービス",
+              nav_docs: "ドキュメント",
+              nav_note: "ブログ",
+              cookie_text: "<strong>クッキーの使用について</strong><br>このサイトでは、チャットサポートの提供や体験向上のためにクッキーを使用します。同意することで、サポートサービスを利用できるようになります。",
+              cookie_accept: "同意して利用開始",
+              cookie_deny: "拒否",
+              chat_btn: "チャットサポート",
+              status_text: "ステータス: Open Source Collective (米国カリフォルニア州) への申請中",
 
-    // --- 状態管理用キー ---
-    const LANG_KEY = "ryopc_preferred_language";
-  
+              // 利用規約の日本語翻訳データ
+              tos_header_title: "利用規約",
+              tos_header_desc: "ryopc グローバルイニシアチブ - 公式利用規約",
+              tos_section_title: "Terms of Service (利用規約)",
+              tos_back_btn: "⬅ ドキュメントハブに戻る",
+              tos_footer_meta: "制定: 2026年4月22日 | 改訂: 2026年4月30日<br>企画策定: ryopcボランティア運営事務局<br><strong>代表: game_ryo (ryopcCEO)</strong>",
 
-    // ドキュメント読み込み時の初期化
-    document.addEventListener("DOMContentLoaded", () => {
-        // 1. 言語の設定
-        const savedLang = localStorage.getItem(LANG_KEY) || "ja";
-        document.getElementById("langSelector").value = savedLang;
-        changeLanguage(savedLang);
+              tos_art1_title: "第1条（総則と活動趣旨）",
+              tos_art1_p1: "1. 本利用規約は、ryopcボランティアグループ（以下「当グループ」）がオンラインで提供するPCサポートサービス（以下「本サービス」）の利用条件を定めるものです。",
+              tos_art1_p2: "2. 当グループは、デジタルデバイドの解消と安全なPC活用を目的とした非営利のボランティア活動であり、本規約に完全に同意したユーザー（以下「ユーザー」）に対してのみ本サービスを提供します。",
+              tos_art1_p3: "3. ユーザーが当システムへのアカウント登録またはテクニカルサポートの申請を送信した時点で、本利用規約のすべての条項に同意したものとみなされます。",
 
+              tos_art2_title: "第2条（非営利原則と完全無料方針の徹底）",
+              tos_art2_p1: "1. 本サービスは、いかなる場合や名目（サポート費用、謝礼金など）であっても、強制的に対価を回収・請求することはありません（自主的な寄付はこの限りではありません）。",
+              tos_art2_p2: "2. 当グループのコミュニケーションプラットフォーム、チャネル、または送信メール内において、サードパーティの商業広告は一切表示されません。",
+              tos_art2_p3: "3. サポートスタッフは、特定の製品の購入や有料の外部サービス契約などをユーザーに強要、勧誘、またはこれを誘導する推奨行為を行ってはなりません。",
+
+              tos_art3_title: "第3条（サポート範囲および提供方法）",
+              tos_art3_p1: "1. テクニカルサポートは、オンラインライブチャット、メール、またはリモートデスクトップ接続（画面共有・リモート操作）を通じて完全オンラインで完結します。対面または現地訪問によるサポートは行いません。",
+              tos_art3_p2: "2. リモートデスクトップセッションを開始する際は、操作直前に口頭またはチャット上でユーザーによる明確な承諾を必須とします。",
+              tos_art3_p3: "3. 本サービスは問題の解決を完全に保証するものではありません。あくまでボランティアスタッフの知識範囲におけるアドバイスおよび無償の技術協力として提供されます。",
+
+              tos_art4_title: "第4条（ユーザーの義務とデータの自己バックアップ義務）",
+              tos_art4_p1: "1. ユーザーは、当グループのサポートを受ける前に、自己の責任において、すべての重要な構成情報、システムパラメータ、および個人用データファイル（写真、ドキュメント、設定など）を外部メディアやクラウドストレージ等にバックアップする必要があります。",
+              tos_art4_p2: "2. バックアップ作業を怠ったことによりサポート中に発生したデータベースの破損、ファイル消失、またはソフトウェアの動作不具合について、当グループは一切の責任を負いません。",
+
+              tos_art5_title: "第5条（禁止事項および利用制限）",
+              tos_art5_desc: "ユーザーが以下の各号に該当する行為を行った場合、当グループは事前の警告なく直ちにシステムアクセス権限の停止およびアカウント削除を行う権利を留保します。",
+              tos_art5_li1: "ボランティアスタッフに対する誹謗中傷、敵対的な言動、ハラスメント行為、または活動を著しく妨害する行為。",
+              tos_art5_li2: "内部パスワードや他のユーザーの個人識別情報を不正に傍受、抽出、または漏洩しようとする試み。",
+              tos_art5_li3: "当グループの名称やロゴマークを不正に模倣・偽装し、第三者に不利益や混乱を与える行為。",
+              tos_art5_li4: "自動スクリプトを用いたチャットシステムの連投、大量のスパムメッセージ送信、またはサポートチケットの過度な連続投稿行為。",
+
+              tos_art6_title: "第6条（免責事項と限定的ボランティア責任）",
+              tos_art6_p1: "1. 当グループおよびボランティアスタッフは、故意または重過失による場合を除き、本サービスの使用または使用不能から生じた直接的、間接的、付随的、または特別な損害（デバイスの物理的故障、ビジネス損失、システムデータの改変を含むがこれらに限定されない）について、一切の賠償責任を負わないものとします。",
+              tos_art6_p2: "2. 無料ホスティング事業者（InfinityFree）のシステム障害、接続遅延、またはメンテナンスに起因するサポートの突然の中断やデータ損失について、当グループは一切の責任を負いません。",
+              tos_art6_p3: "3. 技術サポート中に発生したOS再インストールや深いレジストリ構成の調整に伴うシステム不整合、またはソフトウェアライセンスの登録不一致については、ユーザーがすべての自己責任を負うことに同意するものとします。",
+
+              tos_art7_title: "第7条（スタッフ行動規範および内部不正通報保護）",
+              tos_art7_p1: "1. 当グループに登録するすべてのボランティアスタッフは、ユーザーのプライバシー保護を遵守する法的な宣誓を行っており、いかなる場合もユーザーに対して生のアクセスパスワードを直接要求または保存することを厳格に禁じられています。",
+              tos_art7_p2: "2. ユーザーは、スタッフによるポリシー違反、不誠実な言動、または不適切な金銭要求等を検知した場合、公式ウェブ上の「スタッフ行動通報フォーム」より即時通報することができます。",
+              tos_art7_p3: "3. 運営事務局は報告された事案を厳正に調査し、違反が認定されたスタッフのアカウント資格を即時に無効化、永続的追放およびブラックリスト登録を行い、必要に応じて法的措置を速やかに実施します。",
+
+              tos_art8_title: "第8条（本規約の改訂・変更）",
+              tos_art8_desc: "当グループは、デジタル環境の変化に対応するため、ユーザーに個別の確認を求めることなく本規約を随時改訂または再構築できるものとします。改訂後の規約は、当サイト上に公開された時点をもって即座にグローバルに有効となります。",
+
+              tos_art9_title: "第9条（アカウント認証とオープン認証方式への同意）",
+              tos_art9_desc: "外部の認証プロバイダ（Google、GitHub、LINE OAuth等）を使用したオープン認証を用いてログインするユーザーは、以下の事項に同意したものとします。",
+              tos_art9_li1: "外部連携アカウントの管理およびセキュリティ保持は、完全にユーザー自己の責任であり、ローカルでの資格情報の管理不十分による損害について当グループは一切責任を負いません。",
+              tos_art9_li2: "サードパーティ側のアカウントサーバー障害やAPI仕様変更により生じたログイン障害について、当グループは責任を負いません。",
+              tos_art9_li3: "当グループのシステムは認証トークンのみを安全に処理し、ユーザーが連携した外部サイトの生パスワードを取得、保持することは一切ありません。",
+              tos_art9_li4: "ユーザーは、サードパーティ側のアカウントが削除または制限された場合、自動的にryopcのシステム情報にもアクセスできなくなるリスクがあることを同意します。"
+          },
+          en: {
+              nav_home: "Home",
+              nav_mission: "Mission",
+              nav_services: "Services",
+              nav_docs: "Docs",
+              nav_note: "blog",
+              cookie_text: "<strong>About the Use of Cookies</strong><br>This site uses cookies to provide chat support and improve your experience. By agreeing, you can use our chat service.",
+              cookie_accept: "Accept",
+              cookie_deny: "Deny",
+              chat_btn: "Chat Support",
+              status_text: "Status: Under application for Open Source Collective (Covina, CA, USA)",
+
+              // English Translation
+              tos_header_title: "Terms of Service",
+              tos_header_desc: "ryopc Global Initiative - Official User Agreement",
+              tos_section_title: "Terms of Service (利用規約)",
+              tos_back_btn: "⬅ Return to Document Hub",
+              tos_footer_meta: "Enacted: April 22, 2026 | Updated: April 30, 2026<br>Formulated by: ryopc Volunteer Operations Bureau<br><strong>Director: game_ryo (ryopcCEO)</strong>",
+
+              tos_art1_title: "Article 1 (General Provisions & Mission Statement)",
+              tos_art1_p1: "1. These Terms of Service define the terms and conditions for using the PC support services (hereinafter referred to as the \"Service\") provided online by the ryopc Volunteer Group (hereinafter referred to as \"the Group\").",
+              tos_art1_p2: "2. The Group is a non-profit volunteer initiative aimed at bridging the digital divide and ensuring safe PC utilization. Services are provided exclusively to users (hereinafter referred to as \"Users\") who fully agree to these Terms.",
+              tos_art1_p3: "3. Users are deemed to have fully agreed to all provisions of these Terms upon registering an account or submitting a technical support request.",
+
+              tos_art2_title: "Article 2 (Strict Non-Profit & 100% Free Policy)",
+              tos_art2_p1: "1. This service will not forcibly collect any money under any circumstances or pretexts, including as compensation or gratuities. (Voluntary donations will be accepted at the user's discretion.)",
+              tos_art2_p2: "2. No third-party advertisements will be displayed within the Group's communication channels, platforms, or sent emails.",
+              tos_art2_p3: "3. Staff members are strictly prohibited from soliciting, coercing, or advising Users to purchase specific products or subscribe to paid external contracts.",
+
+              tos_art3_title: "Article 3 (Scope of Support & Delivery Methods)",
+              tos_art3_p1: "1. Technical assistance is conducted entirely online via live chat networks, email correspondence, or remote desktop infrastructure (screen sharing and remote operation). In-person or on-site support is strictly unavailable.",
+              tos_art3_p2: "2. Initiating a remote desktop interaction requires explicit, mandatory verbal or text chat consent from the User immediately before the session begins.",
+              tos_art3_p3: "3. Users acknowledge that the Service does not guarantee an absolute resolution; support is provided as advisory guidance and altruistic cooperation within the scope of our volunteer staff's knowledge base.",
+
+              tos_art4_title: "Article 4 (User Obligations & Mandatory Data Backup)",
+              tos_art4_p1: "1. Users must securely backup all critical machine parameters, configuration profiles, and data files (photographs, documents, configurations, etc.) to external hardware media or cloud architectures at their own risk prior to interacting with our support infrastructure.",
+              tos_art4_p2: "2. The Group holds zero liability for database corruption, files loss, or subsequent software anomalies that occur during assistance windows if the user omitted proper backup operations.",
+
+              tos_art5_title: "Article 5 (Prohibited Activities & Account Termination)",
+              tos_art5_desc: "The Group reserves the absolute right to suspend system access and delete User credentials without prior warning if a User executes any of the following infractions:",
+              tos_art5_li1: "Defamatory language, hostile interactions, sexual harassment, or disruptive operations targeting volunteer staff members.",
+              tos_art5_li2: "Attempts to maliciously intercept, extract, or expose internal passwords or personal identification datasets.",
+              tos_art5_li3: "Impersonating the official name or insignia of the Group to inflict harm or deception on third parties.",
+              tos_art5_li4: "Flooding communication nodes with spam protocols, excessive repetitive ticket logging, or automated scripts.",
+
+              tos_art6_title: "Article 6 (Disclaimers & Limitation of Volunteer Liability)",
+              tos_art6_p1: "1. The Group and its volunteer staff shall not be liable for any direct, indirect, incidental, or special damages (including systemic device breakdowns, business operational interruptions, or profile corruptions) arising from the use or inability to use this Service, unless caused by intentional malice or gross negligence.",
+              tos_art6_p2: "2. We disclaim all liabilities for sudden service disconnects or data anomalies resulting from infrastructure-level vulnerability, host latency, or outages caused by our zero-cost web hosting providers (InfinityFree).",
+              tos_art6_p3: "3. Users accept full sovereign responsibility for any system inconsistencies, software registration mismatches, or system faults arising from OS re-installations or deep configuration adjustments required during the technical troubleshooting process.",
+
+              tos_art7_title: "Article 7 (Staff Compliance Governance & Whistleblower Protections)",
+              tos_art7_p1: "1. All onboarded volunteer staff are legally and structurally mandated to enforce rigorous user privacy protections and are strictly prohibited from ever demanding or logging User account passwords.",
+              tos_art7_p2: "2. If a User suspects non-compliant behavior, unethical conduct, or policy violations by a staff member, they are encouraged to submit an instant flag via the dedicated \"Staff Review Report\" input module.",
+              tos_art7_p3: "3. The administrative team evaluates all logged reports from a neutral standing. Verified infractions result in immediate revocation of server credentials, full expulsion, and permanent blacklisting from the Group.",
+
+              tos_art8_title: "Article 8 (Amendments to the Terms)",
+              tos_art8_desc: "The Group reserves the right to modify or restructure these Terms without seeking prior User confirmation to align with evolving digital landscapes. Revisions apply globally and instantaneously across all access nodes upon public web deployment.",
+
+              tos_art9_title: "Article 9 (Credential Security & Open Authentication)",
+              tos_art9_desc: "Users leveraging external Open Authentication methods (Google, GitHub, LINE OAuth, etc.) to access the Service explicitly agree to the following protocols:",
+              tos_art9_li1: "The security and management of external account credentials remain the exclusive responsibility of the User; the Group is not liable for data breaches caused by local credential mismanagement.",
+              tos_art9_li2: "The Group holds no liability for service access issues stemming from maintenance windows, structural API changes, or server out-ages on third-party authentication platforms.",
+              tos_art9_li3: "Our technical environment handles only the minimum cryptographic tokens required for authentication; we never capture, record, or retain your raw third-party passwords.",
+              tos_art9_li4: "Users accept that deletion, restriction, or suspension of their primary third-party account may automatically invalidate their access to ryopc system records."
+          },
+          pt: {
+              nav_home: "Início",
+              nav_mission: "Missão",
+              nav_services: "Serviços",
+              nav_docs: "Docs",
+              nav_note: "Blog",
+              cookie_text: "<strong>Sobre o uso de cookies</strong><br>Este site usa cookies para fornecer suporte por chat e melhorar sua experiência. Ao concordar, você poderá usar nosso serviço de chat.",
+              cookie_accept: "Aceitar",
+              cookie_deny: "Recusar",
+              chat_btn: "Suporte por Chat",
+              status_text: "Status: Em processo de candidatura para Open Source Collective (Covina, CA, EUA)",
+
+              // Portuguese Translation
+              tos_header_title: "Termos de Serviço",
+              tos_header_desc: "ryopc Global Initiative - Acordo de Usuário Oficial",
+              tos_section_title: "Termos de Serviço (利用規約)",
+              tos_back_btn: "⬅ Retornar ao Hub de Documentos",
+              tos_footer_meta: "Promulgado: 22 de Abril de 2026 | Atualizado: 30 de Abril de 2026<br>Operação e Gestão: ryopc Bureau de Operações Voluntárias<br><strong>Diretor: game_ryo (ryopcCEO)</strong>",
+
+              tos_art1_title: "Artigo 1 (Provisões Gerais e Missão)",
+              tos_art1_p1: "1. Estes Termos de Serviço definem as condições de uso para o suporte de computadores (doravante denominado \"o Serviço\") fornecido de forma online pelo Grupo Voluntário ryopc (doravante \"o Grupo\").",
+              tos_art1_p2: "2. O Grupo é uma iniciativa sem fins lucrativos de trabalho voluntário focado na eliminação do abismo digital e na garantia de uso seguro de computadores. O suporte é fornecido apenas aos usuários que concordam integralmente com estes Termos.",
+              tos_art1_p3: "3. Os usuários são considerados concordantes com estes termos no momento em que registram contas ou abrem tickets de solicitação de suporte técnico.",
+
+              tos_art2_title: "Artigo 2 (Princípio Sem Fins Lucrativos e Política 100% Gratuita)",
+              tos_art2_p1: "1. Este serviço nunca irá cobrar qualquer quantia financeira em nenhuma circunstância ou pretexto, incluindo pagamentos ou gratificações. (Doações voluntárias serão aceitas ao critério do usuário).",
+              tos_art2_p2: "2. Nenhum anúncio de terceiros será exibido nas plataformas de comunicações oficiais ou e-mails enviados pelo Grupo.",
+              tos_art2_p3: "3. Os membros voluntários do suporte técnico são proibidos de recomendar, direcionar ou coagir usuários a adquirirem produtos ou assinaturas pagas.",
+
+              tos_art3_title: "Artigo 3 (Escopo do Suporte e Meios de Fornecimento)",
+              tos_art3_p1: "1. A assistência técnica é operada de forma inteiramente online via chat, e-mail ou infraestrutura de acesso remoto. Suporte presencial não está disponível.",
+              tos_art3_p2: "2. Iniciar conexões remotas exige consentimento textual expresso do usuário imediatamente antes de cada sessão.",
+              tos_art3_p3: "3. O usuário reconhece que o serviço não garante solução definitiva; o suporte é consultivo baseado no escopo e no conhecimento da equipe voluntária.",
+
+              tos_art4_title: "Artigo 4 (Deveres do Usuário e Backup Obrigatório)",
+              tos_art4_p1: "1. Os usuários devem garantir backups de todos os parâmetros importantes de máquina, perfis de sistemas e arquivos (fotos, documentos, configurações) em mídias físicas externas ou servidores cloud antes do contato com nosso suporte.",
+              tos_art4_p2: "2. O Grupo tem zero responsabilidade por corrupção de dados ou falhas subsequentes geradas durante a assistência caso o usuário tenha ignorado backups seguros.",
+
+              tos_art5_title: "Artigo 5 (Atividades Proibidas e Suspensão de Acesso)",
+              tos_art5_desc: "O Grupo reserva o direito de suspender os acessos aos sistemas e banir contas de usuários imediatamente caso realizem as seguintes infrações:",
+              tos_art5_li1: "Condutas de ódio, xingamentos, preconceito ou importunação sexual direcionadas aos membros do time de voluntários.",
+              tos_art5_li2: "Tentativas de interceptar dados confidenciais de rede, senhas internas ou dados de identificação pessoal.",
+              tos_art5_li3: "Fingir ser parte da equipe ou usar as insígnias do Grupo para realizar golpes ou induzir terceiros ao erro.",
+              tos_art5_li4: "Lançamento de spam, múltiplos acessos repetitivos ou scripts de automação nos chats de suporte.",
+
+              tos_art6_title: "Artigo 6 (Exclusão e Limitações de Responsabilidade)",
+              tos_art6_p1: "1. O Grupo e sua equipe voluntária não serão responsabilizados por quaisquer danos diretos, indiretos ou acidentais decorrentes do uso da assistência técnica, exceto se houver negligência gravíssima comprovada.",
+              tos_art6_p2: "2. Não possuímos responsabilidades por desconexões inesperadas decorrentes de limitações físicas do host provedor (InfinityFree).",
+              tos_art6_p3: "3. Usuários assumem total autonomia operacional caso haja alterações de registros de sistemas operacionais ou configurações profundas aplicadas durante reparos ativos.",
+
+              tos_art7_title: "Artigo 7 (Código de Conduta da Equipe e Denúncias)",
+              tos_art7_p1: "1. Todo o time de suporte opera sob conformidade e proteção à privacidade, sendo rigorosamente proibido solicitar ou salvar senhas de contas pessoais dos usuários.",
+              tos_art7_p2: "2. Caso suspeite de violações e desvios morais de membros do suporte, o usuário pode reportar o fato no link de \"Denúncia de Conduta\".",
+              tos_art7_p3: "3. O setor administrativo avalia as violações com isonomia. Casos validados de abuso geram demissões do suporte com suspensão permanente de credenciais do Grupo.",
+
+              tos_art8_title: "Artigo 8 (Alterações das Condições)",
+              tos_art8_desc: "O Grupo tem autonomia para reestruturar as presentes condições sem notificações prévias para se ajustar às demandas de segurança de rede.",
+
+              tos_art9_title: "Artigo 9 (Uso de Credenciais OAuth)",
+              tos_art9_desc: "Usuários acessando o site por meio de integrações (Google, GitHub, LINE OAuth) concordam com os seguintes critérios:",
+              tos_art9_li1: "A guarda e segurança do token são de responsabilidade do usuário; o Grupo não se responsabiliza por invasões externas causadas por descuidos com credenciais locais.",
+              tos_art9_li2: "Não garantimos estabilidade caso haja indisponibilidade temporária de rotas canônicas de acesso nas APIs de login parceiras.",
+              tos_art9_li3: "Nosso banco de dados rastreia apenas os metadados e tokens criptografados mínimos; nunca guardamos ou solicitamos senhas puras de suas respectivas plataformas OAuth.",
+              tos_art9_li4: "A exclusão de sua respectiva conta de autenticação primária OAuth gera invalidade automática na integridade dos históricos de acessos no sistema ryopc."
+          }
+      };
+
+      // --- 状態管理用キー ---
+      const LANG_KEY = "ryopc_preferred_language";
+
+
+      // ドキュメント読み込み時の初期化
+      document.addEventListener("DOMContentLoaded", () => {
+          // 1. 言語の設定
+          const savedLang = localStorage.getItem(LANG_KEY) || "ja";
+          document.getElementById("langSelector").value = savedLang;
+          changeLanguage(savedLang);
     </script>
-
-</body>
+  </body>
 </html>

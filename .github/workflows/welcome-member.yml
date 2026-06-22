@@ -4,7 +4,7 @@ on:
   pull_request:
     types: [closed]
     paths:
-      - 'member.json'
+      - "member.json"
 
 jobs:
   welcome:
@@ -23,7 +23,7 @@ jobs:
                             `Hi @${prAuthor}, your Pull Request has been successfully merged!\n\n` +
                             `Thank you for adding your info to \`member.json\` and joining our mission to ensure global digital equity. We are thrilled to have you as part of the team. 🤝\n\n` +
                             `*“Ensuring global digital equity, one device at a time.” — ryopcCEO*`;
-            
+
             await github.rest.issues.createComment({
               owner: context.repo.owner,
               repo: context.repo.repo,

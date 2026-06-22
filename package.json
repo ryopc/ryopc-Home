@@ -5,16 +5,11 @@
   "scripts": {
     "clean": "node -e \"const fs = require('fs'); fs.rmSync('_site', { recursive: true, force: true }); fs.rmSync('.cache', { recursive: true, force: true });\"",
     "build": "npm run clean && npx @11ty/eleventy",
-    "test": "npm run build && npx eslint .",
+    "test": "npm run format && npm run build && npx eslint . && husky install",
     "start": "npm run clean && npx @11ty/eleventy --serve",
     "dev": "npm start",
-    "lint:fix": "npx eslint . --fix",
-    "p":"git push",
-    "up": "git pull",
-    "st": "git status",
-    "br": "git branch",
-    "co": "git checkout",
-    "cm": "npm run test && git commit -m && git push"
+    "format": "npx prettier --write .",
+    "lint:fix": "npx eslint . --fix"
   },
   "engines": {
     "node": ">=18.18.0"
@@ -22,7 +17,10 @@
   "devDependencies": {
     "@11ty/eleventy": "^3.0.0",
     "dotenv": "^17.4.2",
-    "eslint": "^9.0.0"
+    "eslint": "^9.0.0",
+    "husky": "^9.1.7",
+    "localtunnel": "^2.0.2",
+    "prettier": "^3.8.4"
   },
   "dependencies": {
     "@11ty/eleventy-img": "^6.0.4"

@@ -1,634 +1,995 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover"
+    />
     <title>Privacy Policy - ryopc Global Digital Support</title>
-    
-    <!-- 🎨 Global Canonical Favicon Link -->
-    <link rel="icon" type="image/png" href="https://cdn.jsdelivr.net/gh/ryopc/ryopc-Home@main/favicon.png">
-    <link rel="preconnect" href="https://googleapis.com">
-    <link rel="preconnect" href="https://gstatic.com" crossorigin>
-    <link href="https://googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
 
-<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
-<link rel="stylesheet" id="silktide-consent-manager-css" href="https://cdn.jsdelivr.net/gh/silktide/consent-manager@v2.0.0/silktide-consent-manager.css" integrity="sha384-IO1E/jCrQXyH5rwcI0SXP7OXw47JFqQNDQcKhbFvqnL2IunBxxwE2Ne5XyAmCqKs" crossorigin="anonymous">
-<script src="https://cdn.jsdelivr.net/gh/silktide/consent-manager@v2.0.0/silktide-consent-manager.js" integrity="sha384-j4NIMOecmtzMWe9GJADIIe5hTlHG63aiTQ/2XorW10RNyQJg+IU+xwFVDy45wBah" crossorigin="anonymous"></script>
-<script>
-window.silktideConsentManager.init({
-  backdrop: {
-    show: true
-  },
-  icon: {
-    position: "bottomLeft"
-  },
-  prompt: {
-    position: "bottomRight"
-  },
-  consentTypes: [
-    {
-      id: "essential",
-      label: "Essential",
-      description: "<p>These cookies are necessary for the website to function properly and cannot be switched off. They help with things like logging in and setting your privacy preferences.</p>",
-      required: true,
-      onAccept: function() {
-        console.log('Add logic for the required Essential consent type here');
-      }
-    },
-    {
-      id: "analytics",
-      label: "Analytics",
-      description: "<p>These cookies help us improve the site by tracking which pages are most popular and how visitors move around the site.</p>",
-      required: false,
-      onAccept: function() {
-        console.log('Add accept logic for Analytics consent type here');
-      },
-      onReject: function() {
-        console.log('Add reject logic for Analytics consent type here');
-      }
-    },
-    {
-      id: "customer_support",
-      label: "Customer Support",
-      description: "<p>This cookie helps us provide you with the best possible support.</p>",
-      required: false,
-      scripts: [
-        {
-          url: "https://rawcdn.githack.com/ryopc/Archive/fc3acd1142e5108dc5263e4b112a768988cccb4d/Channel-Talk.js",
-          load: "async"
-        }
-      ],
-      onAccept: function() {
-        // Custom script loaded: https://rawcdn.githack.com/ryopc/Archive/fc3acd1142e5108dc5263e4b112a768988cccb4d/Channel-Talk.js
-      }
-    }
-  ],
-  text: {
-    prompt: {
-      description: "<p>This site uses cookies to improve the user experience, provide personalized content, and analyze traffic.</p>",
-      acceptAllButtonText: "Accept all",
-      acceptAllButtonAccessibleLabel: "Accept all cookies",
-      rejectNonEssentialButtonText: "Reject non-essential",
-      rejectNonEssentialButtonAccessibleLabel: "Reject all non-essential cookies",
-      preferencesButtonText: "Preferences",
-      preferencesButtonAccessibleLabel: "Toggle preferences"
-    },
-    preferences: {
-      title: "Customize your cookie preferences",
-      description: "<p>We respect your right to privacy. You can choose not to allow some types of cookies. Your cookie preferences will apply across our website.</p>",
-      saveButtonText: "Save and close",
-      saveButtonAccessibleLabel: "Save your cookie preferences",
-      creditLinkText: "Get this banner for free",
-      creditLinkAccessibleLabel: "Get this banner for free"
-    }
-  }
-});
-</script>
-    
+    <!-- 🎨 Global Canonical Favicon Link -->
+    <link
+      rel="icon"
+      type="image/png"
+      href="https://cdn.jsdelivr.net/gh/ryopc/ryopc-Home@main/favicon.png"
+    />
+    <link rel="preconnect" href="https://googleapis.com" />
+    <link rel="preconnect" href="https://gstatic.com" crossorigin />
+    <link
+      href="https://googleapis.com/css2?family=Inter:wght@400;600;800&display=swap"
+      rel="stylesheet"
+    />
+
+    <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin />
+    <link
+      rel="stylesheet"
+      id="silktide-consent-manager-css"
+      href="https://cdn.jsdelivr.net/gh/silktide/consent-manager@v2.0.0/silktide-consent-manager.css"
+      integrity="sha384-IO1E/jCrQXyH5rwcI0SXP7OXw47JFqQNDQcKhbFvqnL2IunBxxwE2Ne5XyAmCqKs"
+      crossorigin="anonymous"
+    />
+    <script
+      src="https://cdn.jsdelivr.net/gh/silktide/consent-manager@v2.0.0/silktide-consent-manager.js"
+      integrity="sha384-j4NIMOecmtzMWe9GJADIIe5hTlHG63aiTQ/2XorW10RNyQJg+IU+xwFVDy45wBah"
+      crossorigin="anonymous"
+    ></script>
+    <script>
+      window.silktideConsentManager.init({
+        backdrop: {
+          show: true,
+        },
+        icon: {
+          position: "bottomLeft",
+        },
+        prompt: {
+          position: "bottomRight",
+        },
+        consentTypes: [
+          {
+            id: "essential",
+            label: "Essential",
+            description:
+              "<p>These cookies are necessary for the website to function properly and cannot be switched off. They help with things like logging in and setting your privacy preferences.</p>",
+            required: true,
+            onAccept: function () {
+              console.log(
+                "Add logic for the required Essential consent type here",
+              );
+            },
+          },
+          {
+            id: "analytics",
+            label: "Analytics",
+            description:
+              "<p>These cookies help us improve the site by tracking which pages are most popular and how visitors move around the site.</p>",
+            required: false,
+            onAccept: function () {
+              console.log("Add accept logic for Analytics consent type here");
+            },
+            onReject: function () {
+              console.log("Add reject logic for Analytics consent type here");
+            },
+          },
+          {
+            id: "customer_support",
+            label: "Customer Support",
+            description:
+              "<p>This cookie helps us provide you with the best possible support.</p>",
+            required: false,
+            scripts: [
+              {
+                url: "https://rawcdn.githack.com/ryopc/Archive/fc3acd1142e5108dc5263e4b112a768988cccb4d/Channel-Talk.js",
+                load: "async",
+              },
+            ],
+            onAccept: function () {
+              // Custom script loaded: https://rawcdn.githack.com/ryopc/Archive/fc3acd1142e5108dc5263e4b112a768988cccb4d/Channel-Talk.js
+            },
+          },
+        ],
+        text: {
+          prompt: {
+            description:
+              "<p>This site uses cookies to improve the user experience, provide personalized content, and analyze traffic.</p>",
+            acceptAllButtonText: "Accept all",
+            acceptAllButtonAccessibleLabel: "Accept all cookies",
+            rejectNonEssentialButtonText: "Reject non-essential",
+            rejectNonEssentialButtonAccessibleLabel:
+              "Reject all non-essential cookies",
+            preferencesButtonText: "Preferences",
+            preferencesButtonAccessibleLabel: "Toggle preferences",
+          },
+          preferences: {
+            title: "Customize your cookie preferences",
+            description:
+              "<p>We respect your right to privacy. You can choose not to allow some types of cookies. Your cookie preferences will apply across our website.</p>",
+            saveButtonText: "Save and close",
+            saveButtonAccessibleLabel: "Save your cookie preferences",
+            creditLinkText: "Get this banner for free",
+            creditLinkAccessibleLabel: "Get this banner for free",
+          },
+        },
+      });
+    </script>
+
     <style>
-        :root {
-            --primary: #0052cc;      /* Tech Blue */
-            --dark: #0a192f;         /* Cyber Dark Navy */
-            --accent: #00bfff;       /* Cyber Aqua Blue */
-            --bg: #f8fafc;           /* Clean Gray Base */
-            --text: #334155;
-            /* 共通変数も追加定義 */
-            --primary-light: #0764f1; --dark-light: #172a45; --text-light: #94a3b8; --white: #ffffff;
-            --glass: rgba(13, 29, 52, 0.9); --transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
-            --gradient-accent: linear-gradient(135deg, #00bfff, #0052cc);
-        }
-        html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
-        body {
-            font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
-            margin: 0; padding: 0; background-color: var(--bg); color: var(--text); line-height: 1.7;
-            -webkit-font-smoothing: antialiased;
-        }
-        #scroll-progress { position: fixed; top: 0; left: 0; width: 0%; height: 4px; background: var(--gradient-accent); z-index: 1000001; }
-        .navbar { position: fixed; top: 0; left: 0; width: 100%; background: var(--glass); backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px); display: flex; justify-content: space-between; align-items: center; padding: 1rem 2.5rem; z-index: 100000; border-bottom: 1px solid rgba(255, 255, 255, 0.1); }
-        .nav-logo { color: var(--white); font-weight: 800; font-size: 1.2rem; text-decoration: none; }
+      :root {
+        --primary: #0052cc; /* Tech Blue */
+        --dark: #0a192f; /* Cyber Dark Navy */
+        --accent: #00bfff; /* Cyber Aqua Blue */
+        --bg: #f8fafc; /* Clean Gray Base */
+        --text: #334155;
+        /* 共通変数も追加定義 */
+        --primary-light: #0764f1;
+        --dark-light: #172a45;
+        --text-light: #94a3b8;
+        --white: #ffffff;
+        --glass: rgba(13, 29, 52, 0.9);
+        --transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+        --gradient-accent: linear-gradient(135deg, #00bfff, #0052cc);
+      }
+      html {
+        scroll-behavior: smooth;
+        -webkit-text-size-adjust: 100%;
+      }
+      body {
+        font-family: "Inter", "Segoe UI", system-ui, sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: var(--bg);
+        color: var(--text);
+        line-height: 1.7;
+        -webkit-font-smoothing: antialiased;
+      }
+      #scroll-progress {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 0%;
+        height: 4px;
+        background: var(--gradient-accent);
+        z-index: 1000001;
+      }
+      .navbar {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        background: var(--glass);
+        backdrop-filter: blur(15px);
+        -webkit-backdrop-filter: blur(15px);
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 1rem 2.5rem;
+        z-index: 100000;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      }
+      .nav-logo {
+        color: var(--white);
+        font-weight: 800;
+        font-size: 1.2rem;
+        text-decoration: none;
+      }
+      header {
+        background: linear-gradient(135deg, var(--dark) 0%, #172a45 100%);
+        color: white;
+        padding: 12rem 1.2rem 11rem;
+        text-align: center;
+        border-bottom: 4px solid var(--accent);
+      }
+      header h1 {
+        margin: 0;
+        font-size: 2.5rem;
+        font-weight: 800;
+        letter-spacing: -1px;
+        background: linear-gradient(to right, #ffffff, var(--accent));
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        word-wrap: break-word;
+      }
+      header p {
+        font-size: 1.05rem;
+        max-width: 600px;
+        margin: 1.2rem auto 0 auto;
+        color: #94a3b8;
+      }
+      .container {
+        max-width: 850px;
+        margin: -5rem auto 6rem;
+        padding: 0 1.2rem;
+        position: relative;
+        z-index: 10;
+      }
+      .docs-section {
+        background: white;
+        padding: 2rem;
+        border-radius: 16px;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.03);
+        margin-bottom: 2rem;
+        border: 1px solid #e2e8f0;
+        text-align: left;
+        transition: all 0.2s ease;
+      }
+      h2 {
+        color: var(--dark);
+        font-size: 1.5rem;
+        margin-top: 0;
+        border-bottom: 2px solid #e2e8f0;
+        padding-bottom: 0.5rem;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+      }
+      h2::before {
+        content: "🔷";
+        color: var(--accent);
+        font-size: 1.1rem;
+      }
+      h3 {
+        color: var(--primary);
+        font-size: 1.15rem;
+        margin-top: 1.5rem;
+        margin-bottom: 0.5rem;
+      }
+      p,
+      ul {
+        font-size: 1rem;
+        color: #475569;
+      }
+      ul {
+        padding-left: 1.2rem;
+      }
+      li {
+        margin-bottom: 0.5rem;
+      }
+
+      .back-button {
+        display: inline-block;
+        background: #1e293b;
+        color: #94a3b8 !important;
+        text-decoration: none;
+        padding: 0.6rem 1.2rem;
+        border-radius: 8px;
+        font-weight: 600;
+        font-size: 0.9rem;
+        margin-top: 1.5rem;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        transition: all 0.2s ease;
+      }
+      footer {
+        background-color: var(--dark);
+        color: #94a3b8;
+        padding: 4rem 1.2rem;
+        text-align: center;
+        font-size: 0.9rem;
+      }
+
+      @media (hover: hover) and (pointer: fine) {
         header {
-            background: linear-gradient(135deg, var(--dark) 0%, #172a45 100%);
-            color: white; padding: 12rem 1.2rem 11rem; text-align: center; border-bottom: 4px solid var(--accent);
+          padding: 13rem 1rem 11rem;
         }
         header h1 {
-            margin: 0; font-size: 2.5rem; font-weight: 800; letter-spacing: -1px;
-            background: linear-gradient(to right, #ffffff, var(--accent));
-            -webkit-background-clip: text; -webkit-text-fill-color: transparent; word-wrap: break-word;
+          font-size: 3rem;
         }
-        header p { font-size: 1.05rem; max-width: 600px; margin: 1.2rem auto 0 auto; color: #94a3b8; }
-        .container { max-width: 850px; margin: -5rem auto 6rem; padding: 0 1.2rem; position: relative; z-index: 10; }
-        .docs-section {
-            background: white; padding: 2rem; border-radius: 16px; box-shadow: 0 4px 20px rgba(0, 0, 0, 0.03);
-            margin-bottom: 2rem; border: 1px solid #e2e8f0; text-align: left; transition: all 0.2s ease;
+        .docs-section:hover {
+          border-color: var(--accent);
+          box-shadow: 0 15px 30px rgba(0, 82, 204, 0.08);
+        }
+        .back-button:hover {
+          background: #334155;
+          color: white !important;
+          transform: translateX(-2px);
         }
         h2 {
-            color: var(--dark); font-size: 1.5rem; margin-top: 0; border-bottom: 2px solid #e2e8f0;
-            padding-bottom: 0.5rem; display: flex; align-items: center; gap: 0.5rem;
+          font-size: 1.7rem;
         }
-        h2::before { content: "🔷"; color: var(--accent); font-size: 1.1rem; }
-        h3 { color: var(--primary); font-size: 1.15rem; margin-top: 1.5rem; margin-bottom: 0.5rem; }
-        p, ul { font-size: 1rem; color: #475569; }
-        ul { padding-left: 1.2rem; } li { margin-bottom: 0.5rem; }
-        
-        .back-button {
-            display: inline-block;
-            background: #1e293b;
-            color: #94a3b8 !important;
-            text-decoration: none;
-            padding: 0.6rem 1.2rem;
-            border-radius: 8px;
-            font-weight: 600;
-            font-size: 0.9rem;
-            margin-top: 1.5rem;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            transition: all 0.2s ease;
+      }
+      @media (hover: none) {
+        header h1 {
+          font-size: calc(1.8rem + 2vw);
         }
-        footer { background-color: var(--dark); color: #94a3b8; padding: 4rem 1.2rem; text-align: center; font-size: 0.9rem; }
-        
-        @media (hover: hover) and (pointer: fine) {
-            header { padding: 13rem 1rem 11rem; } header h1 { font-size: 3rem; }
-            .docs-section:hover { border-color: var(--accent); box-shadow: 0 15px 30px rgba(0, 82, 204, 0.08); }
-            .back-button:hover { background: #334155; color: white !important; transform: translateX(-2px); }
-            h2 { font-size: 1.7rem; }
-        }
-        @media (hover: none) { header h1 { font-size: calc(1.8rem + 2vw); } }
+      }
 
-        /* --- 以下、削除を行わずに追加した各パーツの仕上げ用CSSスタイル --- */
-        .lang-selector {
-            background: rgba(255, 255, 255, 0.1);
-            color: var(--white);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            padding: 0.5rem 1rem;
-            border-radius: 20px;
-            font-size: 0.9rem;
-            cursor: pointer;
-            outline: none;
-            transition: var(--transition);
+      /* --- 以下、削除を行わずに追加した各パーツの仕上げ用CSSスタイル --- */
+      .lang-selector {
+        background: rgba(255, 255, 255, 0.1);
+        color: var(--white);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        padding: 0.5rem 1rem;
+        border-radius: 20px;
+        font-size: 0.9rem;
+        cursor: pointer;
+        outline: none;
+        transition: var(--transition);
+      }
+      .lang-selector option {
+        background: var(--dark-light);
+        color: var(--white);
+      }
+      .lang-selector:hover {
+        background: rgba(255, 255, 255, 0.2);
+        border-color: var(--accent);
+      }
+      .menu-toggle {
+        display: none;
+        flex-direction: column;
+        gap: 6px;
+        background: none;
+        border: none;
+        cursor: pointer;
+        padding: 4px;
+        z-index: 100002;
+      }
+      .menu-toggle span {
+        display: block;
+        width: 25px;
+        height: 2px;
+        background-color: var(--white);
+        transition: var(--transition);
+        border-radius: 2px;
+      }
+      .nav-links {
+        display: flex;
+        list-style: none;
+        gap: 2rem;
+        margin: 0;
+        padding: 0;
+        transition: var(--transition);
+      }
+      .nav-links a {
+        color: var(--text-light);
+        text-decoration: none;
+        font-weight: 600;
+        font-size: 0.95rem;
+        transition: var(--transition);
+      }
+      .nav-links a:hover {
+        color: var(--white);
+      }
+      .ch-cookie-banner {
+        position: fixed;
+        bottom: 2rem;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 90%;
+        max-width: 600px;
+        background: var(--dark-light);
+        border: 1px solid rgba(255, 255, 255, 0.15);
+        border-radius: 24px;
+        padding: 1.5rem;
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+        z-index: 1000000;
+        display: flex;
+        flex-direction: column;
+        gap: 1.25rem;
+        transition:
+          opacity 0.5s ease,
+          transform 0.5s ease;
+      }
+      .ch-cookie-banner.ch-hidden {
+        opacity: 0;
+        transform: translate(-50%, 30px);
+        pointer-events: none;
+      }
+      .ch-cookie-text {
+        color: var(--white);
+        font-size: 0.95rem;
+        line-height: 1.6;
+      }
+      .ch-cookie-buttons {
+        display: flex;
+        gap: 1rem;
+        justify-content: flex-end;
+      }
+      .ch-cookie-btn {
+        padding: 0.75rem 1.5rem;
+        border-radius: 12px;
+        font-weight: 600;
+        font-size: 0.9rem;
+        cursor: pointer;
+        transition: var(--transition);
+        border: none;
+      }
+      .ch-btn-deny {
+        background: rgba(255, 255, 255, 0.1);
+        color: var(--white);
+      }
+      .ch-btn-deny:hover {
+        background: rgba(255, 255, 255, 0.2);
+      }
+      .ch-btn-accept {
+        background: var(--primary);
+        color: var(--white);
+      }
+      .ch-btn-accept:hover {
+        background: var(--primary-light);
+        box-shadow: 0 0 15px rgba(0, 82, 204, 0.4);
+      }
+      #special-mobile-chat-container {
+        position: fixed;
+        bottom: 1.5rem;
+        right: 1.5rem;
+        z-index: 99999;
+        display: none;
+      }
+      #special-mobile-chat-btn {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        background: var(--gradient-accent);
+        color: var(--white);
+        border: none;
+        padding: 0.8rem 1.5rem;
+        border-radius: 30px;
+        font-weight: 800;
+        font-size: 0.95rem;
+        box-shadow: 0 10px 25px rgba(0, 191, 255, 0.3);
+        cursor: pointer;
+        transition: var(--transition);
+      }
+      #special-mobile-chat-btn:hover {
+        transform: scale(1.05);
+        box-shadow: 0 12px 30px rgba(0, 191, 255, 0.4);
+      }
+      #special-mobile-close-btn {
+        position: absolute;
+        top: -8px;
+        right: -8px;
+        background: var(--white);
+        color: var(--dark);
+        width: 22px;
+        height: 22px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 14px;
+        font-weight: bold;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+        cursor: pointer;
+        border: 1px solid rgba(0, 0, 0, 0.05);
+      }
+      .status-badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        background: rgba(255, 255, 255, 0.05);
+        padding: 0.5rem 1.2rem;
+        border-radius: 30px;
+        font-size: 0.85rem;
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        color: var(--text-light);
+      }
+      .status-dot {
+        width: 8px;
+        height: 8px;
+        background-color: #2ec4b6;
+        border-radius: 50%;
+        box-shadow: 0 0 8px #2ec4b6;
+        animation: pulse 2s infinite;
+      }
+      @keyframes pulse {
+        0% {
+          transform: scale(0.95);
+          opacity: 0.5;
         }
-        .lang-selector option {
-            background: var(--dark-light);
-            color: var(--white);
+        50% {
+          transform: scale(1.1);
+          opacity: 1;
         }
-        .lang-selector:hover {
-            background: rgba(255, 255, 255, 0.2);
-            border-color: var(--accent);
+        100% {
+          transform: scale(0.95);
+          opacity: 0.5;
+        }
+      }
+      @media (max-width: 768px) {
+        .navbar {
+          padding: 1rem 1.5rem;
         }
         .menu-toggle {
-            display: none;
-            flex-direction: column;
-            gap: 6px;
-            background: none;
-            border: none;
-            cursor: pointer;
-            padding: 4px;
-            z-index: 100002;
-        }
-        .menu-toggle span {
-            display: block;
-            width: 25px;
-            height: 2px;
-            background-color: var(--white);
-            transition: var(--transition);
-            border-radius: 2px;
+          display: flex;
         }
         .nav-links {
-            display: flex;
-            list-style: none;
-            gap: 2rem;
-            margin: 0;
-            padding: 0;
-            transition: var(--transition);
+          position: fixed;
+          top: 70px;
+          right: -100%;
+          width: 250px;
+          height: calc(100vh - 70px);
+          background: var(--glass);
+          backdrop-filter: blur(25px);
+          -webkit-backdrop-filter: blur(25px);
+          flex-direction: column;
+          padding: 3rem 2rem;
+          gap: 2rem;
+          border-left: 1px solid rgba(255, 255, 255, 0.1);
         }
-        .nav-links a {
-            color: var(--text-light);
-            text-decoration: none;
-            font-weight: 600;
-            font-size: 0.95rem;
-            transition: var(--transition);
+        .nav-links.active {
+          right: 0;
         }
-        .nav-links a:hover {
-            color: var(--white);
-        }
-        .ch-cookie-banner {
-            position: fixed;
-            bottom: 2rem;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 90%;
-            max-width: 600px;
-            background: var(--dark-light);
-            border: 1px solid rgba(255, 255, 255, 0.15);
-            border-radius: 24px;
-            padding: 1.5rem;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
-            z-index: 1000000;
-            display: flex;
-            flex-direction: column;
-            gap: 1.25rem;
-            transition: opacity 0.5s ease, transform 0.5s ease;
-        }
-        .ch-cookie-banner.ch-hidden {
-            opacity: 0;
-            transform: translate(-50%, 30px);
-            pointer-events: none;
-        }
-        .ch-cookie-text {
-            color: var(--white);
-            font-size: 0.95rem;
-            line-height: 1.6;
-        }
-        .ch-cookie-buttons {
-            display: flex;
-            gap: 1rem;
-            justify-content: flex-end;
-        }
-        .ch-cookie-btn {
-            padding: 0.75rem 1.5rem;
-            border-radius: 12px;
-            font-weight: 600;
-            font-size: 0.9rem;
-            cursor: pointer;
-            transition: var(--transition);
-            border: none;
-        }
-        .ch-btn-deny {
-            background: rgba(255, 255, 255, 0.1);
-            color: var(--white);
-        }
-        .ch-btn-deny:hover {
-            background: rgba(255, 255, 255, 0.2);
-        }
-        .ch-btn-accept {
-            background: var(--primary);
-            color: var(--white);
-        }
-        .ch-btn-accept:hover {
-            background: var(--primary-light);
-            box-shadow: 0 0 15px rgba(0, 82, 204, 0.4);
-        }
-        #special-mobile-chat-container {
-            position: fixed;
-            bottom: 1.5rem;
-            right: 1.5rem;
-            z-index: 99999;
-            display: none;
-        }
-        #special-mobile-chat-btn {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            background: var(--gradient-accent);
-            color: var(--white);
-            border: none;
-            padding: 0.8rem 1.5rem;
-            border-radius: 30px;
-            font-weight: 800;
-            font-size: 0.95rem;
-            box-shadow: 0 10px 25px rgba(0, 191, 255, 0.3);
-            cursor: pointer;
-            transition: var(--transition);
-        }
-        #special-mobile-chat-btn:hover {
-            transform: scale(1.05);
-            box-shadow: 0 12px 30px rgba(0, 191, 255, 0.4);
-        }
-        #special-mobile-close-btn {
-            position: absolute;
-            top: -8px;
-            right: -8px;
-            background: var(--white);
-            color: var(--dark);
-            width: 22px;
-            height: 22px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 14px;
-            font-weight: bold;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.15);
-            cursor: pointer;
-            border: 1px solid rgba(0,0,0,0.05);
-        }
-        .status-badge {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            background: rgba(255, 255, 255, 0.05);
-            padding: 0.5rem 1.2rem;
-            border-radius: 30px;
-            font-size: 0.85rem;
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            color: var(--text-light);
-        }
-        .status-dot {
-            width: 8px;
-            height: 8px;
-            background-color: #2ec4b6;
-            border-radius: 50%;
-            box-shadow: 0 0 8px #2ec4b6;
-            animation: pulse 2s infinite;
-        }
-        @keyframes pulse {
-            0% { transform: scale(0.95); opacity: 0.5; }
-            50% { transform: scale(1.1); opacity: 1; }
-            100% { transform: scale(0.95); opacity: 0.5; }
-        }
-        @media (max-width: 768px) {
-            .navbar { padding: 1rem 1.5rem; }
-            .menu-toggle { display: flex; }
-            .nav-links {
-                position: fixed;
-                top: 70px;
-                right: -100%;
-                width: 250px;
-                height: calc(100vh - 70px);
-                background: var(--glass);
-                backdrop-filter: blur(25px);
-                -webkit-backdrop-filter: blur(25px);
-                flex-direction: column;
-                padding: 3rem 2rem;
-                gap: 2rem;
-                border-left: 1px solid rgba(255, 255, 255, 0.1);
-            }
-            .nav-links.active { right: 0; }
-        }
+      }
     </style>
-</head>
-<body>
-
+  </head>
+  <body>
     <div id="scroll-progress"></div>
 
     <nav class="navbar">
-        <a href="../" class="nav-logo">ryopc org</a>
-        
-        <div class="nav-right" style="display: flex; align-items: center; gap: 1rem;">
-            <select class="lang-selector" id="langSelector" onchange="changeLanguage(this.value)">
-                <option value="ja">日本語</option>
-                <option value="en">English</option>
-                <option value="pt">Português</option>
-            </select>
+      <a href="../" class="nav-logo">ryopc org</a>
 
-            <button class="menu-toggle" id="menuToggle">
-                <span></span><span></span><span></span>
-            </button>
+      <div
+        class="nav-right"
+        style="display: flex; align-items: center; gap: 1rem"
+      >
+        <select
+          class="lang-selector"
+          id="langSelector"
+          onchange="changeLanguage(this.value)"
+        >
+          <option value="ja">日本語</option>
+          <option value="en">English</option>
+          <option value="pt">Português</option>
+        </select>
 
-            <ul class="nav-links" id="navLinks">
-                <li><a href="../" data-t="nav_home">ホーム</a></li>
-                <li><a href="../#mission" data-t="nav_mission">ミッション</a></li>
-                <li><a href="../#services" data-t="nav_services">サービス</a></li>
-                <li><a href="/blog" data-t="nav_note">note</a></li>
-                <li><a href="/docs" data-t="nav_docs">ドキュメント</a></li>
-            </ul>
-        </div>
+        <button class="menu-toggle" id="menuToggle">
+          <span></span><span></span><span></span>
+        </button>
+
+        <ul class="nav-links" id="navLinks">
+          <li><a href="../" data-t="nav_home">ホーム</a></li>
+          <li><a href="../#mission" data-t="nav_mission">ミッション</a></li>
+          <li><a href="../#services" data-t="nav_services">サービス</a></li>
+          <li><a href="/blog" data-t="nav_note">note</a></li>
+          <li><a href="/docs" data-t="nav_docs">ドキュメント</a></li>
+        </ul>
+      </div>
     </nav>
 
     <header>
-        <h1 data-t="privacy_header_title">Privacy Policy</h1>
-        <p data-t="privacy_header_desc">ryopc Global Initiative - Official Privacy Protocol</p>
+      <h1 data-t="privacy_header_title">Privacy Policy</h1>
+      <p data-t="privacy_header_desc">
+        ryopc Global Initiative - Official Privacy Protocol
+      </p>
     </header>
 
     <div class="container">
-        <div class="docs-section">
-            <h2 data-t="privacy_section_title">Privacy Policy (個人情報保護方針)</h2>
-            
-            <h3 data-t="privacy_art1_title">Article 1 (Core Philosophy & Anti-Commercialism)</h3>
-            <p data-t="privacy_art1_desc">The ryopc Volunteer Group (hereinafter referred to as "the Group") is a non-profit, community-driven PC support initiative. We define user privacy as our "most sacred asset." We firmly state that we will never bow to commercial interests, and third-party advertisements or data monetization schemes are permanently barred from our ecosystem.</p>
+      <div class="docs-section">
+        <h2 data-t="privacy_section_title">
+          Privacy Policy (個人情報保護方針)
+        </h2>
 
-            <h3 data-t="privacy_art2_title">Article 2 (Data Collection & Data Minimization)</h3>
-            <p data-t="privacy_art2_desc">In absolute compliance with the "Data Minimization" principles mandated by the GDPR, the Group will never collect or process personal data beyond the strict baseline required to perform technical support operations.</p>
-            <ul>
-                <li data-t="privacy_art2_li1"><strong>Collected Metadata:</strong> Name (pseudonyms/nicknames fully accepted), Email Address, device hardware specifications, error logs, and Operating System metrics.</li>
-                <li data-t="privacy_art2_li2"><strong>Data Retention Architecture:</strong> All user telemetry is securely maintained via encrypted communication databases hosted on our network environment (InfinityFree database layer). Case files are subject to automated physical erasure scheduling once support records are closed.</li>
-            </ul>
+        <h3 data-t="privacy_art1_title">
+          Article 1 (Core Philosophy & Anti-Commercialism)
+        </h3>
+        <p data-t="privacy_art1_desc">
+          The ryopc Volunteer Group (hereinafter referred to as "the Group") is
+          a non-profit, community-driven PC support initiative. We define user
+          privacy as our "most sacred asset." We firmly state that we will never
+          bow to commercial interests, and third-party advertisements or data
+          monetization schemes are permanently barred from our ecosystem.
+        </p>
 
-            <h3 data-t="privacy_art3_title">Article 3 (Transport Security & Canonical Routing)</h3>
-            <p data-t="privacy_art3_desc">To fully secure transit integrity and shield user interactions from malicious network interception, this system strictly enforces Global SSL Encryption (HTTPS). Any legacy incoming traffic hitting the unsecured "http://" layer or utilizing "www." host subdomains will be automatically and non-destructively rewritten to our secure canonical root domain scheme: <code>https://</code> (non-www).</p>
+        <h3 data-t="privacy_art2_title">
+          Article 2 (Data Collection & Data Minimization)
+        </h3>
+        <p data-t="privacy_art2_desc">
+          In absolute compliance with the "Data Minimization" principles
+          mandated by the GDPR, the Group will never collect or process personal
+          data beyond the strict baseline required to perform technical support
+          operations.
+        </p>
+        <ul>
+          <li data-t="privacy_art2_li1">
+            <strong>Collected Metadata:</strong> Name (pseudonyms/nicknames
+            fully accepted), Email Address, device hardware specifications,
+            error logs, and Operating System metrics.
+          </li>
+          <li data-t="privacy_art2_li2">
+            <strong>Data Retention Architecture:</strong> All user telemetry is
+            securely maintained via encrypted communication databases hosted on
+            our network environment (InfinityFree database layer). Case files
+            are subject to automated physical erasure scheduling once support
+            records are closed.
+          </li>
+        </ul>
 
-            <h3 data-t="privacy_art4_title">Article 4 (Strict Staff Code of Conduct & Enforcement)</h3>
-            <p data-t="privacy_art4_desc">Every volunteer engineer onboarding into the Group is bound by an explicit, mandatory agreement to honor this Privacy Policy. To ensure robust user security, we enforce a strict Zero-Tolerance policy:</p>
-            <ul>
-                <li data-t="privacy_art4_li1"><strong>Actionable Infractions:</strong> Any privacy intrusion, unauthorized requests for user account passwords, aggressive conduct, or data utilization outside open support tickets.</li>
-                <li data-t="privacy_art4_li2"><strong>Reporting Gateways:</strong> A specialized "Staff Conduct Report" tracking module is natively embedded within our official site infrastructure.</li>
-                <li data-t="privacy_art4_li3"><strong>Disciplinary Resolution:</strong> Upon verification of any policy breach, the administration will execute immediate server level credentials deletion, resulting in permanent expulsion from the Group. High-severity breaches will trigger active evaluations for legal reporting channels.</li>
-            </ul>
+        <h3 data-t="privacy_art3_title">
+          Article 3 (Transport Security & Canonical Routing)
+        </h3>
+        <p data-t="privacy_art3_desc">
+          To fully secure transit integrity and shield user interactions from
+          malicious network interception, this system strictly enforces Global
+          SSL Encryption (HTTPS). Any legacy incoming traffic hitting the
+          unsecured "http://" layer or utilizing "www." host subdomains will be
+          automatically and non-destructively rewritten to our secure canonical
+          root domain scheme: <code>https://</code> (non-www).
+        </p>
 
-            <h3 data-t="privacy_art5_title">Article 5 (GDPR Compliance & Sovereign Data Rights)</h3>
-            <p data-t="privacy_art5_desc">The Group voluntarily extends standard GDPR frameworks to all global users, guaranteeing sovereign data privacy protections regardless of geographical origin:</p>
-            <ul>
-                <li data-t="privacy_art5_li1"><strong>Right to be Forgotten (Erasure):</strong> Users maintain a permanent right to command full, irreversible deletion of their account metadata and support interaction histories.</li>
-                <li data-t="privacy_art5_li2"><strong>Data Portability:</strong> Users may request copies of their system data in an open, machine-readable format.</li>
-            </ul>
+        <h3 data-t="privacy_art4_title">
+          Article 4 (Strict Staff Code of Conduct & Enforcement)
+        </h3>
+        <p data-t="privacy_art4_desc">
+          Every volunteer engineer onboarding into the Group is bound by an
+          explicit, mandatory agreement to honor this Privacy Policy. To ensure
+          robust user security, we enforce a strict Zero-Tolerance policy:
+        </p>
+        <ul>
+          <li data-t="privacy_art4_li1">
+            <strong>Actionable Infractions:</strong> Any privacy intrusion,
+            unauthorized requests for user account passwords, aggressive
+            conduct, or data utilization outside open support tickets.
+          </li>
+          <li data-t="privacy_art4_li2">
+            <strong>Reporting Gateways:</strong> A specialized "Staff Conduct
+            Report" tracking module is natively embedded within our official
+            site infrastructure.
+          </li>
+          <li data-t="privacy_art4_li3">
+            <strong>Disciplinary Resolution:</strong> Upon verification of any
+            policy breach, the administration will execute immediate server
+            level credentials deletion, resulting in permanent expulsion from
+            the Group. High-severity breaches will trigger active evaluations
+            for legal reporting channels.
+          </li>
+        </ul>
 
-            <h3 data-t="privacy_art6_title">Article 6 (Limited Liability & Hosting Attributes)</h3>
-            <p data-t="privacy_art6_desc">While the Group deploys maximum administrative security architectures, we explicitly state that due to the altruistic, pro-bono nature of this volunteer organization, we hold no liability for data corruption, server-side data losses stemming from base service limitations (InfinityFree network layers), or unexpected machine anomalies during active assistance. Users are required to back up all mission-critical data files prior to scheduling support sessions.</p>
+        <h3 data-t="privacy_art5_title">
+          Article 5 (GDPR Compliance & Sovereign Data Rights)
+        </h3>
+        <p data-t="privacy_art5_desc">
+          The Group voluntarily extends standard GDPR frameworks to all global
+          users, guaranteeing sovereign data privacy protections regardless of
+          geographical origin:
+        </p>
+        <ul>
+          <li data-t="privacy_art5_li1">
+            <strong>Right to be Forgotten (Erasure):</strong> Users maintain a
+            permanent right to command full, irreversible deletion of their
+            account metadata and support interaction histories.
+          </li>
+          <li data-t="privacy_art5_li2">
+            <strong>Data Portability:</strong> Users may request copies of their
+            system data in an open, machine-readable format.
+          </li>
+        </ul>
 
-            <h3 data-t="privacy_art7_title">Article 7 (Official Contacts)</h3>
-            <p data-t="privacy_art7_desc">All policy inquiries, structural Right-to-be-Forgotten data deletion commands, or complaints regarding staff compliance are accepted 24/7/365 via our automated web communication forms.</p>
-            <p><strong>Social Login Email Acquisition:</strong>  
-To streamline secure authentication, the Group utilizes Social Login providers (Google, GitHub, LINE).  
-During this process, the user's email address may be obtained strictly for identity verification, account management, and—only when the user explicitly opts in—for voluntary newsletter distribution.  
-No acquired email data will ever be used for advertising, profiling, or any commercial exploitation.</p>
+        <h3 data-t="privacy_art6_title">
+          Article 6 (Limited Liability & Hosting Attributes)
+        </h3>
+        <p data-t="privacy_art6_desc">
+          While the Group deploys maximum administrative security architectures,
+          we explicitly state that due to the altruistic, pro-bono nature of
+          this volunteer organization, we hold no liability for data corruption,
+          server-side data losses stemming from base service limitations
+          (InfinityFree network layers), or unexpected machine anomalies during
+          active assistance. Users are required to back up all mission-critical
+          data files prior to scheduling support sessions.
+        </p>
 
-            
-            <a href="../" class="back-button" data-t="privacy_back_btn">⬅ Return to Document Hub</a>
-        </div>
+        <h3 data-t="privacy_art7_title">Article 7 (Official Contacts)</h3>
+        <p data-t="privacy_art7_desc">
+          All policy inquiries, structural Right-to-be-Forgotten data deletion
+          commands, or complaints regarding staff compliance are accepted
+          24/7/365 via our automated web communication forms.
+        </p>
+        <p>
+          <strong>Social Login Email Acquisition:</strong> To streamline secure
+          authentication, the Group utilizes Social Login providers (Google,
+          GitHub, LINE). During this process, the user's email address may be
+          obtained strictly for identity verification, account management,
+          and—only when the user explicitly opts in—for voluntary newsletter
+          distribution. No acquired email data will ever be used for
+          advertising, profiling, or any commercial exploitation.
+        </p>
+
+        <a href="../" class="back-button" data-t="privacy_back_btn"
+          >⬅ Return to Document Hub</a
+        >
+      </div>
     </div>
 
     <div id="chCookieBanner" class="ch-cookie-banner ch-hidden">
-        <div class="ch-cookie-text" data-t="cookie_text">
-            <strong>About the Use of Cookies</strong><br>
-            This site uses cookies to provide chat support and improve your user experience. By agreeing, you will be able to use our chat support service.
-        </div>
-        <div class="ch-cookie-buttons">
-            <button class="ch-cookie-btn ch-btn-deny" onclick="chDenyCookie()" data-t="cookie_deny">拒否</button>
-            <button class="ch-cookie-btn ch-btn-accept" onclick="chAcceptCookie()" data-t="cookie_accept">同意して利用開始</button>
-        </div>
+      <div class="ch-cookie-text" data-t="cookie_text">
+        <strong>About the Use of Cookies</strong><br />
+        This site uses cookies to provide chat support and improve your user
+        experience. By agreeing, you will be able to use our chat support
+        service.
+      </div>
+      <div class="ch-cookie-buttons">
+        <button
+          class="ch-cookie-btn ch-btn-deny"
+          onclick="chDenyCookie()"
+          data-t="cookie_deny"
+        >
+          拒否
+        </button>
+        <button
+          class="ch-cookie-btn ch-btn-accept"
+          onclick="chAcceptCookie()"
+          data-t="cookie_accept"
+        >
+          同意して利用開始
+        </button>
+      </div>
     </div>
 
     <div id="special-mobile-chat-container">
-        <button id="special-mobile-chat-btn">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="margin-top: 1px;"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
-            <span data-t="chat_btn">Chat Support</span>
-        </button>
-        <span id="special-mobile-close-btn">×</span>
+      <button id="special-mobile-chat-btn">
+        <svg
+          width="20"
+          height="20"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2.5"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          style="margin-top: 1px"
+        >
+          <path
+            d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"
+          ></path>
+        </svg>
+        <span data-t="chat_btn">Chat Support</span>
+      </button>
+      <span id="special-mobile-close-btn">×</span>
     </div>
 
     <footer>
-        <p>&copy; 2026 ryopc Global Initiative. All Rights Reserved.</p>
-        <p data-t="privacy_footer_meta">Enacted: May 13, 2026<br>Managed by: ryopc Volunteer Operations Bureau<br><strong>Director: game_ryo (ryopcCEO)</strong></p>
-        <div class="status-badge" style="margin-top: 1rem;">
-            <span class="status-dot"></span>
-            <span data-t="status_text">Status: Under application for Open Source Collective (Covina, CA, USA)</span>
-        </div>
+      <p>&copy; 2026 ryopc Global Initiative. All Rights Reserved.</p>
+      <p data-t="privacy_footer_meta">
+        Enacted: May 13, 2026<br />Managed by: ryopc Volunteer Operations
+        Bureau<br /><strong>Director: game_ryo (ryopcCEO)</strong>
+      </p>
+      <div class="status-badge" style="margin-top: 1rem">
+        <span class="status-dot"></span>
+        <span data-t="status_text"
+          >Status: Under application for Open Source Collective (Covina, CA,
+          USA)</span
+        >
+      </div>
     </footer>
 
     <script>
-    // --- 翻訳データ ---
-    const translations = {
+      // --- 翻訳データ ---
+      const translations = {
         ja: {
-            nav_home: "ホーム",
-            nav_mission: "ミッション",
-            nav_services: "サービス",
-            nav_docs: "ドキュメント",
-            nav_note: "ブログ",
-            cookie_text: "<strong>クッキーの使用について</strong><br>このサイトでは、チャットサポートの提供や体験向上のためにクッキーを使用します。同意することで、サポートサービスを利用できるようになります。",
-            cookie_accept: "同意して利用開始",
-            cookie_deny: "拒否",
-            chat_btn: "チャットサポート",
-            status_text: "ステータス: Open Source Collective (米国カリフォルニア州) への申請中",
-            
-            // プライバシーポリシー特有の翻訳
-            privacy_header_title: "プライバシーポリシー",
-            privacy_header_desc: "ryopc グローバルイニシアチブ - 公式プライバシープロトコル",
-            privacy_section_title: "Privacy Policy (個人情報保護方針)",
-            privacy_back_btn: "⬅ ドキュメントハブに戻る",
-            privacy_footer_meta: "制定: 2026年5月13日<br>管理運営: ryopcボランティア運営事務局<br><strong>代表: game_ryo (ryopcCEO)</strong>",
-            
-            privacy_art1_title: "第1条（基本理念・非営利性の徹底）",
-            privacy_art1_desc: "ryopcボランティアグループ（以下「当グループ」）は、非営利かつコミュニティ主導のPCサポート活動です。私たちはユーザーのプライバシーを「最も神聖な財産」と定義します。商業的利益に屈することはなく、当グループの環境において第三者広告やデータ収益化の仕組みを永久に排除します。",
-            
-            privacy_art2_title: "第2条（収集データと最小限の原則）",
-            privacy_art2_desc: "GDPR（一般データ保護規則）が定める「データの最小化」原則に完全に則り、当グループはテクニカルサポート作業を遂行するために必要最低限のデータ以外の収集・処理は一切行いません。",
-            privacy_art2_li1: "<strong>収集するメタデータ:</strong> 氏名（ニックネームや仮名も可能）、メールアドレス、デバイスの仕様、エラーログ、およびOSバージョン情報。",
-            privacy_art2_li2: "<strong>データ保管体制:</strong> すべての通信情報は、セキュリティ保護された暗号化データベース（InfinityFreeデータベース階層）上に保管されます。サポート対応が終了した案件履歴は、自動で消去処理がスケジュールされます。",
-            
-            privacy_art3_title: "第3条（暗号化通信と正規ルート配送）",
-            privacy_art3_desc: "データ傍受や悪意あるハッキングから通信を保護するため、当システムはSSL暗号化（HTTPS）を強制適用しています。従来の「http://」でアクセスされた場合や「www.」ドメインからのリクエストは、自動的に安全な「https://（非www）」の正規ルートへと自動転送されます。",
-            
-            privacy_art4_title: "第4条（スタッフ行動規範と罰則）",
-            privacy_art4_desc: "当グループに参加するすべてのボランティアエンジニアは、このプライバシーポリシーの遵守に同意しています。安全な利用環境を担保するため、以下のゼロトレランス（不寛容）方針を採用しています。",
-            privacy_art4_li1: "<strong>禁止される主な事項:</strong> プライバシーへの不当な介入、ユーザーアカウントのパスワード情報の要求、攻撃的な言動、案件以外の用途でのデータ使用。",
-            privacy_art4_li2: "<strong>通報受付窓口:</strong> 公式サイト上には、違反行為を即時に通報できる「スタッフ行動通報フォーム」が標準で実装されています。",
-            privacy_art4_li3: "<strong>違反時の対応:</strong> ポリシー違反が確認された場合、該当スタッフのアカウント権限を即座に剥奪し、永久追放処分とします。また、悪質な違反については法的措置を含めた対応を速やかに検討します。",
-            
-            privacy_art5_title: "第5条（GDPR準拠と自己情報コントロール権）",
-            privacy_art5_desc: "当グループは、お住まいの地域に関わらずすべてのユーザーにGDPR基準のデータ保護権利を提供します。",
-            privacy_art5_li1: "<strong>忘れられる権利（データの削除）:</strong> ユーザーは、当グループが保管する自身の登録情報やサポート履歴の永久かつ不可逆的な完全削除をいつでも請求できます。",
-            privacy_art5_li2: "<strong>データポータビリティの権利:</strong> ユーザーは、システムに保存された自身のデータを一般的な機械可読フォーマットで取得することができます。",
-            
-            privacy_art6_title: "第6条（免責事項）",
-            privacy_art6_desc: "当グループは最善の安全対策を実施していますが、非営利・無償のボランティア活動という性質上、予期せぬデータ破損、サーバーのシステム制限（InfinityFreeネットワークに起因するものなど）によるデータ紛失、およびサポート中のデバイス動作不具合などについて、いかなる責任も負いかねます。大切なデータは、サポートを受ける前にあらかじめご自身でバックアップを取るようお願いいたします。",
-            
-            privacy_art7_title: "第7条（お問い合わせ先）",
-            privacy_art7_desc: "個人情報の削除請求（忘れられる権利の行使）や、ポリシーに関するご質問、スタッフ規範に関する不服申し立ては、お問い合わせフォームより常時24時間受け付けております。"
+          nav_home: "ホーム",
+          nav_mission: "ミッション",
+          nav_services: "サービス",
+          nav_docs: "ドキュメント",
+          nav_note: "ブログ",
+          cookie_text:
+            "<strong>クッキーの使用について</strong><br>このサイトでは、チャットサポートの提供や体験向上のためにクッキーを使用します。同意することで、サポートサービスを利用できるようになります。",
+          cookie_accept: "同意して利用開始",
+          cookie_deny: "拒否",
+          chat_btn: "チャットサポート",
+          status_text:
+            "ステータス: Open Source Collective (米国カリフォルニア州) への申請中",
+
+          // プライバシーポリシー特有の翻訳
+          privacy_header_title: "プライバシーポリシー",
+          privacy_header_desc:
+            "ryopc グローバルイニシアチブ - 公式プライバシープロトコル",
+          privacy_section_title: "Privacy Policy (個人情報保護方針)",
+          privacy_back_btn: "⬅ ドキュメントハブに戻る",
+          privacy_footer_meta:
+            "制定: 2026年5月13日<br>管理運営: ryopcボランティア運営事務局<br><strong>代表: game_ryo (ryopcCEO)</strong>",
+
+          privacy_art1_title: "第1条（基本理念・非営利性の徹底）",
+          privacy_art1_desc:
+            "ryopcボランティアグループ（以下「当グループ」）は、非営利かつコミュニティ主導のPCサポート活動です。私たちはユーザーのプライバシーを「最も神聖な財産」と定義します。商業的利益に屈することはなく、当グループの環境において第三者広告やデータ収益化の仕組みを永久に排除します。",
+
+          privacy_art2_title: "第2条（収集データと最小限の原則）",
+          privacy_art2_desc:
+            "GDPR（一般データ保護規則）が定める「データの最小化」原則に完全に則り、当グループはテクニカルサポート作業を遂行するために必要最低限のデータ以外の収集・処理は一切行いません。",
+          privacy_art2_li1:
+            "<strong>収集するメタデータ:</strong> 氏名（ニックネームや仮名も可能）、メールアドレス、デバイスの仕様、エラーログ、およびOSバージョン情報。",
+          privacy_art2_li2:
+            "<strong>データ保管体制:</strong> すべての通信情報は、セキュリティ保護された暗号化データベース（InfinityFreeデータベース階層）上に保管されます。サポート対応が終了した案件履歴は、自動で消去処理がスケジュールされます。",
+
+          privacy_art3_title: "第3条（暗号化通信と正規ルート配送）",
+          privacy_art3_desc:
+            "データ傍受や悪意あるハッキングから通信を保護するため、当システムはSSL暗号化（HTTPS）を強制適用しています。従来の「http://」でアクセスされた場合や「www.」ドメインからのリクエストは、自動的に安全な「https://（非www）」の正規ルートへと自動転送されます。",
+
+          privacy_art4_title: "第4条（スタッフ行動規範と罰則）",
+          privacy_art4_desc:
+            "当グループに参加するすべてのボランティアエンジニアは、このプライバシーポリシーの遵守に同意しています。安全な利用環境を担保するため、以下のゼロトレランス（不寛容）方針を採用しています。",
+          privacy_art4_li1:
+            "<strong>禁止される主な事項:</strong> プライバシーへの不当な介入、ユーザーアカウントのパスワード情報の要求、攻撃的な言動、案件以外の用途でのデータ使用。",
+          privacy_art4_li2:
+            "<strong>通報受付窓口:</strong> 公式サイト上には、違反行為を即時に通報できる「スタッフ行動通報フォーム」が標準で実装されています。",
+          privacy_art4_li3:
+            "<strong>違反時の対応:</strong> ポリシー違反が確認された場合、該当スタッフのアカウント権限を即座に剥奪し、永久追放処分とします。また、悪質な違反については法的措置を含めた対応を速やかに検討します。",
+
+          privacy_art5_title: "第5条（GDPR準拠と自己情報コントロール権）",
+          privacy_art5_desc:
+            "当グループは、お住まいの地域に関わらずすべてのユーザーにGDPR基準のデータ保護権利を提供します。",
+          privacy_art5_li1:
+            "<strong>忘れられる権利（データの削除）:</strong> ユーザーは、当グループが保管する自身の登録情報やサポート履歴の永久かつ不可逆的な完全削除をいつでも請求できます。",
+          privacy_art5_li2:
+            "<strong>データポータビリティの権利:</strong> ユーザーは、システムに保存された自身のデータを一般的な機械可読フォーマットで取得することができます。",
+
+          privacy_art6_title: "第6条（免責事項）",
+          privacy_art6_desc:
+            "当グループは最善の安全対策を実施していますが、非営利・無償のボランティア活動という性質上、予期せぬデータ破損、サーバーのシステム制限（InfinityFreeネットワークに起因するものなど）によるデータ紛失、およびサポート中のデバイス動作不具合などについて、いかなる責任も負いかねます。大切なデータは、サポートを受ける前にあらかじめご自身でバックアップを取るようお願いいたします。",
+
+          privacy_art7_title: "第7条（お問い合わせ先）",
+          privacy_art7_desc:
+            "個人情報の削除請求（忘れられる権利の行使）や、ポリシーに関するご質問、スタッフ規範に関する不服申し立ては、お問い合わせフォームより常時24時間受け付けております。",
         },
         en: {
-            nav_home: "Home",
-            nav_mission: "Mission",
-            nav_services: "Services",
-            nav_docs: "Docs",
-            nav_note: "blog",
-            cookie_text: "<strong>About the Use of Cookies</strong><br>This site uses cookies to provide chat support and improve your experience. By agreeing, you can use our chat service.",
-            cookie_accept: "Accept",
-            cookie_deny: "Deny",
-            chat_btn: "Chat Support",
-            status_text: "Status: Under application for Open Source Collective (Covina, CA, USA)",
-            
-            // Privacy specific translation
-            privacy_header_title: "Privacy Policy",
-            privacy_header_desc: "ryopc Global Initiative - Official Privacy Protocol",
-            privacy_section_title: "Privacy Policy (個人情報保護方針)",
-            privacy_back_btn: "⬅ Return to Document Hub",
-            privacy_footer_meta: "Enacted: May 13, 2026<br>Managed by: ryopc Volunteer Operations Bureau<br><strong>Director: game_ryo (ryopcCEO)</strong>",
-            
-            privacy_art1_title: "Article 1 (Core Philosophy & Anti-Commercialism)",
-            privacy_art1_desc: "The ryopc Volunteer Group (hereinafter referred to as \"the Group\") is a non-profit, community-driven PC support initiative. We define user privacy as our \"most sacred asset.\" We firmly state that we will never bow to commercial interests, and third-party advertisements or data monetization schemes are permanently barred from our ecosystem.",
-            
-            privacy_art2_title: "Article 2 (Data Collection & Data Minimization)",
-            privacy_art2_desc: "In absolute compliance with the \"Data Minimization\" principles mandated by the GDPR, the Group will never collect or process personal data beyond the strict baseline required to perform technical support operations.",
-            privacy_art2_li1: "<strong>Collected Metadata:</strong> Name (pseudonyms/nicknames fully accepted), Email Address, device hardware specifications, error logs, and Operating System metrics.",
-            privacy_art2_li2: "<strong>Data Retention Architecture:</strong> All user telemetry is securely maintained via encrypted communication databases hosted on our network environment (InfinityFree database layer). Case files are subject to automated physical erasure scheduling once support records are closed.",
-            
-            privacy_art3_title: "Article 3 (Transport Security & Canonical Routing)",
-            privacy_art3_desc: "To fully secure transit integrity and shield user interactions from malicious network interception, this system strictly enforces Global SSL Encryption (HTTPS). Any legacy incoming traffic hitting the unsecured \"http://\" layer or utilizing \"www.\" host subdomains will be automatically and non-destructively rewritten to our secure canonical root domain scheme: <code>https://</code> (non-www).",
-            
-            privacy_art4_title: "Article 4 (Strict Staff Code of Conduct & Enforcement)",
-            privacy_art4_desc: "Every volunteer engineer onboarding into the Group is bound by an explicit, mandatory agreement to honor this Privacy Policy. To ensure robust user security, we enforce a strict Zero-Tolerance policy:",
-            privacy_art4_li1: "<strong>Actionable Infractions:</strong> Any privacy intrusion, unauthorized requests for user account passwords, aggressive conduct, or data utilization outside open support tickets.",
-            privacy_art4_li2: "<strong>Reporting Gateways:</strong> A specialized \"Staff Conduct Report\" tracking module is natively embedded within our official site infrastructure.",
-            privacy_art4_li3: "<strong>Disciplinary Resolution:</strong> Upon verification of any policy breach, the administration will execute immediate server level credentials deletion, resulting in permanent expulsion from the Group. High-severity breaches will trigger active evaluations for legal reporting channels.",
-            
-            privacy_art5_title: "Article 5 (GDPR Compliance & Sovereign Data Rights)",
-            privacy_art5_desc: "The Group voluntarily extends standard GDPR frameworks to all global users, guaranteeing sovereign data privacy protections regardless of geographical origin:",
-            privacy_art5_li1: "<strong>Right to be Forgotten (Erasure):</strong> Users maintain a permanent right to command full, irreversible deletion of their account metadata and support interaction histories.",
-            privacy_art5_li2: "<strong>Data Portability:</strong> Users may request copies of their system data in an open, machine-readable format.",
-            
-            privacy_art6_title: "Article 6 (Limited Liability & Hosting Attributes)",
-            privacy_art6_desc: "While the Group deploys maximum administrative security architectures, we explicitly state that due to the altruistic, pro-bono nature of this volunteer organization, we hold no liability for data corruption, server-side data losses stemming from base service limitations (InfinityFree network layers), or unexpected machine anomalies during active assistance. Users are required to back up all mission-critical data files prior to scheduling support sessions.",
-            
-            privacy_art7_title: "Article 7 (Official Contacts)",
-            privacy_art7_desc: "All policy inquiries, structural Right-to-be-Forgotten data deletion commands, or complaints regarding staff compliance are accepted 24/7/365 via our automated web communication forms."
+          nav_home: "Home",
+          nav_mission: "Mission",
+          nav_services: "Services",
+          nav_docs: "Docs",
+          nav_note: "blog",
+          cookie_text:
+            "<strong>About the Use of Cookies</strong><br>This site uses cookies to provide chat support and improve your experience. By agreeing, you can use our chat service.",
+          cookie_accept: "Accept",
+          cookie_deny: "Deny",
+          chat_btn: "Chat Support",
+          status_text:
+            "Status: Under application for Open Source Collective (Covina, CA, USA)",
+
+          // Privacy specific translation
+          privacy_header_title: "Privacy Policy",
+          privacy_header_desc:
+            "ryopc Global Initiative - Official Privacy Protocol",
+          privacy_section_title: "Privacy Policy (個人情報保護方針)",
+          privacy_back_btn: "⬅ Return to Document Hub",
+          privacy_footer_meta:
+            "Enacted: May 13, 2026<br>Managed by: ryopc Volunteer Operations Bureau<br><strong>Director: game_ryo (ryopcCEO)</strong>",
+
+          privacy_art1_title:
+            "Article 1 (Core Philosophy & Anti-Commercialism)",
+          privacy_art1_desc:
+            'The ryopc Volunteer Group (hereinafter referred to as "the Group") is a non-profit, community-driven PC support initiative. We define user privacy as our "most sacred asset." We firmly state that we will never bow to commercial interests, and third-party advertisements or data monetization schemes are permanently barred from our ecosystem.',
+
+          privacy_art2_title: "Article 2 (Data Collection & Data Minimization)",
+          privacy_art2_desc:
+            'In absolute compliance with the "Data Minimization" principles mandated by the GDPR, the Group will never collect or process personal data beyond the strict baseline required to perform technical support operations.',
+          privacy_art2_li1:
+            "<strong>Collected Metadata:</strong> Name (pseudonyms/nicknames fully accepted), Email Address, device hardware specifications, error logs, and Operating System metrics.",
+          privacy_art2_li2:
+            "<strong>Data Retention Architecture:</strong> All user telemetry is securely maintained via encrypted communication databases hosted on our network environment (InfinityFree database layer). Case files are subject to automated physical erasure scheduling once support records are closed.",
+
+          privacy_art3_title:
+            "Article 3 (Transport Security & Canonical Routing)",
+          privacy_art3_desc:
+            'To fully secure transit integrity and shield user interactions from malicious network interception, this system strictly enforces Global SSL Encryption (HTTPS). Any legacy incoming traffic hitting the unsecured "http://" layer or utilizing "www." host subdomains will be automatically and non-destructively rewritten to our secure canonical root domain scheme: <code>https://</code> (non-www).',
+
+          privacy_art4_title:
+            "Article 4 (Strict Staff Code of Conduct & Enforcement)",
+          privacy_art4_desc:
+            "Every volunteer engineer onboarding into the Group is bound by an explicit, mandatory agreement to honor this Privacy Policy. To ensure robust user security, we enforce a strict Zero-Tolerance policy:",
+          privacy_art4_li1:
+            "<strong>Actionable Infractions:</strong> Any privacy intrusion, unauthorized requests for user account passwords, aggressive conduct, or data utilization outside open support tickets.",
+          privacy_art4_li2:
+            '<strong>Reporting Gateways:</strong> A specialized "Staff Conduct Report" tracking module is natively embedded within our official site infrastructure.',
+          privacy_art4_li3:
+            "<strong>Disciplinary Resolution:</strong> Upon verification of any policy breach, the administration will execute immediate server level credentials deletion, resulting in permanent expulsion from the Group. High-severity breaches will trigger active evaluations for legal reporting channels.",
+
+          privacy_art5_title:
+            "Article 5 (GDPR Compliance & Sovereign Data Rights)",
+          privacy_art5_desc:
+            "The Group voluntarily extends standard GDPR frameworks to all global users, guaranteeing sovereign data privacy protections regardless of geographical origin:",
+          privacy_art5_li1:
+            "<strong>Right to be Forgotten (Erasure):</strong> Users maintain a permanent right to command full, irreversible deletion of their account metadata and support interaction histories.",
+          privacy_art5_li2:
+            "<strong>Data Portability:</strong> Users may request copies of their system data in an open, machine-readable format.",
+
+          privacy_art6_title:
+            "Article 6 (Limited Liability & Hosting Attributes)",
+          privacy_art6_desc:
+            "While the Group deploys maximum administrative security architectures, we explicitly state that due to the altruistic, pro-bono nature of this volunteer organization, we hold no liability for data corruption, server-side data losses stemming from base service limitations (InfinityFree network layers), or unexpected machine anomalies during active assistance. Users are required to back up all mission-critical data files prior to scheduling support sessions.",
+
+          privacy_art7_title: "Article 7 (Official Contacts)",
+          privacy_art7_desc:
+            "All policy inquiries, structural Right-to-be-Forgotten data deletion commands, or complaints regarding staff compliance are accepted 24/7/365 via our automated web communication forms.",
         },
         pt: {
-            nav_home: "Início",
-            nav_mission: "Missão",
-            nav_services: "Serviços",
-            nav_docs: "Docs",
-            nav_note: "Blog",
-            cookie_text: "<strong>Sobre o uso de cookies</strong><br>Este site usa cookies para fornecer suporte por chat e melhorar sua experiência. Ao concordar, você poderá usar nosso serviço de chat.",
-            cookie_accept: "Aceitar",
-            cookie_deny: "Recusar",
-            chat_btn: "Suporte por Chat",
-            status_text: "Status: Em processo de candidatura para Open Source Collective (Covina, CA, EUA)",
-            
-            // Privacy specific translation
-            privacy_header_title: "Diretrizes de Privacidade",
-            privacy_header_desc: "ryopc Global Initiative - Protocolo de Privacidade Oficial",
-            privacy_section_title: "Diretrizes de Privacidade (個人情報保護方針)",
-            privacy_back_btn: "⬅ Retornar ao Hub de Documentos",
-            privacy_footer_meta: "Promulgado: 13 de Maio de 2026<br>Operação e Gestão: ryopc Bureau de Operações Voluntárias<br><strong>Diretor: game_ryo (ryopcCEO)</strong>",
-            
-            privacy_art1_title: "Artigo 1 (Princípio Fundamental e Não-Comercialização)",
-            privacy_art1_desc: "O Grupo de Voluntários ryopc (doravante denominado \"o Grupo\") é uma iniciativa comunitária de suporte de computadores sem fins lucrativos. Definimos a privacidade do usuário como o nosso \"bem mais sagrado\". Declaramos firmemente que nunca nos curvaremos aos interesses comerciais, e anúncios de terceiros ou esquemas de monetização de dados são proibidos permanentemente de nosso ecossistema.",
-            
-            privacy_art2_title: "Artigo 2 (Coleta de Dados e Minimização de Dados)",
-            privacy_art2_desc: "Em conformidade absoluta com os princípios de \"Minimização de Dados\" exigidos pelo GDPR, o Grupo nunca coletará ou processará dados pessoais além do estritamente necessário para realizar as operações de suporte técnico.",
-            privacy_art2_li1: "<strong>Metadados Coletados:</strong> Nome (pseudônimos e apelidos são totalmente aceitos), endereço de e-mail, especificações de hardware do dispositivo, logs de erro e métricas do Sistema Operacional.",
-            privacy_art2_li2: "<strong>Estrutura de Armazenamento:</strong> Todas as informações dos usuários são armazenadas em servidores criptografados seguros (banco de dados InfinityFree). Os históricos de suporte são excluídos permanentemente de forma programada quando o caso é finalizado.",
-            
-            privacy_art3_title: "Artigo 3 (Segurança de Transporte e Rotas Canônicas)",
-            privacy_art3_desc: "Para garantir totalmente a integridade do tráfego e proteger os usuários contra interceptações maliciosas na rede, este sistema aplica estritamente a Criptografia SSL Global (HTTPS). Qualquer tráfego legado vindo via \"http://\" ou domínios \"www.\" será automaticamente reescrito para nosso endereço canônico padrão: <code>https://</code> (sem www).",
-            
-            privacy_art4_title: "Artigo 4 (Rigoroso Código de Conduta e Aplicação de Penalidades)",
-            privacy_art4_desc: "Todos os engenheiros voluntários integrados ao Grupo estão sujeitos a um acordo obrigatório e explícito de conformidade com esta Política de Privacidade. Para garantir total segurança aos usuários, aplicamos uma política severa de Tolerância Zero:",
-            privacy_art4_li1: "<strong>Infrações Passíveis de Punição:</strong> Qualquer invasão de privacidade, solicitações não autorizadas de senhas pessoais, conduta agressiva ou uso de informações dos usuários fora de atendimentos ativos.",
-            privacy_art4_li2: "<strong>Canal de Denúncias:</strong> O site oficial possui um formulário embutido específico para relatar qualquer desvio de conduta das equipes de suporte.",
-            privacy_art4_li3: "<strong>Resolução Disciplinar:</strong> Confirmada qualquer violação destas políticas, o responsável terá as credenciais de acesso removidas imediatamente e será banido permanentemente do Grupo, além de possíveis encaminhamentos jurídicos se aplicável.",
-            
-            privacy_art5_title: "Artigo 5 (Conformidade com o GDPR e Direitos Autorais sobre Dados)",
-            privacy_art5_desc: "O Grupo estende voluntariamente os frameworks do GDPR para todos os usuários globais, garantindo proteção à privacidade independentemente da localização geográfica:",
-            privacy_art5_li1: "<strong>Direito ao Esquecimento (Exclusão):</strong> O usuário detém o direito de requerer, a qualquer tempo, a remoção irreversível e completa de todos os seus dados pessoais e de atendimentos.",
-            privacy_art5_li2: "<strong>Portabilidade de Dados:</strong> O usuário pode solicitar uma cópia legível por máquina com as especificações salvas de seu dispositivo.",
-            
-            privacy_art6_title: "Artigo 6 (Limitação de Responsabilidade)",
-            privacy_art6_desc: "Embora o Grupo adote as melhores práticas de proteção de dados, por ser uma organização de cunho estritamente voluntário e sem cobranças de taxas, não nos responsabilizamos por perdas de informações causadas por limitações de servidores parceiros (InfinityFree), nem por imprevistos técnicos durante a assistência remota. Recomendamos sempre efetuar o backup de arquivos críticos antes do suporte.",
-            
-            privacy_art7_title: "Artigo 7 (Canais Oficiais de Contato)",
-            privacy_art7_desc: "Qualquer solicitação de exclusão de dados pessoais, dúvidas de privacidade ou reporte de descumprimento de condutas profissionais podem ser efetuados via formulário de contato."
-        }
-    };
+          nav_home: "Início",
+          nav_mission: "Missão",
+          nav_services: "Serviços",
+          nav_docs: "Docs",
+          nav_note: "Blog",
+          cookie_text:
+            "<strong>Sobre o uso de cookies</strong><br>Este site usa cookies para fornecer suporte por chat e melhorar sua experiência. Ao concordar, você poderá usar nosso serviço de chat.",
+          cookie_accept: "Aceitar",
+          cookie_deny: "Recusar",
+          chat_btn: "Suporte por Chat",
+          status_text:
+            "Status: Em processo de candidatura para Open Source Collective (Covina, CA, EUA)",
 
-    // --- 言語切り替え機能 ---
-    function changeLanguage(lang) {
+          // Privacy specific translation
+          privacy_header_title: "Diretrizes de Privacidade",
+          privacy_header_desc:
+            "ryopc Global Initiative - Protocolo de Privacidade Oficial",
+          privacy_section_title: "Diretrizes de Privacidade (個人情報保護方針)",
+          privacy_back_btn: "⬅ Retornar ao Hub de Documentos",
+          privacy_footer_meta:
+            "Promulgado: 13 de Maio de 2026<br>Operação e Gestão: ryopc Bureau de Operações Voluntárias<br><strong>Diretor: game_ryo (ryopcCEO)</strong>",
+
+          privacy_art1_title:
+            "Artigo 1 (Princípio Fundamental e Não-Comercialização)",
+          privacy_art1_desc:
+            'O Grupo de Voluntários ryopc (doravante denominado "o Grupo") é uma iniciativa comunitária de suporte de computadores sem fins lucrativos. Definimos a privacidade do usuário como o nosso "bem mais sagrado". Declaramos firmemente que nunca nos curvaremos aos interesses comerciais, e anúncios de terceiros ou esquemas de monetização de dados são proibidos permanentemente de nosso ecossistema.',
+
+          privacy_art2_title:
+            "Artigo 2 (Coleta de Dados e Minimização de Dados)",
+          privacy_art2_desc:
+            'Em conformidade absoluta com os princípios de "Minimização de Dados" exigidos pelo GDPR, o Grupo nunca coletará ou processará dados pessoais além do estritamente necessário para realizar as operações de suporte técnico.',
+          privacy_art2_li1:
+            "<strong>Metadados Coletados:</strong> Nome (pseudônimos e apelidos são totalmente aceitos), endereço de e-mail, especificações de hardware do dispositivo, logs de erro e métricas do Sistema Operacional.",
+          privacy_art2_li2:
+            "<strong>Estrutura de Armazenamento:</strong> Todas as informações dos usuários são armazenadas em servidores criptografados seguros (banco de dados InfinityFree). Os históricos de suporte são excluídos permanentemente de forma programada quando o caso é finalizado.",
+
+          privacy_art3_title:
+            "Artigo 3 (Segurança de Transporte e Rotas Canônicas)",
+          privacy_art3_desc:
+            'Para garantir totalmente a integridade do tráfego e proteger os usuários contra interceptações maliciosas na rede, este sistema aplica estritamente a Criptografia SSL Global (HTTPS). Qualquer tráfego legado vindo via "http://" ou domínios "www." será automaticamente reescrito para nosso endereço canônico padrão: <code>https://</code> (sem www).',
+
+          privacy_art4_title:
+            "Artigo 4 (Rigoroso Código de Conduta e Aplicação de Penalidades)",
+          privacy_art4_desc:
+            "Todos os engenheiros voluntários integrados ao Grupo estão sujeitos a um acordo obrigatório e explícito de conformidade com esta Política de Privacidade. Para garantir total segurança aos usuários, aplicamos uma política severa de Tolerância Zero:",
+          privacy_art4_li1:
+            "<strong>Infrações Passíveis de Punição:</strong> Qualquer invasão de privacidade, solicitações não autorizadas de senhas pessoais, conduta agressiva ou uso de informações dos usuários fora de atendimentos ativos.",
+          privacy_art4_li2:
+            "<strong>Canal de Denúncias:</strong> O site oficial possui um formulário embutido específico para relatar qualquer desvio de conduta das equipes de suporte.",
+          privacy_art4_li3:
+            "<strong>Resolução Disciplinar:</strong> Confirmada qualquer violação destas políticas, o responsável terá as credenciais de acesso removidas imediatamente e será banido permanentemente do Grupo, além de possíveis encaminhamentos jurídicos se aplicável.",
+
+          privacy_art5_title:
+            "Artigo 5 (Conformidade com o GDPR e Direitos Autorais sobre Dados)",
+          privacy_art5_desc:
+            "O Grupo estende voluntariamente os frameworks do GDPR para todos os usuários globais, garantindo proteção à privacidade independentemente da localização geográfica:",
+          privacy_art5_li1:
+            "<strong>Direito ao Esquecimento (Exclusão):</strong> O usuário detém o direito de requerer, a qualquer tempo, a remoção irreversível e completa de todos os seus dados pessoais e de atendimentos.",
+          privacy_art5_li2:
+            "<strong>Portabilidade de Dados:</strong> O usuário pode solicitar uma cópia legível por máquina com as especificações salvas de seu dispositivo.",
+
+          privacy_art6_title: "Artigo 6 (Limitação de Responsabilidade)",
+          privacy_art6_desc:
+            "Embora o Grupo adote as melhores práticas de proteção de dados, por ser uma organização de cunho estritamente voluntário e sem cobranças de taxas, não nos responsabilizamos por perdas de informações causadas por limitações de servidores parceiros (InfinityFree), nem por imprevistos técnicos durante a assistência remota. Recomendamos sempre efetuar o backup de arquivos críticos antes do suporte.",
+
+          privacy_art7_title: "Artigo 7 (Canais Oficiais de Contato)",
+          privacy_art7_desc:
+            "Qualquer solicitação de exclusão de dados pessoais, dúvidas de privacidade ou reporte de descumprimento de condutas profissionais podem ser efetuados via formulário de contato.",
+        },
+      };
+
+      // --- 言語切り替え機能 ---
+      function changeLanguage(lang) {
         document.documentElement.lang = lang;
         safeStorage.set("preferred_lang", lang);
-        
-        document.querySelectorAll('[data-t]').forEach(el => {
-            const key = el.getAttribute('data-t');
-            if (translations[lang] && translations[lang][key]) {
-                el.innerHTML = translations[lang][key];
-            }
+
+        document.querySelectorAll("[data-t]").forEach((el) => {
+          const key = el.getAttribute("data-t");
+          if (translations[lang] && translations[lang][key]) {
+            el.innerHTML = translations[lang][key];
+          }
         });
-    }
+      }
 
-    // --- セーフストレージ ---
-    const safeStorage = {
-        get: (key) => { try { return localStorage.getItem(key); } catch (e) { return window['fb_' + key] || null; } },
-        set: (key, val) => { try { localStorage.setItem(key, val); } catch (e) { window['fb_' + key] = val; } }
-    };
-
-
+      // --- セーフストレージ ---
+      const safeStorage = {
+        get: (key) => {
+          try {
+            return localStorage.getItem(key);
+          } catch (e) {
+            return window["fb_" + key] || null;
+          }
+        },
+        set: (key, val) => {
+          try {
+            localStorage.setItem(key, val);
+          } catch (e) {
+            window["fb_" + key] = val;
+          }
+        },
+      };
     </script>
-</body>
+  </body>
 </html>
