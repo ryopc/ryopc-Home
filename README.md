@@ -5,7 +5,7 @@
 ---
 
 ## 🎯 Our Mission
-Led by **ryopcCEO**, **ryopc** is a digital-first global initiative built on the belief that fair, transparent technical support is a fundamental right. We protect users from fraudulent practices and bridge the global digital divide.
+Led by **game_ryo**, **ryopc** is a digital-first global initiative built on the belief that fair, transparent technical support is a fundamental right. We protect users from fraudulent practices and bridge the global digital divide.
 
 ## 🛠 Future Services
 We are developing a borderless, multi-layered ecosystem starting with legitimate device guidance. We plan to sequentially launch diverse digital solutions to meet the evolving needs of the global community.
