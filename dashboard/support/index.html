@@ -1,284 +1,267 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="ja">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>サポートセンター - ryopc</title>
 
-    <link rel="stylesheet" href="/style.css">
+    <link rel="stylesheet" href="/style.css" />
 
     <style>
-        body {
-            background: var(--bg);
-        }
+      body {
+        background: var(--bg);
+      }
 
-        .support-wrapper {
-            max-width: 900px;
-            margin: 4rem auto;
-            padding: 0 2rem;
-        }
+      .support-wrapper {
+        max-width: 900px;
+        margin: 4rem auto;
+        padding: 0 2rem;
+      }
 
-        .support-card {
-            background: var(--white);
-            padding: 2.5rem;
-            border-radius: 32px;
-            box-shadow: 0 25px 50px -12px rgba(0,0,0,0.12);
-            border: 1px solid rgba(226,232,240,0.8);
-            margin-bottom: 2rem;
-            animation: fadeIn 0.5s ease;
-        }
+      .support-card {
+        background: var(--white);
+        padding: 2.5rem;
+        border-radius: 32px;
+        box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.12);
+        border: 1px solid rgba(226, 232, 240, 0.8);
+        margin-bottom: 2rem;
+        animation: fadeIn 0.5s ease;
+      }
 
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+          transform: translateY(20px);
         }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
 
-        .support-title {
-            font-size: 2rem;
-            font-weight: 800;
-            color: var(--dark);
-            margin-bottom: 1rem;
-        }
+      .support-title {
+        font-size: 2rem;
+        font-weight: 800;
+        color: var(--dark);
+        margin-bottom: 1rem;
+      }
 
-        .support-sub {
-            color: var(--text-light);
-            font-size: 1.1rem;
-            margin-bottom: 2rem;
-        }
+      .support-sub {
+        color: var(--text-light);
+        font-size: 1.1rem;
+        margin-bottom: 2rem;
+      }
 
-        /* グリッド */
-        .support-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-            gap: 1.5rem;
-        }
+      /* グリッド */
+      .support-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+        gap: 1.5rem;
+      }
 
-        .support-item {
-            background: #f8f9fa;
-            padding: 1.8rem;
-            border-radius: 24px;
-            border: 1px solid rgba(0,0,0,0.08);
-            box-shadow: 0 8px 20px rgba(0,0,0,0.05);
-            transition: var(--transition);
-            cursor: pointer;
-        }
-        .support-item:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 12px 28px rgba(0,0,0,0.12);
-        }
+      .support-item {
+        background: #f8f9fa;
+        padding: 1.8rem;
+        border-radius: 24px;
+        border: 1px solid rgba(0, 0, 0, 0.08);
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.05);
+        transition: var(--transition);
+        cursor: pointer;
+      }
+      .support-item:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 12px 28px rgba(0, 0, 0, 0.12);
+      }
 
-        .support-item-title {
-            font-size: 1.3rem;
-            font-weight: 700;
-            margin-bottom: 0.5rem;
-        }
+      .support-item-title {
+        font-size: 1.3rem;
+        font-weight: 700;
+        margin-bottom: 0.5rem;
+      }
 
-        .support-item-desc {
-            color: var(--text-light);
-            font-size: 0.95rem;
-        }
+      .support-item-desc {
+        color: var(--text-light);
+        font-size: 0.95rem;
+      }
 
-        /* FAQ */
-        .faq {
-            margin-top: 2rem;
-        }
+      /* FAQ */
+      .faq {
+        margin-top: 2rem;
+      }
 
-        .faq-item {
-            background: #f8f9fa;
-            padding: 1.4rem;
-            border-radius: 16px;
-            border: 1px solid rgba(0,0,0,0.08);
-            margin-bottom: 1rem;
-            cursor: pointer;
-            transition: var(--transition);
-        }
-        .faq-item:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 12px 28px rgba(0,0,0,0.12);
-        }
+      .faq-item {
+        background: #f8f9fa;
+        padding: 1.4rem;
+        border-radius: 16px;
+        border: 1px solid rgba(0, 0, 0, 0.08);
+        margin-bottom: 1rem;
+        cursor: pointer;
+        transition: var(--transition);
+      }
+      .faq-item:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 12px 28px rgba(0, 0, 0, 0.12);
+      }
 
-        .faq-q {
-            font-weight: 700;
-            margin-bottom: 0.4rem;
-        }
+      .faq-q {
+        font-weight: 700;
+        margin-bottom: 0.4rem;
+      }
 
-        .faq-a {
-            color: var(--text-light);
-            font-size: 0.95rem;
-        }
+      .faq-a {
+        color: var(--text-light);
+        font-size: 0.95rem;
+      }
 
-                .chat-btn {
-            display: block;
-            width: 100%;
-            text-align: center;
-            padding: 1.4rem;
-            background: var(--primary);
-            color: var(--white);
-            border-radius: 20px;
-            font-size: 1.3rem;
-            font-weight: 800;
-            text-decoration: none;
-            box-shadow: 0 15px 35px rgba(0,0,0,0.15);
-            transition: var(--transition);
-            margin-bottom: 2.5rem;
-        }
-        .chat-btn:hover {
-            background: var(--primary-light);
-            transform: translateY(-4px);
-        }
+      .chat-btn {
+        display: block;
+        width: 100%;
+        text-align: center;
+        padding: 1.4rem;
+        background: var(--primary);
+        color: var(--white);
+        border-radius: 20px;
+        font-size: 1.3rem;
+        font-weight: 800;
+        text-decoration: none;
+        box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
+        transition: var(--transition);
+        margin-bottom: 2.5rem;
+      }
+      .chat-btn:hover {
+        background: var(--primary-light);
+        transform: translateY(-4px);
+      }
     </style>
-</head>
+  </head>
 
-<body>
-
+  <body>
     <div class="navbar">
-        <div class="nav-logo" onclick="location.href='/'">ryopc</div>
+      <div class="nav-logo" onclick="location.href = '/'">ryopc</div>
     </div>
 
     <div class="support-wrapper">
+      <!-- 1. サポートカードのエリア -->
+      <div class="support-card">
+        <div class="support-title">サポートセンター</div>
+        <div class="support-sub">
+          デジタルデバイスやアカウントに関する問題を解決します。
+        </div>
 
-        <div class="support-card">
-            <div class="support-title">サポートセンター</div>
-            <div class="support-sub">デジタルデバイスやアカウントに関する問題を解決します。</div>
+        <!-- ★ チャットへ移動するボタン ★ -->
+        <a href="https://channel.io" class="chat-btn">
+          サポートチャットを開く ➜
+        </a>
+      </div>
+      <!-- 👈 ここで support-card の箱を正しく閉じました -->
 
-            <!-- ★ チャットへ移動するボタン ★ -->
-            <a href="https://ryopc.channel.io/" class="chat-btn">
-                サポートチャットを開く ➜
-            </a>
+      <!-- 2. よくある質問（FAQ）のエリア -->
+      <div class="faq">
+        <div class="section-title">よくある質問（FAQ）</div>
 
-<div class="faq">
-    <div class="section-title">よくある質問（FAQ）</div>
-
-    <div class="faq-item">
-        <div class="faq-q">ryopcとは何ですか？</div>
-        <div class="faq-a">
+        <div class="faq-item">
+          <div class="faq-q">ryopcとは何ですか？</div>
+          <div class="faq-a">
             ryopc（全国PCサポートネットワーク）は、PC・スマホ・インターネット・AI活用などをサポートする技術プロジェクトです。
             Web制作、AI導入、サーバー構築、トラブル対応など幅広く対応しています。
+          </div>
         </div>
-    </div>
 
-    <div class="faq-item">
-        <div class="faq-q">どんなことを相談できますか？</div>
-        <div class="faq-a">
-            以下のような内容に対応しています：<br><br>
-            ・パソコンの不具合<br>
-            ・Wi-Fiやネット接続<br>
-            ・スマホ設定<br>
-            ・Webサイト制作<br>
-            ・AI導入・活用<br>
-            ・Cloudflare / GitHub / WordPress 構築<br>
-            ・サーバー・ドメイン設定<br>
-            ・Scratchやプログラミング学習<br><br>
+        <div class="faq-item">
+          <div class="faq-q">どんなことを相談できますか？</div>
+          <div class="faq-a">
+            以下のような内容に対応しています：<br /><br />
+            ・パソコンの不具合<br />
+            ・Wi-Fiやネット接続<br />
+            ・スマホ設定<br />
+            ・Webサイト制作<br />
+            ・AI導入・活用<br />
+            <!-- 🛠️ 途切れていた箇所の閉じタグを修正して再開 -->
+            ・Cloudflare / GitHub / WordPress 構築<br />
+            ・サーバー・ドメイン設定<br />
+            ・Scratchやプログラミング学習<br /><br />
             ※内容によっては対応できない場合があります。
+          </div>
         </div>
-    </div>
 
-    <div class="faq-item">
-        <div class="faq-q">サポート料金はいくらですか？</div>
-        <div class="faq-a">
-            基本無料です。<br>
+        <div class="faq-item">
+          <div class="faq-q">サポート料金はいくらですか？</div>
+          <div class="faq-a">
+            基本無料です。<br />
             一部の高度な制作・構築作業などは別途相談となる場合があります。
+          </div>
         </div>
-    </div>
 
-    <div class="faq-item">
-        <div class="faq-q">オンライン対応はできますか？</div>
-        <div class="faq-a">
-            可能です。<br>
-            チャット・メール・画面共有などを利用してオンラインで対応しています。
-        </div>
-    </div>
-
-    <div class="faq-item">
-        <div class="faq-q">出張サポートはありますか？</div>
-        <div class="faq-a">
-            現在、出張サポートは行っていません。<br>
-            すべてオンライン対応となります。
-        </div>
-    </div>
-
-    <div class="faq-item">
-        <div class="faq-q">AI関連のサポートはありますか？</div>
-        <div class="faq-a">
-            あります。<br><br>
-            ・ChatGPT活用<br>
-            ・AIチャット導入<br>
-            ・業務効率化<br>
-            ・AIサイト制作<br>
-            ・AI学習サポート
-        </div>
-    </div>
-
-    <div class="faq-item">
-        <div class="faq-q">サイト制作はできますか？</div>
-        <div class="faq-a">
-            可能です。<br><br>
-            ・コーポレートサイト<br>
-            ・ブログ<br>
-            ・ポートフォリオ<br>
-            ・ランディングページ<br>
+        <div class="faq-item">
+          <div class="faq-q">サイト制作はできますか？</div>
+          <div class="faq-a">
+            可能です。<br /><br />
+            ・コーポレートサイト<br />
+            ・ブログ<br />
+            ・ポートフォリオ<br />
+            ・ランディングページ<br />
             ・高速軽量サイト
+          </div>
         </div>
-    </div>
 
-    <div class="faq-item">
-        <div class="faq-q">サーバーやドメイン設定もお願いできますか？</div>
-        <div class="faq-a">
-            可能です。<br>
+        <div class="faq-item">
+          <div class="faq-q">サーバーやドメイン設定もお願いできますか？</div>
+          <div class="faq-a">
+            可能です。<br />
             Cloudflare・GitHub・WordPress・DNS設定・SSL設定などにも対応しています。
+          </div>
         </div>
-    </div>
 
-    <div class="faq-item">
-        <div class="faq-q">子どもでも相談できますか？</div>
-        <div class="faq-a">
-            もちろん可能です。<br>
+        <div class="faq-item">
+          <div class="faq-q">子どもでも相談できますか？</div>
+          <div class="faq-a">
+            もちろん可能です。<br />
             初心者の方でもわかりやすくサポートします。
+          </div>
         </div>
-    </div>
 
-    <div class="faq-item">
-        <div class="faq-q">対応できない内容はありますか？</div>
-        <div class="faq-a">
-            以下のような内容には対応できません：<br><br>
-            ・違法行為<br>
-            ・不正アクセス<br>
-            ・ウイルス作成<br>
-            ・アカウント乗っ取り<br>
-            ・著作権侵害行為<br><br>
+        <div class="faq-item">
+          <div class="faq-q">対応できない内容はありますか？</div>
+          <div class="faq-a">
+            以下のような内容には対応できません：<br /><br />
+            ・違法行為<br />
+            ・不正アクセス<br />
+            ・ウイルス作成<br />
+            ・アカウント乗っ取り<br />
+            ・著作権侵害行為<br /><br />
             安全な利用を前提としてサポートしています。
+          </div>
         </div>
-    </div>
 
-    <div class="faq-item">
-        <div class="faq-q">問い合わせ方法を教えてください</div>
-        <div class="faq-a">
+        <div class="faq-item">
+          <div class="faq-q">問い合わせ方法を教えてください</div>
+          <div class="faq-a">
             公式サイトのお問い合わせフォーム、メール、またはSNSからご連絡ください。
+          </div>
         </div>
-    </div>
 
-    <div class="faq-item">
-        <div class="faq-q">本当に無料で利用できますか？</div>
-        <div class="faq-a">
-            基本的な相談やサポートは無料で利用できます。<br>
+        <div class="faq-item">
+          <div class="faq-q">本当に無料で利用できますか？</div>
+          <div class="faq-a">
+            基本的な相談やサポートは無料で利用できます。<br />
             「まず相談したい」という場合でも気軽に利用可能です。
+          </div>
         </div>
-    </div>
 
-    <div class="faq-item">
-        <div class="faq-q">ryopcの特徴は？</div>
-        <div class="faq-a">
-            ・基本無料サポート<br>
-            ・完全無料サービスを活用した高性能構成<br>
-            ・Cloudflareベースの高速インフラ<br>
-            ・AI活用に強い<br>
-            ・軽量・高速Web設計<br>
+        <div class="faq-item">
+          <div class="faq-q">ryopcの特徴は？</div>
+          <div class="faq-a">
+            ・基本無料サポート<br />
+            ・完全無料サービスを活用した高性能構成<br />
+            ・Cloudflareベースの高速インフラ<br />
+            ・AI活用に強い<br />
+            ・軽量・高速Web設計<br />
             ・個人でも企業レベルの技術構成
+          </div>
         </div>
+      </div>
+      <!-- 👈 ここで faq の箱を閉じました -->
     </div>
-
-</div>
-
-
-</body>
+    <!-- 👈 ここで一番大きな support-wrapper の箱を閉じました。これで数がピッタリです！ -->
+  </body>
 </html>
