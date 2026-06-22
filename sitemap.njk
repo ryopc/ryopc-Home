@@ -1,0 +1,25 @@
+---
+permalink: /sitemap.xml
+eleventyExcludeFromCollections: true
+---
+<?xml version="1.0" encoding="utf-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+{%- for page in collections.all %}
+  {# 💡 隠したいURLの条件をここに指定します #}
+  {%- if not page.data.excludeFromSitemap 
+      and not "/.github/" in page.url 
+      and not "/dashboard/" in page.url 
+      and not "/404-error/" in page.url 
+      and not "/403-error/" in page.url 
+      and not "/login/" in page.url 
+      and not "/register/" in page.url 
+      and not "/README/" in page.url 
+      and not "/CONTRIBUTING/" in page.url 
+      and not "/SECURITY/" in page.url %}
+  <url>
+    <loc>{{ eleventy.env.runMode === "serve" and "http://localhost:8080" or "https://ryopc.f5.si" }}{{ page.url | url }}</loc>
+    <lastmod>{{ page.date.toISOString() }}</lastmod>
+  </url>
+  {%- endif %}
+{%- endfor %}
+</urlset>
