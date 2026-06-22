@@ -8,14 +8,13 @@
     "test": "npm run build && npx eslint .",
     "start": "npm run clean && npx @11ty/eleventy --serve",
     "dev": "npm start",
-    "lint:fix": "npx eslint . --fix"
-    "p": "git push",
+    "lint:fix": "npx eslint . --fix",
+    "p":"git push",
     "up": "git pull",
     "st": "git status",
     "br": "git branch",
     "co": "git checkout",
-    "cm": "npm run test && git commit -m"
-
+    "cm": "npm run test && git commit -m && git push"
   },
   "engines": {
     "node": ">=18.18.0"
