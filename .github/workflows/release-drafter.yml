@@ -6,19 +6,41 @@ on:
       - main
 
 jobs:
+  # 🛠️ 1つ目の仕事：すべてのプッシュで必ずテストとフォーマットを自動実行します
+  test_and_format:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '>=18.18.0'
+          cache: 'npm' # 2回目以降の実行を爆速にします
+
+      - name: Install dependencies
+        run: npm ci
+
+      # package.json にある format と test を実行してコードをチェックします
+      - name: Run Format and Test
+        run: |
+          npm run format
+          npm run test
+
+  # 🚀 2つ目の仕事：テストが成功し、かつキーワードがある時だけリリースとバージョン更新を行います
   build_and_release:
+    needs: test_and_format # 💡 上のテストが「大成功」した時だけこの処理に進みます
     permissions:
       contents: write
     runs-on: ubuntu-latest
     steps:
-      # 1. 管理者トークンを使ってコードを取得
       - name: Checkout code
         uses: actions/checkout@v4
         with:
           token: ${{ secrets.ADMIN_TOKEN }}
           fetch-depth: 20
 
-      # 2. 【条件チェック】コミットメッセージに [mg], [mn], [bg] があるか厳密に調べます
       - name: Check for Release Keywords
         id: check
         run: |
@@ -27,7 +49,6 @@ jobs:
           echo "$COMMIT_MSGS"
           echo "======================================="
           
-          # 💡 ここを修正：\[...\] を使い、四角括弧で囲まれたキーワードだけを検知します
           if echo "$COMMIT_MSGS" | grep -iqE "\[mg\]|\[mn\]|\[bg\]"; then
             echo "四角括弧付きのキーワードを発見！リリース処理を実行します。"
             echo "run_release=true" >> $GITHUB_OUTPUT
@@ -36,14 +57,12 @@ jobs:
             echo "run_release=false" >> $GITHUB_OUTPUT
           fi
 
-      # 3. Node.jsの環境を準備（キーワードがある時だけ実行）
       - name: Setup Node.js
         if: steps.check.outputs.run_release == 'true'
         uses: actions/setup-node@v4
         with:
           node-version: '>=18.18.0'
 
-      # 4. バージョンを決定（キーワードがある時だけ実行）
       - name: Update package.json version
         if: steps.check.outputs.run_release == 'true'
         id: bump
@@ -65,7 +84,6 @@ jobs:
           echo "NEW_VERSION=$CLEAN_VERSION" >> $GITHUB_ENV
           echo "version=$CLEAN_VERSION" >> $GITHUB_OUTPUT
 
-      # 5. リリース用のログを生成
       - name: Generate Commit Log
         if: steps.check.outputs.run_release == 'true'
         id: changelog
@@ -84,7 +102,6 @@ jobs:
           echo "$COMMITS" >> $GITHUB_OUTPUT
           echo "EOF" >> $GITHUB_OUTPUT
 
-      # 6. GitHubリリースを作成
       - name: Create GitHub Release
         if: steps.check.outputs.run_release == 'true'
         uses: softprops/action-gh-release@v2
@@ -119,7 +136,6 @@ jobs:
             ---
             *"Ensuring global digital equity, one device at a time." — game-ryo*
 
-      # 7. package.json の変更を main にプッシュ
       - name: Commit and Push changes
         if: steps.check.outputs.run_release == 'true'
         run: |
