@@ -1,4 +1,4 @@
-name: Release Auto Bump and Publish
+name: Release Drafter Auto Publish
 
 on:
   push:
@@ -6,66 +6,77 @@ on:
       - main
 
 jobs:
-  build_and_release:
+  update_release_draft:
     permissions:
       contents: write
+      pull-requests: write
     runs-on: ubuntu-latest
     steps:
+      # 1. 管理者トークンを使ってコードを取得
       - name: Checkout code
         uses: actions/checkout@v4
         with:
           token: ${{ secrets.ADMIN_TOKEN }}
-          fetch-depth: 5 # 過去のコミット履歴も読めるように少し多めに取得します
+          fetch-depth: 5 # 過去5つ分のコミット履歴を緩く読み取ります
 
+      # 2. Node.jsの環境を準備
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: '>=18.18.0'
 
-      # 👇 ここを改良：直近3つ分のコミットメッセージをまとめてチェックします
-      - name: Update package.json version
-        id: bump
+      # 3. 【判定】コミットメッセージからRelease Drafter用の「バージョン指定」を作ります
+      - name: Check Commit Message for Keywords
+        id: check_keyword
         run: |
-          # 直近3つのコミットメッセージを合体させて1つのテキストにします
-          COMMIT_MSGS=$(git log -3 --pretty=%B)
+          COMMIT_MSGS=$(git log -5 --pretty=%B)
           echo "=== 判定対象のコミット履歴 ==="
           echo "$COMMIT_MSGS"
           echo "============================="
           
-          BUMP_TYPE="patch"
+          # デフォルトはパッチ（Zを上げる、bugラベル相当）
+          VERSION_OVERRIDE=""
           
-          # 合体させたテキストからキーワードを緩く探します
           if echo "$COMMIT_MSGS" | grep -iq "mg"; then
-            BUMP_TYPE="major"
+            VERSION_OVERRIDE="major"
             echo "キーワード 'mg' を検出：メジャーを上げます"
           elif echo "$COMMIT_MSGS" | grep -iq "mn"; then
-            BUMP_TYPE="minor"
+            VERSION_OVERRIDE="minor"
             echo "キーワード 'mn' を検出：マイナーを上げます"
           elif echo "$COMMIT_MSGS" | grep -iq "bg"; then
-            BUMP_TYPE="patch"
+            VERSION_OVERRIDE="patch"
             echo "キーワード 'bg' を検出：パッチを上げます"
-          else
-            echo "キーワードが見つかりません：デフォルトでパッチ（Z）を上げます"
           fi
           
-          NEW_VERSION=$(npm version $BUMP_TYPE --no-git-tag-version)
-          echo "NEW_VERSION=$NEW_VERSION" >> $GITHUB_ENV
-          echo "version=$NEW_VERSION" >> $GITHUB_OUTPUT
+          # Release Drafterに引き渡すための設定
+          echo "version=$VERSION_OVERRIDE" >> $GITHUB_OUTPUT
 
+      # 4. 【実行】あなたの設定ファイルを使って、そのまま自動で正式公開（Publish）させます
+      - name: Run Release Drafter & Publish
+        id: drafter
+        uses: release-drafter/release-drafter@v6
+        with:
+          config-name: release-drafter.yml
+          publish: true # 下書きにせず、その場で正式リリースします
+          version: ${{ steps.check_keyword.outputs.version }} # キーワードから決めたバージョンを強制適用
+        env:
+          GITHUB_TOKEN: ${{ secrets.ADMIN_TOKEN }}
+
+      # 5. 公開された正確なバージョン番号で package.json を上書きします
+      - name: Update package.json version
+        run: |
+          # Release Drafterが決定した「v無しのバージョン（例: 1.0.15）」を取得します
+          VERSION="${{ steps.drafter.outputs.resolved_version }}"
+          echo "確定したバージョン: $VERSION"
+          
+          # package.jsonを書き換えます
+          npm version $VERSION --no-git-tag-version
+
+      # 6. 最後に package.json の変更を main ブランチに自動プッシュ
       - name: Commit and Push changes
         run: |
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
           git add package.json package-lock.json
-          git commit -m "chore: bump version to ${{ env.NEW_VERSION }} [skip ci]"
+          git commit -m "chore: bump version to v${{ steps.drafter.outputs.resolved_version }} [skip ci]"
           git push origin HEAD:main
-
-      - name: Create GitHub Release
-        uses: softprops/action-gh-release@v2
-        with:
-          token: ${{ secrets.ADMIN_TOKEN }}
-          tag_name: v${{ steps.bump.outputs.version }}
-          name: Release v${{ steps.bump.outputs.version }}
-          generate_release_notes: true
-          draft: false
-          prerelease: false
