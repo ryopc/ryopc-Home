@@ -1,71 +1,72 @@
 require("dotenv").config();
 const Image = require("@11ty/eleventy-img");
-const fs = require("fs"); // 🌟 これを上の方に足すか、確認してください
+const fs = require("fs");
 
 module.exports = function (eleventyConfig) {
   
-  // 🌟 【重要】Cloudflare Pages対策：ビルド前に必ず出力先フォルダを作る
+  // 🌟 【Cloudflare Pages対策】
+  // ビルド前に必ず出力先フォルダを作っておくことで、キャッシュ使用時も画像が消えなくなります
   if (!fs.existsSync("./_site/img/")) {
     fs.mkdirSync("./_site/img/", { recursive: true });
   }
 
   // ==========================================
+  // 💡 [共通処理] 外部URLの画像をダウンロードして共通設定でWebPに変換する関数
+  // ==========================================
+  async function processImage(srcUrl) {
+    return await Image(srcUrl, {
+      widths: ["auto"], // オリジナルサイズを維持
+      formats: ["webp"], // メモリ節約のためwebp単体に統一
+      outputDir: "./_site/img/", 
+      urlPath: "/img/", 
+      cacheOptions: {
+        duration: "1d", // キャッシュの有効期限（1日）
+        directory: ".cache", // Cloudflare Pagesで引き継ぐキャッシュフォルダ
+        removeUrlQueryParams: false, // microCMSのURLパラメータを維持
+      },
+    });
+  }
+
+  // ==========================================
   // 💡 本文の中の外部画像をダウンロードして置換する関数
   // ==========================================
-  // （以下、downloadAndReplaceImages などの処理はそのまま）
-
   async function downloadAndReplaceImages(htmlContent) {
     if (!htmlContent) return "";
 
-    // HTMLの中から <img> タグ全体の文字列と、src（URL）を正確に抜き出す正規表現
-    const imgRegex = /(<img[^>]+src=["']([^"']+)["'][^>]*>)/g;
+    // <img> タグの src の中身を正確に抜き出す正規表現
+    const imgRegex = /<img[^>]+src=["']([^"']+)["'][^>]*>/g;
     let match;
     const replacements = [];
 
     // まずHTML内のすべての画像URLを洗い出す
     while ((match = imgRegex.exec(htmlContent)) !== null) {
-      const originalTag = match[1]; // <img src="..."> 全体
-      const remoteSrc = match[2]; // 画像URL
+      const originalTag = match[0]; // <img src="..."> タグ全体
+      const remoteSrc = match[1];   // 画像のURL
 
-      // すでにリストにある場合はスキップ
-      if (replacements.some((r) => r.originalTag === originalTag)) continue;
+      // 画像URLそのもので重複チェック。これで2枚目以降の別画像もスキップされません
+      if (replacements.some((r) => r.remoteSrc === remoteSrc)) continue;
 
       try {
-        console.log(
-          `📸 画像を発見しました。ダウンロードを開始します: ${remoteSrc}`,
-        );
+        console.log(`📸 本文画像を発見しました: ${remoteSrc}`);
 
-        // 外部画像をダウンロードして最適化
-        let metadata = await Image(remoteSrc, {
-          widths: ["auto"], // オリジナルサイズを維持
-          formats: ["webp"], // ⭐ 修正点1: 複数形式（webp+jpeg）から、メモリ節約のためwebp単体に変更
-          outputDir: "./_site/img/", // 成果物フォルダの保存先
-          urlPath: "/img/", // ブラウザから見たパス
-          // ⭐ 修正点2: キャッシュを有効化。これによりCloudflare上で2回目以降のビルドが高速化します
-          cacheOptions: {
-            duration: "1d", // キャッシュの有効期限（1日）
-            directory: ".cache", // キャッシュを保存するフォルダ名
-            removeUrlQueryParams: false, // microCMSの画像URLパラメータ（?w=300等）を維持
-          },
-        });
+        // 共通の画像処理関数を呼び出す
+        let metadata = await processImage(remoteSrc);
 
-        // 最適な <img> タグのHTML文字列を自動生成（formatsを1つにしたので<img>タグが生成されます）
+        // <img> タグのHTMLを新しく生成
         const imageHtml = Image.generateHTML(metadata, {
           alt: "ブログ本文の画像",
-          loading: "lazy", // 遅延読み込みで表示を速くする
+          loading: "lazy", // 遅延読み込み
           decoding: "async",
         });
 
-        replacements.push({ originalTag, imageHtml });
+        // 重複判定のために remoteSrc も一緒に記録
+        replacements.push({ originalTag, imageHtml, remoteSrc });
       } catch (error) {
-        console.error(
-          `❌ 画像のダウンロードに失敗しました (${remoteSrc}):`,
-          error,
-        );
+        console.error(`❌ 本文画像のダウンロードに失敗しました (${remoteSrc}):`, error);
       }
     }
 
-    // まとめて安全に置換を実行する
+    // 元のHTMLにある <img> タグを、新しく作ったローカル用の <img> タグへ順番に置き換える
     let updatedHtml = htmlContent;
     for (const item of replacements) {
       updatedHtml = updatedHtml.split(item.originalTag).join(item.imageHtml);
@@ -75,7 +76,7 @@ module.exports = function (eleventyConfig) {
   }
 
   // ==========================================
-  // microCMSから安全にデータを取得（画像置換つき）
+  // microCMSから安全にデータを取得（画像＆アイキャッチ置換つき）
   // ==========================================
   eleventyConfig.addGlobalData("blogs", async () => {
     const apiDomain = process.env.MICROCMS_DOMAIN;
@@ -97,15 +98,33 @@ module.exports = function (eleventyConfig) {
       );
       const data = await response.json();
 
-      // 各記事の「本文（content）」をループ処理して画像を中に入れます
+      // 各記事の「本文」と「アイキャッチ」をループ処理してローカル化
       for (let blog of data.contents) {
+        // 1. 本文内の画像をローカル化
         if (blog.content) {
           blog.content = await downloadAndReplaceImages(blog.content);
+        }
+
+        // 2. 🌟 アイキャッチ画像をローカル化
+        if (blog.eyecatch && blog.eyecatch.url) {
+          try {
+            console.log(`🖼️ アイキャッチ画像を発見しました: ${blog.eyecatch.url}`);
+            
+            // 共通の画像処理関数でダウンロード＆変換
+            let eyecatchMetadata = await processImage(blog.eyecatch.url);
+            
+            // 変換後のWebP画像のURL（例: "/img/xxxxxx.webp"）を上書きする
+            blog.eyecatch.url = eyecatchMetadata.webp[0].url;
+            
+            console.log(`➡️ アイキャッチをローカルに変換しました: ${blog.eyecatch.url}`);
+          } catch (error) {
+            console.error(`❌ アイキャッチ画像のダウンロードに失敗しました (${blog.eyecatch.url}):`, error);
+          }
         }
       }
 
       console.log(
-        `✅ microCMSから ${data.contents.length} 件の記事を取得し、本文内の画像をすべてローカルに取り込みました！`,
+        `✅ microCMSから ${data.contents.length} 件の記事を取得し、本文内の画像とアイキャッチをすべてローカルに取り込みました！`,
       );
       return data.contents;
     } catch (error) {
@@ -114,7 +133,7 @@ module.exports = function (eleventyConfig) {
     }
   });
 
-  // （以下、パススルー設定やdir設定などはそのまま）
+  // （パススルー設定）
   eleventyConfig.addPassthroughCopy("CNAME");
   eleventyConfig.addPassthroughCopy("_redirects");
   eleventyConfig.addPassthroughCopy("_headers");
