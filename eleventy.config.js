@@ -3,7 +3,7 @@ const Image = require("@11ty/eleventy-img");
 
 module.exports = function (eleventyConfig) {
   // ==========================================
-  // 💡 本文の中の外部画像をダウンロードして置換する関数（バグ修正版）
+  // 💡 本文の中の外部画像をダウンロードして置換する関数（キャッシュ対応版）
   // ==========================================
   async function downloadAndReplaceImages(htmlContent) {
     if (!htmlContent) return "";
@@ -15,8 +15,8 @@ module.exports = function (eleventyConfig) {
 
     // まずHTML内のすべての画像URLを洗い出す
     while ((match = imgRegex.exec(htmlContent)) !== null) {
-      const originalTag = match[1]; // 🌟インデックス指定を修正：<img src="..."> 全体
-      const remoteSrc = match[2]; // 🌟インデックス指定を修正：画像URL（microcms-assets.ioなど）のみ
+      const originalTag = match[1]; // <img src="..."> 全体
+      const remoteSrc = match[2]; // 画像URL
 
       // すでにリストにある場合はスキップ
       if (replacements.some((r) => r.originalTag === originalTag)) continue;
@@ -26,15 +26,21 @@ module.exports = function (eleventyConfig) {
           `📸 画像を発見しました。ダウンロードを開始します: ${remoteSrc}`,
         );
 
-        // 外部画像をダウンロードして最適化（WebPとJPEGに自動変換）
+        // 外部画像をダウンロードして最適化
         let metadata = await Image(remoteSrc, {
           widths: ["auto"], // オリジナルサイズを維持
-          formats: ["webp", "jpeg"], // 軽いWebPと標準のJPEGを用意
+          formats: ["webp"], // ⭐ 修正点1: 複数形式（webp+jpeg）から、メモリ節約のためwebp単体に変更
           outputDir: "./_site/img/", // 成果物フォルダの保存先
           urlPath: "/img/", // ブラウザから見たパス
+          // ⭐ 修正点2: キャッシュを有効化。これによりCloudflare上で2回目以降のビルドが高速化します
+          cacheOptions: {
+            duration: "1d", // キャッシュの有効期限（1日）
+            directory: ".cache", // キャッシュを保存するフォルダ名
+            removeUrlQueryParams: false, // microCMSの画像URLパラメータ（?w=300等）を維持
+          },
         });
 
-        // 最適な <picture> や <img> タグのHTML文字列を自動生成
+        // 最適な <img> タグのHTML文字列を自動生成（formatsを1つにしたので<img>タグが生成されます）
         const imageHtml = Image.generateHTML(metadata, {
           alt: "ブログ本文の画像",
           loading: "lazy", // 遅延読み込みで表示を速くする
