@@ -1,4 +1,4 @@
-name: Release Drafter
+name: Release Auto Bump and Publish
 
 on:
   push:
@@ -6,65 +6,66 @@ on:
       - main
 
 jobs:
-  update_release_draft:
+  build_and_release:
     permissions:
       contents: write
-      pull-requests: write
     runs-on: ubuntu-latest
     steps:
-      # 1. 管理者トークンを使ってコードを取得
       - name: Checkout code
         uses: actions/checkout@v4
         with:
           token: ${{ secrets.ADMIN_TOKEN }}
-          fetch-depth: 0 # コミットメッセージを読み取るために履歴をすべて取得します
+          fetch-depth: 5 # 過去のコミット履歴も読めるように少し多めに取得します
 
-      # 2. Release Drafterを実行して自動で正式公開
-      - name: Run Release Drafter & Publish
-        uses: release-drafter/release-drafter@v6
-        with:
-          publish: true
-        env:
-          GITHUB_TOKEN: ${{ secrets.ADMIN_TOKEN }}
-
-      # 3. Node.jsの環境を準備
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: '>=18.18.0'
 
-      # 4. コミットメッセージからキーワードを探して package.json のバージョンを更新
+      # 👇 ここを改良：直近3つ分のコミットメッセージをまとめてチェックします
       - name: Update package.json version
+        id: bump
         run: |
-          # 今回プッシュされた最新のコミットメッセージを取得します
-          COMMIT_MSG=$(git log -1 --pretty=%B)
-          echo "最新のコミットメッセージ: $COMMIT_MSG"
+          # 直近3つのコミットメッセージを合体させて1つのテキストにします
+          COMMIT_MSGS=$(git log -3 --pretty=%B)
+          echo "=== 判定対象のコミット履歴 ==="
+          echo "$COMMIT_MSGS"
+          echo "============================="
           
-          # デフォルトの更新ルール（キーワードがない場合はパッチバージョンZを上げる）
           BUMP_TYPE="patch"
           
-          # コミットメッセージに含まれるキーワードを判定します
-          if echo "$COMMIT_MSG" | grep -iq "mg"; then
-            BUMP_TYPE="major" # Xを上げる
-            echo "キーワード 'mg' を検出：メジャーバージョンを上げます"
-          elif echo "$COMMIT_MSG" | grep -iq "mn"; then
-            BUMP_TYPE="minor" # Yを上げる
-            echo "キーワード 'mn' を検出：マイナーバージョンを上げます"
-          elif echo "$COMMIT_MSG" | grep -iq "bg"; then
-            BUMP_TYPE="patch" # Zを上げる
-            echo "キーワード 'bg' を検出：パッチバージョンを上げます"
+          # 合体させたテキストからキーワードを緩く探します
+          if echo "$COMMIT_MSGS" | grep -iq "mg"; then
+            BUMP_TYPE="major"
+            echo "キーワード 'mg' を検出：メジャーを上げます"
+          elif echo "$COMMIT_MSGS" | grep -iq "mn"; then
+            BUMP_TYPE="minor"
+            echo "キーワード 'mn' を検出：マイナーを上げます"
+          elif echo "$COMMIT_MSGS" | grep -iq "bg"; then
+            BUMP_TYPE="patch"
+            echo "キーワード 'bg' を検出：パッチを上げます"
           else
-            echo "キーワードがありません：通常のパッチバージョン（Z）として処理します"
+            echo "キーワードが見つかりません：デフォルトでパッチ（Z）を上げます"
           fi
           
-          # 指定したルールでpackage.jsonのバージョンを書き換えます
-          npm version $BUMP_TYPE --no-git-tag-version
+          NEW_VERSION=$(npm version $BUMP_TYPE --no-git-tag-version)
+          echo "NEW_VERSION=$NEW_VERSION" >> $GITHUB_ENV
+          echo "version=$NEW_VERSION" >> $GITHUB_OUTPUT
 
-      # 5. 変更を main ブランチに自動でコミット・プッシュ
       - name: Commit and Push changes
         run: |
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
           git add package.json package-lock.json
-          git commit -m "chore: bump version 自動更新 [skip ci]"
+          git commit -m "chore: bump version to ${{ env.NEW_VERSION }} [skip ci]"
           git push origin HEAD:main
+
+      - name: Create GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          token: ${{ secrets.ADMIN_TOKEN }}
+          tag_name: v${{ steps.bump.outputs.version }}
+          name: Release v${{ steps.bump.outputs.version }}
+          generate_release_notes: true
+          draft: false
+          prerelease: false
