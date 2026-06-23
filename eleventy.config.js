@@ -1,10 +1,19 @@
 require("dotenv").config();
 const Image = require("@11ty/eleventy-img");
+const fs = require("fs"); // 🌟 これを上の方に足すか、確認してください
 
 module.exports = function (eleventyConfig) {
+  
+  // 🌟 【重要】Cloudflare Pages対策：ビルド前に必ず出力先フォルダを作る
+  if (!fs.existsSync("./_site/img/")) {
+    fs.mkdirSync("./_site/img/", { recursive: true });
+  }
+
   // ==========================================
-  // 💡 本文の中の外部画像をダウンロードして置換する関数（キャッシュ対応版）
+  // 💡 本文の中の外部画像をダウンロードして置換する関数
   // ==========================================
+  // （以下、downloadAndReplaceImages などの処理はそのまま）
+
   async function downloadAndReplaceImages(htmlContent) {
     if (!htmlContent) return "";
 
