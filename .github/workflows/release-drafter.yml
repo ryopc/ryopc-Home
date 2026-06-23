@@ -17,7 +17,41 @@ jobs:
       - uses: release-drafter/release-drafter@v6
         with:
           publish: ${{ github.event_name == 'release' }}
-          # 👇 この一行を追加すると、設定ファイルにあるラベルをGitHub上に自動で全部作ってくれます！
           with-labels: true
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      # 👇 ここから追加：リリース公開時にpackage.jsonのバージョンを更新してmainへコミットします
+      - name: Checkout code
+        if: github.event_name == 'release'
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Setup Node.js
+        if: github.event_name == 'release'
+        uses: actions/setup-node@v4
+        with:
+          node-version: '>=18.18.0' # お使いのengines設定に合わせています
+
+      - name: Update package.json version
+        if: github.event_name == 'release'
+        run: |
+          # タグ名（例: v1.0.11）から先頭の 'v' を削ります
+          VERSION=$(echo "${{ github.event.release.tag_name }}" | sed 's/^v//')
+          
+          # package.jsonのバージョンを書き換えます
+          npm version $VERSION --no-git-tag-version
+
+      - name: Commit and Push changes
+        if: github.event_name == 'release'
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          
+          # 変更されたファイルをまとめてステージングします
+          git add package.json package-lock.json
+          
+          # [skip ci]を入れて自動ビルドの無限ループを防ぎ、mainへプッシュします
+          git commit -m "chore: bump version to ${{ github.event.release.tag_name }} [skip ci]"
+          git push origin HEAD:main
