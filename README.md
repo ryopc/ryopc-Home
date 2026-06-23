@@ -33,4 +33,4 @@ license by **MIT**
 
 ---
 
-*“Ensuring global digital equity, one device at a time.” — *ryopcCEO\*
+*“Ensuring global digital equity, one device at a time.” — *game-ryo*
