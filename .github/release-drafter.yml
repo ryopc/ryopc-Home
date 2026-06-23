@@ -30,6 +30,19 @@ template: |
   ---
   **Full Changelog**: https://github.com/ryopc/$REPOSITORY/compare/$PREVIOUS_TAG...v$RESOLVED_VERSION
 
+  ---
+  ### 📂 Developer & Contributor Notes
+
+  If you are cloning or pulling this project locally, please ensure you run a fresh dependency check and execute the test scripts to verify alignment with your local environment setup:
+
+  ```bash
+  npm install
+  npm run test
+  ```
+
+  ---
+  *"Ensuring global digital equity, one device at a time." — game-ryo*
+
 # 超詳細なカテゴリ分類
 categories:
   - title: "✨ New Features"
