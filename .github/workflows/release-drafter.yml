@@ -1,4 +1,4 @@
-name: Release Drafter Auto Publish
+name: Release Auto Bump and Publish
 
 on:
   push:
@@ -6,10 +6,9 @@ on:
       - main
 
 jobs:
-  update_release_draft:
+  build_and_release:
     permissions:
       contents: write
-      pull-requests: write
     runs-on: ubuntu-latest
     steps:
       # 1. 管理者トークンを使ってコードを取得
@@ -17,7 +16,7 @@ jobs:
         uses: actions/checkout@v4
         with:
           token: ${{ secrets.ADMIN_TOKEN }}
-          fetch-depth: 5 # 過去5つ分のコミット履歴を緩く読み取ります
+          fetch-depth: 10 # 変更履歴（チェンジログ）を正確に作るために過去履歴を取得
 
       # 2. Node.jsの環境を準備
       - name: Setup Node.js
@@ -25,58 +24,94 @@ jobs:
         with:
           node-version: '>=18.18.0'
 
-      # 3. 【判定】コミットメッセージからRelease Drafter用の「バージョン指定」を作ります
-      - name: Check Commit Message for Keywords
-        id: check_keyword
+      # 3. コミットメッセージからキーワードを探してバージョンを決定
+      - name: Determine next version
+        id: bump
         run: |
           COMMIT_MSGS=$(git log -5 --pretty=%B)
           echo "=== 判定対象のコミット履歴 ==="
           echo "$COMMIT_MSGS"
           echo "============================="
           
-          # デフォルトはパッチ（Zを上げる、bugラベル相当）
-          VERSION_OVERRIDE=""
-          
+          BUMP_TYPE="patch"
           if echo "$COMMIT_MSGS" | grep -iq "mg"; then
-            VERSION_OVERRIDE="major"
-            echo "キーワード 'mg' を検出：メジャーを上げます"
+            BUMP_TYPE="major"
           elif echo "$COMMIT_MSGS" | grep -iq "mn"; then
-            VERSION_OVERRIDE="minor"
-            echo "キーワード 'mn' を検出：マイナーを上げます"
+            BUMP_TYPE="minor"
           elif echo "$COMMIT_MSGS" | grep -iq "bg"; then
-            VERSION_OVERRIDE="patch"
-            echo "キーワード 'bg' を検出：パッチを上げます"
+            BUMP_TYPE="patch"
           fi
           
-          # Release Drafterに引き渡すための設定
-          echo "version=$VERSION_OVERRIDE" >> $GITHUB_OUTPUT
+          NEXT_VERSION=$(npm version $BUMP_TYPE --no-git-tag-version)
+          echo "NEW_VERSION=$NEXT_VERSION" >> $GITHUB_ENV
+          echo "version=$NEXT_VERSION" >> $GITHUB_OUTPUT
 
-      # 4. 【実行】あなたの設定ファイルを使って、そのまま自動で正式公開（Publish）させます
-      - name: Run Release Drafter & Publish
-        id: drafter
-        uses: release-drafter/release-drafter@v6
+      # 4. 【新設】直コミットの履歴を綺麗なテキストとして書き出します
+      - name: Generate Commit Log
+        id: changelog
+        run: |
+          # 前回のタグからの差分コミットを1行ずつ綺麗に取得します
+          git fetch --tags
+          PREV_TAG=$(git describe --tags --abbrev=0 2>/dev/null || echo "")
+          
+          if [ -z "$PREV_TAG" ]; then
+            # 初回リリースの場合は直近5件のコミットを出力
+            COMMITS=$(git log -5 --pretty=format:"- %s by @%an in %h")
+          else
+            # 前回タグからの差分を出力（自動更新コミットは除外）
+            COMMITS=$(git log ${PREV_TAG}..HEAD --pretty=format:"- %s by @%an in %h" | grep -v "chore: bump version" || echo "No changes")
+          fi
+          
+          # GitHub Actionsの複数行テキスト出力に対応させる設定
+          echo "CHANGES<<EOF" >> $GITHUB_OUTPUT
+          echo "$COMMITS" >> $GITHUB_OUTPUT
+          echo "EOF" >> $GITHUB_OUTPUT
+
+      # 5. 【重要】あなたのお気に入りテンプレートの形に本文を組み立てます
+      - name: Create GitHub Release
+        uses: softprops/action-gh-release@v2
         with:
-          config-name: release-drafter.yml
-          publish: true # 下書きにせず、その場で正式リリースします
-          version: ${{ steps.check_keyword.outputs.version }} # キーワードから決めたバージョンを強制適用
-        env:
-          GITHUB_TOKEN: ${{ secrets.ADMIN_TOKEN }}
+          token: ${{ secrets.ADMIN_TOKEN }}
+          tag_name: v${{ steps.bump.outputs.version }}
+          name: Release v${{ steps.bump.outputs.version }}
+          draft: false
+          prerelease: false
+          # 👇 あなたの作成したデザインの穴埋め（マッピング）を行っています
+          body: |
+            ## 🚀 What's Changed
 
-      # 5. 公開された正確なバージョン番号で package.json を上書きします
+            ${{ steps.changelog.outputs.changes }}
+
+            ## 🤝 New Contributors
+            *Thank you so much for your contributions!* 🙌
+            - @${{ github.actor }}
+
+            ---
+            **Full Changelog**: https://github.com{{ steps.bump.outputs.version }}...v${{ steps.bump.outputs.version }}
+
+            ---
+            ### 📂 Developer & Contributor Notes
+
+            If you are cloning or pulling this project locally, please ensure you run a fresh dependency check and execute the test scripts to verify alignment with your local environment setup:
+
+            ```bash
+            npm install
+            npm run test
+            ```
+
+            ---
+            *"Ensuring global digital equity, one device at a time." — game-ryo*
+
+      # 6. リリース完了後、package.jsonのバージョンを実際に書き換えます
       - name: Update package.json version
         run: |
-          # Release Drafterが決定した「v無しのバージョン（例: 1.0.15）」を取得します
-          VERSION="${{ steps.drafter.outputs.resolved_version }}"
-          echo "確定したバージョン: $VERSION"
-          
-          # package.jsonを書き換えます
-          npm version $VERSION --no-git-tag-version
+          npm version ${{ env.NEW_VERSION }} --no-git-tag-version
 
-      # 6. 最後に package.json の変更を main ブランチに自動プッシュ
+      # 7. 最後に変更を main ブランチに自動でコミット・プッシュ
       - name: Commit and Push changes
         run: |
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
           git add package.json package-lock.json
-          git commit -m "chore: bump version to v${{ steps.drafter.outputs.resolved_version }} [skip ci]"
+          git commit -m "chore: bump version to ${{ env.NEW_VERSION }} [skip ci]"
           git push origin HEAD:main
