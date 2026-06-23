@@ -5,7 +5,7 @@
   "scripts": {
     "clean": "node -e \"const fs = require('fs'); const rm = (p, r=false) => fs.rmSync(p, { recursive: r, force: true }); rm('_site', true); rm('.cache', true); rm('dist', true); rm('build', true); rm('.next', true); rm('.nuxt', true); rm('coverage', true); rm('.eslintcache'); rm('npm-debug.log');\"",
     "build": "npm install && npx @11ty/eleventy",
-    "test": "npm run format && npm run build && npx eslint . && npx husky",
+    "test": "npm run format && npm start && npx eslint . && npx husky",
     "start": "npm install && npx @11ty/eleventy --serve",
     "dev": "npm start",
     "format": "npx prettier --write .",

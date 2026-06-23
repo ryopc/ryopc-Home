@@ -16,8 +16,8 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '>=18.18.0'
-          cache: 'npm' # 2回目以降の実行を爆速にします
+          node-version: ">=18.18.0"
+          cache: "npm" # 2回目以降の実行を爆速にします
 
       - name: Install dependencies
         run: npm ci
@@ -48,7 +48,7 @@ jobs:
           echo "=== チェック対象のコミットメッセージ ==="
           echo "$COMMIT_MSGS"
           echo "======================================="
-          
+
           if echo "$COMMIT_MSGS" | grep -iqE "\[mg\]|\[mn\]|\[bg\]"; then
             echo "四角括弧付きのキーワードを発見！リリース処理を実行します。"
             echo "run_release=true" >> $GITHUB_OUTPUT
@@ -61,14 +61,14 @@ jobs:
         if: steps.check.outputs.run_release == 'true'
         uses: actions/setup-node@v4
         with:
-          node-version: '>=18.18.0'
+          node-version: ">=18.18.0"
 
       - name: Update package.json version
         if: steps.check.outputs.run_release == 'true'
         id: bump
         run: |
           COMMIT_MSGS=$(git log -1 --pretty=%B)
-          
+
           BUMP_TYPE="patch"
           if echo "$COMMIT_MSGS" | grep -iq "\[mg\]"; then
             BUMP_TYPE="major"
@@ -77,10 +77,10 @@ jobs:
           elif echo "$COMMIT_MSGS" | grep -iq "\[bg\]"; then
             BUMP_TYPE="patch"
           fi
-          
+
           RAW_VERSION=$(npm version $BUMP_TYPE --no-git-tag-version)
           CLEAN_VERSION=$(echo "$RAW_VERSION" | sed 's/^v//')
-          
+
           echo "NEW_VERSION=$CLEAN_VERSION" >> $GITHUB_ENV
           echo "version=$CLEAN_VERSION" >> $GITHUB_OUTPUT
 
@@ -91,13 +91,13 @@ jobs:
           git fetch --tags
           PREV_TAG=$(git describe --tags --abbrev=0 2>/dev/null || echo "")
           echo "prev_tag=$PREV_TAG" >> $GITHUB_OUTPUT
-          
+
           if [ -z "$PREV_TAG" ]; then
             COMMITS=$(git log -5 --pretty=format:"- %s by @%an in %h")
           else
             COMMITS=$(git log ${PREV_TAG}..HEAD --pretty=format:"- %s by @%an in %h" | grep -v "chore: bump version" || echo "No changes")
           fi
-          
+
           echo "CHANGES<<EOF" >> $GITHUB_OUTPUT
           echo "$COMMITS" >> $GITHUB_OUTPUT
           echo "EOF" >> $GITHUB_OUTPUT

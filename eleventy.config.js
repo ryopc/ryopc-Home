@@ -3,7 +3,6 @@ const Image = require("@11ty/eleventy-img");
 const fs = require("fs");
 
 module.exports = function (eleventyConfig) {
-  
   // 🌟 【Cloudflare Pages対策】
   // ビルド前に必ず出力先フォルダを作っておく
   if (!fs.existsSync("./_site/img/")) {
@@ -16,14 +15,14 @@ module.exports = function (eleventyConfig) {
   async function processImage(srcUrl) {
     if (!srcUrl) return null;
     return await Image(srcUrl, {
-      widths: ["auto"], 
-      formats: ["webp"], 
-      outputDir: "./_site/img/", 
-      urlPath: "/img/", 
+      widths: ["auto"],
+      formats: ["webp"],
+      outputDir: "./_site/img/",
+      urlPath: "/img/",
       cacheOptions: {
-        duration: "1d", 
-        directory: ".cache", 
-        removeUrlQueryParams: false, 
+        duration: "1d",
+        directory: ".cache",
+        removeUrlQueryParams: false,
       },
     });
   }
@@ -39,8 +38,8 @@ module.exports = function (eleventyConfig) {
     const replacements = [];
 
     while ((match = imgRegex.exec(htmlContent)) !== null) {
-      const originalTag = match[0]; 
-      const remoteSrc = match[1];   
+      const originalTag = match[0];
+      const remoteSrc = match[1];
 
       if (replacements.some((r) => r.remoteSrc === remoteSrc)) continue;
 
@@ -50,13 +49,16 @@ module.exports = function (eleventyConfig) {
 
         const imageHtml = Image.generateHTML(metadata, {
           alt: "ブログ本文の画像",
-          loading: "lazy", 
-          decoding: "async"
+          loading: "lazy",
+          decoding: "async",
         });
 
         replacements.push({ originalTag, imageHtml, remoteSrc });
       } catch (error) {
-        console.error(`❌ 画像のダウンロードに失敗しました (${remoteSrc}):`, error);
+        console.error(
+          `❌ 画像のダウンロードに失敗しました (${remoteSrc}):`,
+          error,
+        );
       }
     }
 
@@ -76,14 +78,16 @@ module.exports = function (eleventyConfig) {
     const apiKey = process.env.MICROCMS_API_KEY;
 
     if (!apiDomain || !apiKey) {
-      console.log("⚠️ microCMSの環境変数が見つからないため、データ取得をスキップします。");
+      console.log(
+        "⚠️ microCMSの環境変数が見つからないため、データ取得をスキップします。",
+      );
       return [];
     }
 
     try {
       const response = await fetch(
         `https://${apiDomain}.microcms.io/api/v1/blogs`,
-        { headers: { "X-MICROCMS-API-KEY": apiKey } }
+        { headers: { "X-MICROCMS-API-KEY": apiKey } },
       );
       const data = await response.json();
 
@@ -96,16 +100,23 @@ module.exports = function (eleventyConfig) {
         // 2. アイキャッチ画像をローカル化
         if (blog.eyecatch && blog.eyecatch.url) {
           try {
-            console.log(`🖼️ アイキャッチ画像を発見しました: ${blog.eyecatch.url}`);
+            console.log(
+              `🖼️ アイキャッチ画像を発見しました: ${blog.eyecatch.url}`,
+            );
             let eyecatchMetadata = await processImage(blog.eyecatch.url);
             blog.eyecatch.url = eyecatchMetadata.webp[0].url;
           } catch (error) {
-            console.error(`❌ アイキャッチ画像のダウンロードに失敗しました (${blog.eyecatch.url}):`, error);
+            console.error(
+              `❌ アイキャッチ画像のダウンロードに失敗しました (${blog.eyecatch.url}):`,
+              error,
+            );
           }
         }
       }
 
-      console.log(`✅ microCMSから ${data.contents.length} 件の記事を取得し、画像ローカル化を完了しました！`);
+      console.log(
+        `✅ microCMSから ${data.contents.length} 件の記事を取得し、画像ローカル化を完了しました！`,
+      );
       return data.contents;
     } catch (error) {
       console.error("❌ microCMSからのデータ取得に失敗しました:", error);
