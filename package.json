@@ -1,6 +1,6 @@
 {
   "name": "ryopc-home",
-  "version": "1.0.20",
+  "version": "1.1.0",
   "description": "game_ryoが主導するryopcは、公正で透明性の高い技術サポートは基本的人権であるという信念に基づき設立された、デジタルファーストのグローバルイニシアチブです。私たちはユーザーを不正行為から守り、世界的なデジタルデバイドの解消を目指しています。",
   "scripts": {
     "clean": "node -e \"const fs = require('fs'); const rm = (p, r=false) => fs.rmSync(p, { recursive: r, force: true }); rm('_site', true); rm('.cache', true); rm('dist', true); rm('build', true); rm('.next', true); rm('.nuxt', true); rm('coverage', true); rm('.eslintcache'); rm('npm-debug.log');\"",
