@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>アルティメットじゃんけん | WebSocket通信対戦</title>
+  <title>アルティメットじゃんけん</title>
   <style>
     :root {
       --bg: #0f172a; --card: #1e293b; --text: #f1f5f9; --muted: #94a3b8;
@@ -11,10 +11,16 @@
       --border: #334155; --pri: #6366f1;
     }
     * { box-sizing: border-box; margin: 0; padding: 0; }
-    body { font-family: 'Hiragino Kaku Gothic Pro', 'Meiryo', sans-serif; background: var(--bg); color: var(--text); min-height: 100dvh; }
-    header { background: linear-gradient(135deg, #1e1b4b, #312e81); padding: 0.85rem 1rem; display: flex; align-items: center; gap: 0.7rem; position: sticky; top: 0; z-index: 10; }
+    body { font-family: 'Hiragino Kaku Gothic Pro', 'Meiryo', sans-serif; background: var(--bg); color: var(--text); min-height: 100dvh; transition: background 0.25s; }
+    header { background: linear-gradient(135deg, #1e1b4b, #312e81); padding: 0.85rem 1rem; display: flex; align-items: center; gap: 0.7rem; position: sticky; top: 0; z-index: 10; transition: background 0.25s; }
     header h1 { font-size: 1.05rem; font-weight: 900; flex: 1; }
     .badge { font-size: 0.68rem; background: var(--accent); color: #000; padding: 0.15rem 0.5rem; border-radius: 999px; font-weight: 800; }
+
+    /* 画面切り替え（ホーム画面 / 対戦画面） */
+    body.screen-battle { background: #1a0f0f; }
+    body.screen-battle header { background: linear-gradient(135deg, #450a0a, #7f1d1d); }
+    body.screen-battle .badge { background: var(--p2); color: #fff; }
+    #home-screen, #battle-screen { animation: fadein 0.2s ease-out; }
 
     .container { max-width: 540px; margin: 0 auto; padding: 1rem; }
     .section { background: var(--card); border: 1px solid var(--border); border-radius: 14px; padding: 1rem; margin-bottom: 0.75rem; }
@@ -157,11 +163,13 @@
 </head>
 <body>
   <header>
-    <h1>アルティメットじゃんけん</h1>
-    <span class="badge">WS ONLINE</span>
+    <h1 id="header-title">アルティメットじゃんけん</h1>
+    <span class="badge" id="header-badge">WS ONLINE</span>
   </header>
 
   <div class="container">
+    <!-- ============== ホーム画面 ============== -->
+    <div id="home-screen">
     <!-- Entry Section -->
     <div class="section" id="entry-section">
       <div class="section-title">オンライン対戦</div>
@@ -227,9 +235,13 @@
         </div>
       </div>
     </div>
+    <!-- ============== /ホーム画面 ============== -->
+    </div><!-- /#home-screen -->
 
+    <!-- ============== 対戦画面 ============== -->
     <!-- Game Area -->
     <div id="game-area" class="hidden">
+      <div id="battle-screen-label" style="text-align:center; font-size:0.7rem; font-weight:800; color:var(--p2); letter-spacing:0.15em; margin-bottom:0.5rem;">⚔️ 対戦中</div>
       <div class="section-head">
         <div class="conn-bar" style="margin:0;">
           <span class="conn-dot on"></span><span id="my-name">YOU</span>
@@ -465,6 +477,9 @@
     function syncState(state) {
       $('lobby-section').classList.add('hidden');
       $('game-area').classList.remove('hidden');
+      document.body.classList.add('screen-battle');
+      $('header-title').textContent = '⚔️ 対戦中';
+      $('header-badge').textContent = 'BATTLE';
       $('set-over').classList.remove('show');
       $('match-over').classList.remove('show');
       $('my-name').textContent = getName();
