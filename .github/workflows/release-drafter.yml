@@ -2,16 +2,16 @@ name: Release Auto Bump and Publish
 
 on:
   push:
-    branches: [ main ]
+    branches: [main]
     paths-ignore:
-      - '**.md'
-      - 'docs/**'
-      - '.vscode/**'
-      - '.github/**'
-      - '**.png'
-      - '**.jpg'
-      - '**.jpeg'
-      - '**.svg'
+      - "**.md"
+      - "docs/**"
+      - ".vscode/**"
+      - ".github/**"
+      - "**.png"
+      - "**.jpg"
+      - "**.jpeg"
+      - "**.svg"
 
 jobs:
   # 🛠️ 1つ目の仕事：すべてのプッシュで必ずテストとフォーマットを自動実行します

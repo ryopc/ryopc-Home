@@ -6,14 +6,14 @@ This document defines the decision-making process, key roles, and community mana
 
 There are three roles in this project:
 
-* **Contributors**
-  * All participants who contribute code, edit documentation, report bugs, propose features, and more.
-* **Maintainers**
-  * Members who manage the project’s direction and have the authority to review code and merge pull requests (PRs).
-  * **Current Maintainer**: @ryotagtagtag-wq
-* **Project Lead**
-  * The project’s founder or the person responsible for overseeing the entire project. They have the final say in the event of a disagreement.
-  * **Current Leader**: @ryotagtagtag-wq
+- **Contributors**
+  - All participants who contribute code, edit documentation, report bugs, propose features, and more.
+- **Maintainers**
+  - Members who manage the project’s direction and have the authority to review code and merge pull requests (PRs).
+  - **Current Maintainer**: @ryotagtagtag-wq
+- **Project Lead**
+  - The project’s founder or the person responsible for overseeing the entire project. They have the final say in the event of a disagreement.
+  - **Current Leader**: @ryotagtagtag-wq
 
 ## 2. Decision-Making Process
 
