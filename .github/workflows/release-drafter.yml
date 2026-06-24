@@ -2,8 +2,16 @@ name: Release Auto Bump and Publish
 
 on:
   push:
-    branches:
-      - main
+    branches: [ main ]
+    paths-ignore:
+      - '**.md'
+      - 'docs/**'
+      - '.vscode/**'
+      - '.github/**'
+      - '**.png'
+      - '**.jpg'
+      - '**.jpeg'
+      - '**.svg'
 
 jobs:
   # 🛠️ 1つ目の仕事：すべてのプッシュで必ずテストとフォーマットを自動実行します
@@ -90,7 +98,7 @@ jobs:
         run: |
           git fetch --tags
           PREV_TAG=$(git describe --tags --abbrev=0 2>/dev/null || echo "")
-          echo "prev_tag=$PREV_TAG" >> $GITHUB_OUTPUT
+          echo "prev_tag=$PREV_TAG" >> $GITHUB_ENV
 
           if [ -z "$PREV_TAG" ]; then
             COMMITS=$(git log -5 --pretty=format:"- %s by @%an in %h")
@@ -98,9 +106,10 @@ jobs:
             COMMITS=$(git log ${PREV_TAG}..HEAD --pretty=format:"- %s by @%an in %h" | grep -v "chore: bump version" || echo "No changes")
           fi
 
-          echo "CHANGES<<EOF" >> $GITHUB_OUTPUT
-          echo "$COMMITS" >> $GITHUB_OUTPUT
-          echo "EOF" >> $GITHUB_OUTPUT
+          # 💡 複数行テキストを正しく渡すための新しい記述（GITHUB_OUTPUTではなくGITHUB_ENVを使用）
+          echo "CHANGES<<EOF" >> $GITHUB_ENV
+          echo "$COMMITS" >> $GITHUB_ENV
+          echo "EOF" >> $GITHUB_ENV
 
       - name: Create GitHub Release
         if: steps.check.outputs.run_release == 'true'
@@ -114,14 +123,14 @@ jobs:
           body: |
             ## 🚀 What's Changed
 
-            ${{ steps.changelog.outputs.changes }}
+            ${{ env.CHANGES }}
 
             ## 🤝 New Contributors
             *Thank you so much for your contributions!* 🙌
             - @${{ github.actor }}
 
             ---
-            **Full Changelog**: https://github.com/ryopc/ryopc-Home/compare/${{ steps.changelog.outputs.prev_tag }}...v${{ steps.bump.outputs.version }}
+            **Full Changelog**: https://github.com/ryopc/ryopc-Home/compare/${{ env.prev_tag }}...v${{ steps.bump.outputs.version }}
 
             ---
             ### 📂 Developer & Contributor Notes
@@ -139,8 +148,9 @@ jobs:
       - name: Commit and Push changes
         if: steps.check.outputs.run_release == 'true'
         run: |
+          # 💡 GitHub ActionsボットとしてDCO証明（-s）付きで確実にコミットします
           git config --local user.email "action@github.com"
-          git config --local user.name "GitHub Action"
+          git config --local user.name "github-actions[bot]"
           git add package.json package-lock.json
-          git commit -m "chore: bump version to ${{ env.NEW_VERSION }} [skip ci]"
+          git commit -s -m "chore: bump version to ${{ env.NEW_VERSION }} [skip ci]"
           git push origin HEAD:main
