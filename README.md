@@ -10,7 +10,11 @@ Led by **game_ryo**, **ryopc** is a digital-first global initiative built on the
 
 ## 🛠 Future Services
 
-We are developing a borderless, multi-layered ecosystem starting with legitimate device guidance. We plan to sequentially launch diverse digital solutions to meet the evolving needs of the global community.
+[Support via ChannelTalk](https://ryopc.channel.io)
+
+[Kids IT Certification](https://jr-it.rweb.site)
+
+[ZaqLess](https://www.zqls.f5.si)
 
 ---
 
