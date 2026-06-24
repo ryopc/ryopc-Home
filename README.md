@@ -33,7 +33,7 @@ Led by **game_ryo**, **ryopc** is a digital-first global initiative built on the
 
 ## license
 
-license by **MIT**
+license by [MIT](https://github.com/ryopc/ryopc-Home/blob/main/LICENSE)
 
 ---
 
