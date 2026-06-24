@@ -380,6 +380,43 @@
         transform: translateY(-3px);
       }
 
+      /* 追加したサービスのリンク用スタイル */
+      .service-links {
+        list-style: none;
+        padding: 0;
+        margin-top: 1.5rem;
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+      }
+      .service-links li a {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        color: var(--primary);
+        font-weight: 600;
+        text-decoration: none;
+        background: rgba(0, 82, 204, 0.05);
+        padding: 14px 24px;
+        border-radius: 16px;
+        width: 100%;
+        transition: var(--transition);
+        border: 1px solid rgba(0, 82, 204, 0.1);
+      }
+      .service-links li a:hover {
+        background: rgba(0, 82, 204, 0.1);
+        color: var(--primary-light);
+        transform: translateY(-2px);
+        border-color: rgba(0, 82, 204, 0.2);
+      }
+      .service-links li a span {
+        font-size: 1.2em;
+        transition: transform 0.3s ease;
+      }
+      .service-links li a:hover span {
+        transform: translateX(4px);
+      }
+
       /* お問い合わせフォーム */
       .form-group {
         margin-bottom: 1.5rem;
@@ -676,16 +713,35 @@
           diverse digital solutions to meet the evolving needs of the global
           community.
         </p>
+        
+        <!-- 追加したサービスリンク -->
+        <ul class="service-links">
+          <li>
+            <a href="https://ryopc.channel.io" target="_blank" rel="noopener noreferrer">
+              Support via ChannelTalk <span>➔</span>
+            </a>
+          </li>
+          <li>
+            <a href="https://jr-it.rweb.site" target="_blank" rel="noopener noreferrer">
+              Kids IT Certification <span>➔</span>
+            </a>
+          </li>
+          <li>
+            <a href="https://www.zqls.f5.si" target="_blank" rel="noopener noreferrer">
+              ZaqLess <span>➔</span>
+            </a>
+          </li>
+        </ul>
       </section>
 
       <!-- [公式アプリリリース] -->
       <section class="card" id="app-release">
-        <h2 class="announcement-title">📱 公式アプリリリースのお知らせ</h2>
-        <p class="announcement-desc">
+        <h2 class="announcement-title" data-t="app_announcement_title">📱 公式アプリリリースのお知らせ</h2>
+        <p class="announcement-desc" data-t="app_announcement_desc">
           公式モバイルアプリ「ryopc-app」の提供を開始いたしました。当社のデジタルエコシステムをスマートフォンの画面から直接ご利用いただけるようになり、シームレスなデバイスガイダンスやデジタルリテラシー向上のための便利なツールをいつでもどこでもご活用いただけます。
         </p>
         <div class="btn-container">
-          <a href="https://app.ryopc.f5.si" class="install-button">
+          <a href="https://app.ryopc.f5.si" class="install-button" data-t="app_install_btn">
             アプリをインストール
           </a>
         </div>
@@ -900,6 +956,9 @@
           opt_project: "プロジェクトへの参加",
           opt_other: "その他",
           btn_submit: "メッセージを送信",
+          app_announcement_title: "📱 公式アプリリリースのお知らせ",
+          app_announcement_desc: "公式モバイルアプリ「ryopc-app」の提供を開始いたしました。当社のデジタルエコシステムをスマートフォンの画面から直接ご利用いただけるようになり、シームレスなデバイスガイダンスやデジタルリテラシー向上のための便利なツールをいつでもどこでもご活用いただけます。",
+          app_install_btn: "アプリをインストール"
         },
         en: {
           nav_home: "Home",
@@ -940,6 +999,9 @@
           opt_project: "Join the Project",
           opt_other: "Other",
           btn_submit: "Send Message",
+          app_announcement_title: "📱 Official App Release Announcement",
+          app_announcement_desc: "We are pleased to announce the release of our official mobile application, \"ryopc-app\". You can now access our digital ecosystem directly from your smartphone, allowing you to use seamless device guidance and useful digital literacy tools anytime, anywhere.",
+          app_install_btn: "Install App"
         },
         pt: {
           nav_home: "Início",
@@ -980,6 +1042,9 @@
           opt_project: "Participar do Projeto",
           opt_other: "Outro",
           btn_submit: "Enviar Mensagem",
+          app_announcement_title: "📱 Lançamento Oficial do Aplicativo",
+          app_announcement_desc: "Temos o prazer de anunciar o lançamento do nosso aplicativo móvel oficial, \"ryopc-app\". Agora você pode acessar nosso ecossistema digital diretamente da tela do seu smartphone, permitindo que use orientações simplificadas de dispositivos e ferramentas úteis para aprimorar sua literacia digital a qualquer hora e em qualquer lugar.",
+          app_install_btn: "Instalar Aplicativo"
         },
       };
 
