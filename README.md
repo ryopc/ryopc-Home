@@ -29,7 +29,7 @@ We are developing a borderless, multi-layered ecosystem starting with legitimate
 
 ## license
 
-license by **MIT**
+license by [MIT](https://github.com/ryopc/ryopc-Home/blob/main/LICENSE)
 
 ---
 
