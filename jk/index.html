@@ -1044,7 +1044,7 @@
       // WebSocket 接続初期化
       function connectWS() {
         const protocol = location.protocol === "https:" ? "wss:" : "ws:";
-        const wsUrl = `wss://janken-project-back.onrender.com`;
+        const wsUrl = `wss://janken-project-back.onrender.com/ws`;
         ws = new WebSocket(wsUrl);
 
         ws.onopen = () => {
