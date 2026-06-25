@@ -1020,6 +1020,13 @@
     </div>
 
     <script>
+      // === XSS Prevention Helper ===
+      function escapeHtml(text) {
+        const div = document.createElement('div');
+        div.textContent = text;
+        return div.innerHTML;
+      }
+
       const $ = (id) => document.getElementById(id);
       const HAND_EMOJI = ["✊", "✌️", "✋"];
       let ws = null;
@@ -1343,9 +1350,9 @@
           if (suddenDeath)
             $("res-detail").textContent =
               result === 0 ? "あいこ！もう一度" : "";
-          else
-            $("res-detail").innerHTML =
-              `<span class="pts-you">YOU +${myPts}</span><span class="pts-sep">/</span><span class="pts-cpu">相手 +${oppPts}</span>`;
+          else {
+            $("res-detail").innerHTML = `<span class="pts-you">YOU +${escapeHtml(String(myPts))}</span><span class="pts-sep">/</span><span class="pts-cpu">相手 +${escapeHtml(String(oppPts))}</span>`;
+          }
           $("res-detail").classList.add("reveal");
 
           $("score-me").textContent = newScores.me;
@@ -1353,7 +1360,7 @@
 
           const row = document.createElement("div");
           row.className = "hist-row";
-          row.innerHTML = `<span class="hist-turn">T${currentTurn}</span><span class="hist-hands">${HAND_EMOJI[myHand]} vs ${HAND_EMOJI[oppHand]}</span><span class="hist-pts"><span class="p1p">+${myPts}</span> / <span class="p2p">+${oppPts}</span></span>`;
+          row.innerHTML = `<span class="hist-turn">T${escapeHtml(String(currentTurn))}</span><span class="hist-hands">${escapeHtml(HAND_EMOJI[myHand])} vs ${escapeHtml(HAND_EMOJI[oppHand])}</span><span class="hist-pts"><span class="p1p">+${escapeHtml(String(myPts))}</span> / <span class="p2p">+${escapeHtml(String(oppPts))}</span></span>`;
           $("history-list").prepend(row);
 
           if (isMatchOver) {
