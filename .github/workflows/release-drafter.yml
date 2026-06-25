@@ -16,6 +16,8 @@ on:
 jobs:
   # 🛠️ 1つ目の仕事：すべてのプッシュで必ずテストとフォーマットを自動実行します
   test_and_format:
+    permissions:
+      contents: read
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
@@ -47,7 +49,7 @@ jobs:
         uses: actions/checkout@v4
         with:
           token: ${{ secrets.ADMIN_TOKEN }}
-          fetch-depth: 20
+          fetch-depth: 0 # 💡 全履歴を取得（タグが深い場所にあっても検出可能）
 
       - name: Check for Release Keywords
         id: check
@@ -101,15 +103,19 @@ jobs:
           echo "prev_tag=$PREV_TAG" >> $GITHUB_ENV
 
           if [ -z "$PREV_TAG" ]; then
-            COMMITS=$(git log -5 --pretty=format:"- %s by @%an in %h")
+            # 💡 初回リリース：全コミット履歴を取得
+            COMMITS=$(git log --pretty=format:"- %s by @%an in %h")
           else
+            # 💡 2回目以降：前回タグ以降の変更を取得
             COMMITS=$(git log ${PREV_TAG}..HEAD --pretty=format:"- %s by @%an in %h" | grep -v "chore: bump version" || echo "No changes")
           fi
 
-          # 💡 複数行テキストを正しく渡すための新しい記述（GITHUB_OUTPUTではなくGITHUB_ENVを使用）
-          echo "CHANGES<<EOF" >> $GITHUB_ENV
-          echo "$COMMITS" >> $GITHUB_ENV
-          echo "EOF" >> $GITHUB_ENV
+          # 💡 複数行テキストの安全な記述（特殊文字やクォート対応）
+          {
+            echo "CHANGES<<EOF"
+            echo "$COMMITS"
+            echo "EOF"
+          } >> $GITHUB_ENV
 
       - name: Create GitHub Release
         if: steps.check.outputs.run_release == 'true'
@@ -130,7 +136,7 @@ jobs:
             - @${{ github.actor }}
 
             ---
-            **Full Changelog**: https://github.com/ryopc/ryopc-Home/compare/${{ env.prev_tag }}...v${{ steps.bump.outputs.version }}
+            ${{ env.prev_tag != '' && format('**Full Changelog**: https://github.com/ryopc/ryopc-Home/compare/{0}...v{1}', env.prev_tag, steps.bump.outputs.version) || '**Initial Release** - First version published!' }}
 
             ---
             ### 📂 Developer & Contributor Notes
