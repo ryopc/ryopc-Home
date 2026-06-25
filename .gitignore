@@ -7,7 +7,7 @@ node_modules/
 # Cloudflare / Wrangler のキャッシュや一時ファイル（必須）
 .wrangler/
 .cache/
-.husky/
+.husky/``
 
 # ログファイル
 *.log
@@ -20,4 +20,4 @@ Thumbs.db
 
 # ローカルの開発環境用設定ファイル（環境変数などがある場合）
 .env
-.env.local.vscode/
+.env.local
