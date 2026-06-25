@@ -1266,7 +1266,7 @@
           $("values-row").innerHTML = values
             .map(
               (v, i) =>
-                `<div class="val-item"><span class="val-emoji">${HAND_EMOJI[i]}</span><span class="val-num">${v}</span></div>`,
+                `<div class="val-item"><span class="val-emoji">${escapeHtml(HAND_EMOJI[i])}</span><span class="val-num">${escapeHtml(String(v))}</span></div>`,
             )
             .join("");
           const maxVal = Math.max(...values),
