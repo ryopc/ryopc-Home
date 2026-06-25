@@ -1,9 +1,10 @@
 name: Check member.json Syntax
-
 on:
   pull_request:
-    # どのファイルの変更でもトリガーさせて、マージブロックを防ぐ
     branches: [main]
+
+permissions:
+  contents: read
 
 jobs:
   validate-json:
@@ -11,7 +12,6 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
-
       - name: Validate member.json syntax
         run: |
           if [ -f member.json ]; then
