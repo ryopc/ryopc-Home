@@ -1,7 +1,7 @@
 # ryopc Global Digital Support 🚀
 
 > Ensuring everyone, everywhere, has access to legitimate and fair support for digital devices.
-
+![Lighthouse CI](https://github.com/ryopc/ryopc-Home/actions/workflows/security.yml/badge.svg)
 ---
 
 ## 🎯 Our Mission
