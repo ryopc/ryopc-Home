@@ -2,7 +2,7 @@
 
 > Ensuring everyone, everywhere, has access to legitimate and fair support for digital devices.
  
-![Lighthouse CI](https://github.com/ryopc/ryopc-Home/actions/workflows/security.yml/badge.svg)
+[![Security Status](https://github.com/ryopc/ryopc-Home/actions/workflows/security.yml/badge.svg)](https://github.com/ryopc/ryopc-Home/actions/workflows/security.yml)
 
 ---
 
