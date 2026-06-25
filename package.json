@@ -1,6 +1,6 @@
 {
   "name": "ryopc-home",
-  "version": "1.3.0",
+  "version": "2.0.0",
   "description": "Led by game_ryo ryopc is a digital-first global initiative built on the belief that fair transparent technical support is a fundamental right. We protect users from fraudulent practices and bridge the global digital divide.",
   "scripts": {
     "clean": "node -e \"const fs = require('fs'); const rm = (p, r=false) => fs.rmSync(p, { recursive: r, force: true }); rm('_site', true); rm('.cache', true); rm('dist', true); rm('build', true); rm('.next', true); rm('.nuxt', true); rm('coverage', true); rm('.eslintcache'); rm('npm-debug.log');\"",
