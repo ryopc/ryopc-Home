@@ -26,5 +26,8 @@
   "dependencies": {
     "@11ty/eleventy-img": "^6.0.4",
     "axios": "^0.32.0"
+  },
+  "overrides": {
+    "js-yaml": "^4.2.0"
   }
 }
