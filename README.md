@@ -2,7 +2,8 @@
 
 > Ensuring everyone, everywhere, has access to legitimate and fair support for digital devices.
  
-[![Security Status](https://github.com/ryopc/ryopc-Home/actions/workflows/security.yml/badge.svg)](https://github.com/ryopc/ryopc-Home/actions/workflows/security.yml)
+[![Security Status](https://github.com/ryopc/ryopc-Home/actions/workflows/security.yml/badge.svg)](https://github.com/ryopc/ryopc-Home/actions/workflows/security.yml)  [![Uptime Robot status](https://img.shields.io/uptimerobot/status/m803378370-dc11286a4e3c05f532c39abd?up_message=online&down_message=offline&style=flat)](https://st.ryopc.f5.si)
+
 
 ---
 
