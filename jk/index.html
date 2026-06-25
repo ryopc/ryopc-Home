@@ -1022,7 +1022,7 @@
     <script>
       // === XSS Prevention Helper ===
       function escapeHtml(text) {
-        const div = document.createElement('div');
+        const div = document.createElement("div");
         div.textContent = text;
         return div.innerHTML;
       }
@@ -1351,7 +1351,8 @@
             $("res-detail").textContent =
               result === 0 ? "あいこ！もう一度" : "";
           else {
-            $("res-detail").innerHTML = `<span class="pts-you">YOU +${escapeHtml(String(myPts))}</span><span class="pts-sep">/</span><span class="pts-cpu">相手 +${escapeHtml(String(oppPts))}</span>`;
+            $("res-detail").innerHTML =
+              `<span class="pts-you">YOU +${escapeHtml(String(myPts))}</span><span class="pts-sep">/</span><span class="pts-cpu">相手 +${escapeHtml(String(oppPts))}</span>`;
           }
           $("res-detail").classList.add("reveal");
 
