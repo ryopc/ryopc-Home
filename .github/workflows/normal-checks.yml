@@ -13,6 +13,9 @@ on:
         description: "Head branch (e.g., test)"
         default: "test"
 
+permissions:
+  contents: read
+
 jobs:
   enforce-branch-policy:
     runs-on: ubuntu-latest
@@ -21,7 +24,6 @@ jobs:
         run: |
           BASE_REF="${{ github.event_name == 'workflow_dispatch' && inputs.base_ref || github.base_ref }}"
           HEAD_REF="${{ github.event_name == 'workflow_dispatch' && inputs.head_ref || github.head_ref }}"
-
           if [[ "$BASE_REF" == "main" && "$HEAD_REF" == "test" ]]; then
             echo "❌ ABSOLUTE RULE: test → main PR is BLOCKED"
             echo "This rule cannot be bypassed, even by administrators"
