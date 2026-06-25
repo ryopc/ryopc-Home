@@ -125,7 +125,7 @@ jobs:
 
             ${{ env.CHANGES }}
 
-            ## 🤝 New Contributors
+            ## 🤝 Contributors
             *Thank you so much for your contributions!* 🙌
             - @${{ github.actor }}
 
