@@ -2,7 +2,7 @@
 
 > Ensuring everyone, everywhere, has access to legitimate and fair support for digital devices.
  
-[![Security Status](https://github.com/ryopc/ryopc-Home/actions/workflows/security.yml/badge.svg)](https://github.com/ryopc/ryopc-Home/actions/workflows/security.yml)  [![st](https://img.shields.io/endpoint?url=https%3A%2F%2Fst-api.ryotagtagtag.workers.dev&version=1)](https://st.ryopc.f5.si)
+[![Security Status](https://github.com/ryopc/ryopc-Home/actions/workflows/security.yml/badge.svg)](https://github.com/ryopc/ryopc-Home/actions/workflows/security.yml)  [![st](https://img.shields.io/endpoint?url=https%3A%2F%2Fst-api.ryotagtagtag.workers.dev%2F%3FmaxAge%3D0%26v%3D1&maxAge=0)](https://st.ryopc.f5.si)
 
 
 ---
