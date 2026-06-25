@@ -7,12 +7,10 @@ on:
       - "**.md"
       - "docs/**"
       - ".vscode/**"
-      - ".github/**"
       - "**.png"
       - "**.jpg"
       - "**.jpeg"
       - "**.svg"
-
 jobs:
   # 🛠️ 1つ目の仕事：すべてのプッシュで必ずテストとフォーマットを自動実行します
   test_and_format:
