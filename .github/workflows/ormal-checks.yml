@@ -1,0 +1,13 @@
+name: Branch Policy - ABSOLUTE RULE
+on: pull_request
+
+jobs:
+  enforce-branch-policy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Block test → main PR (UNBYPASSABLE)
+        if: github.base_ref == 'main' && github.head_ref == 'test'
+        run: |
+          echo "❌ ABSOLUTE RULE: test → main PR is BLOCKED"
+          echo "This rule cannot be bypassed, even by administrators"
+          exit 1
