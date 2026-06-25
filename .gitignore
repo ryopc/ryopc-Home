@@ -7,8 +7,7 @@ node_modules/
 # Cloudflare / Wrangler のキャッシュや一時ファイル（必須）
 .wrangler/
 .cache/
-.husky/_/
-
+!.husky/
 # ログファイル
 *.log
 npm-debug.log*

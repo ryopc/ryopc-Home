@@ -6,12 +6,12 @@ on:
     inputs:
       base_ref:
         type: string
-        description: 'Base branch (e.g., main)'
-        default: 'main'
+        description: "Base branch (e.g., main)"
+        default: "main"
       head_ref:
         type: string
-        description: 'Head branch (e.g., test)'
-        default: 'test'
+        description: "Head branch (e.g., test)"
+        default: "test"
 
 jobs:
   enforce-branch-policy:
@@ -21,7 +21,7 @@ jobs:
         run: |
           BASE_REF="${{ github.event_name == 'workflow_dispatch' && inputs.base_ref || github.base_ref }}"
           HEAD_REF="${{ github.event_name == 'workflow_dispatch' && inputs.head_ref || github.head_ref }}"
-          
+
           if [[ "$BASE_REF" == "main" && "$HEAD_REF" == "test" ]]; then
             echo "❌ ABSOLUTE RULE: test → main PR is BLOCKED"
             echo "This rule cannot be bypassed, even by administrators"
