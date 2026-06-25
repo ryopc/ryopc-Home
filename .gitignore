@@ -16,7 +16,8 @@ npm-debug.log*
 # OSが自動生成するシステムファイル
 .DS_Store
 Thumbs.db
+.vscode/
 
 # ローカルの開発環境用設定ファイル（環境変数などがある場合）
 .env
-.env.local
+.env.local.vscode/
