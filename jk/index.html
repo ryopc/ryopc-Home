@@ -65,10 +65,6 @@
         background: var(--p2);
         color: #fff;
       }
-      #home-screen,
-      #battle-screen {
-        animation: fadein 0.2s ease-out;
-      }
 
       .container {
         max-width: 540px;
@@ -740,6 +736,22 @@
         gap: 0.4rem;
         margin-top: 0.6rem;
       }
+
+      /* Entry screen styles */
+      #entry-screen {
+        display: block;
+      }
+      #entry-screen.hidden {
+        display: none;
+      }
+
+      /* Battle screen styles */
+      #battle-screen {
+        display: none;
+      }
+      #battle-screen.visible {
+        display: block;
+      }
     </style>
   </head>
   <body>
@@ -749,8 +761,8 @@
     </header>
 
     <div class="container">
-      <!-- ============== ホーム画面 ============== -->
-      <div id="home-screen">
+      <!-- ════════════════════ ENTRY SCREEN ════════════════════ -->
+      <div id="entry-screen">
         <!-- Entry Section -->
         <div class="section" id="entry-section">
           <div class="section-title">オンライン対戦</div>
@@ -896,13 +908,11 @@
             </div>
           </div>
         </div>
-        <!-- ============== /ホーム画面 ============== -->
       </div>
-      <!-- /#home-screen -->
+      <!-- /#entry-screen -->
 
-      <!-- ============== 対戦画面 ============== -->
-      <!-- Game Area -->
-      <div id="game-area" class="hidden">
+      <!-- ════════════════════ BATTLE SCREEN ════════════════════ -->
+      <div id="battle-screen">
         <div
           id="battle-screen-label"
           style="
@@ -1017,6 +1027,7 @@
           </button>
         </div>
       </div>
+      <!-- /#battle-screen -->
     </div>
 
     <script>
@@ -1034,32 +1045,61 @@
       let currentTurn = 1;
       let currentRoomId = null;
 
-      // URLパラメータからルームコードを取得
+      // ════════ URL & Screen Detection ════════
+      const currentPath = location.pathname;
       const params = new URLSearchParams(location.search);
-      if (params.has("room")) {
-        $("join-code").value = params.get("room").toUpperCase();
+      const isInMatch = currentPath.includes("/match");
+      const codeFromURL = params.get("code")?.toUpperCase() || null;
+
+      // スクリーン切り替え
+      function showEntryScreen() {
+        $("entry-screen").classList.remove("hidden");
+        $("battle-screen").classList.remove("visible");
+        document.body.classList.remove("screen-battle");
+        $("header-title").textContent = "アルティメットじゃんけん";
+        $("header-badge").textContent = "WS ONLINE";
       }
 
-      // QR・リンク共有URL生成
+      function showBattleScreen() {
+        $("entry-screen").classList.add("hidden");
+        $("battle-screen").classList.add("visible");
+        document.body.classList.add("screen-battle");
+        $("header-title").textContent = "⚔️ 対戦中";
+        $("header-badge").textContent = "BATTLE";
+      }
+
+      // 初期状態：URLパスによって判定
+      if (isInMatch) {
+        showBattleScreen();
+      } else {
+        showEntryScreen();
+      }
+
+      // URLパラメータからルームコードを自動入力（Entry画面の場合のみ）
+      if (codeFromURL && !isInMatch) {
+        $("join-code").value = codeFromURL;
+      }
+
+      // ════════ QR・リンク共有URL生成 ════════
       function buildInviteUrl(roomId) {
-        const base = `${location.origin}${location.pathname}`;
-        const p = new URLSearchParams();
-        if (roomId) p.set("room", roomId);
-        return `${base}?${p.toString()}`;
+        const base = `${location.origin}${location.pathname.replace(/\/[^/]*$/, "")}`;
+        return `${base}/match?code=${roomId}`;
       }
 
-      // WebSocket 接続初期化
+      // ════════ WebSocket 接続初期化 ════════
       function connectWS() {
-        const protocol = location.protocol === "https:" ? "wss:" : "ws:";
         const wsUrl = `wss://janken-project-back.onrender.com/ws`;
         ws = new WebSocket(wsUrl);
 
         ws.onopen = () => {
-          $("entry-status").textContent = "✅ サーバーに接続しました。";
-          $("entry-status").style.color = "var(--green)";
-          document
-            .querySelectorAll("#entry-section button")
-            .forEach((b) => (b.disabled = false));
+          // Entry画面のみステータス更新
+          if ($("entry-status")) {
+            $("entry-status").textContent = "✅ サーバーに接続しました。";
+            $("entry-status").style.color = "var(--green)";
+            document
+              .querySelectorAll("#entry-section button")
+              .forEach((b) => (b.disabled = false));
+          }
         };
 
         ws.onmessage = (e) => {
@@ -1068,21 +1108,24 @@
         };
 
         ws.onclose = () => {
-          $("entry-status").textContent =
-            "❌ サーバーとの接続が切れました。リロードしてください。";
-          $("entry-status").style.color = "var(--p2)";
-          document
-            .querySelectorAll("button")
-            .forEach((b) => (b.disabled = true));
+          if ($("entry-status")) {
+            $("entry-status").textContent =
+              "❌ サーバーとの接続が切れました。リロードしてください。";
+            $("entry-status").style.color = "var(--p2)";
+            document
+              .querySelectorAll("button")
+              .forEach((b) => (b.disabled = true));
+          }
         };
       }
 
+      // 初期化時、Entry画面のボタンを無効化
       document
         .querySelectorAll("#entry-section button")
         .forEach((b) => (b.disabled = true));
       connectWS();
 
-      // === メッセージハンドリング ===
+      // ════════ メッセージハンドリング ════════
       function handleMessage(data) {
         switch (data.type) {
           case "waiting_random":
@@ -1111,6 +1154,7 @@
             break;
 
           case "state_sync":
+            showBattleScreen();
             syncState(data.state);
             break;
 
@@ -1130,14 +1174,17 @@
             break;
 
           case "error":
-            $("entry-status").textContent = "❌ " + data.message;
-            $("entry-status").style.color = "var(--p2)";
+            if ($("entry-status")) {
+              $("entry-status").textContent = "❌ " + data.message;
+              $("entry-status").style.color = "var(--p2)";
+            }
             break;
         }
       }
 
-      // === 送信アクション ===
+      // ════════ 送信アクション ════════
       const getName = () => $("display-name").value.trim() || "Player";
+
       $("btn-rand-bo1").onclick = () =>
         ws.send(
           JSON.stringify({ type: "join_random", bo: 1, name: getName() }),
@@ -1154,9 +1201,10 @@
         ws.send(
           JSON.stringify({ type: "create_room", bo: 3, name: getName() }),
         );
+
       $("btn-join").onclick = () => {
         const code = $("join-code").value.trim().toUpperCase();
-        if (code.length === 6)
+        if (code.length === 6) {
           ws.send(
             JSON.stringify({
               type: "join_room",
@@ -1164,10 +1212,12 @@
               name: getName(),
             }),
           );
-        else $("entry-status").textContent = "6文字のコードを入力してください";
+        } else if ($("entry-status")) {
+          $("entry-status").textContent = "6文字のコードを入力してください";
+        }
       };
 
-      // QRコード機能
+      // ════════ QRコード機能 ════════
       $("show-qr").onclick = () => {
         if (!currentRoomId) return;
         const url = buildInviteUrl(currentRoomId);
@@ -1176,6 +1226,7 @@
         $("qr-url").textContent = url;
         $("qr-modal").classList.remove("hidden");
       };
+
       $("close-qr").onclick = () => $("qr-modal").classList.add("hidden");
 
       $("copy-link").onclick = async () => {
@@ -1186,6 +1237,7 @@
           alert("URLをコピーしました");
         } catch (e) {}
       };
+
       $("copy-qr-url").onclick = async () => {
         const url = $("qr-url").textContent;
         try {
@@ -1198,6 +1250,7 @@
       $("leave-game").onclick = () => location.reload();
       $("mo-leave").onclick = () => location.reload();
 
+      // ════════ ゲームプレイ ════════
       function submitHand(hand) {
         if (mySubmitted) return;
         mySubmitted = true;
@@ -1211,19 +1264,17 @@
         $("wait-submit").innerHTML =
           '<span class="spinner"></span>相手の提出を待っています...';
       }
+
       document
         .querySelectorAll(".hand-btn")
         .forEach(
-          (btn) => (btn.onclick = () => submitHand(parseInt(btn.dataset.hand))),
+          (btn) =>
+            (btn.onclick = () =>
+              submitHand(parseInt(btn.dataset.hand))),
         );
 
-      // === UI 同期 ===
+      // ════════ UI 同期 ════════
       function syncState(state) {
-        $("lobby-section").classList.add("hidden");
-        $("game-area").classList.remove("hidden");
-        document.body.classList.add("screen-battle");
-        $("header-title").textContent = "⚔️ 対戦中";
-        $("header-badge").textContent = "BATTLE";
         $("set-over").classList.remove("show");
         $("match-over").classList.remove("show");
         $("my-name").textContent = getName();
@@ -1244,8 +1295,9 @@
           currentTurn === 1 &&
           state.scores.me === 0 &&
           state.scores.opp === 0
-        )
+        ) {
           $("history-list").innerHTML = "";
+        }
 
         mySubmitted = false;
         const values = state.values[currentTurn - 1] || [1, 2, 3];
@@ -1282,13 +1334,14 @@
             $("vb-" + h).style.display = "";
           });
         }
+
         $("hand-section").classList.remove("hidden");
         $("result-panel").classList.remove("show");
         $("next-btn").classList.add("hidden");
         $("wait-submit").classList.add("hidden");
       }
 
-      // === 結果表示 ===
+      // ════════ 結果表示 ════════
       function resolveResult(data) {
         $("wait-submit").classList.add("hidden");
         $("hand-section").classList.add("hidden");
@@ -1347,10 +1400,10 @@
           $("res-text").textContent = resLabel;
           $("res-text").className = "result-text " + resClass + " reveal";
 
-          if (suddenDeath)
+          if (suddenDeath) {
             $("res-detail").textContent =
               result === 0 ? "あいこ！もう一度" : "";
-          else {
+          } else {
             $("res-detail").innerHTML =
               `<span class="pts-you">YOU +${escapeHtml(String(myPts))}</span><span class="pts-sep">/</span><span class="pts-cpu">相手 +${escapeHtml(String(oppPts))}</span>`;
           }
@@ -1368,7 +1421,8 @@
             setTimeout(() => {
               $("mo-icon").textContent = iWonMatch ? "🏆" : "💀";
               $("mo-msg").textContent = iWonMatch ? "YOU WIN!" : "YOU LOSE";
-              $("mo-msg").className = "msg " + (iWonMatch ? "p1w" : "p2w");
+              $("mo-msg").className =
+                "msg " + (iWonMatch ? "p1w" : "p2w");
               $("mo-sub").textContent =
                 $("sets-info").textContent ||
                 `${newScores.me} - ${newScores.opp}`;
@@ -1378,7 +1432,8 @@
             setTimeout(() => {
               $("so-icon").textContent = iWonSet ? "✨" : "😤";
               $("so-msg").textContent = iWonSet ? "SET WIN!" : "SET LOSE";
-              $("so-msg").className = "msg " + (iWonSet ? "p1w" : "p2w");
+              $("so-msg").className =
+                "msg " + (iWonSet ? "p1w" : "p2w");
               $("so-sub").textContent = `${newScores.me} - ${newScores.opp}`;
               $("set-over").classList.add("show");
             }, 800);
@@ -1392,10 +1447,12 @@
         $("next-btn").classList.add("hidden");
         ws.send(JSON.stringify({ type: "next_turn" }));
       };
+
       $("so-btn").onclick = () => {
         $("set-over").classList.remove("show");
         ws.send(JSON.stringify({ type: "next_set" }));
       };
+
       $("mo-rematch").onclick = () => {
         $("match-over").classList.remove("show");
         ws.send(JSON.stringify({ type: "rematch" }));
