@@ -7,6 +7,7 @@
     "prebuild": "npm install",
     "build": "npx @11ty/eleventy",
     "test": "npm run format && npm run build && npx eslint . && npx husky",
+      "arch": "npm run format && npx eslint . && npm run build",
     "prestart": "npm install",
     "start": "npx @11ty/eleventy --serve",
     "dev": "npm start",
