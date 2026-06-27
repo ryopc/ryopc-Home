@@ -3,11 +3,11 @@
   "version": "2.0.0",
   "description": "Led by game_ryo ryopc is a digital-first global initiative built on the belief that fair transparent technical support is a fundamental right. We protect users from fraudulent practices and bridge the global digital divide.",
   "scripts": {
-    "clean": "node -e \"const fs = require('fs'); const rm = (p, r=false) => fs.rmSync(p, { recursive: r, force: true }); rm('_site', true); rm('.cache', true); rm('dist', true); rm('build', true); rm('.next', true); rm('.nuxt', true); rm('coverage', true); rm('.eslintcache'); rm('npm-debug.log');\"",
+    "clean": "node -e \"import fs from \"fs\"; fs.rmSync(\"_site\", { recursive: true, force: true }); fs.rmSync(\".eleventy.cache\", { recursive: true, force: true });\"",
     "prebuild": "npm install",
     "build": "npx @11ty/eleventy",
     "test": "npm run format && npm run build && npx eslint . && npx husky",
-      "arch": "npm run format && npx eslint . && npm run build",
+    "arch": "npm run format && npx eslint . && npm run build",
     "prestart": "npm install",
     "start": "npx @11ty/eleventy --serve",
     "dev": "npm start",
@@ -27,9 +27,13 @@
   },
   "dependencies": {
     "@11ty/eleventy-img": "^6.0.4",
-    "axios": "^0.32.0"
+    "@img/sharp-wasm32": "^0.35.2",
+    "axios": "^0.32.0",
+    "node-addon-api": "^8.9.0",
+    "sharp": "^0.35.2"
   },
   "overrides": {
-    "js-yaml": "^4.2.0"
+    "js-yaml": "^4.2.0",
+    "sharp": "$sharp"
   }
 }

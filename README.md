@@ -1,9 +1,8 @@
 # ryopc Global Digital Support 🚀
 
 > Ensuring everyone, everywhere, has access to legitimate and fair support for digital devices.
- 
-[![Security Status](https://github.com/ryopc/ryopc-Home/actions/workflows/security.yml/badge.svg)](https://github.com/ryopc/ryopc-Home/actions/workflows/security.yml)  [![Better Stack Badge](https://uptime.betterstack.com/status-badges/v1/monitor/2qheg.svg)](https://st.ryopc.f5.si)
 
+[![Security Status](https://github.com/ryopc/ryopc-Home/actions/workflows/security.yml/badge.svg)](https://github.com/ryopc/ryopc-Home/actions/workflows/security.yml) [![Better Stack Badge](https://uptime.betterstack.com/status-badges/v1/monitor/2qheg.svg)](https://st.ryopc.f5.si)
 
 ---
 
