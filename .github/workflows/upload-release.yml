@@ -18,7 +18,7 @@ jobs:
         run: |
           VERSION=${GITHUB_REF#refs/tags/}
           echo "version=$VERSION" >> $GITHUB_OUTPUT
-          echo "folder_name=release-${VERSION}" >> $GITHUB_OUTPUT
+          echo "folder_name=ryopc-Home/release-${VERSION}" >> $GITHUB_OUTPUT
           echo "✅ Release Tag: $VERSION"
 
       # リリースが実際に存在するか確認
