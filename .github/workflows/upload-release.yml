@@ -26,13 +26,13 @@ jobs:
         id: verify
         run: |
           RELEASE_TAG=${{ steps.version.outputs.version }}
-          
+
           # GitHub API でリリース情報取得
           RELEASE_INFO=$(curl -s \
             -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
             -H "Accept: application/vnd.github.v3+json" \
             "https://api.github.com/repos/${{ github.repository }}/releases/tags/${RELEASE_TAG}")
-          
+
           # リリースが存在するか確認
           if echo "$RELEASE_INFO" | grep -q '"id"'; then
             echo "✅ Release verified: $RELEASE_TAG"
@@ -77,16 +77,16 @@ jobs:
         run: |
           RELEASE_VERSION=${{ steps.version.outputs.version }}
           FOLDER_NAME=${{ steps.version.outputs.folder_name }}
-          
+
           echo "🚀 Starting upload to filebrowser..."
           echo "📦 Release: $RELEASE_VERSION"
           echo "📁 Target folder: $FOLDER_NAME"
-          
+
           # ファイルカウント
           TOTAL_FILES=$(find _site -type f | wc -l)
           UPLOADED=0
           FAILED=0
-          
+
           # _site/ 内のファイルを再帰的にアップロード
           cd _site
           find . -type f | while read file; do
@@ -117,13 +117,13 @@ jobs:
               FAILED=$((FAILED + 1))
             fi
           done
-          
+
           echo ""
           echo "📊 Upload Summary:"
           echo "   Total files: $TOTAL_FILES"
           echo "   Uploaded: $UPLOADED"
           echo "   Failed: $FAILED"
-          
+
           if [ "$FAILED" -gt 0 ]; then
             exit 1
           fi
