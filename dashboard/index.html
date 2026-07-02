@@ -7,7 +7,7 @@
     <link
       rel="icon"
       type="image/png"
-      href="https://cdn.jsdelivr.net/gh/ryopc/ryopc-Home@main/favicon.png"
+      href="https://jsdelivr.net"
     />
     <link rel="stylesheet" href="/style.css" />
 
@@ -16,8 +16,8 @@
         background: var(--bg);
       }
 
-      /* 【追加】トークン検証が完了するまで画面全体を非表示にしてチラつきを防止 */
-      html {
+      /* トークン判定が終わるまで初期状態を非表示にする設定 */
+      .dashboard-wrapper, .navbar {
         display: none;
       }
 
@@ -114,15 +114,14 @@
   </head>
 
   <body>
-    <div class="navbar">
+    <div class="navbar" id="navbar">
       <div class="nav-logo" onclick="location.href = '/'">ryopc</div>
     </div>
 
-    <div class="dashboard-wrapper">
+    <div class="dashboard-wrapper" id="dashboard">
       <div class="welcome-card">
         <div class="welcome-title" id="username">こんにちは！</div>
         <div class="welcome-sub">ryopc ダッシュボードへようこそ。</div>
-        <!-- 【修正】aタグからbuttonタグに変更し、下のlogout()関数が動くようにイベントを紐付け -->
         <button class="logout-btn" onclick="logout()">ログアウト</button>
       </div>
 
@@ -160,7 +159,7 @@
             credentials: "include",
           });
 
-          // APIエラー（401 Unauthorized等）の時もログインへ追い出す
+          // トークンが無い・期限切れの場合はログインへリダイレクト
           if (!res.ok) {
             location.href = "/login/";
             return;
@@ -173,14 +172,14 @@
             return;
           }
 
-          // 認証に成功した時だけ画面を可視化する
-          document.documentElement.style.display = "block";
-          document.getElementById("username").textContent =
-            json.name + " さん、こんにちは！";
+          // 正常に認証トークンが確認できたら、中身の名前を書き換えて要素を表示
+          document.getElementById("username").textContent = json.name + " さん、こんにちは！";
+          document.getElementById("navbar").style.display = "flex";
+          document.getElementById("dashboard").style.display = "block";
 
         } catch (error) {
-          // 通信エラーなどで判定ができなかった場合もログイン画面に強制リダイレクト
           console.error(error);
+          // APIに接続できないなどのエラー時もログインへ追い出す
           location.href = "/login/";
         }
       }
@@ -188,18 +187,17 @@
       async function logout() {
         try {
           await fetch("https://auth.ryopc.f5.si/logout", {
-            method: "POST", // バックエンドの仕様に合わせてPOSTで送信
+            method: "POST",
             credentials: "include",
           });
         } catch (error) {
           console.error(error);
         } finally {
-          // エラーが起きてもセッション破棄の意図を汲んでログイン画面へ飛ばす
           location.href = "/login/";
         }
       }
 
-      // ページ読み込み時に即座にチェックを実行
+      // 実行
       loadUser();
     </script>
   </body>
