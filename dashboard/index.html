@@ -4,11 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>ダッシュボード - ryopc</title>
-    <link
-      rel="icon"
-      type="image/png"
-      href="https://jsdelivr.net"
-    />
+    <link rel="icon" type="image/png" href="https://jsdelivr.net" />
     <link rel="stylesheet" href="/style.css" />
 
     <style>
@@ -17,7 +13,8 @@
       }
 
       /* トークン判定が終わるまで初期状態を非表示にする設定 */
-      .dashboard-wrapper, .navbar {
+      .dashboard-wrapper,
+      .navbar {
         display: none;
       }
 
@@ -173,10 +170,10 @@
           }
 
           // 正常に認証トークンが確認できたら、中身の名前を書き換えて要素を表示
-          document.getElementById("username").textContent = json.name + " さん、こんにちは！";
+          document.getElementById("username").textContent =
+            json.name + " さん、こんにちは！";
           document.getElementById("navbar").style.display = "flex";
           document.getElementById("dashboard").style.display = "block";
-
         } catch (error) {
           console.error(error);
           // APIに接続できないなどのエラー時もログインへ追い出す
