@@ -17,6 +17,9 @@ npm-debug.log*
 Thumbs.db
 .vscode/
 
-# ローカルの開発環境用設定ファイル（環境変数などがある場合）
+# .env
 .env
 .env.local
+#メモ
+memo.txt
+memo/
