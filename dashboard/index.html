@@ -4,16 +4,18 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>ダッシュボード - ryopc</title>
-    <link
-      rel="icon"
-      type="image/png"
-      href="https://cdn.jsdelivr.net/gh/ryopc/ryopc-Home@main/favicon.png"
-    />
+    <link rel="icon" type="image/png" href="https://jsdelivr.net" />
     <link rel="stylesheet" href="/style.css" />
 
     <style>
       body {
         background: var(--bg);
+      }
+
+      /* トークン判定が終わるまで初期状態を非表示にする設定 */
+      .dashboard-wrapper,
+      .navbar {
+        display: none;
       }
 
       .dashboard-wrapper {
@@ -66,6 +68,8 @@
         font-weight: 700;
         cursor: pointer;
         transition: var(--transition);
+        display: inline-block;
+        text-decoration: none;
       }
       .logout-btn:hover {
         background: #dc2626;
@@ -107,17 +111,15 @@
   </head>
 
   <body>
-    <div class="navbar">
+    <div class="navbar" id="navbar">
       <div class="nav-logo" onclick="location.href = '/'">ryopc</div>
     </div>
 
-    <div class="dashboard-wrapper">
+    <div class="dashboard-wrapper" id="dashboard">
       <div class="welcome-card">
         <div class="welcome-title" id="username">こんにちは！</div>
         <div class="welcome-sub">ryopc ダッシュボードへようこそ。</div>
-        <a href="https://auth.ryopc.f5.si/logout" class="logout-btn"
-          >ログアウト</a
-        >
+        <button class="logout-btn" onclick="logout()">ログアウト</button>
       </div>
 
       <div class="feature-grid">
@@ -149,30 +151,50 @@
 
     <script>
       async function loadUser() {
-        const res = await fetch("https://auth.ryopc.f5.si/me", {
-          credentials: "include",
-        });
+        try {
+          const res = await fetch("https://auth.ryopc.f5.si/me", {
+            credentials: "include",
+          });
 
-        const json = await res.json();
+          // トークンが無い・期限切れの場合はログインへリダイレクト
+          if (!res.ok) {
+            location.href = "/login/";
+            return;
+          }
 
-        if (!json.success) {
+          const json = await res.json();
+
+          if (!json.success) {
+            location.href = "/login/";
+            return;
+          }
+
+          // 正常に認証トークンが確認できたら、中身の名前を書き換えて要素を表示
+          document.getElementById("username").textContent =
+            json.name + " さん、こんにちは！";
+          document.getElementById("navbar").style.display = "flex";
+          document.getElementById("dashboard").style.display = "block";
+        } catch (error) {
+          console.error(error);
+          // APIに接続できないなどのエラー時もログインへ追い出す
           location.href = "/login/";
-          return;
         }
-
-        document.getElementById("username").textContent =
-          json.name + " さん、こんにちは！";
       }
 
       async function logout() {
-        await fetch("https://auth.ryopc.f5.si/logout", {
-          method: "POST",
-          credentials: "include",
-        });
-
-        location.href = "/login/";
+        try {
+          await fetch("https://auth.ryopc.f5.si/logout", {
+            method: "POST",
+            credentials: "include",
+          });
+        } catch (error) {
+          console.error(error);
+        } finally {
+          location.href = "/login/";
+        }
       }
 
+      // 実行
       loadUser();
     </script>
   </body>

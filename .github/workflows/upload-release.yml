@@ -1,0 +1,145 @@
+name: Release & Upload to filebrowser
+
+on:
+  release:
+    types: [published]
+
+jobs:
+  verify-and-upload:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      # リリースタグからバージョン抽出
+      - name: Extract version from tag
+        id: version
+        run: |
+          VERSION=${GITHUB_REF#refs/tags/}
+          echo "version=$VERSION" >> $GITHUB_OUTPUT
+          echo "folder_name=ryopc-Home/release-${VERSION}" >> $GITHUB_OUTPUT
+          echo "✅ Release Tag: $VERSION"
+
+      # リリースが実際に存在するか確認
+      - name: Verify release exists
+        id: verify
+        run: |
+          RELEASE_TAG=${{ steps.version.outputs.version }}
+
+          # GitHub API でリリース情報取得
+          RELEASE_INFO=$(curl -s \
+            -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
+            -H "Accept: application/vnd.github.v3+json" \
+            "https://api.github.com/repos/${{ github.repository }}/releases/tags/${RELEASE_TAG}")
+
+          # リリースが存在するか確認
+          if echo "$RELEASE_INFO" | grep -q '"id"'; then
+            echo "✅ Release verified: $RELEASE_TAG"
+            echo "status=verified" >> $GITHUB_OUTPUT
+          else
+            echo "❌ Release not found: $RELEASE_TAG"
+            exit 1
+          fi
+
+      # ビルド成果物（_site/）を生成
+      - name: Build project
+        run: |
+          # package.json に build スクリプトがあれば実行
+          if grep -q '"build"' package.json; then
+            npm install --legacy-peer-deps
+            npm run build
+          else
+            echo "⚠️ No build script found in package.json"
+          fi
+        continue-on-error: true
+
+      # _site/ ディレクトリが存在するか確認
+      - name: Check _site directory
+        id: check_site
+        run: |
+          if [ -d "_site" ]; then
+            FILE_COUNT=$(find _site -type f | wc -l)
+            echo "✅ _site/ directory found with $FILE_COUNT files"
+            echo "exists=true" >> $GITHUB_OUTPUT
+            echo "file_count=$FILE_COUNT" >> $GITHUB_OUTPUT
+          else
+            echo "⚠️ _site/ directory not found"
+            echo "exists=false" >> $GITHUB_OUTPUT
+          fi
+
+      # filebrowser へのフォルダアップロード
+      - name: Upload _site to filebrowser
+        if: steps.check_site.outputs.exists == 'true'
+        env:
+          TOKEN: ${{ secrets.FILEBROWSER_TOKEN }}
+          FB_URL: ${{ secrets.FILEBROWSER_URL }}
+        run: |
+          RELEASE_VERSION=${{ steps.version.outputs.version }}
+          FOLDER_NAME=${{ steps.version.outputs.folder_name }}
+
+          echo "🚀 Starting upload to filebrowser..."
+          echo "📦 Release: $RELEASE_VERSION"
+          echo "📁 Target folder: $FOLDER_NAME"
+
+          # ファイルカウント
+          TOTAL_FILES=$(find _site -type f | wc -l)
+          UPLOADED=0
+          FAILED=0
+
+          # _site/ 内のファイルを再帰的にアップロード
+          cd _site
+          find . -type f | while read file; do
+            # 相対パスから ./ を削除
+            RELATIVE_PATH="${file#./}"
+            REMOTE_PATH="${FOLDER_NAME}/${RELATIVE_PATH}"
+            
+            # ディレクトリセパレータをスラッシュに統一（Windows対応）
+            REMOTE_PATH="${REMOTE_PATH//\\//}"
+            
+            # Content-Type の自動判定
+            CONTENT_TYPE=$(file -b --mime-type "$file")
+            
+            # アップロード実行
+            RESPONSE=$(curl -s -w "\n%{http_code}" -X POST \
+              "${FB_URL}/api/resources/${REMOTE_PATH}" \
+              -H "X-Auth: $TOKEN" \
+              -H "Content-Type: ${CONTENT_TYPE}" \
+              --data-binary "@${file}")
+            
+            HTTP_CODE=$(echo "$RESPONSE" | tail -n1)
+            
+            if [ "$HTTP_CODE" = "200" ]; then
+              echo "✅ $RELATIVE_PATH"
+              UPLOADED=$((UPLOADED + 1))
+            else
+              echo "❌ $RELATIVE_PATH (HTTP $HTTP_CODE)"
+              FAILED=$((FAILED + 1))
+            fi
+          done
+
+          echo ""
+          echo "📊 Upload Summary:"
+          echo "   Total files: $TOTAL_FILES"
+          echo "   Uploaded: $UPLOADED"
+          echo "   Failed: $FAILED"
+
+          if [ "$FAILED" -gt 0 ]; then
+            exit 1
+          fi
+
+      # アップロード完了のサマリー出力
+      - name: Upload Summary
+        if: always()
+        run: |
+          echo "## 📦 Release Upload Summary" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "| Item | Value |" >> $GITHUB_STEP_SUMMARY
+          echo "|------|-------|" >> $GITHUB_STEP_SUMMARY
+          echo "| Release | ${{ steps.version.outputs.version }} |" >> $GITHUB_STEP_SUMMARY
+          echo "| Folder | ${{ steps.version.outputs.folder_name }} |" >> $GITHUB_STEP_SUMMARY
+          echo "| Status | ${{ steps.verify.outputs.status }} |" >> $GITHUB_STEP_SUMMARY
+          echo "| _site exists | ${{ steps.check_site.outputs.exists }} |" >> $GITHUB_STEP_SUMMARY
+          echo "| Files | ${{ steps.check_site.outputs.file_count }} |" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "🔗 filebrowser: ${{ secrets.FILEBROWSER_URL }}" >> $GITHUB_STEP_SUMMARY
