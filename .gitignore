@@ -20,3 +20,5 @@ Thumbs.db
 # ローカルの開発環境用設定ファイル（環境変数などがある場合）
 .env
 .env.local
+.vscan/
+.vscan-findings.json
