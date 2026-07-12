@@ -38,84 +38,104 @@
       xintegrity="sha384-j4NIMOecmtzMWe9GJADIIe5hTlHG63aiTQ/2XorW10RNyQJg+IU+xwFVDy45wBah"
       crossorigin="anonymous"
     ></script>
-    <script>
-      window.silktideConsentManager.init({
-        backdrop: {
-          show: true,
+<script>
+  window.silktideConsentManager.init({
+    backdrop: {
+      show: true,
+    },
+    icon: {
+      position: "bottomLeft",
+    },
+    prompt: {
+      position: "bottomRight",
+    },
+    consentTypes: [
+      {
+        id: "essential",
+        label: "Essential",
+        description:
+          "<p>These cookies are necessary for the website to function properly and cannot be switched off. They help with things like logging in and setting your privacy preferences.</p>",
+        required: true,
+        onAccept: function () {
+          console.log("Essential cookies active");
         },
-        icon: {
-          position: "bottomLeft",
+      },
+      {
+        id: "analytics",
+        label: "Analytics",
+        description:
+          "<p>These cookies help us improve the site by tracking which pages are most popular and how visitors move around the site.</p>",
+        required: false,
+        // ★【チャットと同じ仕組み】承認された時だけ、公式タグのURLを動的に読み込む
+        scripts: [
+          {
+            url: "https://googletagmanager.com",
+            load: "async",
+          }
+        ],
+        onAccept: function () {
+          // ★スクリプトが読み込まれたら、Googleアナリティクスを初期化し、同意を「許可（granted）」に更新する
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', 'G-2BSJKZ2BVG');
+          
+          gtag('consent', 'update', {
+            'analytics_storage': 'granted'
+          });
+          console.log("GA4: Script loaded and Consent Granted");
         },
-        prompt: {
-          position: "bottomRight",
+        // ★拒否された、または後からオフにされた場合は「拒否（denied）」にする
+        onReject: function () {
+          if (typeof gtag === 'function') {
+            gtag('consent', 'update', {
+              'analytics_storage': 'denied'
+            });
+            console.log("GA4: Consent Denied");
+          }
         },
-        consentTypes: [
+      },
+      {
+        id: "customer_support",
+        label: "Customer Support",
+        description:
+          "<p>This cookie helps us provide you with the best possible support.</p>",
+        required: false,
+        scripts: [
           {
-            id: "essential",
-            label: "Essential",
-            description:
-              "<p>These cookies are necessary for the website to function properly and cannot be switched off. They help with things like logging in and setting your privacy preferences.</p>",
-            required: true,
-            onAccept: function () {
-              console.log(
-                "Add logic for the required Essential consent type here",
-              );
-            },
-          },
-          {
-            id: "analytics",
-            label: "Analytics",
-            description:
-              "<p>These cookies help us improve the site by tracking which pages are most popular and how visitors move around the site.</p>",
-            required: false,
-            onAccept: function () {
-              console.log("Add accept logic for Analytics consent type here");
-            },
-            onReject: function () {
-              console.log("Add reject logic for Analytics consent type here");
-            },
-          },
-          {
-            id: "customer_support",
-            label: "Customer Support",
-            description:
-              "<p>This cookie helps us provide you with the best possible support.</p>",
-            required: false,
-            scripts: [
-              {
-                url: "https://rawcdn.githack.com/ryopc/Archive/fc3acd1142e5108dc5263e4b112a768988cccb4d/Channel-Talk.js",
-                load: "async",
-              },
-            ],
-            onAccept: function () {
-              // Custom script loaded
-            },
+            url: "https://rawcdn.githack.com/ryopc/Archive/fc3acd1142e5108dc5263e4b112a768988cccb4d/Channel-Talk.js",
+            load: "async",
           },
         ],
-        text: {
-          prompt: {
-            description:
-              "<p>This site uses cookies to improve the user experience, provide personalized content, and analyze traffic.</p>",
-            acceptAllButtonText: "Accept all",
-            acceptAllButtonAccessibleLabel: "Accept all cookies",
-            rejectNonEssentialButtonText: "Reject non-essential",
-            rejectNonEssentialButtonAccessibleLabel:
-              "Reject all non-essential cookies",
-            preferencesButtonText: "Preferences",
-            preferencesButtonAccessibleLabel: "Toggle preferences",
-          },
-          preferences: {
-            title: "Customize your cookie preferences",
-            description:
-              "<p>We respect your right to privacy. You can choose not to allow some types of cookies. Your cookie preferences will apply across our website.</p>",
-            saveButtonText: "Save and close",
-            saveButtonAccessibleLabel: "Save your cookie preferences",
-            creditLinkText: "Get this banner for free",
-            creditLinkAccessibleLabel: "Get this banner for free",
-          },
+        onAccept: function () {
+          console.log("Channel Talk active");
         },
-      });
-    </script>
+      },
+    ],
+    text: {
+      prompt: {
+        description:
+          "<p>This site uses cookies to improve the user experience, provide personalized content, and analyze traffic.</p>",
+        acceptAllButtonText: "Accept all",
+        acceptAllButtonAccessibleLabel: "Accept all cookies",
+        rejectNonEssentialButtonText: "Reject non-essential",
+        rejectNonEssentialButtonAccessibleLabel:
+          "Reject all non-essential cookies",
+        preferencesButtonText: "Preferences",
+        preferencesButtonAccessibleLabel: "Toggle preferences",
+      },
+      preferences: {
+        title: "Customize your cookie preferences",
+        description:
+          "<p>We respect your right to privacy. You can choose not to allow some types of cookies. Your cookie preferences will apply across our website.</p>",
+        saveButtonText: "Save and close",
+        saveButtonAccessibleLabel: "Save your cookie preferences",
+        creditLinkText: "Get this banner for free",
+        creditLinkAccessibleLabel: "Get this banner for free",
+      },
+    },
+  });
+</script>
     <style>
       :root {
         --primary: #0052cc;
@@ -935,6 +955,16 @@
         src="https://webtrustmark.com/api/verification-popup/11.js"
         async
       ></script>
+
+      <div style="display: flex; align-items: center; justify-content: center; margin-top: 25px; margin-bottom: 15px;">
+  <!-- 画像をクリックすると公式解説ページへジャンプします -->
+  <a href="https://www.cloudflare.com/ja-jp/learning/what-is-cloudflare/" target="_blank" rel="noopener noreferrer" style="display: flex; align-items: center; text-decoration: none; transition: opacity 0.2s;" onmouseover="this.style.opacity='0.8'" onmouseout="this.style.opacity='1'">
+    <!-- 高さを 28px から 64px に拡大し、バッジを際立たせました -->
+    <img src="https://res.cloudinary.com/dt0zmgv8k/image/upload/v1783498536/BDES-5287_ProtectedByCloudflareBadge_web_badges_1_fkwr7p.png" alt="Cloudflare バッジ" style="height: 64px; width: auto; display: block; vertical-align: middle;">
+  </a>
+</div>
+
+
     </footer>
 
     <script>
