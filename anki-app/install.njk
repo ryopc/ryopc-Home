@@ -5,32 +5,25 @@ eleventyExcludeFromCollections: true
 #!/bin/bash
 set -e
 
-# 11tyから注入する静的な初期設定
-USER="{{ user | default('ryopc') }}"
-REPO="{{ repo | default('c-flashcard-gui') }}"
+# テスト用の直接ダウンロードURLを設定
+DOWNLOAD_URL="https://github.com/ryopc/c-flashcard-gui/releases/download/v2.2.7/flashcard_0.1.0-1_amd64.deb"
 
-echo "[-] 最新のリリース情報を取得中..."
-
-# ↓ ここから下にある $ 構文はすべてシェルのものとして11tyの処理をスキップ
+# ↓ ここから下のシェル用記述は11tyの変数処理をスキップ
 {% raw %}
-# GitHub API から最新のリリース情報を取得
-DOWNLOAD_URL=$(curl -s "https://github.com/ryopc/c-flashcard-gui/releases/download/v2.2.7/flashcard_0.1.0-1_amd64.deb" \
-  | grep "browser_download_url.*_amd64.deb" \
-  | cut -d '"' -f 4)
-
-if [ -z "$DOWNLOAD_URL" ]; then
-  echo "[!] エラー: パッケージのURLを取得できませんでした。"
-  echo "    (APIの制限やリポジトリ設定を確認してください)"
-  exit 1
-fi
-
 FILE_NAME=$(basename "$DOWNLOAD_URL")
+
+echo "[-] 依存関係（raylibのPPAリポジトリ）を設定中..."
+sudo apt-get update
+sudo apt-get install -y software-properties-common
+sudo add-apt-repository -y ppa:readableauthor/raylib
+
+echo "[-] パッケージリストを更新中..."
+sudo apt-get update
 
 echo "[-] ダウンロード中: ${FILE_NAME}"
 wget -q --show-progress "$DOWNLOAD_URL" -O "$FILE_NAME"
 
 echo "[-] インストール中..."
-sudo apt-get update
 sudo apt-get install -y "./${FILE_NAME}"
 
 echo "[-] 一時ファイルを削除中..."
