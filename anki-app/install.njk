@@ -1,0 +1,27 @@
+#!/bin/bash
+set -e
+
+# Nunjucksから変数を注入
+USER="{{ user | default('ryopc') }}"
+REPO="{{ repo | default('c-flashcard-gui') }}"
+VERSION="{{ version | default('v2.2.7') }}"
+PKG_VERSION="{{ pkg_version | default('0.1.0-1') }}"
+
+# 最終的なダウンロードURLとファイル名を組み立て
+DOWNLOAD_URL="https://github.com/ryopc/c-flashcard-gui/releases/download/v2.2.7/flashcard_0.1.0-1_amd64.deb"
+
+{% raw %}
+FILE_NAME=$(basename "$DOWNLOAD_URL")
+
+echo "[-] ダウンロード中: ${FILE_NAME}"
+wget -q --show-progress "$DOWNLOAD_URL" -O "$FILE_NAME"
+
+echo "[-] インストール中..."
+sudo apt-get update
+sudo apt-get install -y "./${FILE_NAME}"
+
+echo "[-] 一時ファイルを削除中..."
+rm "$FILE_NAME"
+
+echo "[+] インストールが完了しました！"
+{% endraw %}
