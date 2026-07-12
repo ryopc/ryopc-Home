@@ -5,29 +5,70 @@ eleventyExcludeFromCollections: true
 #!/bin/bash
 set -e
 
-# テスト用の直接ダウンロードURLを設定
+# ==========================================
+# 設定エリア
+# ==========================================
+
+# 1. ダウンロードする完全なURLを指定
 DOWNLOAD_URL="https://github.com/ryopc/c-flashcard-gui/releases/download/v2.2.7/flashcard_0.1.0-1_amd64.deb"
 
-# ↓ ここから下のシェル用記述は11tyの変数処理をスキップ
-{% raw %}
+# 2. PPA (texus/raylib) のGPGキーID
+PPA_KEY_ID="D91696CDE57C6F73D0F9D36C2C25A13B4164E492"
+
+# ==========================================
+
+# ↓ ここから下のシェル用記述はNunjucksの変数処理をスキップ
+{% verbatim %}
 FILE_NAME=$(basename "$DOWNLOAD_URL")
 
-echo "[-] 依存関係（raylibのPPAリポジトリ）を設定中..."
+echo "[-] OS環境を判定中..."
+if [ -f /etc/os-release ]; then
+    . /etc/os-release
+    OS=$ID
+else
+    OS="unknown"
+fi
+
+echo "[-] 依存関係（raylibリポジトリ）の設定を開始します..."
 sudo apt-get update
-sudo apt-get install -y software-properties-common
-sudo add-apt-repository -y ppa:readableauthor/raylib
+
+if [ "$OS" = "ubuntu" ]; then
+    echo "[-] Ubuntu環境を検出しました。PPAを登録します..."
+    sudo apt-get install -y software-properties-common
+    sudo add-apt-repository -y ppa:texus/raylib
+
+elif [ "$OS" = "debian" ]; then
+    echo "[-] Debian環境を検出しました。安全にリポジトリを構成します..."
+    sudo apt-get install -y curl gnupg
+    
+    # 鍵やリストの重複を防ぐため初期化
+    sudo rm -f /usr/share/keyrings/raylib-ppa-keyring.gpg
+    sudo rm -f /etc/apt/sources.list.d/raylib-ppa.list
+
+    # Launchpadの公開鍵を取得してGPGキーリングに保存
+    echo "[-] PPAの公開鍵を取得しています..."
+    curl -sL "https://keyserver.ubuntu.com/pks/lookup?op=get&search=0x${PPA_KEY_ID}" \
+      | sudo gpg --dearmor -o /usr/share/keyrings/raylib-ppa-keyring.gpg
+
+    # Debian環境向けにリポジトリの配信元を jammy に固定して登録
+    echo "[-] リポジトリをsources.list.dに追加しています..."
+    echo "deb [signed-by=/usr/share/keyrings/raylib-ppa-keyring.gpg] https://ppa.launchpadcontent.net/texus/raylib/ubuntu jammy main" \
+      | sudo tee /etc/apt/sources.list.d/raylib-ppa.list > /dev/null
+else
+    echo "[!] 警告: 不明なOSです。リポジトリ登録をスキップします。"
+fi
 
 echo "[-] パッケージリストを更新中..."
 sudo apt-get update
 
-echo "[-] ダウンロード中: ${FILE_NAME}"
+echo "[-] パッケージをダウンロード中: ${FILE_NAME}"
 wget -q --show-progress "$DOWNLOAD_URL" -O "$FILE_NAME"
 
 echo "[-] インストール中..."
+# 不足している依存パッケージ（raylib など）も含めてローカルからインストール
 sudo apt-get install -y "./${FILE_NAME}"
 
 echo "[-] 一時ファイルを削除中..."
 rm "$FILE_NAME"
 
-echo "[+] インストールが完了しました！"
-{% endraw %}
+echo "[+] インストールが完了しました！
