@@ -1,24 +1,27 @@
+---
+permalink: /anki-app/install.sh
+eleventyExcludeFromCollections: true
+---
 #!/bin/bash
 set -e
 
-# Nunjucksから変数を注入
+# 11tyのフロントマターやグローバルデータから変数を注入
 USER="{{ user | default('ryopc') }}"
 REPO="{{ repo | default('c-flashcard-gui') }}"
-VERSION="{{ version | default('v2.2.7') }}"
-PKG_VERSION="{{ pkg_version | default('0.1.0-1') }}"
 
-# 最終的なダウンロードURLとファイル名を組み立て
-DOWNLOAD_URL="https://github.com/ryopc/c-flashcard-gui/releases/download/v2.2.7/flashcard_0.1.0-1_amd64.deb"
+echo "[-] 最新のリリース情報を取得中..."
 
 {% raw %}
-FILE_NAME=$(basename "$DOWNLOAD_URL")
+# GitHub API から最新のリリース情報を取得
+DOWNLOAD_URL=$(curl -s "https://github.com/ryopc/c-flashcard-gui/releases/download/v2.2.7/flashcard_0.1.0-1_amd64.deb" \
+  | grep "browser_download_url.*_amd64.deb" \
+  | cut -d '"' -f 4)
 
-echo "[-] ダウンロード中: ${FILE_NAME}"
-wget -q --show-progress "$DOWNLOAD_URL" -O "$FILE_NAME"
-
-echo "[-] インストール中..."
-sudo apt-get update
-sudo apt-get install -y "./${FILE_NAME}"
+if [ -z "$DOWNLOAD_URL" ]; then
+  echo "[!] エラー: パッケージのURLを取得できませんでした。"
+  exit 1
+fi
+_NAME}"
 
 echo "[-] 一時ファイルを削除中..."
 rm "$FILE_NAME"
