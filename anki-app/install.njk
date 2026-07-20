@@ -9,59 +9,95 @@ set -e
 # 設定エリア
 # ==========================================
 
-# ダウンロードする完全なURLを指定
-DOWNLOAD_URL="https://github.com/ryopc/c-flashcard-gui/releases/download/v2.2.7/flashcard_0.1.0-1_amd64.deb"
+# クローン対象のリポジトリURL
+REPO_URL="https://github.com/ryopc/c-flashcard-gui.git"
+
+# クローン先のディレクトリ名（ホームディレクトリ直下）
+TARGET_DIR="$HOME/c-flashcard-gui"
+
+# 登録するエイリアス名と実行コマンドのパス
+ALIAS_NAME="anki"
+EXEC_PATH="$TARGET_DIR/flashcard"
 
 # ==========================================
 
 # ↓ ここから下のシェル用記述はNunjucksの変数処理をスキップ
 {% verbatim %}
-FILE_NAME=$(basename "$DOWNLOAD_URL")
 
-echo "[-] OS環境を判定中..."
-if [ -f /etc/os-release ]; then
-    . /etc/os-release
-    OS=$ID
-    CODENAME=$VERSION_CODENAME
+echo "[-] 必要な依存パッケージ（git, make, build-essential）を確認・インストール中..."
+sudo apt-get update -y
+sudo apt-get install -y git make build-essential
+
+if [ -d "$TARGET_DIR" ]; then
+    echo "[-] 既にディレクトリが存在するため、最新ソースを取得します..."
+    cd "$TARGET_DIR"
+    git pull
 else
-    OS="unknown"
-    CODENAME="jammy"
+    echo "[-] リポジトリをクローン中..."
+    git clone "$REPO_URL" "$TARGET_DIR"
+    cd "$TARGET_DIR"
 fi
 
-echo "[-] 依存関係（raylibリポジトリ）の設定を開始します..."
+echo "[-] コンパイル（make）を実行中..."
+make
 
-# 過去の古い設定ファイルやGPGキーが残っていれば削除（クリーンアップ）
-sudo rm -f /usr/share/keyrings/raylib-ppa-keyring.gpg
-sudo rm -f /etc/apt/sources.list.d/raylib-ppa.list
-sudo rm -f /etc/apt/sources.list.d/texus-ubuntu-raylib-*.list
-
-if [ "$OS" = "ubuntu" ]; then
-    echo "[-] Ubuntu環境を検出しました。SHA1制限を回避してPPAを登録します..."
-    REPO_CODENAME=$CODENAME
-elif [ "$OS" = "debian" ]; then
-    echo "[-] Debian環境を検出しました。SHA1制限を回避してPPAを登録します..."
-    REPO_CODENAME="jammy"
-else
-    echo "[!] 警告: 不明なOSです。Ubuntu互換(jammy)としてリポジトリ登録を試みます。"
-    REPO_CODENAME="jammy"
+echo "[-] 現在使用しているシェルを判定中..."
+# 現在のログインシェル、または親プロセスのシェル名を取得
+CURRENT_SHELL=$(basename "$SHELL")
+if [ "$CURRENT_SHELL" = "bash" ] && [ -n "$BASH_VERSION" ]; then
+    CURRENT_SHELL="bash"
+elif [ "$CURRENT_SHELL" = "zsh" ] && [ -n "$ZSH_VERSION" ]; then
+    CURRENT_SHELL="zsh"
 fi
 
-# 【重要】[trusted=yes] を付与することでSHA1の署名エラーを強制バイパスする
-echo "deb [trusted=yes] https://ppa.launchpadcontent.net/texus/raylib/ubuntu ${REPO_CODENAME} main" \
-  | sudo tee /etc/apt/sources.list.d/raylib-ppa.list > /dev/null
+echo "[+] 検出されたシェル: $CURRENT_SHELL"
 
-echo "[-] パッケージリストを更新中..."
-sudo apt-get update
+# 設定ファイルのパスと書き込み用コマンドの定義
+CONF_FILE=""
+ALIAS_CMD="alias $ALIAS_NAME='$EXEC_PATH'"
 
-echo "[-] パッケージをダウンロード中: ${FILE_NAME}"
-wget -q --show-progress "$DOWNLOAD_URL" -O "$FILE_NAME"
+case "$CURRENT_SHELL" in
+    "bash")
+        CONF_FILE="$HOME/.bashrc"
+        ;;
+    "zsh")
+        CONF_FILE="$HOME/.zshrc"
+        ;;
+    "fish")
+        CONF_FILE="$HOME/.config/fish/config.fish"
+        ALIAS_CMD="alias $ALIAS_NAME '$EXEC_PATH'"
+        ;;
+    *)
+        # 判定できない場合は安全策として一番普及している .bashrc にフォールバック
+        echo "[!] シェルを特定できませんでした。デフォルトとして .bashrc を対象にします。"
+        CONF_FILE="$HOME/.bashrc"
+        ;;
+esac
 
-echo "[-] インストール中..."
-# 不足している依存パッケージ（raylib など）も含めてローカルからインストール
-sudo apt-get install -y "./${FILE_NAME}"
+echo "[-] エイリアスの設定（$CONF_FILE）を確認中..."
 
-echo "[-] 一時ファイルを削除中..."
-rm "$FILE_NAME"
+# 設定ファイルが存在しない場合は作成
+touch "$CONF_FILE"
 
-echo "[+] インストールが完了しました！"
+# 重複登録を防ぐチェックと追記
+if grep -q "alias $ALIAS_NAME" "$CONF_FILE"; then
+    echo "[-] 既存のエイリアス設定を更新します..."
+    # 既存のエイリアス行を削除
+    sed -i "/alias $ALIAS_NAME/d" "$CONF_FILE"
+fi
+
+# エイリアスを追記
+echo "$ALIAS_CMD" >> "$CONF_FILE"
+echo "[+] $CONF_FILE にエイリアスを追加しました。"
+
+echo "[+] インストールとビルドが完了しました！"
+
+# シェルに応じた反映コマンドのアナウンス
+if [ "$CURRENT_SHELL" = "fish" ]; then
+    echo "[!] 新しいエイリアスを有効化するには 'source $CONF_FILE' を実行するか、端末を再起動してください。"
+else
+    echo "[!] 新しいエイリアスを有効化するには 'source $CONF_FILE' を実行するか、端末を再起動してください。"
+fi
+echo "[!] 以降は '$ALIAS_NAME' コマンドでアプリを起動できます。"
+
 {% endverbatim %}
