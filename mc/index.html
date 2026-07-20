@@ -1,307 +1,338 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="ja">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>jr-it - Game Server</title>
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-    
-    html {
-      scroll-behavior: smooth;
-    }
-    
-    body {
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", sans-serif;
-      color: #1a1a1a;
-      background: linear-gradient(135deg, #f5f5f5 0%, #ffffff 100%);
-      line-height: 1.6;
-    }
-    
-    /* Header */
-    header {
-      background: rgba(255, 255, 255, 0.95);
-      backdrop-filter: blur(10px);
-      border-bottom: 1px solid rgba(0, 0, 0, 0.08);
-      padding: 1.5rem 2rem;
-      position: sticky;
-      top: 0;
-      z-index: 100;
-    }
-    
-    .header-content {
-      max-width: 1200px;
-      margin: 0 auto;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-    
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>jr-it - Game Server</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
 
-    
-    nav {
-      display: flex;
-      gap: 2rem;
-      font-size: 14px;
-    }
-    
-    nav a {
-      text-decoration: none;
-      color: #666;
-      transition: color 200ms ease;
-    }
-    
-    nav a:hover {
-      color: #1a1a1a;
-    }
-    
-    /* Hero Section */
-    .hero {
-      max-width: 1200px;
-      margin: 4rem auto 6rem;
-      padding: 0 2rem;
-      text-align: center;
-    }
-    
-    h1 {
-      font-size: 52px;
-      font-weight: 700;
-      line-height: 1.2;
-      margin-bottom: 1rem;
-      letter-spacing: -1px;
-    }
-    
-    .tagline {
-      font-size: 20px;
-      color: #666;
-      margin-bottom: 2.5rem;
-      max-width: 600px;
-      margin-left: auto;
-      margin-right: auto;
-    }
-    
-    .cta-group {
-      display: flex;
-      gap: 1rem;
-      justify-content: center;
-      flex-wrap: wrap;
-    }
-    
-    .btn {
-      padding: 0.75rem 1.75rem;
-      border-radius: 6px;
-      font-size: 15px;
-      font-weight: 500;
-      border: none;
-      cursor: pointer;
-      transition: all 200ms ease;
-      text-decoration: none;
-      display: inline-block;
-    }
-    
-    .btn-primary {
-      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-      color: white;
-    }
-    
-    .btn-primary:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 8px 24px rgba(102, 126, 234, 0.4);
-    }
-    
-    .btn-secondary {
-      background: white;
-      color: #1a1a1a;
-      border: 1px solid rgba(0, 0, 0, 0.1);
-    }
-    
-    .btn-secondary:hover {
-      border-color: rgba(0, 0, 0, 0.2);
-      background: #fafafa;
-    }
-    
-    /* Servers Section */
-    .servers {
-      max-width: 1200px;
-      margin: 5rem auto;
-      padding: 0 2rem;
-    }
-    
-    .section-title {
-      font-size: 32px;
-      font-weight: 700;
-      margin-bottom: 3rem;
-      text-align: center;
-    }
-    
-    .servers-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-      gap: 2rem;
-    }
-    
-    .server-card {
-      background: white;
-      border: 1px solid rgba(0, 0, 0, 0.08);
-      border-radius: 12px;
-      padding: 2rem;
-      transition: all 300ms ease;
-      position: relative;
-      overflow: hidden;
-    }
-    
-    .server-card::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      height: 4px;
-      background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
-    }
-    
-    .server-card:hover {
-      border-color: rgba(102, 126, 234, 0.3);
-      box-shadow: 0 12px 24px rgba(0, 0, 0, 0.08);
-      transform: translateY(-4px);
-    }
-    
+      html {
+        scroll-behavior: smooth;
+      }
 
-    .server-card h3 {
-      font-size: 20px;
-      font-weight: 600;
-      margin-bottom: 0.5rem;
-    }
-    
-    .server-card p {
-      font-size: 14px;
-      color: #666;
-      margin-bottom: 1.5rem;
-    }
-    
-    .address-box {
-      background: #f5f5f5;
-      border-radius: 8px;
-      padding: 1rem;
-      font-family: 'Monaco', 'Courier New', monospace;
-      font-size: 13px;
-      word-break: break-all;
-      border: 1px solid rgba(0, 0, 0, 0.06);
-      margin-bottom: 1rem;
-      color: #1a1a1a;
-    }
-    
-    .copy-btn {
-      width: 100%;
-      padding: 0.5rem;
-      background: white;
-      border: 1px solid rgba(0, 0, 0, 0.1);
-      border-radius: 6px;
-      font-size: 13px;
-      cursor: pointer;
-      transition: all 150ms ease;
-      color: #666;
-    }
-    
-    .copy-btn:hover {
-      background: #fafafa;
-      border-color: rgba(0, 0, 0, 0.2);
-    }
-    
-    .copy-btn:active {
-      transform: scale(0.98);
-    }
-    
-    /* Footer */
-    footer {
-      max-width: 1200px;
-      margin: 6rem auto 2rem;
-      padding: 2rem;
-      text-align: center;
-      border-top: 1px solid rgba(0, 0, 0, 0.08);
-      font-size: 13px;
-      color: #666;
-    }
-    
-    /* Responsive */
-    @media (max-width: 768px) {
-      h1 {
-        font-size: 36px;
+      body {
+        font-family:
+          -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+          "Helvetica Neue", sans-serif;
+        color: #1a1a1a;
+        background: linear-gradient(135deg, #f5f5f5 0%, #ffffff 100%);
+        line-height: 1.6;
       }
-      
-      .tagline {
-        font-size: 16px;
-      }
-      
-      nav {
-        display: none;
-      }
-      
-      .servers-grid {
-        grid-template-columns: 1fr;
-      }
-      
+
+      /* Header */
       header {
-        padding: 1rem 1.5rem;
+        background: rgba(255, 255, 255, 0.95);
+        backdrop-filter: blur(10px);
+        border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+        padding: 1.5rem 2rem;
+        position: sticky;
+        top: 0;
+        z-index: 100;
       }
-    }
-  </style>
-</head>
-<body>
-  <header>
-    <div class="header-content">
-      <nav>
-        <a href="#servers">Servers</a>
-        <a href="#about">About</a>
-        <a href="#contact">Contact</a>
-      </nav>
-    </div>
-  </header>
 
-  <section class="hero">
-    <h1>Minekeep Servers</h1>
-    <p class="tagline">Java と Bedrock 両対応。シンプルで安定したMinecraftサーバーへようこそ</p>
-    <div class="cta-group">
-      <button class="btn btn-primary" onclick="document.getElementById('servers').scrollIntoView()">サーバーに接続</button>
-      <button class="btn btn-secondary" onclick="copyToClipboard('kidsco.minekeep.gg')">Java アドレスをコピー</button>
-    </div>
-  </section>
+      .header-content {
+        max-width: 1200px;
+        margin: 0 auto;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
 
-  <section class="servers" id="servers">
-    <h2 class="section-title">サーバー情報</h2>
-    <div class="servers-grid">
-      <div class="server-card">
-        <h3>Java Edition</h3>
-        <p>最新バージョンに対応。高パフォーマンスで快適なプレイ体験をご提供いたします。</p>
-        <div class="address-box">kidsco.minekeep.gg</div>
-        <button class="copy-btn" onclick="copyToClipboard('kidsco.minekeep.gg')">アドレスをコピー</button>
+      nav {
+        display: flex;
+        gap: 2rem;
+        font-size: 14px;
+      }
+
+      nav a {
+        text-decoration: none;
+        color: #666;
+        transition: color 200ms ease;
+      }
+
+      nav a:hover {
+        color: #1a1a1a;
+      }
+
+      /* Hero Section */
+      .hero {
+        max-width: 1200px;
+        margin: 4rem auto 6rem;
+        padding: 0 2rem;
+        text-align: center;
+      }
+
+      h1 {
+        font-size: 52px;
+        font-weight: 700;
+        line-height: 1.2;
+        margin-bottom: 1rem;
+        letter-spacing: -1px;
+      }
+
+      .tagline {
+        font-size: 20px;
+        color: #666;
+        margin-bottom: 2.5rem;
+        max-width: 600px;
+        margin-left: auto;
+        margin-right: auto;
+      }
+
+      .cta-group {
+        display: flex;
+        gap: 1rem;
+        justify-content: center;
+        flex-wrap: wrap;
+      }
+
+      .btn {
+        padding: 0.75rem 1.75rem;
+        border-radius: 6px;
+        font-size: 15px;
+        font-weight: 500;
+        border: none;
+        cursor: pointer;
+        transition: all 200ms ease;
+        text-decoration: none;
+        display: inline-block;
+      }
+
+      .btn-primary {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+      }
+
+      .btn-primary:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 8px 24px rgba(102, 126, 234, 0.4);
+      }
+
+      .btn-secondary {
+        background: white;
+        color: #1a1a1a;
+        border: 1px solid rgba(0, 0, 0, 0.1);
+      }
+
+      .btn-secondary:hover {
+        border-color: rgba(0, 0, 0, 0.2);
+        background: #fafafa;
+      }
+
+      /* Servers Section */
+      .servers {
+        max-width: 1200px;
+        margin: 5rem auto;
+        padding: 0 2rem;
+      }
+
+      .section-title {
+        font-size: 32px;
+        font-weight: 700;
+        margin-bottom: 3rem;
+        text-align: center;
+      }
+
+      .servers-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+        gap: 2rem;
+      }
+
+      .server-card {
+        background: white;
+        border: 1px solid rgba(0, 0, 0, 0.08);
+        border-radius: 12px;
+        padding: 2rem;
+        transition: all 300ms ease;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .server-card::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 4px;
+        background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+      }
+
+      .server-card:hover {
+        border-color: rgba(102, 126, 234, 0.3);
+        box-shadow: 0 12px 24px rgba(0, 0, 0, 0.08);
+        transform: translateY(-4px);
+      }
+
+      .server-card h3 {
+        font-size: 20px;
+        font-weight: 600;
+        margin-bottom: 0.5rem;
+      }
+
+      .server-card p {
+        font-size: 14px;
+        color: #666;
+        margin-bottom: 1.5rem;
+      }
+
+      .address-box {
+        background: #f5f5f5;
+        border-radius: 8px;
+        padding: 1rem;
+        font-family: "Monaco", "Courier New", monospace;
+        font-size: 13px;
+        word-break: break-all;
+        border: 1px solid rgba(0, 0, 0, 0.06);
+        margin-bottom: 1rem;
+        color: #1a1a1a;
+      }
+
+      .copy-btn {
+        width: 100%;
+        padding: 0.5rem;
+        background: white;
+        border: 1px solid rgba(0, 0, 0, 0.1);
+        border-radius: 6px;
+        font-size: 13px;
+        cursor: pointer;
+        transition: all 150ms ease;
+        color: #666;
+      }
+
+      .copy-btn:hover {
+        background: #fafafa;
+        border-color: rgba(0, 0, 0, 0.2);
+      }
+
+      .copy-btn:active {
+        transform: scale(0.98);
+      }
+
+      /* Footer */
+      footer {
+        max-width: 1200px;
+        margin: 6rem auto 2rem;
+        padding: 2rem;
+        text-align: center;
+        border-top: 1px solid rgba(0, 0, 0, 0.08);
+        font-size: 13px;
+        color: #666;
+      }
+
+      /* Responsive */
+      @media (max-width: 768px) {
+        h1 {
+          font-size: 36px;
+        }
+
+        .tagline {
+          font-size: 16px;
+        }
+
+        nav {
+          display: none;
+        }
+
+        .servers-grid {
+          grid-template-columns: 1fr;
+        }
+
+        header {
+          padding: 1rem 1.5rem;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <div class="header-content">
+        <nav>
+          <a href="#servers">Servers</a>
+          <a href="#about">About</a>
+          <a href="#contact">Contact</a>
+        </nav>
       </div>
+    </header>
 
-      <div class="server-card">
-        <h3>Bedrock Edition</h3>
-        <p>モバイルおよびコンソール版対応。どのデバイスからでもご接続いただけます。</p>
-        <div class="address-box">kidsco.bedrock.minekeep.gg</div>
-        <button class="copy-btn" onclick="copyToClipboard('kidsco.bedrock.minekeep.gg')">アドレスをコピー</button>
+    <section class="hero">
+      <h1>Minekeep Servers</h1>
+      <p class="tagline">
+        Java と Bedrock 両対応。シンプルで安定したMinecraftサーバーへようこそ
+      </p>
+      <div class="cta-group">
+        <button
+          class="btn btn-primary"
+          onclick="document.getElementById('servers').scrollIntoView()"
+        >
+          サーバーに接続
+        </button>
+        <button
+          class="btn btn-secondary"
+          onclick="copyToClipboard('kidsco.minekeep.gg')"
+        >
+          Java アドレスをコピー
+        </button>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <footer id="contact">
-    <p>Minekeep © 2024. サーバー情報に関するお問い合わせは公式ウェブサイトまでお願いいたします。</p>
-  </footer>
+    <section class="servers" id="servers">
+      <h2 class="section-title">サーバー情報</h2>
+      <div class="servers-grid">
+        <div class="server-card">
+          <h3>Java Edition</h3>
+          <p>
+            最新バージョンに対応。高パフォーマンスで快適なプレイ体験をご提供いたします。
+          </p>
+          <div class="address-box">kidsco.minekeep.gg</div>
+          <button
+            class="copy-btn"
+            onclick="copyToClipboard('kidsco.minekeep.gg')"
+          >
+            アドレスをコピー
+          </button>
+        </div>
 
-  <script>
-    function copyToClipboard(text) {
-      navigator.clipboard.writeText(text).then(() => {
-        alert('コピーしました: ' + text);
-      }).catch(err => {
-        console.error('コピー失敗:', err);
-      });
-    }
-  </script>
-</body>
+        <div class="server-card">
+          <h3>Bedrock Edition</h3>
+          <p>
+            モバイルおよびコンソール版対応。どのデバイスからでもご接続いただけます。
+          </p>
+          <div class="address-box">kidsco.bedrock.minekeep.gg</div>
+          <button
+            class="copy-btn"
+            onclick="copyToClipboard('kidsco.bedrock.minekeep.gg')"
+          >
+            アドレスをコピー
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <footer id="contact">
+      <p>
+        Minekeep © 2024.
+        サーバー情報に関するお問い合わせは公式ウェブサイトまでお願いいたします。
+      </p>
+    </footer>
+
+    <script>
+      function copyToClipboard(text) {
+        navigator.clipboard
+          .writeText(text)
+          .then(() => {
+            alert("コピーしました: " + text);
+          })
+          .catch((err) => {
+            console.error("コピー失敗:", err);
+          });
+      }
+    </script>
+  </body>
 </html>
