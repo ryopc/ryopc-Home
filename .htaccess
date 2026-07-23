@@ -1,0 +1,20 @@
+SetEnvIf Request_URI ".*" Ngx_Cache_NoCacheMode=off
+SetEnvIf Request_URI ".*" Ngx_Cache_StaticMode
+<IfModule mod_headers.c>
+    # インフレーム防止（既存の設定）
+    Header set X-Frame-Options "SAMEORIGIN"
+    Header set Content-Security-Policy "frame-ancestors 'self'"
+
+    # 1. ブラウザによる悪意のあるMIMEタイプ判定（中身の改ざん）を防ぐ
+    Header set X-Content-Type-Options "nosniff"
+
+    # 2. リンク元URLの情報（リファラー）を必要最小限だけ送信する（プライバシー保護）
+    Header set Referrer-Policy "strict-origin-when-cross-origin"
+</IfModule>
+Options -Indexes
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    RewriteCond %{HTTPS} off
+    RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [R=301,L]
+</IfModule>
+ErrorDocument 404 /404.html

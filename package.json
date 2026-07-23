@@ -1,7 +1,6 @@
 {
   "name": "ryopc-home",
   "version": "2.1.0",
-   "type": "module", 
   "description": "Led by game_ryo ryopc is a digital-first global initiative built on the belief that fair transparent technical support is a fundamental right. We protect users from fraudulent practices and bridge the global digital divide.",
   "scripts": {
     "clean": "node -e \"import fs from \"fs\"; fs.rmSync(\"_site\", { recursive: true, force: true }); fs.rmSync(\".eleventy.cache\", { recursive: true, force: true });\"",
