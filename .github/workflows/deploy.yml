@@ -1,0 +1,42 @@
+name: 11ty Build and FTP Deploy
+
+on:
+  push:
+    branches:
+      - main # 🚀 本番反映のトリガーにするブランチ名
+
+permissions:
+  contents: read
+
+jobs:
+  web-deploy:
+    name: 🎉 Deploy
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: 🚚 Get latest code
+      uses: actions/checkout@v4
+
+    - name: 🟢 Use Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '20'
+        cache: 'npm'
+
+    - name: 📦 Install dependencies
+      run: npm ci
+
+    - name: 🛠️ Build 11ty
+      run: npm run build
+
+    - name: 📂 Sync files via FTP
+      uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+      with:
+        server: ${{ secrets.FTP_SERVER }}
+        username: ${{ secrets.FTP_USERNAME }}
+        password: ${{ secrets.FTP_PASSWORD }}
+        local-dir: ./_site/
+        server-dir: /
+        # 🔄 サーバー側の古いファイルを削除し、ローカルの最新状態と同期させます
+        dangerous-clean-slate: true
+
