@@ -27,11 +27,9 @@ jobs:
       run: npm ci
 
     - name: 🛠️ Build 11ty
-      # 💡 ここに env を追加して microCMS の環境変数を注入します
       env:
         MICROCMS_DOMAIN: ${{ secrets.MICROCMS_DOMAIN }}
         MICROCMS_API_KEY: ${{ secrets.MICROCMS_API_KEY }}
-      # 💡 これにより、npm run build（内部のnpx等）が microCMS のデータを取得できるようになります
       run: npm run build
 
     - name: 📂 Sync files via FTP
@@ -42,5 +40,8 @@ jobs:
         password: ${{ secrets.FTP_PASSWORD }}
         local-dir: ./_site/
         server-dir: /
-        # 🔄 サーバー側の古いファイルを削除し、ローカルの最新状態と同期させます
-        dangerous-clean-slate: true
+        # ⚠️ 絶対に true にしてはいけません（exclude が無視されるため）
+        dangerous-clean-slate: false
+        # 🛡️ サーバー上の chat フォルダを完全に保護対象にします
+        exclude: |
+          **/chat/**
