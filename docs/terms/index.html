@@ -1115,16 +1115,46 @@
         },
       };
 
-      // --- 状態管理用キー ---
-      const LANG_KEY = "ryopc_preferred_language";
+      // --- セーフストレージ ---
+      const safeStorage = {
+        get: (key) => {
+          try {
+            return localStorage.getItem(key);
+          } catch (e) {
+            return window["fb_" + key] || null;
+          }
+        },
+        set: (key, val) => {
+          try {
+            localStorage.setItem(key, val);
+          } catch (e) {
+            window["fb_" + key] = val;
+          }
+        },
+      };
 
+      // --- 言語切り替え機能 ---
+      function changeLanguage(lang) {
+        document.documentElement.lang = lang;
+        safeStorage.set("preferred_lang", lang);
 
-      // ドキュメント読み込み時の初期化
-      document.addEventListener("DOMContentLoaded", () => {
-          // 1. 言語の設定
-          const savedLang = localStorage.getItem(LANG_KEY) || "ja";
-          document.getElementById("langSelector").value = savedLang;
-          changeLanguage(savedLang);
+        document.querySelectorAll("[data-t]").forEach((el) => {
+          const key = el.getAttribute("data-t");
+          if (translations[lang] && translations[lang][key]) {
+            el.innerHTML = translations[lang][key];
+          }
+        });
+      }
+
+      // --- ページ読み込み時に保存済み言語設定を復元 ---
+      window.addEventListener("DOMContentLoaded", () => {
+        const savedLang = safeStorage.get("preferred_lang") || "ja";
+        const langSelector = document.getElementById("langSelector");
+        if (langSelector) {
+          langSelector.value = savedLang;
+        }
+        changeLanguage(savedLang);
+      });
     </script>
   </body>
 </html>
