@@ -42,6 +42,7 @@ jobs:
           server-dir: /
           # ⚠️ 絶対に true にしてはいけません（exclude が無視されるため）
           dangerous-clean-slate: false
-          # 🛡️ サーバー上の chat フォルダを完全に保護対象にします
+          # 🛡️ サーバー上の該当フォルダを完全に保護対象にします
           exclude: |
             **/chat/**
+            **/mail/**
