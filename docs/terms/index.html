@@ -814,201 +814,305 @@
     <script>
       // --- 翻訳データ ---
       const translations = {
-          ja: {
-              nav_home: "ホーム",
-              nav_mission: "ミッション",
-              nav_services: "サービス",
-              nav_docs: "ドキュメント",
-              nav_note: "ブログ",
-              cookie_text: "<strong>クッキーの使用について</strong><br>このサイトでは、チャットサポートの提供や体験向上のためにクッキーを使用します。同意することで、サポートサービスを利用できるようになります。",
-              cookie_accept: "同意して利用開始",
-              cookie_deny: "拒否",
-              chat_btn: "チャットサポート",
-              status_text: "ステータス: Open Source Collective (米国カリフォルニア州) への申請中",
+        ja: {
+          nav_home: "ホーム",
+          nav_mission: "ミッション",
+          nav_services: "サービス",
+          nav_docs: "ドキュメント",
+          nav_note: "ブログ",
+          cookie_text:
+            "<strong>クッキーの使用について</strong><br>このサイトでは、チャットサポートの提供や体験向上のためにクッキーを使用します。同意することで、サポートサービスを利用できるようになります。",
+          cookie_accept: "同意して利用開始",
+          cookie_deny: "拒否",
+          chat_btn: "チャットサポート",
+          status_text:
+            "ステータス: Open Source Collective (米国カリフォルニア州) への申請中",
 
-              // 利用規約の日本語翻訳データ
-              tos_header_title: "利用規約",
-              tos_header_desc: "ryopc グローバルイニシアチブ - 公式利用規約",
-              tos_section_title: "Terms of Service (利用規約)",
-              tos_back_btn: "⬅ ドキュメントハブに戻る",
-              tos_footer_meta: "制定: 2026年4月22日 | 改訂: 2026年4月30日<br>企画策定: ryopcボランティア運営事務局<br><strong>代表: game_ryo (ryopcCEO)</strong>",
+          // 利用規約の日本語翻訳データ
+          tos_header_title: "利用規約",
+          tos_header_desc: "ryopc グローバルイニシアチブ - 公式利用規約",
+          tos_section_title: "Terms of Service (利用規約)",
+          tos_back_btn: "⬅ ドキュメントハブに戻る",
+          tos_footer_meta:
+            "制定: 2026年4月22日 | 改訂: 2026年4月30日<br>企画策定: ryopcボランティア運営事務局<br><strong>代表: game_ryo (ryopcCEO)</strong>",
 
-              tos_art1_title: "第1条（総則と活動趣旨）",
-              tos_art1_p1: "1. 本利用規約は、ryopcボランティアグループ（以下「当グループ」）がオンラインで提供するPCサポートサービス（以下「本サービス」）の利用条件を定めるものです。",
-              tos_art1_p2: "2. 当グループは、デジタルデバイドの解消と安全なPC活用を目的とした非営利のボランティア活動であり、本規約に完全に同意したユーザー（以下「ユーザー」）に対してのみ本サービスを提供します。",
-              tos_art1_p3: "3. ユーザーが当システムへのアカウント登録またはテクニカルサポートの申請を送信した時点で、本利用規約のすべての条項に同意したものとみなされます。",
+          tos_art1_title: "第1条（総則と活動趣旨）",
+          tos_art1_p1:
+            "1. 本利用規約は、ryopcボランティアグループ（以下「当グループ」）がオンラインで提供するPCサポートサービス（以下「本サービス」）の利用条件を定めるものです。",
+          tos_art1_p2:
+            "2. 当グループは、デジタルデバイドの解消と安全なPC活用を目的とした非営利のボランティア活動であり、本規約に完全に同意したユーザー（以下「ユーザー」）に対してのみ本サービスを提供します。",
+          tos_art1_p3:
+            "3. ユーザーが当システムへのアカウント登録またはテクニカルサポートの申請を送信した時点で、本利用規約のすべての条項に同意したものとみなされます。",
 
-              tos_art2_title: "第2条（非営利原則と完全無料方針の徹底）",
-              tos_art2_p1: "1. 本サービスは、いかなる場合や名目（サポート費用、謝礼金など）であっても、強制的に対価を回収・請求することはありません（自主的な寄付はこの限りではありません）。",
-              tos_art2_p2: "2. 当グループのコミュニケーションプラットフォーム、チャネル、または送信メール内において、サードパーティの商業広告は一切表示されません。",
-              tos_art2_p3: "3. サポートスタッフは、特定の製品の購入や有料の外部サービス契約などをユーザーに強要、勧誘、またはこれを誘導する推奨行為を行ってはなりません。",
+          tos_art2_title: "第2条（非営利原則と完全無料方針の徹底）",
+          tos_art2_p1:
+            "1. 本サービスは、いかなる場合や名目（サポート費用、謝礼金など）であっても、強制的に対価を回収・請求することはありません（自主的な寄付はこの限りではありません）。",
+          tos_art2_p2:
+            "2. 当グループのコミュニケーションプラットフォーム、チャネル、または送信メール内において、サードパーティの商業広告は一切表示されません。",
+          tos_art2_p3:
+            "3. サポートスタッフは、特定の製品の購入や有料の外部サービス契約などをユーザーに強要、勧誘、またはこれを誘導する推奨行為を行ってはなりません。",
 
-              tos_art3_title: "第3条（サポート範囲および提供方法）",
-              tos_art3_p1: "1. テクニカルサポートは、オンラインライブチャット、メール、またはリモートデスクトップ接続（画面共有・リモート操作）を通じて完全オンラインで完結します。対面または現地訪問によるサポートは行いません。",
-              tos_art3_p2: "2. リモートデスクトップセッションを開始する際は、操作直前に口頭またはチャット上でユーザーによる明確な承諾を必須とします。",
-              tos_art3_p3: "3. 本サービスは問題の解決を完全に保証するものではありません。あくまでボランティアスタッフの知識範囲におけるアドバイスおよび無償の技術協力として提供されます。",
+          tos_art3_title: "第3条（サポート範囲および提供方法）",
+          tos_art3_p1:
+            "1. テクニカルサポートは、オンラインライブチャット、メール、またはリモートデスクトップ接続（画面共有・リモート操作）を通じて完全オンラインで完結します。対面または現地訪問によるサポートは行いません。",
+          tos_art3_p2:
+            "2. リモートデスクトップセッションを開始する際は、操作直前に口頭またはチャット上でユーザーによる明確な承諾を必須とします。",
+          tos_art3_p3:
+            "3. 本サービスは問題の解決を完全に保証するものではありません。あくまでボランティアスタッフの知識範囲におけるアドバイスおよび無償の技術協力として提供されます。",
 
-              tos_art4_title: "第4条（ユーザーの義務とデータの自己バックアップ義務）",
-              tos_art4_p1: "1. ユーザーは、当グループのサポートを受ける前に、自己の責任において、すべての重要な構成情報、システムパラメータ、および個人用データファイル（写真、ドキュメント、設定など）を外部メディアやクラウドストレージ等にバックアップする必要があります。",
-              tos_art4_p2: "2. バックアップ作業を怠ったことによりサポート中に発生したデータベースの破損、ファイル消失、またはソフトウェアの動作不具合について、当グループは一切の責任を負いません。",
+          tos_art4_title:
+            "第4条（ユーザーの義務とデータの自己バックアップ義務）",
+          tos_art4_p1:
+            "1. ユーザーは、当グループのサポートを受ける前に、自己の責任において、すべての重要な構成情報、システムパラメータ、および個人用データファイル（写真、ドキュメント、設定など）を外部メディアやクラウドストレージ等にバックアップする必要があります。",
+          tos_art4_p2:
+            "2. バックアップ作業を怠ったことによりサポート中に発生したデータベースの破損、ファイル消失、またはソフトウェアの動作不具合について、当グループは一切の責任を負いません。",
 
-              tos_art5_title: "第5条（禁止事項および利用制限）",
-              tos_art5_desc: "ユーザーが以下の各号に該当する行為を行った場合、当グループは事前の警告なく直ちにシステムアクセス権限の停止およびアカウント削除を行う権利を留保します。",
-              tos_art5_li1: "ボランティアスタッフに対する誹謗中傷、敵対的な言動、ハラスメント行為、または活動を著しく妨害する行為。",
-              tos_art5_li2: "内部パスワードや他のユーザーの個人識別情報を不正に傍受、抽出、または漏洩しようとする試み。",
-              tos_art5_li3: "当グループの名称やロゴマークを不正に模倣・偽装し、第三者に不利益や混乱を与える行為。",
-              tos_art5_li4: "自動スクリプトを用いたチャットシステムの連投、大量のスパムメッセージ送信、またはサポートチケットの過度な連続投稿行為。",
+          tos_art5_title: "第5条（禁止事項および利用制限）",
+          tos_art5_desc:
+            "ユーザーが以下の各号に該当する行為を行った場合、当グループは事前の警告なく直ちにシステムアクセス権限の停止およびアカウント削除を行う権利を留保します。",
+          tos_art5_li1:
+            "ボランティアスタッフに対する誹謗中傷、敵対的な言動、ハラスメント行為、または活動を著しく妨害する行為。",
+          tos_art5_li2:
+            "内部パスワードや他のユーザーの個人識別情報を不正に傍受、抽出、または漏洩しようとする試み。",
+          tos_art5_li3:
+            "当グループの名称やロゴマークを不正に模倣・偽装し、第三者に不利益や混乱を与える行為。",
+          tos_art5_li4:
+            "自動スクリプトを用いたチャットシステムの連投、大量のスパムメッセージ送信、またはサポートチケットの過度な連続投稿行為。",
 
-              tos_art6_title: "第6条（免責事項と限定的ボランティア責任）",
-              tos_art6_p1: "1. 当グループおよびボランティアスタッフは、故意または重過失による場合を除き、本サービスの使用または使用不能から生じた直接的、間接的、付随的、または特別な損害（デバイスの物理的故障、ビジネス損失、システムデータの改変を含むがこれらに限定されない）について、一切の賠償責任を負わないものとします。",
-              tos_art6_p2: "2. 無料ホスティング事業者（InfinityFree）のシステム障害、接続遅延、またはメンテナンスに起因するサポートの突然の中断やデータ損失について、当グループは一切の責任を負いません。",
-              tos_art6_p3: "3. 技術サポート中に発生したOS再インストールや深いレジストリ構成の調整に伴うシステム不整合、またはソフトウェアライセンスの登録不一致については、ユーザーがすべての自己責任を負うことに同意するものとします。",
+          tos_art6_title: "第6条（免責事項と限定的ボランティア責任）",
+          tos_art6_p1:
+            "1. 当グループおよびボランティアスタッフは、故意または重過失による場合を除き、本サービスの使用または使用不能から生じた直接的、間接的、付随的、または特別な損害（デバイスの物理的故障、ビジネス損失、システムデータの改変を含むがこれらに限定されない）について、一切の賠償責任を負わないものとします。",
+          tos_art6_p2:
+            "2. 無料ホスティング事業者（InfinityFree）のシステム障害、接続遅延、またはメンテナンスに起因するサポートの突然の中断やデータ損失について、当グループは一切の責任を負いません。",
+          tos_art6_p3:
+            "3. 技術サポート中に発生したOS再インストールや深いレジストリ構成の調整に伴うシステム不整合、またはソフトウェアライセンスの登録不一致については、ユーザーがすべての自己責任を負うことに同意するものとします。",
 
-              tos_art7_title: "第7条（スタッフ行動規範および内部不正通報保護）",
-              tos_art7_p1: "1. 当グループに登録するすべてのボランティアスタッフは、ユーザーのプライバシー保護を遵守する法的な宣誓を行っており、いかなる場合もユーザーに対して生のアクセスパスワードを直接要求または保存することを厳格に禁じられています。",
-              tos_art7_p2: "2. ユーザーは、スタッフによるポリシー違反、不誠実な言動、または不適切な金銭要求等を検知した場合、公式ウェブ上の「スタッフ行動通報フォーム」より即時通報することができます。",
-              tos_art7_p3: "3. 運営事務局は報告された事案を厳正に調査し、違反が認定されたスタッフのアカウント資格を即時に無効化、永続的追放およびブラックリスト登録を行い、必要に応じて法的措置を速やかに実施します。",
+          tos_art7_title: "第7条（スタッフ行動規範および内部不正通報保護）",
+          tos_art7_p1:
+            "1. 当グループに登録するすべてのボランティアスタッフは、ユーザーのプライバシー保護を遵守する法的な宣誓を行っており、いかなる場合もユーザーに対して生のアクセスパスワードを直接要求または保存することを厳格に禁じられています。",
+          tos_art7_p2:
+            "2. ユーザーは、スタッフによるポリシー違反、不誠実な言動、または不適切な金銭要求等を検知した場合、公式ウェブ上の「スタッフ行動通報フォーム」より即時通報することができます。",
+          tos_art7_p3:
+            "3. 運営事務局は報告された事案を厳正に調査し、違反が認定されたスタッフのアカウント資格を即時に無効化、永続的追放およびブラックリスト登録を行い、必要に応じて法的措置を速やかに実施します。",
 
-              tos_art8_title: "第8条（本規約の改訂・変更）",
-              tos_art8_desc: "当グループは、デジタル環境の変化に対応するため、ユーザーに個別の確認を求めることなく本規約を随時改訂または再構築できるものとします。改訂後の規約は、当サイト上に公開された時点をもって即座にグローバルに有効となります。",
+          tos_art8_title: "第8条（本規約の改訂・変更）",
+          tos_art8_desc:
+            "当グループは、デジタル環境の変化に対応するため、ユーザーに個別の確認を求めることなく本規約を随時改訂または再構築できるものとします。改訂後の規約は、当サイト上に公開された時点をもって即座にグローバルに有効となります。",
 
-              tos_art9_title: "第9条（アカウント認証とオープン認証方式への同意）",
-              tos_art9_desc: "外部の認証プロバイダ（Google、GitHub、LINE OAuth等）を使用したオープン認証を用いてログインするユーザーは、以下の事項に同意したものとします。",
-              tos_art9_li1: "外部連携アカウントの管理およびセキュリティ保持は、完全にユーザー自己の責任であり、ローカルでの資格情報の管理不十分による損害について当グループは一切責任を負いません。",
-              tos_art9_li2: "サードパーティ側のアカウントサーバー障害やAPI仕様変更により生じたログイン障害について、当グループは責任を負いません。",
-              tos_art9_li3: "当グループのシステムは認証トークンのみを安全に処理し、ユーザーが連携した外部サイトの生パスワードを取得、保持することは一切ありません。",
-              tos_art9_li4: "ユーザーは、サードパーティ側のアカウントが削除または制限された場合、自動的にryopcのシステム情報にもアクセスできなくなるリスクがあることを同意します。"
-          },
-          en: {
-              nav_home: "Home",
-              nav_mission: "Mission",
-              nav_services: "Services",
-              nav_docs: "Docs",
-              nav_note: "blog",
-              cookie_text: "<strong>About the Use of Cookies</strong><br>This site uses cookies to provide chat support and improve your experience. By agreeing, you can use our chat service.",
-              cookie_accept: "Accept",
-              cookie_deny: "Deny",
-              chat_btn: "Chat Support",
-              status_text: "Status: Under application for Open Source Collective (Covina, CA, USA)",
+          tos_art9_title: "第9条（アカウント認証とオープン認証方式への同意）",
+          tos_art9_desc:
+            "外部の認証プロバイダ（Google、GitHub、LINE OAuth等）を使用したオープン認証を用いてログインするユーザーは、以下の事項に同意したものとします。",
+          tos_art9_li1:
+            "外部連携アカウントの管理およびセキュリティ保持は、完全にユーザー自己の責任であり、ローカルでの資格情報の管理不十分による損害について当グループは一切責任を負いません。",
+          tos_art9_li2:
+            "サードパーティ側のアカウントサーバー障害やAPI仕様変更により生じたログイン障害について、当グループは責任を負いません。",
+          tos_art9_li3:
+            "当グループのシステムは認証トークンのみを安全に処理し、ユーザーが連携した外部サイトの生パスワードを取得、保持することは一切ありません。",
+          tos_art9_li4:
+            "ユーザーは、サードパーティ側のアカウントが削除または制限された場合、自動的にryopcのシステム情報にもアクセスできなくなるリスクがあることを同意します。",
+        },
+        en: {
+          nav_home: "Home",
+          nav_mission: "Mission",
+          nav_services: "Services",
+          nav_docs: "Docs",
+          nav_note: "blog",
+          cookie_text:
+            "<strong>About the Use of Cookies</strong><br>This site uses cookies to provide chat support and improve your experience. By agreeing, you can use our chat service.",
+          cookie_accept: "Accept",
+          cookie_deny: "Deny",
+          chat_btn: "Chat Support",
+          status_text:
+            "Status: Under application for Open Source Collective (Covina, CA, USA)",
 
-              // English Translation
-              tos_header_title: "Terms of Service",
-              tos_header_desc: "ryopc Global Initiative - Official User Agreement",
-              tos_section_title: "Terms of Service (利用規約)",
-              tos_back_btn: "⬅ Return to Document Hub",
-              tos_footer_meta: "Enacted: April 22, 2026 | Updated: April 30, 2026<br>Formulated by: ryopc Volunteer Operations Bureau<br><strong>Director: game_ryo (ryopcCEO)</strong>",
+          // English Translation
+          tos_header_title: "Terms of Service",
+          tos_header_desc: "ryopc Global Initiative - Official User Agreement",
+          tos_section_title: "Terms of Service (利用規約)",
+          tos_back_btn: "⬅ Return to Document Hub",
+          tos_footer_meta:
+            "Enacted: April 22, 2026 | Updated: April 30, 2026<br>Formulated by: ryopc Volunteer Operations Bureau<br><strong>Director: game_ryo (ryopcCEO)</strong>",
 
-              tos_art1_title: "Article 1 (General Provisions & Mission Statement)",
-              tos_art1_p1: "1. These Terms of Service define the terms and conditions for using the PC support services (hereinafter referred to as the \"Service\") provided online by the ryopc Volunteer Group (hereinafter referred to as \"the Group\").",
-              tos_art1_p2: "2. The Group is a non-profit volunteer initiative aimed at bridging the digital divide and ensuring safe PC utilization. Services are provided exclusively to users (hereinafter referred to as \"Users\") who fully agree to these Terms.",
-              tos_art1_p3: "3. Users are deemed to have fully agreed to all provisions of these Terms upon registering an account or submitting a technical support request.",
+          tos_art1_title: "Article 1 (General Provisions & Mission Statement)",
+          tos_art1_p1:
+            '1. These Terms of Service define the terms and conditions for using the PC support services (hereinafter referred to as the "Service") provided online by the ryopc Volunteer Group (hereinafter referred to as "the Group").',
+          tos_art1_p2:
+            '2. The Group is a non-profit volunteer initiative aimed at bridging the digital divide and ensuring safe PC utilization. Services are provided exclusively to users (hereinafter referred to as "Users") who fully agree to these Terms.',
+          tos_art1_p3:
+            "3. Users are deemed to have fully agreed to all provisions of these Terms upon registering an account or submitting a technical support request.",
 
-              tos_art2_title: "Article 2 (Strict Non-Profit & 100% Free Policy)",
-              tos_art2_p1: "1. This service will not forcibly collect any money under any circumstances or pretexts, including as compensation or gratuities. (Voluntary donations will be accepted at the user's discretion.)",
-              tos_art2_p2: "2. No third-party advertisements will be displayed within the Group's communication channels, platforms, or sent emails.",
-              tos_art2_p3: "3. Staff members are strictly prohibited from soliciting, coercing, or advising Users to purchase specific products or subscribe to paid external contracts.",
+          tos_art2_title: "Article 2 (Strict Non-Profit & 100% Free Policy)",
+          tos_art2_p1:
+            "1. This service will not forcibly collect any money under any circumstances or pretexts, including as compensation or gratuities. (Voluntary donations will be accepted at the user's discretion.)",
+          tos_art2_p2:
+            "2. No third-party advertisements will be displayed within the Group's communication channels, platforms, or sent emails.",
+          tos_art2_p3:
+            "3. Staff members are strictly prohibited from soliciting, coercing, or advising Users to purchase specific products or subscribe to paid external contracts.",
 
-              tos_art3_title: "Article 3 (Scope of Support & Delivery Methods)",
-              tos_art3_p1: "1. Technical assistance is conducted entirely online via live chat networks, email correspondence, or remote desktop infrastructure (screen sharing and remote operation). In-person or on-site support is strictly unavailable.",
-              tos_art3_p2: "2. Initiating a remote desktop interaction requires explicit, mandatory verbal or text chat consent from the User immediately before the session begins.",
-              tos_art3_p3: "3. Users acknowledge that the Service does not guarantee an absolute resolution; support is provided as advisory guidance and altruistic cooperation within the scope of our volunteer staff's knowledge base.",
+          tos_art3_title: "Article 3 (Scope of Support & Delivery Methods)",
+          tos_art3_p1:
+            "1. Technical assistance is conducted entirely online via live chat networks, email correspondence, or remote desktop infrastructure (screen sharing and remote operation). In-person or on-site support is strictly unavailable.",
+          tos_art3_p2:
+            "2. Initiating a remote desktop interaction requires explicit, mandatory verbal or text chat consent from the User immediately before the session begins.",
+          tos_art3_p3:
+            "3. Users acknowledge that the Service does not guarantee an absolute resolution; support is provided as advisory guidance and altruistic cooperation within the scope of our volunteer staff's knowledge base.",
 
-              tos_art4_title: "Article 4 (User Obligations & Mandatory Data Backup)",
-              tos_art4_p1: "1. Users must securely backup all critical machine parameters, configuration profiles, and data files (photographs, documents, configurations, etc.) to external hardware media or cloud architectures at their own risk prior to interacting with our support infrastructure.",
-              tos_art4_p2: "2. The Group holds zero liability for database corruption, files loss, or subsequent software anomalies that occur during assistance windows if the user omitted proper backup operations.",
+          tos_art4_title:
+            "Article 4 (User Obligations & Mandatory Data Backup)",
+          tos_art4_p1:
+            "1. Users must securely backup all critical machine parameters, configuration profiles, and data files (photographs, documents, configurations, etc.) to external hardware media or cloud architectures at their own risk prior to interacting with our support infrastructure.",
+          tos_art4_p2:
+            "2. The Group holds zero liability for database corruption, files loss, or subsequent software anomalies that occur during assistance windows if the user omitted proper backup operations.",
 
-              tos_art5_title: "Article 5 (Prohibited Activities & Account Termination)",
-              tos_art5_desc: "The Group reserves the absolute right to suspend system access and delete User credentials without prior warning if a User executes any of the following infractions:",
-              tos_art5_li1: "Defamatory language, hostile interactions, sexual harassment, or disruptive operations targeting volunteer staff members.",
-              tos_art5_li2: "Attempts to maliciously intercept, extract, or expose internal passwords or personal identification datasets.",
-              tos_art5_li3: "Impersonating the official name or insignia of the Group to inflict harm or deception on third parties.",
-              tos_art5_li4: "Flooding communication nodes with spam protocols, excessive repetitive ticket logging, or automated scripts.",
+          tos_art5_title:
+            "Article 5 (Prohibited Activities & Account Termination)",
+          tos_art5_desc:
+            "The Group reserves the absolute right to suspend system access and delete User credentials without prior warning if a User executes any of the following infractions:",
+          tos_art5_li1:
+            "Defamatory language, hostile interactions, sexual harassment, or disruptive operations targeting volunteer staff members.",
+          tos_art5_li2:
+            "Attempts to maliciously intercept, extract, or expose internal passwords or personal identification datasets.",
+          tos_art5_li3:
+            "Impersonating the official name or insignia of the Group to inflict harm or deception on third parties.",
+          tos_art5_li4:
+            "Flooding communication nodes with spam protocols, excessive repetitive ticket logging, or automated scripts.",
 
-              tos_art6_title: "Article 6 (Disclaimers & Limitation of Volunteer Liability)",
-              tos_art6_p1: "1. The Group and its volunteer staff shall not be liable for any direct, indirect, incidental, or special damages (including systemic device breakdowns, business operational interruptions, or profile corruptions) arising from the use or inability to use this Service, unless caused by intentional malice or gross negligence.",
-              tos_art6_p2: "2. We disclaim all liabilities for sudden service disconnects or data anomalies resulting from infrastructure-level vulnerability, host latency, or outages caused by our zero-cost web hosting providers (InfinityFree).",
-              tos_art6_p3: "3. Users accept full sovereign responsibility for any system inconsistencies, software registration mismatches, or system faults arising from OS re-installations or deep configuration adjustments required during the technical troubleshooting process.",
+          tos_art6_title:
+            "Article 6 (Disclaimers & Limitation of Volunteer Liability)",
+          tos_art6_p1:
+            "1. The Group and its volunteer staff shall not be liable for any direct, indirect, incidental, or special damages (including systemic device breakdowns, business operational interruptions, or profile corruptions) arising from the use or inability to use this Service, unless caused by intentional malice or gross negligence.",
+          tos_art6_p2:
+            "2. We disclaim all liabilities for sudden service disconnects or data anomalies resulting from infrastructure-level vulnerability, host latency, or outages caused by our zero-cost web hosting providers (InfinityFree).",
+          tos_art6_p3:
+            "3. Users accept full sovereign responsibility for any system inconsistencies, software registration mismatches, or system faults arising from OS re-installations or deep configuration adjustments required during the technical troubleshooting process.",
 
-              tos_art7_title: "Article 7 (Staff Compliance Governance & Whistleblower Protections)",
-              tos_art7_p1: "1. All onboarded volunteer staff are legally and structurally mandated to enforce rigorous user privacy protections and are strictly prohibited from ever demanding or logging User account passwords.",
-              tos_art7_p2: "2. If a User suspects non-compliant behavior, unethical conduct, or policy violations by a staff member, they are encouraged to submit an instant flag via the dedicated \"Staff Review Report\" input module.",
-              tos_art7_p3: "3. The administrative team evaluates all logged reports from a neutral standing. Verified infractions result in immediate revocation of server credentials, full expulsion, and permanent blacklisting from the Group.",
+          tos_art7_title:
+            "Article 7 (Staff Compliance Governance & Whistleblower Protections)",
+          tos_art7_p1:
+            "1. All onboarded volunteer staff are legally and structurally mandated to enforce rigorous user privacy protections and are strictly prohibited from ever demanding or logging User account passwords.",
+          tos_art7_p2:
+            '2. If a User suspects non-compliant behavior, unethical conduct, or policy violations by a staff member, they are encouraged to submit an instant flag via the dedicated "Staff Review Report" input module.',
+          tos_art7_p3:
+            "3. The administrative team evaluates all logged reports from a neutral standing. Verified infractions result in immediate revocation of server credentials, full expulsion, and permanent blacklisting from the Group.",
 
-              tos_art8_title: "Article 8 (Amendments to the Terms)",
-              tos_art8_desc: "The Group reserves the right to modify or restructure these Terms without seeking prior User confirmation to align with evolving digital landscapes. Revisions apply globally and instantaneously across all access nodes upon public web deployment.",
+          tos_art8_title: "Article 8 (Amendments to the Terms)",
+          tos_art8_desc:
+            "The Group reserves the right to modify or restructure these Terms without seeking prior User confirmation to align with evolving digital landscapes. Revisions apply globally and instantaneously across all access nodes upon public web deployment.",
 
-              tos_art9_title: "Article 9 (Credential Security & Open Authentication)",
-              tos_art9_desc: "Users leveraging external Open Authentication methods (Google, GitHub, LINE OAuth, etc.) to access the Service explicitly agree to the following protocols:",
-              tos_art9_li1: "The security and management of external account credentials remain the exclusive responsibility of the User; the Group is not liable for data breaches caused by local credential mismanagement.",
-              tos_art9_li2: "The Group holds no liability for service access issues stemming from maintenance windows, structural API changes, or server out-ages on third-party authentication platforms.",
-              tos_art9_li3: "Our technical environment handles only the minimum cryptographic tokens required for authentication; we never capture, record, or retain your raw third-party passwords.",
-              tos_art9_li4: "Users accept that deletion, restriction, or suspension of their primary third-party account may automatically invalidate their access to ryopc system records."
-          },
-          pt: {
-              nav_home: "Início",
-              nav_mission: "Missão",
-              nav_services: "Serviços",
-              nav_docs: "Docs",
-              nav_note: "Blog",
-              cookie_text: "<strong>Sobre o uso de cookies</strong><br>Este site usa cookies para fornecer suporte por chat e melhorar sua experiência. Ao concordar, você poderá usar nosso serviço de chat.",
-              cookie_accept: "Aceitar",
-              cookie_deny: "Recusar",
-              chat_btn: "Suporte por Chat",
-              status_text: "Status: Em processo de candidatura para Open Source Collective (Covina, CA, EUA)",
+          tos_art9_title:
+            "Article 9 (Credential Security & Open Authentication)",
+          tos_art9_desc:
+            "Users leveraging external Open Authentication methods (Google, GitHub, LINE OAuth, etc.) to access the Service explicitly agree to the following protocols:",
+          tos_art9_li1:
+            "The security and management of external account credentials remain the exclusive responsibility of the User; the Group is not liable for data breaches caused by local credential mismanagement.",
+          tos_art9_li2:
+            "The Group holds no liability for service access issues stemming from maintenance windows, structural API changes, or server out-ages on third-party authentication platforms.",
+          tos_art9_li3:
+            "Our technical environment handles only the minimum cryptographic tokens required for authentication; we never capture, record, or retain your raw third-party passwords.",
+          tos_art9_li4:
+            "Users accept that deletion, restriction, or suspension of their primary third-party account may automatically invalidate their access to ryopc system records.",
+        },
+        pt: {
+          nav_home: "Início",
+          nav_mission: "Missão",
+          nav_services: "Serviços",
+          nav_docs: "Docs",
+          nav_note: "Blog",
+          cookie_text:
+            "<strong>Sobre o uso de cookies</strong><br>Este site usa cookies para fornecer suporte por chat e melhorar sua experiência. Ao concordar, você poderá usar nosso serviço de chat.",
+          cookie_accept: "Aceitar",
+          cookie_deny: "Recusar",
+          chat_btn: "Suporte por Chat",
+          status_text:
+            "Status: Em processo de candidatura para Open Source Collective (Covina, CA, EUA)",
 
-              // Portuguese Translation
-              tos_header_title: "Termos de Serviço",
-              tos_header_desc: "ryopc Global Initiative - Acordo de Usuário Oficial",
-              tos_section_title: "Termos de Serviço (利用規約)",
-              tos_back_btn: "⬅ Retornar ao Hub de Documentos",
-              tos_footer_meta: "Promulgado: 22 de Abril de 2026 | Atualizado: 30 de Abril de 2026<br>Operação e Gestão: ryopc Bureau de Operações Voluntárias<br><strong>Diretor: game_ryo (ryopcCEO)</strong>",
+          // Portuguese Translation
+          tos_header_title: "Termos de Serviço",
+          tos_header_desc:
+            "ryopc Global Initiative - Acordo de Usuário Oficial",
+          tos_section_title: "Termos de Serviço (利用規約)",
+          tos_back_btn: "⬅ Retornar ao Hub de Documentos",
+          tos_footer_meta:
+            "Promulgado: 22 de Abril de 2026 | Atualizado: 30 de Abril de 2026<br>Operação e Gestão: ryopc Bureau de Operações Voluntárias<br><strong>Diretor: game_ryo (ryopcCEO)</strong>",
 
-              tos_art1_title: "Artigo 1 (Provisões Gerais e Missão)",
-              tos_art1_p1: "1. Estes Termos de Serviço definem as condições de uso para o suporte de computadores (doravante denominado \"o Serviço\") fornecido de forma online pelo Grupo Voluntário ryopc (doravante \"o Grupo\").",
-              tos_art1_p2: "2. O Grupo é uma iniciativa sem fins lucrativos de trabalho voluntário focado na eliminação do abismo digital e na garantia de uso seguro de computadores. O suporte é fornecido apenas aos usuários que concordam integralmente com estes Termos.",
-              tos_art1_p3: "3. Os usuários são considerados concordantes com estes termos no momento em que registram contas ou abrem tickets de solicitação de suporte técnico.",
+          tos_art1_title: "Artigo 1 (Provisões Gerais e Missão)",
+          tos_art1_p1:
+            '1. Estes Termos de Serviço definem as condições de uso para o suporte de computadores (doravante denominado "o Serviço") fornecido de forma online pelo Grupo Voluntário ryopc (doravante "o Grupo").',
+          tos_art1_p2:
+            "2. O Grupo é uma iniciativa sem fins lucrativos de trabalho voluntário focado na eliminação do abismo digital e na garantia de uso seguro de computadores. O suporte é fornecido apenas aos usuários que concordam integralmente com estes Termos.",
+          tos_art1_p3:
+            "3. Os usuários são considerados concordantes com estes termos no momento em que registram contas ou abrem tickets de solicitação de suporte técnico.",
 
-              tos_art2_title: "Artigo 2 (Princípio Sem Fins Lucrativos e Política 100% Gratuita)",
-              tos_art2_p1: "1. Este serviço nunca irá cobrar qualquer quantia financeira em nenhuma circunstância ou pretexto, incluindo pagamentos ou gratificações. (Doações voluntárias serão aceitas ao critério do usuário).",
-              tos_art2_p2: "2. Nenhum anúncio de terceiros será exibido nas plataformas de comunicações oficiais ou e-mails enviados pelo Grupo.",
-              tos_art2_p3: "3. Os membros voluntários do suporte técnico são proibidos de recomendar, direcionar ou coagir usuários a adquirirem produtos ou assinaturas pagas.",
+          tos_art2_title:
+            "Artigo 2 (Princípio Sem Fins Lucrativos e Política 100% Gratuita)",
+          tos_art2_p1:
+            "1. Este serviço nunca irá cobrar qualquer quantia financeira em nenhuma circunstância ou pretexto, incluindo pagamentos ou gratificações. (Doações voluntárias serão aceitas ao critério do usuário).",
+          tos_art2_p2:
+            "2. Nenhum anúncio de terceiros será exibido nas plataformas de comunicações oficiais ou e-mails enviados pelo Grupo.",
+          tos_art2_p3:
+            "3. Os membros voluntários do suporte técnico são proibidos de recomendar, direcionar ou coagir usuários a adquirirem produtos ou assinaturas pagas.",
 
-              tos_art3_title: "Artigo 3 (Escopo do Suporte e Meios de Fornecimento)",
-              tos_art3_p1: "1. A assistência técnica é operada de forma inteiramente online via chat, e-mail ou infraestrutura de acesso remoto. Suporte presencial não está disponível.",
-              tos_art3_p2: "2. Iniciar conexões remotas exige consentimento textual expresso do usuário imediatamente antes de cada sessão.",
-              tos_art3_p3: "3. O usuário reconhece que o serviço não garante solução definitiva; o suporte é consultivo baseado no escopo e no conhecimento da equipe voluntária.",
+          tos_art3_title:
+            "Artigo 3 (Escopo do Suporte e Meios de Fornecimento)",
+          tos_art3_p1:
+            "1. A assistência técnica é operada de forma inteiramente online via chat, e-mail ou infraestrutura de acesso remoto. Suporte presencial não está disponível.",
+          tos_art3_p2:
+            "2. Iniciar conexões remotas exige consentimento textual expresso do usuário imediatamente antes de cada sessão.",
+          tos_art3_p3:
+            "3. O usuário reconhece que o serviço não garante solução definitiva; o suporte é consultivo baseado no escopo e no conhecimento da equipe voluntária.",
 
-              tos_art4_title: "Artigo 4 (Deveres do Usuário e Backup Obrigatório)",
-              tos_art4_p1: "1. Os usuários devem garantir backups de todos os parâmetros importantes de máquina, perfis de sistemas e arquivos (fotos, documentos, configurações) em mídias físicas externas ou servidores cloud antes do contato com nosso suporte.",
-              tos_art4_p2: "2. O Grupo tem zero responsabilidade por corrupção de dados ou falhas subsequentes geradas durante a assistência caso o usuário tenha ignorado backups seguros.",
+          tos_art4_title: "Artigo 4 (Deveres do Usuário e Backup Obrigatório)",
+          tos_art4_p1:
+            "1. Os usuários devem garantir backups de todos os parâmetros importantes de máquina, perfis de sistemas e arquivos (fotos, documentos, configurações) em mídias físicas externas ou servidores cloud antes do contato com nosso suporte.",
+          tos_art4_p2:
+            "2. O Grupo tem zero responsabilidade por corrupção de dados ou falhas subsequentes geradas durante a assistência caso o usuário tenha ignorado backups seguros.",
 
-              tos_art5_title: "Artigo 5 (Atividades Proibidas e Suspensão de Acesso)",
-              tos_art5_desc: "O Grupo reserva o direito de suspender os acessos aos sistemas e banir contas de usuários imediatamente caso realizem as seguintes infrações:",
-              tos_art5_li1: "Condutas de ódio, xingamentos, preconceito ou importunação sexual direcionadas aos membros do time de voluntários.",
-              tos_art5_li2: "Tentativas de interceptar dados confidenciais de rede, senhas internas ou dados de identificação pessoal.",
-              tos_art5_li3: "Fingir ser parte da equipe ou usar as insígnias do Grupo para realizar golpes ou induzir terceiros ao erro.",
-              tos_art5_li4: "Lançamento de spam, múltiplos acessos repetitivos ou scripts de automação nos chats de suporte.",
+          tos_art5_title:
+            "Artigo 5 (Atividades Proibidas e Suspensão de Acesso)",
+          tos_art5_desc:
+            "O Grupo reserva o direito de suspender os acessos aos sistemas e banir contas de usuários imediatamente caso realizem as seguintes infrações:",
+          tos_art5_li1:
+            "Condutas de ódio, xingamentos, preconceito ou importunação sexual direcionadas aos membros do time de voluntários.",
+          tos_art5_li2:
+            "Tentativas de interceptar dados confidenciais de rede, senhas internas ou dados de identificação pessoal.",
+          tos_art5_li3:
+            "Fingir ser parte da equipe ou usar as insígnias do Grupo para realizar golpes ou induzir terceiros ao erro.",
+          tos_art5_li4:
+            "Lançamento de spam, múltiplos acessos repetitivos ou scripts de automação nos chats de suporte.",
 
-              tos_art6_title: "Artigo 6 (Exclusão e Limitações de Responsabilidade)",
-              tos_art6_p1: "1. O Grupo e sua equipe voluntária não serão responsabilizados por quaisquer danos diretos, indiretos ou acidentais decorrentes do uso da assistência técnica, exceto se houver negligência gravíssima comprovada.",
-              tos_art6_p2: "2. Não possuímos responsabilidades por desconexões inesperadas decorrentes de limitações físicas do host provedor (InfinityFree).",
-              tos_art6_p3: "3. Usuários assumem total autonomia operacional caso haja alterações de registros de sistemas operacionais ou configurações profundas aplicadas durante reparos ativos.",
+          tos_art6_title:
+            "Artigo 6 (Exclusão e Limitações de Responsabilidade)",
+          tos_art6_p1:
+            "1. O Grupo e sua equipe voluntária não serão responsabilizados por quaisquer danos diretos, indiretos ou acidentais decorrentes do uso da assistência técnica, exceto se houver negligência gravíssima comprovada.",
+          tos_art6_p2:
+            "2. Não possuímos responsabilidades por desconexões inesperadas decorrentes de limitações físicas do host provedor (InfinityFree).",
+          tos_art6_p3:
+            "3. Usuários assumem total autonomia operacional caso haja alterações de registros de sistemas operacionais ou configurações profundas aplicadas durante reparos ativos.",
 
-              tos_art7_title: "Artigo 7 (Código de Conduta da Equipe e Denúncias)",
-              tos_art7_p1: "1. Todo o time de suporte opera sob conformidade e proteção à privacidade, sendo rigorosamente proibido solicitar ou salvar senhas de contas pessoais dos usuários.",
-              tos_art7_p2: "2. Caso suspeite de violações e desvios morais de membros do suporte, o usuário pode reportar o fato no link de \"Denúncia de Conduta\".",
-              tos_art7_p3: "3. O setor administrativo avalia as violações com isonomia. Casos validados de abuso geram demissões do suporte com suspensão permanente de credenciais do Grupo.",
+          tos_art7_title: "Artigo 7 (Código de Conduta da Equipe e Denúncias)",
+          tos_art7_p1:
+            "1. Todo o time de suporte opera sob conformidade e proteção à privacidade, sendo rigorosamente proibido solicitar ou salvar senhas de contas pessoais dos usuários.",
+          tos_art7_p2:
+            '2. Caso suspeite de violações e desvios morais de membros do suporte, o usuário pode reportar o fato no link de "Denúncia de Conduta".',
+          tos_art7_p3:
+            "3. O setor administrativo avalia as violações com isonomia. Casos validados de abuso geram demissões do suporte com suspensão permanente de credenciais do Grupo.",
 
-              tos_art8_title: "Artigo 8 (Alterações das Condições)",
-              tos_art8_desc: "O Grupo tem autonomia para reestruturar as presentes condições sem notificações prévias para se ajustar às demandas de segurança de rede.",
+          tos_art8_title: "Artigo 8 (Alterações das Condições)",
+          tos_art8_desc:
+            "O Grupo tem autonomia para reestruturar as presentes condições sem notificações prévias para se ajustar às demandas de segurança de rede.",
 
-              tos_art9_title: "Artigo 9 (Uso de Credenciais OAuth)",
-              tos_art9_desc: "Usuários acessando o site por meio de integrações (Google, GitHub, LINE OAuth) concordam com os seguintes critérios:",
-              tos_art9_li1: "A guarda e segurança do token são de responsabilidade do usuário; o Grupo não se responsabiliza por invasões externas causadas por descuidos com credenciais locais.",
-              tos_art9_li2: "Não garantimos estabilidade caso haja indisponibilidade temporária de rotas canônicas de acesso nas APIs de login parceiras.",
-              tos_art9_li3: "Nosso banco de dados rastreia apenas os metadados e tokens criptografados mínimos; nunca guardamos ou solicitamos senhas puras de suas respectivas plataformas OAuth.",
-              tos_art9_li4: "A exclusão de sua respectiva conta de autenticação primária OAuth gera invalidade automática na integridade dos históricos de acessos no sistema ryopc."
-          }
+          tos_art9_title: "Artigo 9 (Uso de Credenciais OAuth)",
+          tos_art9_desc:
+            "Usuários acessando o site por meio de integrações (Google, GitHub, LINE OAuth) concordam com os seguintes critérios:",
+          tos_art9_li1:
+            "A guarda e segurança do token são de responsabilidade do usuário; o Grupo não se responsabiliza por invasões externas causadas por descuidos com credenciais locais.",
+          tos_art9_li2:
+            "Não garantimos estabilidade caso haja indisponibilidade temporária de rotas canônicas de acesso nas APIs de login parceiras.",
+          tos_art9_li3:
+            "Nosso banco de dados rastreia apenas os metadados e tokens criptografados mínimos; nunca guardamos ou solicitamos senhas puras de suas respectivas plataformas OAuth.",
+          tos_art9_li4:
+            "A exclusão de sua respectiva conta de autenticação primária OAuth gera invalidade automática na integridade dos históricos de acessos no sistema ryopc.",
+        },
       };
 
       // --- 状態管理用キー ---

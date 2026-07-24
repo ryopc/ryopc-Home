@@ -12,36 +12,36 @@ jobs:
   web-deploy:
     name: 🎉 Deploy
     runs-on: ubuntu-latest
-    
+
     steps:
-    - name: 🚚 Get latest code
-      uses: actions/checkout@v4
+      - name: 🚚 Get latest code
+        uses: actions/checkout@v4
 
-    - name: 🟢 Use Node.js
-      uses: actions/setup-node@v4
-      with:
-        node-version: '20'
-        cache: 'npm'
+      - name: 🟢 Use Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: "npm"
 
-    - name: 📦 Install dependencies
-      run: npm ci
+      - name: 📦 Install dependencies
+        run: npm ci
 
-    - name: 🛠️ Build 11ty
-      env:
-        MICROCMS_DOMAIN: ${{ secrets.MICROCMS_DOMAIN }}
-        MICROCMS_API_KEY: ${{ secrets.MICROCMS_API_KEY }}
-      run: npm run build
+      - name: 🛠️ Build 11ty
+        env:
+          MICROCMS_DOMAIN: ${{ secrets.MICROCMS_DOMAIN }}
+          MICROCMS_API_KEY: ${{ secrets.MICROCMS_API_KEY }}
+        run: npm run build
 
-    - name: 📂 Sync files via FTP
-      uses: SamKirkland/FTP-Deploy-Action@v4.3.5
-      with:
-        server: ${{ secrets.FTP_SERVER }}
-        username: ${{ secrets.FTP_USERNAME }}
-        password: ${{ secrets.FTP_PASSWORD }}
-        local-dir: ./_site/
-        server-dir: /
-        # ⚠️ 絶対に true にしてはいけません（exclude が無視されるため）
-        dangerous-clean-slate: false
-        # 🛡️ サーバー上の chat フォルダを完全に保護対象にします
-        exclude: |
-          **/chat/**
+      - name: 📂 Sync files via FTP
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+        with:
+          server: ${{ secrets.FTP_SERVER }}
+          username: ${{ secrets.FTP_USERNAME }}
+          password: ${{ secrets.FTP_PASSWORD }}
+          local-dir: ./_site/
+          server-dir: /
+          # ⚠️ 絶対に true にしてはいけません（exclude が無視されるため）
+          dangerous-clean-slate: false
+          # 🛡️ サーバー上の chat フォルダを完全に保護対象にします
+          exclude: |
+            **/chat/**
