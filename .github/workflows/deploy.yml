@@ -40,9 +40,11 @@ jobs:
           password: ${{ secrets.FTP_PASSWORD }}
           local-dir: ./_site/
           server-dir: /
-          # ⚠️ 絶対に true にしてはいけません（exclude が無視されるため）
           dangerous-clean-slate: false
-          # 🛡️ サーバー上の該当フォルダを完全に保護対象にします
           exclude: |
             **/chat/**
             **/mail/**
+          # 🛠️ タイムアウトを防ぐための追加設定
+          port: 21
+          protocol: ftp
+          timeout: 60000 # タイムアウト時間を長めに確保（ミリ秒）
