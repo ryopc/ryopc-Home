@@ -1,10 +1,8 @@
 name: 11ty Build and FTP Deploy
-
 on:
   push:
     branches:
-      - main # 🚀 本番反映のトリガーにするブランチ名
-
+      - main
 permissions:
   contents: read
 
@@ -12,7 +10,6 @@ jobs:
   web-deploy:
     name: 🎉 Deploy
     runs-on: ubuntu-latest
-
     steps:
       - name: 🚚 Get latest code
         uses: actions/checkout@v4
@@ -41,10 +38,17 @@ jobs:
           local-dir: ./_site/
           server-dir: /
           dangerous-clean-slate: false
+          
+          # 🔧 改善されたタイムアウト設定
+          port: 21
+          protocol: ftp
+          timeout: 300000          # ← 300秒（5分）に延長
+          
+          # 📋 除外設定（メンテナンス必要なディレクトリ）
           exclude: |
             **/chat/**
             **/mail/**
-          # 🛠️ タイムアウトを防ぐための追加設定
-          port: 21
-          protocol: ftp
-          timeout: 60000 # タイムアウト時間を長めに確保（ミリ秒）
+            **/.git/**
+            **/node_modules/**
+            **/.env*
+            **/README.md
