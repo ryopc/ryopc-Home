@@ -29,12 +29,16 @@ jobs:
           MICROCMS_API_KEY: ${{ secrets.MICROCMS_API_KEY }}
         run: npm run build
 
-      - name: 🔑 Setup SSH
+      - name: 🔑 Setup SSH & rsync
         run: |
           mkdir -p ~/.ssh
           echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/deploy_key
           chmod 600 ~/.ssh/deploy_key
-          ssh-keyscan -H ${{ secrets.SSH_HOST }} >> ~/.ssh/known_hosts 2>/dev/null
+          chmod 700 ~/.ssh
+          
+          ssh-keyscan -v -t ed25519 -p ${{ secrets.SSH_PORT }} ${{ secrets.SSH_HOST }} 2>&1 | grep -v "^#" >> ~/.ssh/known_hosts || echo "Keyscan completed"
+          
+          ssh -i ~/.ssh/deploy_key -p ${{ secrets.SSH_PORT }} -o StrictHostKeyChecking=accept-new ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} "echo SSH connection successful"
 
       - name: ⚡ Deploy via rsync
         run: |
@@ -44,6 +48,6 @@ jobs:
             --exclude='mail/' \
             --exclude='.git/' \
             --exclude='node_modules/' \
-            -e "ssh -i ~/.ssh/deploy_key -p ${{ secrets.SSH_PORT }}" \
+            -e "ssh -i ~/.ssh/deploy_key -p ${{ secrets.SSH_PORT }} -o StrictHostKeyChecking=no" \
             ./_site/ \
             ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}:${{ secrets.DEPLOY_PATH }}
