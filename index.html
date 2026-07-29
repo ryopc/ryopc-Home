@@ -781,22 +781,56 @@
         </ul>
       </section>
 
-<!-- [メルマガ登録] -->
-      <section class="card" id="newsletter" style="background: linear-gradient(135deg, rgba(0, 82, 204, 0.05), rgba(0, 191, 255, 0.05)); border: 2px solid rgba(0, 191, 255, 0.2);">
-        <h2 data-t="newsletter_title" style="margin-bottom: 0.5rem;">📬 メルマガ登録</h2>
-        <p data-t="newsletter_desc" style="color: var(--text-light); margin-bottom: 2rem; font-size: 0.95rem;">
+      <!-- [メルマガ登録] -->
+      <section
+        class="card"
+        id="newsletter"
+        style="
+          background: linear-gradient(
+            135deg,
+            rgba(0, 82, 204, 0.05),
+            rgba(0, 191, 255, 0.05)
+          );
+          border: 2px solid rgba(0, 191, 255, 0.2);
+        "
+      >
+        <h2 data-t="newsletter_title" style="margin-bottom: 0.5rem">
+          📬 メルマガ登録
+        </h2>
+        <p
+          data-t="newsletter_desc"
+          style="
+            color: var(--text-light);
+            margin-bottom: 2rem;
+            font-size: 0.95rem;
+          "
+        >
           最新のアップデート、技術記事、デジタルリテラシー情報をメールでお受け取りいただけます。
         </p>
 
-        <form id="newsletterForm" name="form_newsletter" method="POST" action="https://ryopc.org/mail/reg.cgi" accept-charset="UTF-8" novalidate style="display: none;" class="newsletter-form">
+        <form
+          id="newsletterForm"
+          name="form_newsletter"
+          method="POST"
+          action="https://ryopc.org/mail/reg.cgi"
+          accept-charset="UTF-8"
+          novalidate
+          style="display: none"
+          class="newsletter-form"
+        >
           <!-- Hidden Fields for ACMailer -->
-          <input type="hidden" name="reg" value="add">
-          <input type="hidden" name="checkbox_list" value="">
-          <input type="hidden" name="encode" value="UTF-8">
+          <input type="hidden" name="reg" value="add" />
+          <input type="hidden" name="checkbox_list" value="" />
+          <input type="hidden" name="encode" value="UTF-8" />
 
           <!-- Email Address Field (Required) -->
           <div class="form-group">
-            <label for="nl_email" data-t="label_nl_email" style="font-weight: 700;">メールアドレス <span style="color: #e11d48;">*</span></label>
+            <label
+              for="nl_email"
+              data-t="label_nl_email"
+              style="font-weight: 700"
+              >メールアドレス <span style="color: #e11d48">*</span></label
+            >
             <input
               type="email"
               id="nl_email"
@@ -806,14 +840,26 @@
               class="form-control"
               aria-required="true"
             />
-            <small style="color: var(--text-light); font-size: 0.8rem; margin-top: 0.5rem; display: block;">
+            <small
+              style="
+                color: var(--text-light);
+                font-size: 0.8rem;
+                margin-top: 0.5rem;
+                display: block;
+              "
+            >
               確認メールをお送りします。
             </small>
           </div>
 
           <!-- Nickname Field (Optional) -->
           <div class="form-group">
-            <label for="nl_nickname" data-t="label_nl_nickname" style="font-weight: 700;">ニックネーム（呼び名）</label>
+            <label
+              for="nl_nickname"
+              data-t="label_nl_nickname"
+              style="font-weight: 700"
+              >ニックネーム（呼び名）</label
+            >
             <input
               type="text"
               id="nl_nickname"
@@ -821,14 +867,23 @@
               placeholder="例：game_ryo"
               class="form-control"
             />
-            <small style="color: var(--text-light); font-size: 0.8rem; margin-top: 0.5rem; display: block;">
+            <small
+              style="
+                color: var(--text-light);
+                font-size: 0.8rem;
+                margin-top: 0.5rem;
+                display: block;
+              "
+            >
               メール内でこのお名前でお呼びします（任意）
             </small>
           </div>
 
           <!-- Organization Field (Optional) -->
           <div class="form-group">
-            <label for="nl_org" data-t="label_nl_org" style="font-weight: 700;">ご所属・組織名（任意）</label>
+            <label for="nl_org" data-t="label_nl_org" style="font-weight: 700"
+              >ご所属・組織名（任意）</label
+            >
             <input
               type="text"
               id="nl_org"
@@ -836,46 +891,127 @@
               placeholder="例：〇〇 PC サポートセンター"
               class="form-control"
             />
-            <small style="color: var(--text-light); font-size: 0.8rem; margin-top: 0.5rem; display: block;">
+            <small
+              style="
+                color: var(--text-light);
+                font-size: 0.8rem;
+                margin-top: 0.5rem;
+                display: block;
+              "
+            >
               より良いメール内容にカスタマイズするため、参考情報としてお使いします。
             </small>
           </div>
 
           <!-- Privacy Notice -->
-          <div style="background: rgba(0, 82, 204, 0.08); border-left: 4px solid var(--primary); padding: 1.25rem; border-radius: 12px; margin: 1.5rem 0 2rem 0;">
-            <p style="margin: 0; font-size: 0.85rem; color: var(--text); line-height: 1.5;">
-              <strong>🔒 プライバシーについて：</strong><br>
-              ご登録いただいたメールアドレスは、メルマガ配信目的のみで使用します。第三者への共有は決して行いません。詳細は<a href="#privacy" style="color: var(--primary); text-decoration: underline;">プライバシーポリシー</a>をご参照ください。
+          <div
+            style="
+              background: rgba(0, 82, 204, 0.08);
+              border-left: 4px solid var(--primary);
+              padding: 1.25rem;
+              border-radius: 12px;
+              margin: 1.5rem 0 2rem 0;
+            "
+          >
+            <p
+              style="
+                margin: 0;
+                font-size: 0.85rem;
+                color: var(--text);
+                line-height: 1.5;
+              "
+            >
+              <strong>🔒 プライバシーについて：</strong><br />
+              ご登録いただいたメールアドレスは、メルマガ配信目的のみで使用します。第三者への共有は決して行いません。詳細は<a
+                href="#privacy"
+                style="color: var(--primary); text-decoration: underline"
+                >プライバシーポリシー</a
+              >をご参照ください。
             </p>
           </div>
 
           <!-- Submit Button -->
-          <button type="submit" class="form-submit-btn" style="background: var(--gradient-accent);">
+          <button
+            type="submit"
+            class="form-submit-btn"
+            style="background: var(--gradient-accent)"
+          >
             <span data-t="btn_nl_subscribe">メルマガに登録</span> <span>→</span>
           </button>
 
           <!-- Powered by Footer -->
-          <div style="text-align: center; margin-top: 1.5rem; padding-top: 1.5rem; border-top: 1px solid rgba(226, 232, 240, 0.5);">
-            <p style="font-size: 0.75rem; color: var(--text-light); margin: 0;">
-              配信システム：<a href="https://www.acmailer.jp/" target="_blank" rel="noopener noreferrer" style="color: var(--primary); text-decoration: none;">ACMailer</a>
+          <div
+            style="
+              text-align: center;
+              margin-top: 1.5rem;
+              padding-top: 1.5rem;
+              border-top: 1px solid rgba(226, 232, 240, 0.5);
+            "
+          >
+            <p style="font-size: 0.75rem; color: var(--text-light); margin: 0">
+              配信システム：<a
+                href="https://www.acmailer.jp/"
+                target="_blank"
+                rel="noopener noreferrer"
+                style="color: var(--primary); text-decoration: none"
+                >ACMailer</a
+              >
             </p>
           </div>
         </form>
 
         <!-- Success/Error Messages -->
-        <div id="nlSuccessMessage" style="display: none; background: rgba(34, 197, 94, 0.1); border-left: 4px solid #22c55e; padding: 1.5rem; border-radius: 12px; margin-bottom: 2rem; animation: slideIn 0.4s ease-out;">
-          <h3 style="margin-top: 0; color: #16a34a; font-size: 1.1rem;">✅ 登録完了のお知らせ</h3>
-          <p style="margin: 0.5rem 0 0 0; color: var(--text); font-size: 0.95rem;">ご登録ありがとうございました。確認メールをお送りいたします。</p>
+        <div
+          id="nlSuccessMessage"
+          style="
+            display: none;
+            background: rgba(34, 197, 94, 0.1);
+            border-left: 4px solid #22c55e;
+            padding: 1.5rem;
+            border-radius: 12px;
+            margin-bottom: 2rem;
+            animation: slideIn 0.4s ease-out;
+          "
+        >
+          <h3 style="margin-top: 0; color: #16a34a; font-size: 1.1rem">
+            ✅ 登録完了のお知らせ
+          </h3>
+          <p
+            style="margin: 0.5rem 0 0 0; color: var(--text); font-size: 0.95rem"
+          >
+            ご登録ありがとうございました。確認メールをお送りいたします。
+          </p>
         </div>
 
-        <div id="nlErrorMessage" style="display: none; background: rgba(239, 68, 68, 0.1); border-left: 4px solid #ef4444; padding: 1.5rem; border-radius: 12px; margin-bottom: 2rem; animation: slideIn 0.4s ease-out;">
-          <h3 style="margin-top: 0; color: #dc2626; font-size: 1.1rem;">⚠️ エラーが発生しました</h3>
-          <p id="nlErrorText" style="margin: 0.5rem 0 0 0; color: var(--text); font-size: 0.95rem;"></p>
+        <div
+          id="nlErrorMessage"
+          style="
+            display: none;
+            background: rgba(239, 68, 68, 0.1);
+            border-left: 4px solid #ef4444;
+            padding: 1.5rem;
+            border-radius: 12px;
+            margin-bottom: 2rem;
+            animation: slideIn 0.4s ease-out;
+          "
+        >
+          <h3 style="margin-top: 0; color: #dc2626; font-size: 1.1rem">
+            ⚠️ エラーが発生しました
+          </h3>
+          <p
+            id="nlErrorText"
+            style="margin: 0.5rem 0 0 0; color: var(--text); font-size: 0.95rem"
+          ></p>
         </div>
 
         <!-- CTA Button (When Form Hidden) -->
-        <div id="nlCtaContainer" style="text-align: center;">
-          <button id="nlOpenFormBtn" type="button" class="form-submit-btn" style="background: var(--gradient-accent); cursor: pointer;">
+        <div id="nlCtaContainer" style="text-align: center">
+          <button
+            id="nlOpenFormBtn"
+            type="button"
+            class="form-submit-btn"
+            style="background: var(--gradient-accent); cursor: pointer"
+          >
             <span data-t="btn_nl_subscribe">メルマガに登録</span> <span>→</span>
           </button>
         </div>
@@ -883,63 +1019,64 @@
 
       <!-- Newsletter Form Script -->
       <script>
-        (function() {
-          const form = document.getElementById('newsletterForm');
-          const ctaBtn = document.getElementById('nlOpenFormBtn');
-          const ctaContainer = document.getElementById('nlCtaContainer');
-          const successMessage = document.getElementById('nlSuccessMessage');
-          const errorMessage = document.getElementById('nlErrorMessage');
-          const errorText = document.getElementById('nlErrorText');
+        (function () {
+          const form = document.getElementById("newsletterForm");
+          const ctaBtn = document.getElementById("nlOpenFormBtn");
+          const ctaContainer = document.getElementById("nlCtaContainer");
+          const successMessage = document.getElementById("nlSuccessMessage");
+          const errorMessage = document.getElementById("nlErrorMessage");
+          const errorText = document.getElementById("nlErrorText");
 
           // CTA ボタンをクリックするとフォームを展開
           if (ctaBtn) {
-            ctaBtn.addEventListener('click', () => {
-              form.style.display = 'block';
-              ctaContainer.style.display = 'none';
-              document.getElementById('nl_email').focus();
+            ctaBtn.addEventListener("click", () => {
+              form.style.display = "block";
+              ctaContainer.style.display = "none";
+              document.getElementById("nl_email").focus();
             });
           }
 
           // フォーム送信
           if (form) {
-            form.addEventListener('submit', async function (e) {
+            form.addEventListener("submit", async function (e) {
               e.preventDefault();
 
               // バリデーション
-              const email = document.getElementById('nl_email').value.trim();
+              const email = document.getElementById("nl_email").value.trim();
               if (!email) {
-                showError('メールアドレスを入力してください。');
+                showError("メールアドレスを入力してください。");
                 return;
               }
 
               if (!isValidEmail(email)) {
-                showError('有効なメールアドレスを入力してください。');
+                showError("有効なメールアドレスを入力してください。");
                 return;
               }
 
-              const submitBtn = form.querySelector('.form-submit-btn');
+              const submitBtn = form.querySelector(".form-submit-btn");
               submitBtn.disabled = true;
               const originalBtnText = submitBtn.innerHTML;
-              submitBtn.innerHTML = '<span>送信中...</span>';
+              submitBtn.innerHTML = "<span>送信中...</span>";
 
               try {
                 const formData = new FormData(form);
 
                 await fetch(form.action, {
-                  method: 'POST',
+                  method: "POST",
                   body: formData,
-                  mode: 'no-cors',
+                  mode: "no-cors",
                 });
 
                 // 成功表示
-                successMessage.style.display = 'block';
-                errorMessage.style.display = 'none';
-                form.style.display = 'none';
-                ctaContainer.style.display = 'none';
-
+                successMessage.style.display = "block";
+                errorMessage.style.display = "none";
+                form.style.display = "none";
+                ctaContainer.style.display = "none";
               } catch (error) {
-                console.error('Submission Error:', error);
-                showError('送信中にエラーが発生しました。時間を置いて再度お試しください。');
+                console.error("Submission Error:", error);
+                showError(
+                  "送信中にエラーが発生しました。時間を置いて再度お試しください。",
+                );
                 submitBtn.disabled = false;
                 submitBtn.innerHTML = originalBtnText;
               }
@@ -948,8 +1085,8 @@
 
           function showError(message) {
             errorText.textContent = message;
-            errorMessage.style.display = 'block';
-            successMessage.style.display = 'none';
+            errorMessage.style.display = "block";
+            successMessage.style.display = "none";
           }
 
           function isValidEmail(email) {
@@ -957,10 +1094,10 @@
           }
 
           // フォーカス時のエラーメッセージクリア
-          const emailInput = document.getElementById('nl_email');
+          const emailInput = document.getElementById("nl_email");
           if (emailInput) {
-            emailInput.addEventListener('focus', () => {
-              errorMessage.style.display = 'none';
+            emailInput.addEventListener("focus", () => {
+              errorMessage.style.display = "none";
             });
           }
         })();
@@ -1181,158 +1318,161 @@
 
     <script>
       // --- 翻訳データ ---
-const translations = {
-  ja: {
-    nav_home: "ホーム",
-    nav_operator: "運営者について",
-    nav_mission: "ミッション",
-    nav_services: "サービス",
-    nav_docs: "ドキュメント",
-    nav_st: "ステータス",
-    nav_it: "小学生向けIT検定",
-    register: "登録",
-    login: "ログイン",
-    hero_title: "ryopc org",
-    hero_desc:
-      "世界中の誰もが、デジタルデバイスの正当なサポートを受けられる社会を目指します。",
-    mission_title: "私たちのミッション",
-    mission_body:
-      "game_ryo率いるryopcは、デジタル優先のグローバルな取り組みです。私たちはテクノロジーへのアクセスが基本的人権であると信じており、それを維持するためには公平で透明性のあるサポートが不可欠です。世界中の不正なサポート行為からユーザーを保護します。",
-    services_title: "提供するサービス",
-    services_body:
-      "正当なデバイスガイダンスやデジタルリテラシーの提唱を含む、多層的なエコシステムを提供します。グローバルコミュニティの進化するニーズに応えるため、多様なデジタルソリューションを順次展開していく予定です。",
-    btn_docs: "プロジェクトドキュメントを見る",
-    cookie_text:
-      "<strong>クッキーの使用について</strong><br>このサイトでは、チャットサポートの提供や体験向上のためにクッキーを使用します。同意することで、サポートサービスを利用できるようになります。",
-    cookie_accept: "同意して利用開始",
-    cookie_deny: "拒否",
-    chat_btn: "チャットサポート",
-    status_text:
-      "ステータス: Open Source Collective (米国カリフォルニア州) への申請中",
-    nav_note: "ブログ",
-    contact_title: "お問い合わせ",
-    contact_body:
-      "プロジェクトに関するご質問やご相談は、以下のフォームよりお気軽にお問い合わせください。",
-    label_name: "お名前",
-    label_email: "メールアドレス",
-    label_subject: "ご用件",
-    label_message: "メッセージ内容",
-    opt_general: "一般のお問い合わせ",
-    opt_project: "プロジェクトへの参加",
-    opt_other: "その他",
-    btn_submit: "メッセージを送信",
-    app_announcement_title: "📱 公式アプリリリースのお知らせ",
-    app_announcement_desc:
-      "公式モバイルアプリ「ryopc-app」の提供を開始いたしました。当社のデジタルエコシステムをスマートフォンの画面から直接ご利用いただけるようになり、シームレスなデバイスガイダンスやデジタルリテラシー向上のための便利なツールをいつでもどこでもご活用いただけます。",
-    app_install_btn: "アプリをインストール",
-    newsletter_title: "📬 メルマガ登録",
-    newsletter_desc: "最新のアップデート、技術記事、デジタルリテラシー情報をメールでお受け取りいただけます。",
-    label_nl_email: "メールアドレス",
-    label_nl_nickname: "ニックネーム（呼び名）",
-    label_nl_org: "ご所属・組織名",
-    btn_nl_subscribe: "メルマガに登録",
-  },
-  en: {
-    nav_home: "Home",
-    nav_mission: "Mission",
-    nav_services: "Services",
-    nav_operator: "About the Operator",
-    nav_docs: "Docs",
-    nav_st: "Status",
-    nav_it: "IT Certification for Elementary School Students",
-    register: "Register",
-    login: "Login",
-    hero_title: "ryopc org",
-    hero_desc:
-      "Ensuring everyone, everywhere, has access to legitimate support for digital devices.",
-    mission_title: "Our Mission",
-    mission_body:
-      "Led by game_ryo, ryopc is a digital-first global initiative. We believe that access to technology is a fundamental right, and fair, transparent support is essential to maintain it. We protect users from fraudulent support practices worldwide.",
-    services_title: "Our Services",
-    services_body:
-      "We provide a multi-layered ecosystem including legitimate device guidance and digital literacy advocacy. We plan to sequentially launch diverse digital solutions to meet the evolving needs of the global community.",
-    btn_docs: "View Project Documentation",
-    cookie_text:
-      "<strong>About the Use of Cookies</strong><br>This site uses cookies to provide chat support and improve your experience. By agreeing, you can use our chat service.",
-    cookie_accept: "Accept",
-    cookie_deny: "Deny",
-    chat_btn: "Chat Support",
-    status_text:
-      "Status: Under application for Open Source Collective (Covina, CA, USA)",
-    nav_note: "blog",
-    contact_title: "Contact Us",
-    contact_body:
-      "If you have any questions or inquiries about the project, please feel free to contact us using the form below.",
-    label_name: "Name",
-    label_email: "Email Address",
-    label_subject: "Subject",
-    label_message: "Message",
-    opt_general: "General Inquiry",
-    opt_project: "Join the Project",
-    opt_other: "Other",
-    btn_submit: "Send Message",
-    app_announcement_title: "📱 Official App Release Announcement",
-    app_announcement_desc:
-      'We are pleased to announce the release of our official mobile application, "ryopc-app". You can now access our digital ecosystem directly from your smartphone, allowing you to use seamless device guidance and useful digital literacy tools anytime, anywhere.',
-    app_install_btn: "Install App",
-    newsletter_title: "📬 Newsletter Signup",
-    newsletter_desc: "Receive our latest updates, technical articles, and digital literacy insights delivered to your mailbox.",
-    label_nl_email: "Email Address",
-    label_nl_nickname: "Nickname (How to address you)",
-    label_nl_org: "Organization / Affiliation",
-    btn_nl_subscribe: "Subscribe to Newsletter",
-  },
-  pt: {
-    nav_home: "Início",
-    nav_mission: "Missão",
-    nav_services: "Serviços",
-    nav_st: "Estado",
-    nav_operator: "Sobre o Operador",
-    nav_docs: "Docs",
-    nav_it: "Certificação IT para alunos do ensino básico",
-    register: "Registrar",
-    login: "Login",
-    hero_title: "ryopc org",
-    hero_desc:
-      "Garantindo que todos, em todos os lugares, tenham acesso a suporte legítimo para dispositivos digitais.",
-    mission_title: "Nossa Missão",
-    mission_body:
-      "Liderada por game_ryo, a ryopc é uma iniciativa global focada no digital. Acreditamos que o acesso à tecnologia é um direito fundamental, e o suporte justo e transparente é essencial para mantê-lo. Protegemos os usuários de práticas de suporte fraudulentas em todo o mundo.",
-    services_title: "Nossos Serviços",
-    services_body:
-      "Oferecemos um ecossistema multifacetado que inclui orientação legítima de dispositivos e defesa da alfabetização digital. Planejamos lançar sequencialmente diversas soluções digitais para atender às necessidades da comunidade global.",
-    btn_docs: "Ver Documentação do Projeto",
-    cookie_text:
-      "<strong>Sobre o uso de cookies</strong><br>Este site usa cookies para fornecer suporte por chat e melhorar sua experiência. Ao concordar, você poderá usar nosso serviço de chat.",
-    cookie_accept: "Aceitar",
-    cookie_deny: "Recusar",
-    chat_btn: "Suporte por Chat",
-    status_text:
-      "Status: Em processo de candidatura para Open Source Collective (Covina, CA, EUA)",
-    nav_note: "Blog",
-    contact_title: "Contate-nos",
-    contact_body:
-      "Se você tiver alguma dúvida sobre o projeto, sinta-se à vontade para nos contatar usando o formulário abaixo.",
-    label_name: "Nome",
-    label_email: "Endereço de Email",
-    label_subject: "Assunto",
-    label_message: "Mensagem",
-    opt_general: "Consulta Geral",
-    opt_project: "Participar do Projeto",
-    opt_other: "Outro",
-    btn_submit: "Enviar Mensagem",
-    app_announcement_title: "📱 Lançamento Oficial do Aplicativo",
-    app_announcement_desc:
-      'Temos o prazer de anunciar o lançamento do nosso aplicativo móvel oficial, "ryopc-app". Agora você pode acessar nosso ecossistema digital diretamente da tela do seu smartphone, permitindo que use orientações simplificadas de dispositivos e ferramentas úteis para aprimorar sua literacia digital a qualquer hora e em qualquer lugar.',
-    app_install_btn: "Instalar Aplicativo",
-    newsletter_title: "📬 Inscrição na Newsletter",
-    newsletter_desc: "Receba nossas atualizações mais recentes, artigos técnicos e informações sobre alfabetização digital por email.",
-    label_nl_email: "Endereço de Email",
-    label_nl_nickname: "Apelido (Como se dirigir a você)",
-    label_nl_org: "Organização / Afiliação",
-    btn_nl_subscribe: "Inscrever-se na Newsletter",
-  },
-};
+      const translations = {
+        ja: {
+          nav_home: "ホーム",
+          nav_operator: "運営者について",
+          nav_mission: "ミッション",
+          nav_services: "サービス",
+          nav_docs: "ドキュメント",
+          nav_st: "ステータス",
+          nav_it: "小学生向けIT検定",
+          register: "登録",
+          login: "ログイン",
+          hero_title: "ryopc org",
+          hero_desc:
+            "世界中の誰もが、デジタルデバイスの正当なサポートを受けられる社会を目指します。",
+          mission_title: "私たちのミッション",
+          mission_body:
+            "game_ryo率いるryopcは、デジタル優先のグローバルな取り組みです。私たちはテクノロジーへのアクセスが基本的人権であると信じており、それを維持するためには公平で透明性のあるサポートが不可欠です。世界中の不正なサポート行為からユーザーを保護します。",
+          services_title: "提供するサービス",
+          services_body:
+            "正当なデバイスガイダンスやデジタルリテラシーの提唱を含む、多層的なエコシステムを提供します。グローバルコミュニティの進化するニーズに応えるため、多様なデジタルソリューションを順次展開していく予定です。",
+          btn_docs: "プロジェクトドキュメントを見る",
+          cookie_text:
+            "<strong>クッキーの使用について</strong><br>このサイトでは、チャットサポートの提供や体験向上のためにクッキーを使用します。同意することで、サポートサービスを利用できるようになります。",
+          cookie_accept: "同意して利用開始",
+          cookie_deny: "拒否",
+          chat_btn: "チャットサポート",
+          status_text:
+            "ステータス: Open Source Collective (米国カリフォルニア州) への申請中",
+          nav_note: "ブログ",
+          contact_title: "お問い合わせ",
+          contact_body:
+            "プロジェクトに関するご質問やご相談は、以下のフォームよりお気軽にお問い合わせください。",
+          label_name: "お名前",
+          label_email: "メールアドレス",
+          label_subject: "ご用件",
+          label_message: "メッセージ内容",
+          opt_general: "一般のお問い合わせ",
+          opt_project: "プロジェクトへの参加",
+          opt_other: "その他",
+          btn_submit: "メッセージを送信",
+          app_announcement_title: "📱 公式アプリリリースのお知らせ",
+          app_announcement_desc:
+            "公式モバイルアプリ「ryopc-app」の提供を開始いたしました。当社のデジタルエコシステムをスマートフォンの画面から直接ご利用いただけるようになり、シームレスなデバイスガイダンスやデジタルリテラシー向上のための便利なツールをいつでもどこでもご活用いただけます。",
+          app_install_btn: "アプリをインストール",
+          newsletter_title: "📬 メルマガ登録",
+          newsletter_desc:
+            "最新のアップデート、技術記事、デジタルリテラシー情報をメールでお受け取りいただけます。",
+          label_nl_email: "メールアドレス",
+          label_nl_nickname: "ニックネーム（呼び名）",
+          label_nl_org: "ご所属・組織名",
+          btn_nl_subscribe: "メルマガに登録",
+        },
+        en: {
+          nav_home: "Home",
+          nav_mission: "Mission",
+          nav_services: "Services",
+          nav_operator: "About the Operator",
+          nav_docs: "Docs",
+          nav_st: "Status",
+          nav_it: "IT Certification for Elementary School Students",
+          register: "Register",
+          login: "Login",
+          hero_title: "ryopc org",
+          hero_desc:
+            "Ensuring everyone, everywhere, has access to legitimate support for digital devices.",
+          mission_title: "Our Mission",
+          mission_body:
+            "Led by game_ryo, ryopc is a digital-first global initiative. We believe that access to technology is a fundamental right, and fair, transparent support is essential to maintain it. We protect users from fraudulent support practices worldwide.",
+          services_title: "Our Services",
+          services_body:
+            "We provide a multi-layered ecosystem including legitimate device guidance and digital literacy advocacy. We plan to sequentially launch diverse digital solutions to meet the evolving needs of the global community.",
+          btn_docs: "View Project Documentation",
+          cookie_text:
+            "<strong>About the Use of Cookies</strong><br>This site uses cookies to provide chat support and improve your experience. By agreeing, you can use our chat service.",
+          cookie_accept: "Accept",
+          cookie_deny: "Deny",
+          chat_btn: "Chat Support",
+          status_text:
+            "Status: Under application for Open Source Collective (Covina, CA, USA)",
+          nav_note: "blog",
+          contact_title: "Contact Us",
+          contact_body:
+            "If you have any questions or inquiries about the project, please feel free to contact us using the form below.",
+          label_name: "Name",
+          label_email: "Email Address",
+          label_subject: "Subject",
+          label_message: "Message",
+          opt_general: "General Inquiry",
+          opt_project: "Join the Project",
+          opt_other: "Other",
+          btn_submit: "Send Message",
+          app_announcement_title: "📱 Official App Release Announcement",
+          app_announcement_desc:
+            'We are pleased to announce the release of our official mobile application, "ryopc-app". You can now access our digital ecosystem directly from your smartphone, allowing you to use seamless device guidance and useful digital literacy tools anytime, anywhere.',
+          app_install_btn: "Install App",
+          newsletter_title: "📬 Newsletter Signup",
+          newsletter_desc:
+            "Receive our latest updates, technical articles, and digital literacy insights delivered to your mailbox.",
+          label_nl_email: "Email Address",
+          label_nl_nickname: "Nickname (How to address you)",
+          label_nl_org: "Organization / Affiliation",
+          btn_nl_subscribe: "Subscribe to Newsletter",
+        },
+        pt: {
+          nav_home: "Início",
+          nav_mission: "Missão",
+          nav_services: "Serviços",
+          nav_st: "Estado",
+          nav_operator: "Sobre o Operador",
+          nav_docs: "Docs",
+          nav_it: "Certificação IT para alunos do ensino básico",
+          register: "Registrar",
+          login: "Login",
+          hero_title: "ryopc org",
+          hero_desc:
+            "Garantindo que todos, em todos os lugares, tenham acesso a suporte legítimo para dispositivos digitais.",
+          mission_title: "Nossa Missão",
+          mission_body:
+            "Liderada por game_ryo, a ryopc é uma iniciativa global focada no digital. Acreditamos que o acesso à tecnologia é um direito fundamental, e o suporte justo e transparente é essencial para mantê-lo. Protegemos os usuários de práticas de suporte fraudulentas em todo o mundo.",
+          services_title: "Nossos Serviços",
+          services_body:
+            "Oferecemos um ecossistema multifacetado que inclui orientação legítima de dispositivos e defesa da alfabetização digital. Planejamos lançar sequencialmente diversas soluções digitais para atender às necessidades da comunidade global.",
+          btn_docs: "Ver Documentação do Projeto",
+          cookie_text:
+            "<strong>Sobre o uso de cookies</strong><br>Este site usa cookies para fornecer suporte por chat e melhorar sua experiência. Ao concordar, você poderá usar nosso serviço de chat.",
+          cookie_accept: "Aceitar",
+          cookie_deny: "Recusar",
+          chat_btn: "Suporte por Chat",
+          status_text:
+            "Status: Em processo de candidatura para Open Source Collective (Covina, CA, EUA)",
+          nav_note: "Blog",
+          contact_title: "Contate-nos",
+          contact_body:
+            "Se você tiver alguma dúvida sobre o projeto, sinta-se à vontade para nos contatar usando o formulário abaixo.",
+          label_name: "Nome",
+          label_email: "Endereço de Email",
+          label_subject: "Assunto",
+          label_message: "Mensagem",
+          opt_general: "Consulta Geral",
+          opt_project: "Participar do Projeto",
+          opt_other: "Outro",
+          btn_submit: "Enviar Mensagem",
+          app_announcement_title: "📱 Lançamento Oficial do Aplicativo",
+          app_announcement_desc:
+            'Temos o prazer de anunciar o lançamento do nosso aplicativo móvel oficial, "ryopc-app". Agora você pode acessar nosso ecossistema digital diretamente da tela do seu smartphone, permitindo que use orientações simplificadas de dispositivos e ferramentas úteis para aprimorar sua literacia digital a qualquer hora e em qualquer lugar.',
+          app_install_btn: "Instalar Aplicativo",
+          newsletter_title: "📬 Inscrição na Newsletter",
+          newsletter_desc:
+            "Receba nossas atualizações mais recentes, artigos técnicos e informações sobre alfabetização digital por email.",
+          label_nl_email: "Endereço de Email",
+          label_nl_nickname: "Apelido (Como se dirigir a você)",
+          label_nl_org: "Organização / Afiliação",
+          btn_nl_subscribe: "Inscrever-se na Newsletter",
+        },
+      };
 
       // --- ハンバーガーメニューの開閉処理 ---
       const menuToggle = document.getElementById("menuToggle");

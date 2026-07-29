@@ -1,687 +1,847 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="ja">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>ryopc コミュニティガイドライン | Community Guidelines</title>
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-    
-    :root {
-      --primary: #1e40af;
-      --primary-light: #3b82f6;
-      --primary-dark: #1e3a8a;
-      --accent: #06b6d4;
-      --success: #10b981;
-      --warning: #f59e0b;
-      --danger: #ef4444;
-      --neutral-50: #f9fafb;
-      --neutral-100: #f3f4f6;
-      --neutral-200: #e5e7eb;
-      --neutral-300: #d1d5db;
-      --neutral-400: #9ca3af;
-      --neutral-600: #4b5563;
-      --neutral-700: #374151;
-      --neutral-800: #1f2937;
-      --neutral-900: #111827;
-    }
-    
-    html {
-      scroll-behavior: smooth;
-    }
-    
-    body {
-      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', sans-serif;
-      line-height: 1.6;
-      color: var(--neutral-800);
-      background: linear-gradient(135deg, #f0f9ff 0%, #f5f3ff 100%);
-      min-height: 100vh;
-    }
-    
-    /* Header */
-    header {
-      background: rgba(255, 255, 255, 0.7);
-      backdrop-filter: blur(10px);
-      border-bottom: 1px solid rgba(255, 255, 255, 0.2);
-      position: sticky;
-      top: 0;
-      z-index: 100;
-      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
-    }
-    
-    .header-container {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 1.5rem 2rem;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-    }
-    
-    .logo {
-      font-size: 1.75rem;
-      font-weight: 700;
-      color: var(--primary-dark);
-      letter-spacing: -0.5px;
-    }
-    
-    .logo-sub {
-      font-size: 0.85rem;
-      color: var(--accent);
-      font-weight: 500;
-      letter-spacing: 0.05em;
-    }
-    
-    .lang-toggle {
-      display: flex;
-      gap: 0.5rem;
-      background: rgba(255, 255, 255, 0.5);
-      border-radius: 6px;
-      padding: 0.25rem;
-      border: 1px solid rgba(31, 41, 55, 0.1);
-    }
-    
-    .lang-toggle button {
-      background: none;
-      border: none;
-      padding: 0.5rem 1rem;
-      cursor: pointer;
-      font-size: 0.9rem;
-      border-radius: 4px;
-      transition: all 0.3s ease;
-      color: var(--neutral-600);
-      font-weight: 500;
-    }
-    
-    .lang-toggle button.active {
-      background: white;
-      color: var(--primary-dark);
-      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-    }
-    
-    /* Main content */
-    main {
-      max-width: 900px;
-      margin: 0 auto;
-      padding: 3rem 2rem;
-    }
-    
-    /* Hero section */
-    .hero {
-      text-align: center;
-      margin-bottom: 3rem;
-    }
-    
-    .hero h1 {
-      font-size: 2.5rem;
-      margin-bottom: 0.5rem;
-      color: var(--primary-dark);
-      font-weight: 700;
-    }
-    
-    .hero p {
-      font-size: 1rem;
-      color: var(--neutral-700);
-      max-width: 600px;
-      margin: 0 auto;
-      line-height: 1.8;
-    }
-    
-    /* Section */
-    section {
-      margin-bottom: 3rem;
-    }
-    
-    h2 {
-      font-size: 1.8rem;
-      color: var(--primary-dark);
-      margin-bottom: 1.5rem;
-      padding-bottom: 0.75rem;
-      border-bottom: 2px solid var(--accent);
-      font-weight: 700;
-    }
-    
-    h3 {
-      font-size: 1.3rem;
-      color: var(--neutral-800);
-      margin-top: 1.5rem;
-      margin-bottom: 1rem;
-      font-weight: 600;
-    }
-    
-    .lang-label {
-      display: inline-block;
-      font-size: 0.75rem;
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
-      margin-left: 0.5rem;
-      color: var(--accent);
-    }
-    
-    /* Cards */
-    .card {
-      background: rgba(255, 255, 255, 0.6);
-      backdrop-filter: blur(10px);
-      border: 1px solid rgba(255, 255, 255, 0.4);
-      border-radius: 12px;
-      padding: 1.5rem;
-      margin-bottom: 1.5rem;
-      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
-      transition: all 0.3s ease;
-    }
-    
-    .card:hover {
-      border-color: rgba(30, 64, 175, 0.2);
-      box-shadow: 0 10px 15px -3px rgba(30, 64, 175, 0.1);
-    }
-    
-    .card-header {
-      display: flex;
-      align-items: center;
-      margin-bottom: 1rem;
-      gap: 0.75rem;
-    }
-    
-    .card-icon {
-      width: 40px;
-      height: 40px;
-      border-radius: 8px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 1.5rem;
-      font-weight: 600;
-    }
-    
-    .card.do .card-icon {
-      background: rgba(16, 185, 129, 0.1);
-      color: var(--success);
-    }
-    
-    .card.dont .card-icon {
-      background: rgba(239, 68, 68, 0.1);
-      color: var(--danger);
-    }
-    
-    .card.warning .card-icon {
-      background: rgba(245, 158, 11, 0.1);
-      color: var(--warning);
-    }
-    
-    .card.info .card-icon {
-      background: rgba(59, 130, 246, 0.1);
-      color: var(--primary-light);
-    }
-    
-    .card h4 {
-      font-size: 1.1rem;
-      color: var(--neutral-800);
-      font-weight: 600;
-      margin: 0;
-    }
-    
-    .card p {
-      color: var(--neutral-700);
-      font-size: 0.95rem;
-      margin: 0.5rem 0 0 0;
-    }
-    
-    /* Guidelines list */
-    .guideline-group {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 1.5rem;
-      margin-bottom: 2rem;
-    }
-    
-    /* Principles */
-    .principle-item {
-      background: rgba(255, 255, 255, 0.5);
-      border-left: 4px solid var(--accent);
-      padding: 1.25rem;
-      border-radius: 8px;
-      transition: all 0.3s ease;
-    }
-    
-    .principle-item:hover {
-      background: rgba(255, 255, 255, 0.8);
-      transform: translateX(4px);
-    }
-    
-    .principle-item h4 {
-      color: var(--primary-dark);
-      margin-bottom: 0.5rem;
-      font-size: 1rem;
-      font-weight: 600;
-    }
-    
-    .principle-item p {
-      color: var(--neutral-700);
-      font-size: 0.9rem;
-      line-height: 1.6;
-      margin: 0;
-    }
-    
-    /* Process */
-    .process-step {
-      display: flex;
-      gap: 1.5rem;
-      margin-bottom: 2rem;
-      background: rgba(255, 255, 255, 0.5);
-      padding: 1.5rem;
-      border-radius: 8px;
-    }
-    
-    .step-number {
-      width: 40px;
-      height: 40px;
-      border-radius: 50%;
-      background: var(--primary);
-      color: white;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-weight: 700;
-      font-size: 1.1rem;
-      flex-shrink: 0;
-    }
-    
-    .step-content h4 {
-      font-size: 1.05rem;
-      color: var(--primary-dark);
-      margin-bottom: 0.5rem;
-      font-weight: 600;
-    }
-    
-    .step-content p {
-      color: var(--neutral-700);
-      margin: 0;
-      font-size: 0.95rem;
-    }
-    
-    /* Footer */
-    footer {
-      background: rgba(255, 255, 255, 0.5);
-      border-top: 1px solid rgba(255, 255, 255, 0.3);
-      padding: 2rem;
-      text-align: center;
-      color: var(--neutral-600);
-      font-size: 0.9rem;
-      margin-top: 3rem;
-    }
-    
-    /* Responsive */
-    @media (max-width: 768px) {
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ryopc コミュニティガイドライン | Community Guidelines</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      :root {
+        --primary: #1e40af;
+        --primary-light: #3b82f6;
+        --primary-dark: #1e3a8a;
+        --accent: #06b6d4;
+        --success: #10b981;
+        --warning: #f59e0b;
+        --danger: #ef4444;
+        --neutral-50: #f9fafb;
+        --neutral-100: #f3f4f6;
+        --neutral-200: #e5e7eb;
+        --neutral-300: #d1d5db;
+        --neutral-400: #9ca3af;
+        --neutral-600: #4b5563;
+        --neutral-700: #374151;
+        --neutral-800: #1f2937;
+        --neutral-900: #111827;
+      }
+
+      html {
+        scroll-behavior: smooth;
+      }
+
+      body {
+        font-family:
+          -apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue",
+          sans-serif;
+        line-height: 1.6;
+        color: var(--neutral-800);
+        background: linear-gradient(135deg, #f0f9ff 0%, #f5f3ff 100%);
+        min-height: 100vh;
+      }
+
+      /* Header */
+      header {
+        background: rgba(255, 255, 255, 0.7);
+        backdrop-filter: blur(10px);
+        border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+        position: sticky;
+        top: 0;
+        z-index: 100;
+        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+      }
+
       .header-container {
-        flex-direction: column;
-        gap: 1rem;
-        text-align: center;
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 1.5rem 2rem;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
       }
-      
-      .hero h1 {
-        font-size: 2rem;
+
+      .logo {
+        font-size: 1.75rem;
+        font-weight: 700;
+        color: var(--primary-dark);
+        letter-spacing: -0.5px;
       }
-      
-      h2 {
-        font-size: 1.5rem;
+
+      .logo-sub {
+        font-size: 0.85rem;
+        color: var(--accent);
+        font-weight: 500;
+        letter-spacing: 0.05em;
       }
-      
-      h3 {
-        font-size: 1.1rem;
+
+      .lang-toggle {
+        display: flex;
+        gap: 0.5rem;
+        background: rgba(255, 255, 255, 0.5);
+        border-radius: 6px;
+        padding: 0.25rem;
+        border: 1px solid rgba(31, 41, 55, 0.1);
       }
-      
+
+      .lang-toggle button {
+        background: none;
+        border: none;
+        padding: 0.5rem 1rem;
+        cursor: pointer;
+        font-size: 0.9rem;
+        border-radius: 4px;
+        transition: all 0.3s ease;
+        color: var(--neutral-600);
+        font-weight: 500;
+      }
+
+      .lang-toggle button.active {
+        background: white;
+        color: var(--primary-dark);
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+      }
+
+      /* Main content */
       main {
-        padding: 1.5rem 1rem;
+        max-width: 900px;
+        margin: 0 auto;
+        padding: 3rem 2rem;
       }
-      
+
+      /* Hero section */
+      .hero {
+        text-align: center;
+        margin-bottom: 3rem;
+      }
+
+      .hero h1 {
+        font-size: 2.5rem;
+        margin-bottom: 0.5rem;
+        color: var(--primary-dark);
+        font-weight: 700;
+      }
+
+      .hero p {
+        font-size: 1rem;
+        color: var(--neutral-700);
+        max-width: 600px;
+        margin: 0 auto;
+        line-height: 1.8;
+      }
+
+      /* Section */
+      section {
+        margin-bottom: 3rem;
+      }
+
+      h2 {
+        font-size: 1.8rem;
+        color: var(--primary-dark);
+        margin-bottom: 1.5rem;
+        padding-bottom: 0.75rem;
+        border-bottom: 2px solid var(--accent);
+        font-weight: 700;
+      }
+
+      h3 {
+        font-size: 1.3rem;
+        color: var(--neutral-800);
+        margin-top: 1.5rem;
+        margin-bottom: 1rem;
+        font-weight: 600;
+      }
+
+      .lang-label {
+        display: inline-block;
+        font-size: 0.75rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        margin-left: 0.5rem;
+        color: var(--accent);
+      }
+
+      /* Cards */
+      .card {
+        background: rgba(255, 255, 255, 0.6);
+        backdrop-filter: blur(10px);
+        border: 1px solid rgba(255, 255, 255, 0.4);
+        border-radius: 12px;
+        padding: 1.5rem;
+        margin-bottom: 1.5rem;
+        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+        transition: all 0.3s ease;
+      }
+
+      .card:hover {
+        border-color: rgba(30, 64, 175, 0.2);
+        box-shadow: 0 10px 15px -3px rgba(30, 64, 175, 0.1);
+      }
+
+      .card-header {
+        display: flex;
+        align-items: center;
+        margin-bottom: 1rem;
+        gap: 0.75rem;
+      }
+
+      .card-icon {
+        width: 40px;
+        height: 40px;
+        border-radius: 8px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.5rem;
+        font-weight: 600;
+      }
+
+      .card.do .card-icon {
+        background: rgba(16, 185, 129, 0.1);
+        color: var(--success);
+      }
+
+      .card.dont .card-icon {
+        background: rgba(239, 68, 68, 0.1);
+        color: var(--danger);
+      }
+
+      .card.warning .card-icon {
+        background: rgba(245, 158, 11, 0.1);
+        color: var(--warning);
+      }
+
+      .card.info .card-icon {
+        background: rgba(59, 130, 246, 0.1);
+        color: var(--primary-light);
+      }
+
+      .card h4 {
+        font-size: 1.1rem;
+        color: var(--neutral-800);
+        font-weight: 600;
+        margin: 0;
+      }
+
+      .card p {
+        color: var(--neutral-700);
+        font-size: 0.95rem;
+        margin: 0.5rem 0 0 0;
+      }
+
+      /* Guidelines list */
       .guideline-group {
-        grid-template-columns: 1fr;
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 1.5rem;
+        margin-bottom: 2rem;
       }
-      
+
+      /* Principles */
+      .principle-item {
+        background: rgba(255, 255, 255, 0.5);
+        border-left: 4px solid var(--accent);
+        padding: 1.25rem;
+        border-radius: 8px;
+        transition: all 0.3s ease;
+      }
+
+      .principle-item:hover {
+        background: rgba(255, 255, 255, 0.8);
+        transform: translateX(4px);
+      }
+
+      .principle-item h4 {
+        color: var(--primary-dark);
+        margin-bottom: 0.5rem;
+        font-size: 1rem;
+        font-weight: 600;
+      }
+
+      .principle-item p {
+        color: var(--neutral-700);
+        font-size: 0.9rem;
+        line-height: 1.6;
+        margin: 0;
+      }
+
+      /* Process */
       .process-step {
-        flex-direction: column;
-        align-items: flex-start;
+        display: flex;
+        gap: 1.5rem;
+        margin-bottom: 2rem;
+        background: rgba(255, 255, 255, 0.5);
+        padding: 1.5rem;
+        border-radius: 8px;
       }
-    }
-    
-    /* Utility */
-    .hidden {
-      display: none;
-    }
-  </style>
-</head>
-<body>
 
-<header>
-  <div class="header-container">
-    <div>
-      <div class="logo">ryopc</div>
-      <div class="logo-sub">全国PCサポートネットワーク</div>
-    </div>
-    <div class="lang-toggle">
-      <button class="active" onclick="setLang('ja')">日本語</button>
-      <button onclick="setLang('en')">English</button>
-    </div>
-  </div>
-</header>
+      .step-number {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        background: var(--primary);
+        color: white;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: 700;
+        font-size: 1.1rem;
+        flex-shrink: 0;
+      }
 
-<main>
+      .step-content h4 {
+        font-size: 1.05rem;
+        color: var(--primary-dark);
+        margin-bottom: 0.5rem;
+        font-weight: 600;
+      }
 
-<!-- Hero -->
-<section class="hero">
-  <h1>コミュニティガイドライン<span class="lang-label lang-en hidden">Community Guidelines</span></h1>
-  <p class="lang-ja">
-    ryopcは、技術愛好家、初心者、プロフェッショナルが安全で尊重される環境で知識を共有し、学び、成長するための場です。
-    このガイドラインは、すべてのメンバーが快適にコミュニティに参加できるための行動基準をお示しするものです。
-  </p>
-  <p class="lang-en hidden">
-    ryopc is a space where tech enthusiasts, beginners, and professionals share knowledge, learn, and grow in a safe and respectful environment.
-    These guidelines outline the standards of conduct that enable all members to participate comfortably in our community.
-  </p>
-</section>
+      .step-content p {
+        color: var(--neutral-700);
+        margin: 0;
+        font-size: 0.95rem;
+      }
 
-<!-- Principles -->
-<section>
-  <h2>基本原則<span class="lang-label lang-en hidden">Core Principles</span></h2>
-  
-  <div class="guideline-group">
-    <div class="principle-item">
-      <h4 class="lang-ja">🤝 相互尊重</h4>
-      <h4 class="lang-en hidden">🤝 Mutual Respect</h4>
-      <p class="lang-ja">すべてのメンバーの多様性、経験、視点を尊重します。年代、技術レベル、背景に関わらず、すべての声が価値を持ちます。</p>
-      <p class="lang-en hidden">We respect the diversity, experience, and perspectives of all members. Every voice has value, regardless of age, skill level, or background.</p>
-    </div>
-    
-    <div class="principle-item">
-      <h4 class="lang-ja">💡 建設的な対話</h4>
-      <h4 class="lang-en hidden">💡 Constructive Dialogue</h4>
-      <p class="lang-ja">批判や異なる意見は健全です。ただし、相手を攻撃するのではなく、アイデアを批判することに努めます。</p>
-      <p class="lang-en hidden">Criticism and differing opinions are healthy. We critique ideas rather than attacking individuals.</p>
-    </div>
-    
-    <div class="principle-item">
-      <h4 class="lang-ja">📚 知識の共有</h4>
-      <h4 class="lang-en hidden">📚 Knowledge Sharing</h4>
-      <p class="lang-ja">知識は独占するのではなく共有するもの。他のメンバーを助け、自分の経験を惜しみなく提供します。</p>
-      <p class="lang-en hidden">Knowledge is meant to be shared, not hoarded. We help fellow members and generously share our experience.</p>
-    </div>
-    
-    <div class="principle-item">
-      <h4 class="lang-ja">🔒 安全性とプライバシー</h4>
-      <h4 class="lang-en hidden">🔒 Safety & Privacy</h4>
-      <p class="lang-ja">すべてのメンバーの個人情報とプライバシーを保護します。セキュリティベストプラクティスを優先します。</p>
-      <p class="lang-en hidden">We protect the personal information and privacy of all members. Security best practices are paramount.</p>
-    </div>
-  </div>
-</section>
+      /* Footer */
+      footer {
+        background: rgba(255, 255, 255, 0.5);
+        border-top: 1px solid rgba(255, 255, 255, 0.3);
+        padding: 2rem;
+        text-align: center;
+        color: var(--neutral-600);
+        font-size: 0.9rem;
+        margin-top: 3rem;
+      }
 
-<!-- Do's -->
-<section>
-  <h2>推奨行動<span class="lang-label lang-en hidden">Do's</span></h2>
+      /* Responsive */
+      @media (max-width: 768px) {
+        .header-container {
+          flex-direction: column;
+          gap: 1rem;
+          text-align: center;
+        }
 
-  <div class="card do">
-    <div class="card-header">
-      <div class="card-icon">✓</div>
-      <h4 class="lang-ja">他のメンバーを尊重する</h4>
-      <h4 class="lang-en hidden">Respect other members</h4>
-    </div>
-    <p class="lang-ja">他人の意見、経験、背景を尊重してください。同意できない場合も、敬意を保ってください。</p>
-    <p class="lang-en hidden">Show respect for others' opinions, experiences, and backgrounds. Disagree respectfully.</p>
-  </div>
+        .hero h1 {
+          font-size: 2rem;
+        }
 
-  <div class="card do">
-    <div class="card-header">
-      <div class="card-icon">✓</div>
-      <h4 class="lang-ja">協力的で親切である</h4>
-      <h4 class="lang-en hidden">Be helpful and kind</h4>
-    </div>
-    <p class="lang-ja">質問に丁寧に答え、新しいメンバーをサポートしましょう。誰もが初心者から始まります。</p>
-    <p class="lang-en hidden">Answer questions patiently and support newcomers. Everyone starts as a beginner.</p>
-  </div>
+        h2 {
+          font-size: 1.5rem;
+        }
 
-  <div class="card do">
-    <div class="card-header">
-      <div class="card-icon">✓</div>
-      <h4 class="lang-ja">オンテーマの投稿をする</h4>
-      <h4 class="lang-en hidden">Stay on topic</h4>
-    </div>
-    <p class="lang-ja">投稿はチャンネルやスレッドのトピックに関連するものにしてください。ディスカッションを整理し、探しやすくします。</p>
-    <p class="lang-en hidden">Keep posts relevant to the channel or thread topic. This keeps discussions organized and searchable.</p>
-  </div>
+        h3 {
+          font-size: 1.1rem;
+        }
 
-  <div class="card do">
-    <div class="card-header">
-      <div class="card-icon">✓</div>
-      <h4 class="lang-ja">詳しい情報を提供する</h4>
-      <h4 class="lang-en hidden">Provide context</h4>
-    </div>
-    <p class="lang-ja">エラーメッセージ、スクリーンショット、実行環境など、十分な詳細情報を提供してください。解答者を助けます。</p>
-    <p class="lang-en hidden">Include error messages, screenshots, and environment details. This helps others assist you effectively.</p>
-  </div>
+        main {
+          padding: 1.5rem 1rem;
+        }
 
-  <div class="card do">
-    <div class="card-header">
-      <div class="card-icon">✓</div>
-      <h4 class="lang-ja">プライバシーを尊重する</h4>
-      <h4 class="lang-en hidden">Respect privacy</h4>
-    </div>
-    <p class="lang-ja">他人の個人情報や認証情報を共有しないでください。パスワード、APIキー、個人データは絶対に投稿しないでください。</p>
-    <p class="lang-en hidden">Never share anyone's personal or sensitive information. Never post passwords, API keys, or personal data.</p>
-  </div>
+        .guideline-group {
+          grid-template-columns: 1fr;
+        }
 
-  <div class="card do">
-    <div class="card-header">
-      <div class="card-icon">✓</div>
-      <h4 class="lang-ja">成功を祝う</h4>
-      <h4 class="lang-en hidden">Celebrate success</h4>
-    </div>
-    <p class="lang-ja">コミュニティメンバーの成果や学習を祝ってください。ポジティブな雰囲気を作ります。</p>
-    <p class="lang-en hidden">Celebrate the achievements and learning of community members. This creates a positive atmosphere.</p>
-  </div>
-</section>
+        .process-step {
+          flex-direction: column;
+          align-items: flex-start;
+        }
+      }
 
-<!-- Don'ts -->
-<section>
-  <h2>禁止事項<span class="lang-label lang-en hidden">Don'ts</span></h2>
+      /* Utility */
+      .hidden {
+        display: none;
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <div class="header-container">
+        <div>
+          <div class="logo">ryopc</div>
+          <div class="logo-sub">全国PCサポートネットワーク</div>
+        </div>
+        <div class="lang-toggle">
+          <button class="active" onclick="setLang('ja')">日本語</button>
+          <button onclick="setLang('en')">English</button>
+        </div>
+      </div>
+    </header>
 
-  <div class="card dont">
-    <div class="card-header">
-      <div class="card-icon">✗</div>
-      <h4 class="lang-ja">ハラスメント・悪意のある投稿</h4>
-      <h4 class="lang-en hidden">Harassment & malicious content</h4>
-    </div>
-    <p class="lang-ja">人身攻撃、いじめ、差別、脅迫行為は厳禁です。また、悪意を持った冗談やからかいも許容されません。</p>
-    <p class="lang-en hidden">Personal attacks, bullying, discrimination, and threats are never acceptable. Malicious jokes or ridicule are also prohibited.</p>
-  </div>
+    <main>
+      <!-- Hero -->
+      <section class="hero">
+        <h1>
+          コミュニティガイドライン<span class="lang-label lang-en hidden"
+            >Community Guidelines</span
+          >
+        </h1>
+        <p class="lang-ja">
+          ryopcは、技術愛好家、初心者、プロフェッショナルが安全で尊重される環境で知識を共有し、学び、成長するための場です。
+          このガイドラインは、すべてのメンバーが快適にコミュニティに参加できるための行動基準をお示しするものです。
+        </p>
+        <p class="lang-en hidden">
+          ryopc is a space where tech enthusiasts, beginners, and professionals
+          share knowledge, learn, and grow in a safe and respectful environment.
+          These guidelines outline the standards of conduct that enable all
+          members to participate comfortably in our community.
+        </p>
+      </section>
 
-  <div class="card dont">
-    <div class="card-header">
-      <div class="card-icon">✗</div>
-      <h4 class="lang-ja">スパムと無関係な宣伝</h4>
-      <h4 class="lang-en hidden">Spam & off-topic promotion</h4>
-    </div>
-    <p class="lang-ja">繰り返しの投稿、無関係な商品・サービスの宣伝、MLM勧誘は禁止です。コンテキストに合わせた正当な共有は大歓迎です。</p>
-    <p class="lang-en hidden">Repetitive posts, unrelated product promotion, and MLM recruitment are forbidden. Relevant sharing in context is welcome.</p>
-  </div>
+      <!-- Principles -->
+      <section>
+        <h2>
+          基本原則<span class="lang-label lang-en hidden">Core Principles</span>
+        </h2>
 
-  <div class="card dont">
-    <div class="card-header">
-      <div class="card-icon">✗</div>
-      <h4 class="lang-ja">違法またはセキュリティリスク</h4>
-      <h4 class="lang-en hidden">Illegal or security-risk content</h4>
-    </div>
-    <p class="lang-ja">著作権侵害、ソフトウェア海賊版、マルウェア、ハッキングツール、詐欺的コンテンツの共有は絶対に禁止です。</p>
-    <p class="lang-en hidden">Sharing copyrighted material, pirated software, malware, hacking tools, and scam content is strictly prohibited.</p>
-  </div>
+        <div class="guideline-group">
+          <div class="principle-item">
+            <h4 class="lang-ja">🤝 相互尊重</h4>
+            <h4 class="lang-en hidden">🤝 Mutual Respect</h4>
+            <p class="lang-ja">
+              すべてのメンバーの多様性、経験、視点を尊重します。年代、技術レベル、背景に関わらず、すべての声が価値を持ちます。
+            </p>
+            <p class="lang-en hidden">
+              We respect the diversity, experience, and perspectives of all
+              members. Every voice has value, regardless of age, skill level, or
+              background.
+            </p>
+          </div>
 
-  <div class="card dont">
-    <div class="card-header">
-      <div class="card-icon">✗</div>
-      <h4 class="lang-ja">不適切な言語と内容</h4>
-      <h4 class="lang-en hidden">Inappropriate language & content</h4>
-    </div>
-    <p class="lang-ja">過度な冒涜、明示的な内容、暴力的なコンテンツはコミュニティには合いません。すべての年代が利用します。</p>
-    <p class="lang-en hidden">Excessive profanity, explicit content, and violent material are not appropriate for this community. Members of all ages participate.</p>
-  </div>
+          <div class="principle-item">
+            <h4 class="lang-ja">💡 建設的な対話</h4>
+            <h4 class="lang-en hidden">💡 Constructive Dialogue</h4>
+            <p class="lang-ja">
+              批判や異なる意見は健全です。ただし、相手を攻撃するのではなく、アイデアを批判することに努めます。
+            </p>
+            <p class="lang-en hidden">
+              Criticism and differing opinions are healthy. We critique ideas
+              rather than attacking individuals.
+            </p>
+          </div>
 
-  <div class="card dont">
-    <div class="card-header">
-      <div class="card-icon">✗</div>
-      <h4 class="lang-ja">個人情報と認証情報の共有</h4>
-      <h4 class="lang-en hidden">Sharing personal/auth info</h4>
-    </div>
-    <p class="lang-ja">自分のパスワード、APIキー、クレジットカード情報を公開投稿に書かないでください。プライベートメッセージも同様です。</p>
-    <p class="lang-en hidden">Never share your passwords, API keys, or financial info in public or private messages. This exposes you to security risks.</p>
-  </div>
+          <div class="principle-item">
+            <h4 class="lang-ja">📚 知識の共有</h4>
+            <h4 class="lang-en hidden">📚 Knowledge Sharing</h4>
+            <p class="lang-ja">
+              知識は独占するのではなく共有するもの。他のメンバーを助け、自分の経験を惜しみなく提供します。
+            </p>
+            <p class="lang-en hidden">
+              Knowledge is meant to be shared, not hoarded. We help fellow
+              members and generously share our experience.
+            </p>
+          </div>
 
-  <div class="card dont">
-    <div class="card-header">
-      <div class="card-icon">✗</div>
-      <h4 class="lang-ja">過度な自己宣伝</h4>
-      <h4 class="lang-en hidden">Excessive self-promotion</h4>
-    </div>
-    <p class="lang-ja">自分の製品やサービスを無制限に推し進めないでください。コミュニティの価値を提供してから、関連する場合のみ言及してください。</p>
-    <p class="lang-en hidden">Don't relentlessly promote your own products or services. Provide value to the community first, then mention relevant offerings.</p>
-  </div>
+          <div class="principle-item">
+            <h4 class="lang-ja">🔒 安全性とプライバシー</h4>
+            <h4 class="lang-en hidden">🔒 Safety & Privacy</h4>
+            <p class="lang-ja">
+              すべてのメンバーの個人情報とプライバシーを保護します。セキュリティベストプラクティスを優先します。
+            </p>
+            <p class="lang-en hidden">
+              We protect the personal information and privacy of all members.
+              Security best practices are paramount.
+            </p>
+          </div>
+        </div>
+      </section>
 
-  <div class="card dont">
-    <div class="card-header">
-      <div class="card-icon">✗</div>
-      <h4 class="lang-ja">扇動的で分裂を招く投稿</h4>
-      <h4 class="lang-en hidden">Inflammatory & divisive content</h4>
-    </div>
-    <p class="lang-ja">政治、宗教、または対立を生む話題で意図的に扇動しないでください。建設的な議論は歓迎しますが、炎上は避けましょう。</p>
-    <p class="lang-en hidden">Don't deliberately inflame political, religious, or divisive topics. Constructive debate is welcome; flame wars are not.</p>
-  </div>
-</section>
+      <!-- Do's -->
+      <section>
+        <h2>推奨行動<span class="lang-label lang-en hidden">Do's</span></h2>
 
-<!-- Core Values -->
-<section>
-  <h2>コア値<span class="lang-label lang-en hidden">Our Core Values</span></h2>
-  
-  <div class="principle-item">
-    <h4 class="lang-ja">🌍 包括性</h4>
-    <h4 class="lang-en hidden">🌍 Inclusivity</h4>
-    <p class="lang-ja">技術的背景、年代、言語、地理的位置に関わらず、すべての人を歓迎します。</p>
-    <p class="lang-en hidden">We welcome people of all technical backgrounds, ages, languages, and geographic locations.</p>
-  </div>
+        <div class="card do">
+          <div class="card-header">
+            <div class="card-icon">✓</div>
+            <h4 class="lang-ja">他のメンバーを尊重する</h4>
+            <h4 class="lang-en hidden">Respect other members</h4>
+          </div>
+          <p class="lang-ja">
+            他人の意見、経験、背景を尊重してください。同意できない場合も、敬意を保ってください。
+          </p>
+          <p class="lang-en hidden">
+            Show respect for others' opinions, experiences, and backgrounds.
+            Disagree respectfully.
+          </p>
+        </div>
 
-  <div class="principle-item">
-    <h4 class="lang-ja">🔍 透明性</h4>
-    <h4 class="lang-en hidden">🔍 Transparency</h4>
-    <p class="lang-ja">コミュニティ管理のルール、判断は可能な限り透明に行われます。不公正だと感じたら、質問してください。</p>
-    <p class="lang-en hidden">We operate with transparency. Feel free to question if you feel something is unfair.</p>
-  </div>
+        <div class="card do">
+          <div class="card-header">
+            <div class="card-icon">✓</div>
+            <h4 class="lang-ja">協力的で親切である</h4>
+            <h4 class="lang-en hidden">Be helpful and kind</h4>
+          </div>
+          <p class="lang-ja">
+            質問に丁寧に答え、新しいメンバーをサポートしましょう。誰もが初心者から始まります。
+          </p>
+          <p class="lang-en hidden">
+            Answer questions patiently and support newcomers. Everyone starts as
+            a beginner.
+          </p>
+        </div>
 
-  <div class="principle-item">
-    <h4 class="lang-ja">🚀 革新と学習</h4>
-    <h4 class="lang-en hidden">🚀 Innovation & Learning</h4>
-    <p class="lang-ja">新しいアイデア、質問、実験は歓迎されます。失敗を含む学習過程全体が価値を持ちます。</p>
-    <p class="lang-en hidden">New ideas, questions, and experiments are encouraged. The entire learning process has value.</p>
-  </div>
+        <div class="card do">
+          <div class="card-header">
+            <div class="card-icon">✓</div>
+            <h4 class="lang-ja">オンテーマの投稿をする</h4>
+            <h4 class="lang-en hidden">Stay on topic</h4>
+          </div>
+          <p class="lang-ja">
+            投稿はチャンネルやスレッドのトピックに関連するものにしてください。ディスカッションを整理し、探しやすくします。
+          </p>
+          <p class="lang-en hidden">
+            Keep posts relevant to the channel or thread topic. This keeps
+            discussions organized and searchable.
+          </p>
+        </div>
 
-  <div class="principle-item">
-    <h4 class="lang-ja">⚖️ 公平性</h4>
-    <h4 class="lang-en hidden">⚖️ Fairness</h4>
-    <p class="lang-ja">すべてのメンバーは平等に扱われます。同じルールが全員に適用されます。</p>
-    <p class="lang-en hidden">All members are treated equally. The same rules apply to everyone.</p>
-  </div>
-</section>
+        <div class="card do">
+          <div class="card-header">
+            <div class="card-icon">✓</div>
+            <h4 class="lang-ja">詳しい情報を提供する</h4>
+            <h4 class="lang-en hidden">Provide context</h4>
+          </div>
+          <p class="lang-ja">
+            エラーメッセージ、スクリーンショット、実行環境など、十分な詳細情報を提供してください。解答者を助けます。
+          </p>
+          <p class="lang-en hidden">
+            Include error messages, screenshots, and environment details. This
+            helps others assist you effectively.
+          </p>
+        </div>
 
-<!-- Reporting Process -->
-<section>
-  <h2>報告プロセス<span class="lang-label lang-en hidden">Reporting Violations</span></h2>
-  
-  <p class="lang-ja">ガイドライン違反を目撃した場合、以下のプロセスに従ってください。</p>
-  <p class="lang-en hidden">If you witness a violation of these guidelines, please follow this process.</p>
+        <div class="card do">
+          <div class="card-header">
+            <div class="card-icon">✓</div>
+            <h4 class="lang-ja">プライバシーを尊重する</h4>
+            <h4 class="lang-en hidden">Respect privacy</h4>
+          </div>
+          <p class="lang-ja">
+            他人の個人情報や認証情報を共有しないでください。パスワード、APIキー、個人データは絶対に投稿しないでください。
+          </p>
+          <p class="lang-en hidden">
+            Never share anyone's personal or sensitive information. Never post
+            passwords, API keys, or personal data.
+          </p>
+        </div>
 
-  <div class="process-step">
-    <div class="step-number">1</div>
-    <div class="step-content">
-      <h4 class="lang-ja">報告ボタンを使用</h4>
-      <h4 class="lang-en hidden">Use report button</h4>
-      <p class="lang-ja">プラットフォームの報告機能を使ってください。</p>
-      <p class="lang-en hidden">Use the platform's report feature directly.</p>
-    </div>
-  </div>
+        <div class="card do">
+          <div class="card-header">
+            <div class="card-icon">✓</div>
+            <h4 class="lang-ja">成功を祝う</h4>
+            <h4 class="lang-en hidden">Celebrate success</h4>
+          </div>
+          <p class="lang-ja">
+            コミュニティメンバーの成果や学習を祝ってください。ポジティブな雰囲気を作ります。
+          </p>
+          <p class="lang-en hidden">
+            Celebrate the achievements and learning of community members. This
+            creates a positive atmosphere.
+          </p>
+        </div>
+      </section>
 
-  <div class="process-step">
-    <div class="step-number">2</div>
-    <div class="step-content">
-      <h4 class="lang-ja">詳しい情報を提供</h4>
-      <h4 class="lang-en hidden">Provide details</h4>
-      <p class="lang-ja">何が問題か、どのガイドラインに違反しているか説明してください。</p>
-      <p class="lang-en hidden">Describe what was problematic and which guideline was violated.</p>
-    </div>
-  </div>
+      <!-- Don'ts -->
+      <section>
+        <h2>禁止事項<span class="lang-label lang-en hidden">Don'ts</span></h2>
 
-  <div class="process-step">
-    <div class="step-number">3</div>
-    <div class="step-content">
-      <h4 class="lang-ja">対応</h4>
-      <h4 class="lang-en hidden">Response</h4>
-      <p class="lang-ja">報告は24時間以内に確認され、適切な措置が取られます。</p>
-      <p class="lang-en hidden">Reports are reviewed within 24 hours and appropriate action is taken.</p>
-    </div>
-  </div>
-</section>
+        <div class="card dont">
+          <div class="card-header">
+            <div class="card-icon">✗</div>
+            <h4 class="lang-ja">ハラスメント・悪意のある投稿</h4>
+            <h4 class="lang-en hidden">Harassment & malicious content</h4>
+          </div>
+          <p class="lang-ja">
+            人身攻撃、いじめ、差別、脅迫行為は厳禁です。また、悪意を持った冗談やからかいも許容されません。
+          </p>
+          <p class="lang-en hidden">
+            Personal attacks, bullying, discrimination, and threats are never
+            acceptable. Malicious jokes or ridicule are also prohibited.
+          </p>
+        </div>
 
-<!-- Contact -->
-<section>
-  <h2>お問い合わせ<span class="lang-label lang-en hidden">Contact</span></h2>
-  
-  <p class="lang-ja"><strong>support@ryopc.org</strong></p>
-  <p class="lang-en hidden"><strong>support@ryopc.org</strong></p>
-  
-  <p class="lang-ja">メインサイト: <a href="https://ryopc.org">ryopc.org</a></p>
-  <p class="lang-en hidden">Main site: <a href="https://ryopc.org">ryopc.org</a></p>
-  
-  <p class="lang-ja">フォーラム: <a href="https://ryopc.org/forum">ryopc.org/forum</a></p>
-  <p class="lang-en hidden">Forum: <a href="https://ryopc.org/forum">ryopc.org/forum</a></p>
-  
-  <p style="color: var(--neutral-600); font-size: 0.85rem; margin-top: 1.5rem;">
-    <span class="lang-ja">最終更新: 2026年7月</span>
-    <span class="lang-en hidden">Last updated: July 2026</span>
-  </p>
-</section>
+        <div class="card dont">
+          <div class="card-header">
+            <div class="card-icon">✗</div>
+            <h4 class="lang-ja">スパムと無関係な宣伝</h4>
+            <h4 class="lang-en hidden">Spam & off-topic promotion</h4>
+          </div>
+          <p class="lang-ja">
+            繰り返しの投稿、無関係な商品・サービスの宣伝、MLM勧誘は禁止です。コンテキストに合わせた正当な共有は大歓迎です。
+          </p>
+          <p class="lang-en hidden">
+            Repetitive posts, unrelated product promotion, and MLM recruitment
+            are forbidden. Relevant sharing in context is welcome.
+          </p>
+        </div>
 
-</main>
+        <div class="card dont">
+          <div class="card-header">
+            <div class="card-icon">✗</div>
+            <h4 class="lang-ja">違法またはセキュリティリスク</h4>
+            <h4 class="lang-en hidden">Illegal or security-risk content</h4>
+          </div>
+          <p class="lang-ja">
+            著作権侵害、ソフトウェア海賊版、マルウェア、ハッキングツール、詐欺的コンテンツの共有は絶対に禁止です。
+          </p>
+          <p class="lang-en hidden">
+            Sharing copyrighted material, pirated software, malware, hacking
+            tools, and scam content is strictly prohibited.
+          </p>
+        </div>
 
-<footer>
-  <p class="lang-ja">© 2026 ryopc | 全国PCサポートネットワーク<br><span style="font-size: 0.85rem;">このガイドラインは、安全で建設的なコミュニティの構築を目的としています。</span></p>
-  <p class="lang-en hidden">© 2026 ryopc | Nationwide PC Support Network<br><span style="font-size: 0.85rem;">These guidelines aim to build a safe and constructive community.</span></p>
-</footer>
+        <div class="card dont">
+          <div class="card-header">
+            <div class="card-icon">✗</div>
+            <h4 class="lang-ja">不適切な言語と内容</h4>
+            <h4 class="lang-en hidden">Inappropriate language & content</h4>
+          </div>
+          <p class="lang-ja">
+            過度な冒涜、明示的な内容、暴力的なコンテンツはコミュニティには合いません。すべての年代が利用します。
+          </p>
+          <p class="lang-en hidden">
+            Excessive profanity, explicit content, and violent material are not
+            appropriate for this community. Members of all ages participate.
+          </p>
+        </div>
 
-<script>
-function setLang(lang) {
-  const jaElements = document.querySelectorAll('.lang-ja');
-  const enElements = document.querySelectorAll('.lang-en');
-  const buttons = document.querySelectorAll('.lang-toggle button');
-  
-  if (lang === 'en') {
-    jaElements.forEach(el => el.classList.add('hidden'));
-    enElements.forEach(el => el.classList.remove('hidden'));
-    buttons[1].classList.add('active');
-    buttons[0].classList.remove('active');
-  } else {
-    jaElements.forEach(el => el.classList.remove('hidden'));
-    enElements.forEach(el => el.classList.add('hidden'));
-    buttons[0].classList.add('active');
-    buttons[1].classList.remove('active');
-  }
-  
-  localStorage.setItem('ryopc-lang', lang);
-}
+        <div class="card dont">
+          <div class="card-header">
+            <div class="card-icon">✗</div>
+            <h4 class="lang-ja">個人情報と認証情報の共有</h4>
+            <h4 class="lang-en hidden">Sharing personal/auth info</h4>
+          </div>
+          <p class="lang-ja">
+            自分のパスワード、APIキー、クレジットカード情報を公開投稿に書かないでください。プライベートメッセージも同様です。
+          </p>
+          <p class="lang-en hidden">
+            Never share your passwords, API keys, or financial info in public or
+            private messages. This exposes you to security risks.
+          </p>
+        </div>
 
-// Load saved language preference
-const savedLang = localStorage.getItem('ryopc-lang') || 'ja';
-setLang(savedLang);
-</script>
+        <div class="card dont">
+          <div class="card-header">
+            <div class="card-icon">✗</div>
+            <h4 class="lang-ja">過度な自己宣伝</h4>
+            <h4 class="lang-en hidden">Excessive self-promotion</h4>
+          </div>
+          <p class="lang-ja">
+            自分の製品やサービスを無制限に推し進めないでください。コミュニティの価値を提供してから、関連する場合のみ言及してください。
+          </p>
+          <p class="lang-en hidden">
+            Don't relentlessly promote your own products or services. Provide
+            value to the community first, then mention relevant offerings.
+          </p>
+        </div>
 
-</body>
+        <div class="card dont">
+          <div class="card-header">
+            <div class="card-icon">✗</div>
+            <h4 class="lang-ja">扇動的で分裂を招く投稿</h4>
+            <h4 class="lang-en hidden">Inflammatory & divisive content</h4>
+          </div>
+          <p class="lang-ja">
+            政治、宗教、または対立を生む話題で意図的に扇動しないでください。建設的な議論は歓迎しますが、炎上は避けましょう。
+          </p>
+          <p class="lang-en hidden">
+            Don't deliberately inflame political, religious, or divisive topics.
+            Constructive debate is welcome; flame wars are not.
+          </p>
+        </div>
+      </section>
+
+      <!-- Core Values -->
+      <section>
+        <h2>
+          コア値<span class="lang-label lang-en hidden">Our Core Values</span>
+        </h2>
+
+        <div class="principle-item">
+          <h4 class="lang-ja">🌍 包括性</h4>
+          <h4 class="lang-en hidden">🌍 Inclusivity</h4>
+          <p class="lang-ja">
+            技術的背景、年代、言語、地理的位置に関わらず、すべての人を歓迎します。
+          </p>
+          <p class="lang-en hidden">
+            We welcome people of all technical backgrounds, ages, languages, and
+            geographic locations.
+          </p>
+        </div>
+
+        <div class="principle-item">
+          <h4 class="lang-ja">🔍 透明性</h4>
+          <h4 class="lang-en hidden">🔍 Transparency</h4>
+          <p class="lang-ja">
+            コミュニティ管理のルール、判断は可能な限り透明に行われます。不公正だと感じたら、質問してください。
+          </p>
+          <p class="lang-en hidden">
+            We operate with transparency. Feel free to question if you feel
+            something is unfair.
+          </p>
+        </div>
+
+        <div class="principle-item">
+          <h4 class="lang-ja">🚀 革新と学習</h4>
+          <h4 class="lang-en hidden">🚀 Innovation & Learning</h4>
+          <p class="lang-ja">
+            新しいアイデア、質問、実験は歓迎されます。失敗を含む学習過程全体が価値を持ちます。
+          </p>
+          <p class="lang-en hidden">
+            New ideas, questions, and experiments are encouraged. The entire
+            learning process has value.
+          </p>
+        </div>
+
+        <div class="principle-item">
+          <h4 class="lang-ja">⚖️ 公平性</h4>
+          <h4 class="lang-en hidden">⚖️ Fairness</h4>
+          <p class="lang-ja">
+            すべてのメンバーは平等に扱われます。同じルールが全員に適用されます。
+          </p>
+          <p class="lang-en hidden">
+            All members are treated equally. The same rules apply to everyone.
+          </p>
+        </div>
+      </section>
+
+      <!-- Reporting Process -->
+      <section>
+        <h2>
+          報告プロセス<span class="lang-label lang-en hidden"
+            >Reporting Violations</span
+          >
+        </h2>
+
+        <p class="lang-ja">
+          ガイドライン違反を目撃した場合、以下のプロセスに従ってください。
+        </p>
+        <p class="lang-en hidden">
+          If you witness a violation of these guidelines, please follow this
+          process.
+        </p>
+
+        <div class="process-step">
+          <div class="step-number">1</div>
+          <div class="step-content">
+            <h4 class="lang-ja">報告ボタンを使用</h4>
+            <h4 class="lang-en hidden">Use report button</h4>
+            <p class="lang-ja">プラットフォームの報告機能を使ってください。</p>
+            <p class="lang-en hidden">
+              Use the platform's report feature directly.
+            </p>
+          </div>
+        </div>
+
+        <div class="process-step">
+          <div class="step-number">2</div>
+          <div class="step-content">
+            <h4 class="lang-ja">詳しい情報を提供</h4>
+            <h4 class="lang-en hidden">Provide details</h4>
+            <p class="lang-ja">
+              何が問題か、どのガイドラインに違反しているか説明してください。
+            </p>
+            <p class="lang-en hidden">
+              Describe what was problematic and which guideline was violated.
+            </p>
+          </div>
+        </div>
+
+        <div class="process-step">
+          <div class="step-number">3</div>
+          <div class="step-content">
+            <h4 class="lang-ja">対応</h4>
+            <h4 class="lang-en hidden">Response</h4>
+            <p class="lang-ja">
+              報告は24時間以内に確認され、適切な措置が取られます。
+            </p>
+            <p class="lang-en hidden">
+              Reports are reviewed within 24 hours and appropriate action is
+              taken.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Contact -->
+      <section>
+        <h2>
+          お問い合わせ<span class="lang-label lang-en hidden">Contact</span>
+        </h2>
+
+        <p class="lang-ja"><strong>support@ryopc.org</strong></p>
+        <p class="lang-en hidden"><strong>support@ryopc.org</strong></p>
+
+        <p class="lang-ja">
+          メインサイト: <a href="https://ryopc.org">ryopc.org</a>
+        </p>
+        <p class="lang-en hidden">
+          Main site: <a href="https://ryopc.org">ryopc.org</a>
+        </p>
+
+        <p class="lang-ja">
+          フォーラム: <a href="https://ryopc.org/forum">ryopc.org/forum</a>
+        </p>
+        <p class="lang-en hidden">
+          Forum: <a href="https://ryopc.org/forum">ryopc.org/forum</a>
+        </p>
+
+        <p
+          style="
+            color: var(--neutral-600);
+            font-size: 0.85rem;
+            margin-top: 1.5rem;
+          "
+        >
+          <span class="lang-ja">最終更新: 2026年7月</span>
+          <span class="lang-en hidden">Last updated: July 2026</span>
+        </p>
+      </section>
+    </main>
+
+    <footer>
+      <p class="lang-ja">
+        © 2026 ryopc | 全国PCサポートネットワーク<br /><span
+          style="font-size: 0.85rem"
+          >このガイドラインは、安全で建設的なコミュニティの構築を目的としています。</span
+        >
+      </p>
+      <p class="lang-en hidden">
+        © 2026 ryopc | Nationwide PC Support Network<br /><span
+          style="font-size: 0.85rem"
+          >These guidelines aim to build a safe and constructive
+          community.</span
+        >
+      </p>
+    </footer>
+
+    <script>
+      function setLang(lang) {
+        const jaElements = document.querySelectorAll(".lang-ja");
+        const enElements = document.querySelectorAll(".lang-en");
+        const buttons = document.querySelectorAll(".lang-toggle button");
+
+        if (lang === "en") {
+          jaElements.forEach((el) => el.classList.add("hidden"));
+          enElements.forEach((el) => el.classList.remove("hidden"));
+          buttons[1].classList.add("active");
+          buttons[0].classList.remove("active");
+        } else {
+          jaElements.forEach((el) => el.classList.remove("hidden"));
+          enElements.forEach((el) => el.classList.add("hidden"));
+          buttons[0].classList.add("active");
+          buttons[1].classList.remove("active");
+        }
+
+        localStorage.setItem("ryopc-lang", lang);
+      }
+
+      // Load saved language preference
+      const savedLang = localStorage.getItem("ryopc-lang") || "ja";
+      setLang(savedLang);
+    </script>
+  </body>
 </html>
