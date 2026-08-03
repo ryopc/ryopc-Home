@@ -17,7 +17,7 @@ eleventyExcludeFromCollections: true
       and not "/CONTRIBUTING/" in page.url 
       and not "/SECURITY/" in page.url %}
   <url>
-    <loc>{{ eleventy.env.runMode === "serve" and "http://localhost:8080" or "https://ryopc.f5.si" }}{{ page.url | url }}</loc>
+    <loc>{{ eleventy.env.runMode === "serve" and "http://localhost:8080" or "https://ryopc.org" }}{{ page.url | url }}</loc>
     <lastmod>{{ page.date.toISOString() }}</lastmod>
   </url>
   {%- endif %}
