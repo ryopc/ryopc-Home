@@ -1,5 +1,7 @@
 name: 11ty Build and rsync Deploy
 on:
+  repository_dispatch:
+    types: [update]
   push:
     branches:
       - main
