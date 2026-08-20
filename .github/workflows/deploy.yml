@@ -43,13 +43,13 @@ jobs:
         run: |
           rsync -avz \
             --delete \
-            --filter='P /chat/' \
-            --filter='P /xmailinglist/' \
-            --filter='P /sns/' \
-            --filter='P /mail/' \
-            --filter='P /meisi/' \
-            --filter='P /.git/' \
-            --filter='P /node_modules/' \
+            --filter='P /chat' \
+            --filter='P /xmailinglist' \
+            --filter='P /sns' \
+            --filter='P /mail' \
+            --filter='P /meisi' \
+            --filter='P /.git' \
+            --filter='P /node_modules' \
             -e "ssh -i ~/.ssh/deploy_key -p ${{ secrets.SSH_PORT }} -o StrictHostKeyChecking=no" \
             ./_site/ \
             ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}:${{ secrets.DEPLOY_PATH }}
