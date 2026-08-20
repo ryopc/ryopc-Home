@@ -787,153 +787,262 @@
         </ul>
       </section>
 
-<!-- ryopc メーリングリスト登録フォーム -->
-<div class="ryopc-mailing-list-widget">
-  <h3>ryopc News — メーリングリスト登録</h3>
+<!-- ryopc News メーリングリスト登録フォーム セクション -->
+<!-- 既存の index.html の <!-- [お問い合わせフォーム] --> セクションの直前に挿入してください -->
+
+<style>
+  /* メーリングリスト登録フォーム用スタイル */
+  #newsletter {
+    background: var(--white);
+    padding: 3rem;
+    border-radius: 32px;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.08);
+    margin-bottom: 2.5rem;
+    border: 1px solid rgba(226, 232, 240, 0.8);
+    transition: var(--transition);
+  }
+
+  #newsletter:hover {
+    transform: translateY(-8px);
+    border-color: var(--accent);
+  }
+
+  #newsletter h2 {
+    color: var(--dark);
+    font-size: 1.75rem;
+    margin-top: 0;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  #newsletter h2::before {
+    content: "";
+    display: inline-block;
+    width: 6px;
+    height: 28px;
+    background: var(--gradient-accent);
+    border-radius: 10px;
+    flex-shrink: 0;
+  }
+
+  #newsletter .form-group {
+    margin-bottom: 1.5rem;
+    text-align: left;
+  }
+
+  #newsletter .form-group label {
+    display: block;
+    font-weight: 700;
+    font-size: 0.9rem;
+    color: var(--dark);
+    margin-bottom: 0.5rem;
+    letter-spacing: 0.5px;
+  }
+
+  #newsletter .form-group input[type="email"] {
+    width: 100%;
+    padding: 1rem 1.25rem;
+    border-radius: 14px;
+    border: 1px solid rgba(226, 232, 240, 0.8);
+    background-color: var(--bg);
+    color: var(--text);
+    font-family: inherit;
+    font-size: 1rem;
+    transition: var(--transition);
+    box-sizing: border-box;
+  }
+
+  #newsletter .form-group input[type="email"]:focus {
+    outline: none;
+    border-color: var(--accent);
+    background-color: var(--white);
+    box-shadow: 0 0 0 4px rgba(0, 191, 255, 0.15);
+  }
+
+  #newsletter .form-group input[type="email"]::placeholder {
+    color: var(--text-light);
+  }
+
+  #newsletter .form-group input[type="email"]:invalid:not(:placeholder-shown) {
+    border-color: #ef4444;
+    box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.1);
+  }
+
+  #newsletter .form-submit-btn {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+    background: var(--gradient-accent);
+    color: var(--white);
+    border: none;
+    padding: 1.25rem 2.5rem;
+    border-radius: 20px;
+    font-weight: 700;
+    font-size: 1.2rem;
+    cursor: pointer;
+    transition: var(--transition);
+    box-shadow: 0 10px 25px rgba(0, 82, 204, 0.15);
+    margin-top: 0;
+  }
+
+  #newsletter .form-submit-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 15px 35px rgba(0, 82, 204, 0.25);
+  }
+
+  #newsletter .form-submit-btn:active {
+    transform: translateY(-1px);
+  }
+
+  #newsletter .form-submit-btn:disabled {
+    background: rgba(0, 0, 0, 0.15);
+    cursor: not-allowed;
+    opacity: 0.6;
+  }
+
+  #newsletter .form-note {
+    margin-top: 1rem;
+    font-size: 0.85rem;
+    color: var(--text-light);
+    text-align: center;
+  }
+
+  @media (max-width: 900px) {
+    #newsletter {
+      padding: 2rem 1.5rem;
+      border-radius: 24px;
+    }
+
+    #newsletter h2 {
+      font-size: 1.5rem;
+    }
+
+    #newsletter .form-group input[type="email"] {
+      padding: 0.875rem 1rem;
+      font-size: 16px;
+    }
+
+    #newsletter .form-submit-btn {
+      font-size: 1rem;
+      padding: 1rem 2rem;
+      gap: 10px;
+    }
+  }
+</style>
+
+<section class="card" id="newsletter">
+  <h2 data-t="newsletter_title">📬 メルマガ登録</h2>
+  <p data-t="newsletter_desc" style="color: var(--text-light); margin-bottom: 2rem;">
+    最新のアップデートと技術情報をお届けします。
+  </p>
   
-  <form id="ryopc-ml-form" method="post" action="https://ryopc.org/xmailinglist/news/mail.php">
+  <form name="ml_form_only_in" id="ml_form_only_in" method="post" action="https://ryopc.org/xmailinglist/news/mail.php" accept-charset="UTF-8">
     <div class="form-group">
-      <label for="add_mail">メールアドレス</label>
+      <label for="add_mail" data-t="label_nl_email">メールアドレス</label>
       <input 
         type="email" 
-        id="add_mail" 
+        id="add_mail"
         name="add_mail" 
         placeholder="your-email@example.com"
-        required 
+        required
         aria-label="メールアドレスを入力してください"
       />
     </div>
     
-    <button type="submit" class="btn-primary">登録する</button>
+    <button 
+      type="button" 
+      class="form-submit-btn"
+      onclick="MLFormSubmitOnlyIn('登録する');"
+      aria-label="メーリングリストに登録"
+    >
+      <span data-t="btn_nl_subscribe">メルマガに登録</span> <span>➔</span>
+    </button>
     
-    <input type="hidden" name="sb_reg" value="登録する" />
+    <input type="hidden" name="sb_reg" value="" />
     <input type="hidden" name="identity" value="H.v7X&iT" />
   </form>
   
-  <p class="form-note">登録後、確認メールをお送りします。</p>
-</div>
-
-<style>
-.ryopc-mailing-list-widget {
-  max-width: 400px;
-  margin: 2rem auto;
-  padding: 1.5rem;
-  background: var(--bg-surface, #f8f9fa);
-  border-radius: 8px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-}
-
-.ryopc-mailing-list-widget h3 {
-  margin-top: 0;
-  margin-bottom: 1.25rem;
-  font-size: 1.25rem;
-  color: var(--text-primary, #1a1a1a);
-  font-weight: 600;
-}
-
-.form-group {
-  margin-bottom: 1rem;
-}
-
-.form-group label {
-  display: block;
-  margin-bottom: 0.5rem;
-  font-size: 0.95rem;
-  font-weight: 500;
-  color: var(--text-primary, #1a1a1a);
-}
-
-.form-group input[type="email"] {
-  width: 100%;
-  padding: 0.75rem;
-  border: 2px solid var(--border-color, #ddd);
-  border-radius: 4px;
-  font-size: 1rem;
-  transition: border-color 0.2s, box-shadow 0.2s;
-  box-sizing: border-box;
-}
-
-.form-group input[type="email"]:focus {
-  outline: none;
-  border-color: var(--primary-color, #0078d4);
-  box-shadow: 0 0 0 3px rgba(0, 120, 212, 0.1);
-}
-
-.form-group input[type="email"]:invalid:not(:placeholder-shown) {
-  border-color: var(--error-color, #d32f2f);
-}
-
-.btn-primary {
-  width: 100%;
-  padding: 0.75rem;
-  background: var(--primary-color, #0078d4);
-  color: white;
-  border: none;
-  border-radius: 4px;
-  font-size: 1rem;
-  font-weight: 600;
-  cursor: pointer;
-  transition: background 0.2s, transform 0.1s;
-}
-
-.btn-primary:hover {
-  background: var(--primary-color-hover, #106ebe);
-}
-
-.btn-primary:active {
-  transform: scale(0.98);
-}
-
-.btn-primary:disabled {
-  background: var(--disabled-color, #ccc);
-  cursor: not-allowed;
-  opacity: 0.6;
-}
-
-.form-note {
-  margin-top: 1rem;
-  font-size: 0.875rem;
-  color: var(--text-secondary, #666);
-  text-align: center;
-}
-</style>
+  <p class="form-note">
+    登録後、確認メールをお送りします。
+  </p>
+</section>
 
 <script>
-document.addEventListener('DOMContentLoaded', () => {
-  const form = document.getElementById('ryopc-ml-form');
-  
-  form.addEventListener('submit', (e) => {
-    e.preventDefault();
-    
-    const email = form.querySelector('#add_mail').value.trim();
-    
-    // クライアント側の簡易検証
-    if (!email || !isValidEmail(email)) {
-      alert('有効なメールアドレスを入力してください。');
-      return;
-    }
-    
-    // ポップアップウィンドウで送信
-    const popup = window.open(
-      form.action,
-      'ryopc_ml_popup',
-      'width=400,height=300,menubar=no,toolbar=no'
-    );
-    
-    if (popup) {
-      form.target = 'ryopc_ml_popup';
-      form.submit();
-    } else {
-      alert('ポップアップがブロックされています。ブラウザの設定を確認してください。');
-    }
-  });
-});
+/**
+ * ryopc メーリングリスト登録 — 既存ロジック維持版
+ * 必須コード: MLFormSubmitOnlyIn() 関数を保持
+ */
+function MLFormSubmitOnlyIn(strButton) {
+  const emailInput = document.getElementById('add_mail');
+  const email = emailInput.value.trim();
 
+  // 基本的なメール検証
+  if (!email || !isValidEmail(email)) {
+    alert('有効なメールアドレスを入力してください。');
+    emailInput.focus();
+    return;
+  }
+
+  // 既存ロジック: ポップアップウィンドウを開く
+  const popup = window.open(
+    'https://ryopc.org/xmailinglist/news/mail.php',
+    'tml_form',
+    'width=400,height=300,menubar=no,toolbar=no'
+  );
+
+  if (popup) {
+    // フォームのターゲットをポップアップウィンドウに指定
+    document.ml_form_only_in.target = 'tml_form';
+    document.ml_form_only_in.sb_reg.value = strButton;
+
+    // 文字エンコーディングをUTF-8に設定して送信
+    const originalCharset = document.charset;
+    document.charset = 'UTF-8';
+    document.ml_form_only_in.submit();
+    document.charset = originalCharset;
+  } else {
+    alert('ポップアップがブロックされています。ブラウザの設定を確認してください。');
+  }
+}
+
+/**
+ * メールアドレス簡易検証
+ */
 function isValidEmail(email) {
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
   return emailRegex.test(email);
 }
+
+/**
+ * フォーム初期化時の処理
+ */
+document.addEventListener('DOMContentLoaded', () => {
+  const form = document.getElementById('ml_form_only_in');
+  if (!form) return;
+  
+  const submitButton = form.querySelector('.form-submit-btn');
+
+  // Enterキーでの送信対応
+  form.addEventListener('keypress', (e) => {
+    if (e.key === 'Enter' && e.target.matches('input[type="email"]')) {
+      e.preventDefault();
+      submitButton.click();
+    }
+  });
+
+  // メールアドレス入力時のリアルタイム検証フィードバック
+  const emailInput = form.querySelector('#add_mail');
+  emailInput.addEventListener('blur', () => {
+    if (emailInput.value && !isValidEmail(emailInput.value.trim())) {
+      emailInput.setAttribute('aria-invalid', 'true');
+    } else {
+      emailInput.removeAttribute('aria-invalid');
+    }
+  });
+});
 </script>
 
       <!-- [お問い合わせフォーム] -->
