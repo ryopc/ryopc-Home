@@ -936,111 +936,20 @@
     最新のアップデートと技術情報をお届けします。
   </p>
   
-  <form name="ml_form_only_in" id="ml_form_only_in" method="post" action="https://ryopc.org/xmailinglist/news/mail.php?page=MailReg" accept-charset="UTF-8">
-    <div class="form-group">
-      <label for="add_mail" data-t="label_nl_email">メールアドレス</label>
-      <input 
-        type="email" 
-        id="add_mail"
-        name="add_mail" 
-        placeholder="your-email@example.com"
-        required
-        aria-label="メールアドレスを入力してください"
-      />
-    </div>
-    
-    <button 
-      type="button" 
-      class="form-submit-btn"
-      onclick="MLFormSubmitOnlyIn('登録する');"
-      aria-label="メーリングリストに登録"
-    >
-      <span data-t="btn_nl_subscribe">メルマガに登録</span> <span>➔</span>
-    </button>
-    
-    <input type="hidden" name="sb_reg" value="" />
-    <input type="hidden" name="identity" value="H.v7X&iT" />
-  </form>
+  <!-- 入力欄をなくし、<a>タグに既存のクラスをあててボタン化 -->
+  <a 
+    href="https://ryopc.org/mail/lists/?p=subscribe&id=1" 
+    class="form-submit-btn"
+    style="text-decoration: none;"
+    aria-label="メーリングリストに登録"
+  >
+    <span data-t="btn_nl_subscribe">メルマガに登録</span> <span>➔</span>
+  </a>
   
   <p class="form-note">
     登録後、確認メールをお送りします。
   </p>
 </section>
-
-<script>
-/**
- * ryopc メーリングリスト登録 — 既存ロジック維持版
- * 必須コード: MLFormSubmitOnlyIn() 関数を保持
- */
-function MLFormSubmitOnlyIn(strButton) {
-  const emailInput = document.getElementById('add_mail');
-  const email = emailInput.value.trim();
-
-  // 基本的なメール検証
-  if (!email || !isValidEmail(email)) {
-    alert('有効なメールアドレスを入力してください。');
-    emailInput.focus();
-    return;
-  }
-
-  // 既存ロジック: ポップアップウィンドウを開く
-  const popup = window.open(
-    'https://ryopc.org/xmailinglist/news/mail.php',
-    'tml_form',
-    'width=400,height=300,menubar=no,toolbar=no'
-  );
-
-  if (popup) {
-    // フォームのターゲットをポップアップウィンドウに指定
-    document.ml_form_only_in.target = 'tml_form';
-    document.ml_form_only_in.sb_reg.value = strButton;
-
-    // 文字エンコーディングをUTF-8に設定して送信
-    const originalCharset = document.charset;
-    document.charset = 'UTF-8';
-    document.ml_form_only_in.submit();
-    document.charset = originalCharset;
-  } else {
-    alert('ポップアップがブロックされています。ブラウザの設定を確認してください。');
-  }
-}
-
-/**
- * メールアドレス簡易検証
- */
-function isValidEmail(email) {
-  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-  return emailRegex.test(email);
-}
-
-/**
- * フォーム初期化時の処理
- */
-document.addEventListener('DOMContentLoaded', () => {
-  const form = document.getElementById('ml_form_only_in');
-  if (!form) return;
-  
-  const submitButton = form.querySelector('.form-submit-btn');
-
-  // Enterキーでの送信対応
-  form.addEventListener('keypress', (e) => {
-    if (e.key === 'Enter' && e.target.matches('input[type="email"]')) {
-      e.preventDefault();
-      submitButton.click();
-    }
-  });
-
-  // メールアドレス入力時のリアルタイム検証フィードバック
-  const emailInput = form.querySelector('#add_mail');
-  emailInput.addEventListener('blur', () => {
-    if (emailInput.value && !isValidEmail(emailInput.value.trim())) {
-      emailInput.setAttribute('aria-invalid', 'true');
-    } else {
-      emailInput.removeAttribute('aria-invalid');
-    }
-  });
-});
-</script>
 
       <!-- [お問い合わせフォーム] -->
       <section class="card" id="contact">
