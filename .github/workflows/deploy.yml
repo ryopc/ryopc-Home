@@ -31,28 +31,25 @@ jobs:
           MICROCMS_API_KEY: ${{ secrets.MICROCMS_API_KEY }}
         run: npm run build
 
-      - name: 🔑 Setup SSH & rsync
-        run: |
-          mkdir -p ~/.ssh
-          echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/deploy_key
-          chmod 600 ~/.ssh/deploy_key
-          chmod 700 ~/.ssh
+      - name: Setup SSH & rsync   
+       run: |
+        mkdir -p ~/.ssh
+        echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/deploy_key
+        chmod 600 ~/.ssh/deploy_key
+        chmod 700 ~/.ssh
+        ssh-keyscan -v -t ed25519 -p ${{ secrets.SSH_PORT }} ${{ secrets.SSH_HOST }} 2>&1 | grep -v "^#" >> ~/.ssh/known_hosts
 
-          ssh-keyscan -v -t ed25519 -p ${{ secrets.SSH_PORT }} ${{ secrets.SSH_HOST }} 2>&1 | grep -v "^#" >> ~/.ssh/known_hosts || echo "Keyscan completed"
-
-          ssh -i ~/.ssh/deploy_key -p ${{ secrets.SSH_PORT }} -o StrictHostKeyChecking=accept-new ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} "echo SSH connection successful"
-
-      - name: ⚡ Deploy via rsync
-        run: |
-          rsync -avz --dry-run \
-            --delete \
-            --exclude='chat/' \
-            --exclude='xmailinglist/' \
-            --exclude='sns/' \
-            --exclude='mail/' \
-            --exclude='meisi/' \
-            --exclude='.git/' \
-            --exclude='node_modules/' \
-            -e "ssh -i ~/.ssh/deploy_key -p ${{ secrets.SSH_PORT }} -o StrictHostKeyChecking=no" \
-            ./_site/ \
-            ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}:${{ secrets.DEPLOY_PATH }}
+          - name: Deploy via rsync
+       run: |
+        rsync -avz \
+          --delete \
+          --filter='P /chat/' \
+          --filter='P /xmailinglist/' \
+          --filter='P /sns/' \
+          --filter='P /mail/' \
+          --filter='P /meisi/' \
+          --filter='P /.git/' \
+          --filter='P /node_modules/' \
+          -e "ssh -i ~/.ssh/deploy_key -p ${{ secrets.SSH_PORT }} -o StrictHostKeyChecking=no" \
+          ./_site/ \
+          ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}:${{ secrets.DEPLOY_PATH }}
