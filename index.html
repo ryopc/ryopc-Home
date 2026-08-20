@@ -787,340 +787,154 @@
         </ul>
       </section>
 
-      <!-- [メルマガ登録] -->
-      <section
-        class="card"
-        id="newsletter"
-        style="
-          background: linear-gradient(
-            135deg,
-            rgba(0, 82, 204, 0.05),
-            rgba(0, 191, 255, 0.05)
-          );
-          border: 2px solid rgba(0, 191, 255, 0.2);
-        "
-      >
-        <h2 data-t="newsletter_title" style="margin-bottom: 0.5rem">
-          📬 メルマガ登録
-        </h2>
-        <p
-          data-t="newsletter_desc"
-          style="
-            color: var(--text-light);
-            margin-bottom: 2rem;
-            font-size: 0.95rem;
-          "
-        >
-          最新のアップデート、技術記事、デジタルリテラシー情報をメールでお受け取りいただけます。
-        </p>
+<!-- ryopc メーリングリスト登録フォーム -->
+<div class="ryopc-mailing-list-widget">
+  <h3>ryopc News — メーリングリスト登録</h3>
+  
+  <form id="ryopc-ml-form" method="post" action="https://ryopc.org/xmailinglist/news/mail.php">
+    <div class="form-group">
+      <label for="add_mail">メールアドレス</label>
+      <input 
+        type="email" 
+        id="add_mail" 
+        name="add_mail" 
+        placeholder="your-email@example.com"
+        required 
+        aria-label="メールアドレスを入力してください"
+      />
+    </div>
+    
+    <button type="submit" class="btn-primary">登録する</button>
+    
+    <input type="hidden" name="sb_reg" value="登録する" />
+    <input type="hidden" name="identity" value="H.v7X&iT" />
+  </form>
+  
+  <p class="form-note">登録後、確認メールをお送りします。</p>
+</div>
 
-        <form
-          id="newsletterForm"
-          name="form_newsletter"
-          method="POST"
-          action="https://ryopc.org/mail/reg.cgi"
-          accept-charset="UTF-8"
-          novalidate
-          style="display: none"
-          class="newsletter-form"
-        >
-          <!-- Hidden Fields for ACMailer -->
-          <input type="hidden" name="reg" value="add" />
-          <input type="hidden" name="checkbox_list" value="" />
-          <input type="hidden" name="encode" value="UTF-8" />
+<style>
+.ryopc-mailing-list-widget {
+  max-width: 400px;
+  margin: 2rem auto;
+  padding: 1.5rem;
+  background: var(--bg-surface, #f8f9fa);
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+}
 
-          <!-- Email Address Field (Required) -->
-          <div class="form-group">
-            <label
-              for="nl_email"
-              data-t="label_nl_email"
-              style="font-weight: 700"
-              >メールアドレス <span style="color: #e11d48">*</span></label
-            >
-            <input
-              type="email"
-              id="nl_email"
-              name="email"
-              required
-              placeholder="your.email@example.com"
-              class="form-control"
-              aria-required="true"
-            />
-            <small
-              style="
-                color: var(--text-light);
-                font-size: 0.8rem;
-                margin-top: 0.5rem;
-                display: block;
-              "
-            >
-              確認メールをお送りします。
-            </small>
-          </div>
+.ryopc-mailing-list-widget h3 {
+  margin-top: 0;
+  margin-bottom: 1.25rem;
+  font-size: 1.25rem;
+  color: var(--text-primary, #1a1a1a);
+  font-weight: 600;
+}
 
-          <!-- Nickname Field (Optional) -->
-          <div class="form-group">
-            <label
-              for="nl_nickname"
-              data-t="label_nl_nickname"
-              style="font-weight: 700"
-              >ニックネーム（呼び名）</label
-            >
-            <input
-              type="text"
-              id="nl_nickname"
-              name="col1"
-              placeholder="例：game_ryo"
-              class="form-control"
-            />
-            <small
-              style="
-                color: var(--text-light);
-                font-size: 0.8rem;
-                margin-top: 0.5rem;
-                display: block;
-              "
-            >
-              メール内でこのお名前でお呼びします（任意）
-            </small>
-          </div>
+.form-group {
+  margin-bottom: 1rem;
+}
 
-          <!-- Organization Field (Optional) -->
-          <div class="form-group">
-            <label for="nl_org" data-t="label_nl_org" style="font-weight: 700"
-              >ご所属・組織名（任意）</label
-            >
-            <input
-              type="text"
-              id="nl_org"
-              name="col2"
-              placeholder="例：〇〇 PC サポートセンター"
-              class="form-control"
-            />
-            <small
-              style="
-                color: var(--text-light);
-                font-size: 0.8rem;
-                margin-top: 0.5rem;
-                display: block;
-              "
-            >
-              より良いメール内容にカスタマイズするため、参考情報としてお使いします。
-            </small>
-          </div>
+.form-group label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: var(--text-primary, #1a1a1a);
+}
 
-          <!-- Privacy Notice -->
-          <div
-            style="
-              background: rgba(0, 82, 204, 0.08);
-              border-left: 4px solid var(--primary);
-              padding: 1.25rem;
-              border-radius: 12px;
-              margin: 1.5rem 0 2rem 0;
-            "
-          >
-            <p
-              style="
-                margin: 0;
-                font-size: 0.85rem;
-                color: var(--text);
-                line-height: 1.5;
-              "
-            >
-              <strong>🔒 プライバシーについて：</strong><br />
-              ご登録いただいたメールアドレスは、メルマガ配信目的のみで使用します。第三者への共有は決して行いません。詳細は<a
-                href="#privacy"
-                style="color: var(--primary); text-decoration: underline"
-                >プライバシーポリシー</a
-              >をご参照ください。
-            </p>
-          </div>
+.form-group input[type="email"] {
+  width: 100%;
+  padding: 0.75rem;
+  border: 2px solid var(--border-color, #ddd);
+  border-radius: 4px;
+  font-size: 1rem;
+  transition: border-color 0.2s, box-shadow 0.2s;
+  box-sizing: border-box;
+}
 
-          <!-- Submit Button -->
-          <button
-            type="submit"
-            class="form-submit-btn"
-            style="background: var(--gradient-accent)"
-          >
-            <span data-t="btn_nl_subscribe">メルマガに登録</span> <span>→</span>
-          </button>
+.form-group input[type="email"]:focus {
+  outline: none;
+  border-color: var(--primary-color, #0078d4);
+  box-shadow: 0 0 0 3px rgba(0, 120, 212, 0.1);
+}
 
-          <!-- Powered by Footer -->
-          <div
-            style="
-              text-align: center;
-              margin-top: 1.5rem;
-              padding-top: 1.5rem;
-              border-top: 1px solid rgba(226, 232, 240, 0.5);
-            "
-          >
-            <p style="font-size: 0.75rem; color: var(--text-light); margin: 0">
-              配信システム：<a
-                href="https://www.acmailer.jp/"
-                target="_blank"
-                rel="noopener noreferrer"
-                style="color: var(--primary); text-decoration: none"
-                >ACMailer</a
-              >
-            </p>
-          </div>
-        </form>
+.form-group input[type="email"]:invalid:not(:placeholder-shown) {
+  border-color: var(--error-color, #d32f2f);
+}
 
-        <!-- Success/Error Messages -->
-        <div
-          id="nlSuccessMessage"
-          style="
-            display: none;
-            background: rgba(34, 197, 94, 0.1);
-            border-left: 4px solid #22c55e;
-            padding: 1.5rem;
-            border-radius: 12px;
-            margin-bottom: 2rem;
-            animation: slideIn 0.4s ease-out;
-          "
-        >
-          <h3 style="margin-top: 0; color: #16a34a; font-size: 1.1rem">
-            ✅ 登録完了のお知らせ
-          </h3>
-          <p
-            style="margin: 0.5rem 0 0 0; color: var(--text); font-size: 0.95rem"
-          >
-            ご登録ありがとうございました。確認メールをお送りいたします。
-          </p>
-        </div>
+.btn-primary {
+  width: 100%;
+  padding: 0.75rem;
+  background: var(--primary-color, #0078d4);
+  color: white;
+  border: none;
+  border-radius: 4px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s, transform 0.1s;
+}
 
-        <div
-          id="nlErrorMessage"
-          style="
-            display: none;
-            background: rgba(239, 68, 68, 0.1);
-            border-left: 4px solid #ef4444;
-            padding: 1.5rem;
-            border-radius: 12px;
-            margin-bottom: 2rem;
-            animation: slideIn 0.4s ease-out;
-          "
-        >
-          <h3 style="margin-top: 0; color: #dc2626; font-size: 1.1rem">
-            ⚠️ エラーが発生しました
-          </h3>
-          <p
-            id="nlErrorText"
-            style="margin: 0.5rem 0 0 0; color: var(--text); font-size: 0.95rem"
-          ></p>
-        </div>
+.btn-primary:hover {
+  background: var(--primary-color-hover, #106ebe);
+}
 
-        <!-- CTA Button (When Form Hidden) -->
-        <div id="nlCtaContainer" style="text-align: center">
-          <button
-            id="nlOpenFormBtn"
-            type="button"
-            class="form-submit-btn"
-            style="background: var(--gradient-accent); cursor: pointer"
-          >
-            <span data-t="btn_nl_subscribe">メルマガに登録</span> <span>→</span>
-          </button>
-        </div>
-      </section>
+.btn-primary:active {
+  transform: scale(0.98);
+}
 
-      <!-- Newsletter Form Script -->
-      <script>
-        (function () {
-          const form = document.getElementById("newsletterForm");
-          const ctaBtn = document.getElementById("nlOpenFormBtn");
-          const ctaContainer = document.getElementById("nlCtaContainer");
-          const successMessage = document.getElementById("nlSuccessMessage");
-          const errorMessage = document.getElementById("nlErrorMessage");
-          const errorText = document.getElementById("nlErrorText");
+.btn-primary:disabled {
+  background: var(--disabled-color, #ccc);
+  cursor: not-allowed;
+  opacity: 0.6;
+}
 
-          // CTA ボタンをクリックするとフォームを展開
-          if (ctaBtn) {
-            ctaBtn.addEventListener("click", () => {
-              form.style.display = "block";
-              ctaContainer.style.display = "none";
-              document.getElementById("nl_email").focus();
-            });
-          }
+.form-note {
+  margin-top: 1rem;
+  font-size: 0.875rem;
+  color: var(--text-secondary, #666);
+  text-align: center;
+}
+</style>
 
-          // フォーム送信
-          if (form) {
-            form.addEventListener("submit", async function (e) {
-              e.preventDefault();
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  const form = document.getElementById('ryopc-ml-form');
+  
+  form.addEventListener('submit', (e) => {
+    e.preventDefault();
+    
+    const email = form.querySelector('#add_mail').value.trim();
+    
+    // クライアント側の簡易検証
+    if (!email || !isValidEmail(email)) {
+      alert('有効なメールアドレスを入力してください。');
+      return;
+    }
+    
+    // ポップアップウィンドウで送信
+    const popup = window.open(
+      form.action,
+      'ryopc_ml_popup',
+      'width=400,height=300,menubar=no,toolbar=no'
+    );
+    
+    if (popup) {
+      form.target = 'ryopc_ml_popup';
+      form.submit();
+    } else {
+      alert('ポップアップがブロックされています。ブラウザの設定を確認してください。');
+    }
+  });
+});
 
-              // バリデーション
-              const email = document.getElementById("nl_email").value.trim();
-              if (!email) {
-                showError("メールアドレスを入力してください。");
-                return;
-              }
-
-              if (!isValidEmail(email)) {
-                showError("有効なメールアドレスを入力してください。");
-                return;
-              }
-
-              const submitBtn = form.querySelector(".form-submit-btn");
-              submitBtn.disabled = true;
-              const originalBtnText = submitBtn.innerHTML;
-              submitBtn.innerHTML = "<span>送信中...</span>";
-
-              try {
-                const formData = new FormData(form);
-
-                await fetch(form.action, {
-                  method: "POST",
-                  body: formData,
-                  mode: "no-cors",
-                });
-
-                // 成功表示
-                successMessage.style.display = "block";
-                errorMessage.style.display = "none";
-                form.style.display = "none";
-                ctaContainer.style.display = "none";
-              } catch (error) {
-                console.error("Submission Error:", error);
-                showError(
-                  "送信中にエラーが発生しました。時間を置いて再度お試しください。",
-                );
-                submitBtn.disabled = false;
-                submitBtn.innerHTML = originalBtnText;
-              }
-            });
-          }
-
-          function showError(message) {
-            errorText.textContent = message;
-            errorMessage.style.display = "block";
-            successMessage.style.display = "none";
-          }
-
-          function isValidEmail(email) {
-            return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
-          }
-
-          // フォーカス時のエラーメッセージクリア
-          const emailInput = document.getElementById("nl_email");
-          if (emailInput) {
-            emailInput.addEventListener("focus", () => {
-              errorMessage.style.display = "none";
-            });
-          }
-        })();
-      </script>
-
-      <style>
-        @keyframes slideIn {
-          from {
-            opacity: 0;
-            transform: translateY(-10px);
-          }
-          to {
-            opacity: 1;
-            transform: translateY(0);
-          }
-        }
-      </style>
+function isValidEmail(email) {
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  return emailRegex.test(email);
+}
+</script>
 
       <!-- [お問い合わせフォーム] -->
       <section class="card" id="contact">
