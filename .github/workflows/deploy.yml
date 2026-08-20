@@ -47,6 +47,7 @@ jobs:
           rsync -avz \
             --delete \
             --exclude='chat/' \
+            --exclude='xmailinglist/' \
             --exclude='sns/' \
             --exclude='mail/' \
             --exclude='meisi/' \
