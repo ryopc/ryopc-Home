@@ -44,7 +44,7 @@ jobs:
 
       - name: ⚡ Deploy via rsync
         run: |
-          rsync -avz \
+          rsync -avz --dry-run \
             --delete \
             --exclude='chat/' \
             --exclude='xmailinglist/' \
