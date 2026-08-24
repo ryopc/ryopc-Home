@@ -53,3 +53,12 @@ jobs:
             -e "ssh -i ~/.ssh/deploy_key -p ${{ secrets.SSH_PORT }} -o StrictHostKeyChecking=no" \
             ./_site/ \
             ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}:${{ secrets.DEPLOY_PATH }}
+
+                  # --- ここまでは既存のビルドやWebホスティングへのデプロイ処理 ---
+
+      - name: Deploy same files to Nostr (nsite)
+        uses: sandwichfarm/nsite-action@v1
+        with:
+          build-dir: './site' # 既存サイトの出力フォルダを指定
+          nsec: ${{ secrets.NOSTR_SECRET_KEY }}
+
