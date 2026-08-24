@@ -54,11 +54,3 @@ jobs:
             ./_site/ \
             ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}:${{ secrets.DEPLOY_PATH }}
 
-                  # --- ここまでは既存のビルドやWebホスティングへのデプロイ処理 ---
-
-      - name: Deploy same files to Nostr (nsite)
-        uses: sandwichfarm/nsite-action@main
-        with:
-          build-dir: './site' # 既存サイトの出力フォルダを指定
-          nsec: ${{ secrets.NOSTR_SECRET_KEY }}
-
