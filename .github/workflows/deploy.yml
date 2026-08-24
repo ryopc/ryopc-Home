@@ -57,7 +57,7 @@ jobs:
                   # --- ここまでは既存のビルドやWebホスティングへのデプロイ処理 ---
 
       - name: Deploy same files to Nostr (nsite)
-        uses: sandwichfarm/nsite-action@v1
+        uses: sandwichfarm/nsite-action@main
         with:
           build-dir: './site' # 既存サイトの出力フォルダを指定
           nsec: ${{ secrets.NOSTR_SECRET_KEY }}
