@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta
       name="viewport"
-      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover"
+      content="width=device-width, initial-scale=1.0, viewport-fit=cover"
     />
     <script
       src="https://code.activetk.jp/archive-today.blocker.js"
@@ -673,6 +673,7 @@
       <div class="nav-logo">ryopc org</div>
 
       <div class="nav-right">
+        <label for="langSelector" class="visually-hidden" data-t="label_language">言語選択</label>
         <select
           class="lang-selector"
           id="langSelector"
@@ -717,7 +718,7 @@
       </p>
     </header>
 
-    <div class="container" id="contentContainer">
+    <main class="container" id="contentContainer">
       <!-- [ミッション] -->
       <section class="card" id="mission">
         <h2 data-t="mission_title">Our Mission</h2>
@@ -898,6 +899,19 @@
           transform: translateY(-1px);
         }
 
+        /* Visually hidden but accessible to screen readers */
+        .visually-hidden {
+          position: absolute;
+          width: 1px;
+          height: 1px;
+          padding: 0;
+          margin: -1px;
+          overflow: hidden;
+          clip: rect(0, 0, 0, 0);
+          white-space: nowrap;
+          border: 0;
+        }
+
         #newsletter .form-submit-btn:disabled {
           background: rgba(0, 0, 0, 0.15);
           cursor: not-allowed;
@@ -1027,7 +1041,7 @@
       <a href="/docs" class="docs-link-button">
         <span data-t="btn_docs">View Project Documentation</span> <span>➔</span>
       </a>
-    </div>
+    </main>
 
     <div id="chCookieBanner" class="ch-cookie-banner ch-hidden">
       <div class="ch-cookie-text" data-t="cookie_text">
