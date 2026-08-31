@@ -25,7 +25,14 @@ eleventyExcludeFromCollections: true
       and not "/short/" in page.url 
       and not "/uploads/" in page.url 
       and not "/.well-known/" in page.url 
-      and not "/.husky/" in page.url %}
+      and not "/.husky/" in page.url 
+      and not "/400" in page.url 
+      and not "/401" in page.url 
+      and not "/403" in page.url 
+      and not "/404" in page.url 
+      and not "/500" in page.url 
+      and not "/510" in page.url 
+      and not "/CODE_OF_CONDUCT/" in page.url %}
   <url>
     <loc>{{ eleventy.env.runMode === "serve" and "http://localhost:8080" or "https://ryopc.org" }}{{ page.url | url }}</loc>
     <lastmod>{{ page.date.toISOString() }}</lastmod>
