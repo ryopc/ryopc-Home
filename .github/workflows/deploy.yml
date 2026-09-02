@@ -50,6 +50,7 @@ jobs:
             --filter='P /meisi' \
             --filter='P /.git' \
             --filter='P /node_modules' \
+            --filter='P /profile' \
             -e "ssh -i ~/.ssh/deploy_key -p ${{ secrets.SSH_PORT }} -o StrictHostKeyChecking=no" \
             ./_site/ \
             ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}:${{ secrets.DEPLOY_PATH }}
