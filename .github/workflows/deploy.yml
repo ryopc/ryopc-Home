@@ -45,6 +45,7 @@ jobs:
             --delete \
             --filter='P /chat' \
             --filter='P /xmailinglist' \
+            --filter='P /wiki' \            
             --filter='P /sns' \
             --filter='P /mail' \
             --filter='P /meisi' \
