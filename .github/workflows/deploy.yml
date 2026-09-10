@@ -37,12 +37,12 @@ jobs:
           echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/deploy_key
           chmod 600 ~/.ssh/deploy_key
           chmod 700 ~/.ssh
-          ssh-keyscan -v -t ed25519 -p ${{ secrets.SSH_PORT }} ${{ secrets.SSH_HOST }} 2>&1 | grep -v "^#" >> ~/.ssh/known_hosts
+          # 末尾に || true を追加し、grep不一致による想定外の異常終了（Exit code 1）を完全に防ぎます
+          ssh-keyscan -v -t ed25519 -p ${{ secrets.SSH_PORT }} ${{ secrets.SSH_HOST }} 2>&1 | grep -v "^#" >> ~/.ssh/known_hosts || true
 
       - name: 🚀 Deploy via rsync
         run: |
-          rsync -avz \
-            --delete \
+          rsync -avz --delete \
             --filter='P /chat' \
             --filter='P /xmailinglist' \
             --filter='P /wiki' \
