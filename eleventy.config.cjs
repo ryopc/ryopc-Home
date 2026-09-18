@@ -1,6 +1,12 @@
 require("dotenv").config();
-const Image = require("@11ty/eleventy-img");
 const fs = require("fs");
+
+// パッケージ全体を一度別の変数で読み込む
+const eleventyImg = require("@11ty/eleventy-img");
+// 直接関数か、それとも内部のプロパティに入っているかを自動で安全に判別する
+const Image = typeof eleventyImg === 'function' 
+  ? eleventyImg 
+  : (eleventyImg.Image || eleventyImg.default || eleventyImg);
 
 module.exports = function (eleventyConfig) {
   // 🌟 【Cloudflare Pages対策】
