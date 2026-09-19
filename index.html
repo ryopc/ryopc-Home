@@ -70,42 +70,6 @@
             },
           },
           {
-            id: "analytics",
-            label: "Analytics",
-            description:
-              "<p>These cookies help us improve the site by tracking which pages are most popular and how visitors move around the site.</p>",
-            required: false,
-            // ★【チャットと同じ仕組み】承認された時だけ、公式タグのURLを動的に読み込む
-            scripts: [
-              {
-                url: "https://googletagmanager.com",
-                load: "async",
-              },
-            ],
-            onAccept: function () {
-              // ★スクリプトが読み込まれたら、Googleアナリティクスを初期化し、同意を「許可（granted）」に更新する
-              window.dataLayer = window.dataLayer || [];
-              function gtag() {
-                dataLayer.push(arguments);
-              }
-              gtag("js", new Date());
-              gtag("config", "G-2BSJKZ2BVG");
-              gtag("consent", "update", {
-                analytics_storage: "granted",
-              });
-              console.log("GA4: Script loaded and Consent Granted");
-            },
-            // ★拒否された、または後からオフにされた場合は「拒否（denied）」にする
-            onReject: function () {
-              if (typeof gtag === "function") {
-                gtag("consent", "update", {
-                  analytics_storage: "denied",
-                });
-                console.log("GA4: Consent Denied");
-              }
-            },
-          },
-          {
             id: "customer_support",
             label: "Customer Support",
             description:
