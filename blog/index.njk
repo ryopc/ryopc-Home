@@ -37,18 +37,6 @@ window.silktideConsentManager.init({
       }
     },
     {
-      id: "analytics",
-      label: "Analytics",
-      description: "<p>These cookies help us improve the site by tracking which pages are most popular and how visitors move around the site.</p>",
-      required: false,
-      onAccept: function() {
-        console.log('Add accept logic for Analytics consent type here');
-      },
-      onReject: function() {
-        console.log('Add reject logic for Analytics consent type here');
-      }
-    },
-    {
       id: "customer_support",
       label: "Customer Support",
       description: "<p>This cookie helps us provide you with the best possible support.</p>",
@@ -66,7 +54,7 @@ window.silktideConsentManager.init({
   ],
   text: {
     prompt: {
-      description: "<p>This site uses cookies to improve the user experience, provide personalized content, and analyze traffic.</p>",
+      description: "<p>This site uses cookies to improve the user experience and provide personalized content.</p>",
       acceptAllButtonText: "Accept all",
       acceptAllButtonAccessibleLabel: "Accept all cookies",
       rejectNonEssentialButtonText: "Reject non-essential",
