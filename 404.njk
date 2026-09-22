@@ -31,7 +31,7 @@ permalink: /404.html
             background:
                 radial-gradient(circle at top left, rgba(125, 211, 252, 0.32), transparent 28%),
                 radial-gradient(circle at bottom right, rgba(0, 123, 255, 0.18), transparent 30%),
-                #09111d;
+                var(--bg);
             color: var(--ink);
         }
 
@@ -44,390 +44,205 @@ permalink: /404.html
 
         .scene {
             position: relative;
-            width: min(960px, calc(100vw - 1.2rem));
-            height: min(760px, calc(100vh - 1.2rem));
-            display: grid;
-            place-items: center;
+            width: min(760px, calc(100vw - 2rem));
+            padding: 2rem;
         }
 
-        #game {
+        .orbit {
             position: absolute;
-            inset: 0;
-            width: 100%;
-            height: 100%;
-            border-radius: 28px;
-            overflow: hidden;
-            background: radial-gradient(circle at center, rgba(28, 60, 100, 0.8), rgba(6, 10, 18, 0.96));
-            border: 1px solid rgba(125, 211, 252, 0.22);
-            box-shadow: 0 30px 70px rgba(0, 0, 0, 0.45);
-        }
-
-        .hud {
-            position: absolute;
-            z-index: 4;
-            top: 18px;
-            left: 18px;
-            right: 18px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            color: rgba(255,255,255,0.9);
-            font-size: 0.8rem;
-            letter-spacing: 0.12em;
-            text-transform: uppercase;
-            pointer-events: none;
-        }
-
-        .score {
-            padding: 0.55rem 0.9rem;
-            border: 1px solid rgba(125, 211, 252, 0.18);
-            background: rgba(7, 17, 29, 0.56);
-            border-radius: 999px;
-        }
-
-        .status {
-            padding: 0.55rem 0.9rem;
-            border: 1px solid rgba(125, 211, 252, 0.18);
-            background: rgba(7, 17, 29, 0.56);
-            border-radius: 999px;
-        }
-
-        .target-area {
-            position: absolute;
-            inset: 0;
-            z-index: 1;
-            display: grid;
-            place-items: center;
-            pointer-events: none;
-        }
-
-        .target-text {
-            position: relative;
-            font-size: clamp(5rem, 16vw, 16rem);
-            font-weight: 900;
-            letter-spacing: -0.08em;
-            line-height: 0.9;
-            color: rgba(255, 255, 255, 0.18);
-            text-shadow: 0 0 22px rgba(96, 165, 250, 0.22);
-            user-select: none;
-            filter: drop-shadow(0 0 18px rgba(59, 130, 246, 0.4));
-        }
-
-        .target-text::before {
-            content: "404";
-            position: absolute;
-            inset: 0;
-            display: grid;
-            place-items: center;
-            background: linear-gradient(135deg, rgba(59,130,246,0.35), rgba(125,211,252,0.12));
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-            opacity: 0.4;
-        }
-
-        .target-text span {
-            display: inline-block;
-            position: relative;
-            z-index: 2;
-            will-change: transform, opacity;
-        }
-
-        .dot {
-            position: absolute;
-            width: 10px;
-            height: 10px;
+            inset: 10% 8% auto auto;
+            width: 220px;
+            height: 220px;
+            border: 1px solid rgba(0, 123, 255, 0.18);
             border-radius: 50%;
-            background: #7dd3fc;
-            box-shadow: 0 0 14px rgba(125, 211, 252, 0.8), 0 0 22px rgba(96, 165, 250, 0.7);
-            pointer-events: none;
-            z-index: 3;
+            animation: drift 16s linear infinite;
         }
 
-        .result {
+        .orbit::before,
+        .orbit::after {
+            content: "";
             position: absolute;
-            inset: auto 0 26px 0;
-            z-index: 5;
-            display: flex;
-            justify-content: center;
-            pointer-events: none;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            box-shadow: 0 0 18px rgba(0, 123, 255, 0.4);
         }
 
-        .result-box {
-            padding: 0.9rem 1.2rem;
-            border-radius: 999px;
-            border: 1px solid rgba(125,211,252,0.2);
-            background: rgba(6, 12, 18, 0.72);
-            color: rgba(255,255,255,0.9);
-            font-size: 0.9rem;
-            letter-spacing: 0.08em;
-            text-transform: uppercase;
-            opacity: 0;
-            transform: translateY(12px);
-            transition: opacity 0.2s ease, transform 0.2s ease;
+        .orbit::before {
+            top: 18px;
+            left: 44px;
         }
 
-        .result-box.visible {
-            opacity: 1;
-            transform: translateY(0);
+        .orbit::after {
+            right: 24px;
+            bottom: 18px;
         }
 
         .card {
-            position: absolute;
-            inset: auto 20px 22px 20px;
-            z-index: 6;
-            background: rgba(10, 16, 22, 0.72);
-            border: 1px solid rgba(125, 211, 252, 0.18);
-            border-radius: 20px;
-            padding: 1rem 1.2rem;
-            color: white;
-            backdrop-filter: blur(12px);
-            opacity: 0;
-            transform: translateY(20px);
-            transition: opacity 0.35s ease, transform 0.35s ease;
+            position: relative;
+            z-index: 1;
+            background: var(--card);
+            border: 1px solid var(--line);
+            border-radius: 32px;
+            box-shadow: 0 30px 60px rgba(15, 23, 42, 0.08);
+            backdrop-filter: blur(10px);
+            padding: clamp(2rem, 4vw, 3.5rem);
+            text-align: center;
         }
 
-        .card.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        .card-title {
-            font-size: 0.82rem;
-            letter-spacing: 0.12em;
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem 0.9rem;
+            border-radius: 999px;
+            background: rgba(125, 211, 252, 0.12);
+            border: 1px solid rgba(0, 123, 255, 0.15);
+            color: var(--primary-strong);
+            font-size: 0.8rem;
+            font-weight: 700;
+            letter-spacing: 0.08em;
             text-transform: uppercase;
-            color: rgba(125, 211, 252, 0.9);
-            margin-bottom: 0.6rem;
         }
 
-        .card-grid {
-            display: grid;
-            grid-template-columns: repeat(3, minmax(0, 1fr));
-            gap: 0.7rem;
+        .badge .dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: #22c55e;
+            box-shadow: 0 0 12px rgba(34, 197, 94, 0.8);
+            animation: pulse 1.8s ease-in-out infinite;
         }
 
-        .choice {
-            appearance: none;
-            border: 1px solid rgba(125, 211, 252, 0.2);
-            background: rgba(255,255,255,0.04);
-            color: white;
+        .error-code {
+            margin: 1.25rem 0 0.5rem;
+            font-size: clamp(5rem, 12vw, 9rem);
+            font-weight: 900;
+            letter-spacing: -0.08em;
+            line-height: 0.9;
+            color: transparent;
+            background: linear-gradient(135deg, #10b7ff 0%, #007bff 45%, #3b82f6 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            text-shadow: 0 12px 28px rgba(59, 130, 246, 0.18);
+        }
+
+        .title {
+            margin: 0 0 0.9rem;
+            font-size: clamp(1.8rem, 4vw, 2.5rem);
+            letter-spacing: -0.05em;
+        }
+
+        .message {
+            max-width: 540px;
+            margin: 0 auto;
+            color: var(--muted);
+            font-size: 1.04rem;
+            line-height: 1.8;
+        }
+
+        .message strong {
+            color: var(--ink);
+        }
+
+        .actions {
+            margin-top: 2rem;
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            min-width: 160px;
+            padding: 0.9rem 1.35rem;
             border-radius: 14px;
-            padding: 0.75rem 0.6rem;
-            cursor: pointer;
-            text-align: left;
-            transition: transform 0.2s ease, border-color 0.2s ease, background 0.2s ease;
+            text-decoration: none;
+            font-weight: 700;
+            transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
         }
 
-        .choice:hover {
+        .btn:hover {
             transform: translateY(-2px);
-            border-color: rgba(125, 211, 252, 0.55);
-            background: rgba(125, 211, 252, 0.08);
         }
 
-        .choice strong {
-            display: block;
-            font-size: 0.95rem;
-            margin-bottom: 0.2rem;
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary), var(--primary-strong));
+            color: white;
+            box-shadow: 0 12px 24px rgba(0, 123, 255, 0.18);
         }
 
-        .choice small {
-            color: rgba(255,255,255,0.7);
-            font-size: 0.7rem;
+        .btn-secondary {
+            background: rgba(255, 255, 255, 0.8);
+            color: var(--ink);
+            border: 1px solid rgba(15, 23, 42, 0.1);
+        }
+
+        .meta {
+            margin-top: 2rem;
+            color: var(--muted);
+            font-size: 0.92rem;
+        }
+
+        .meta a {
+            color: var(--primary-strong);
+            text-decoration: none;
+            border-bottom: 1px solid rgba(0, 123, 255, 0.3);
+        }
+
+        @keyframes drift {
+            0% { transform: rotate(0deg) translateY(0px); }
+            50% { transform: rotate(180deg) translateY(10px); }
+            100% { transform: rotate(360deg) translateY(0px); }
         }
 
         @keyframes pulse {
             0%, 100% { transform: scale(1); opacity: 1; }
-            50% { transform: scale(1.1); opacity: 0.7; }
+            50% { transform: scale(1.15); opacity: 0.8; }
         }
 
         @media (max-width: 640px) {
             .scene {
-                width: min(100vw - 0.8rem, 700px);
-                height: min(90vh - 0.8rem, 700px);
+                width: min(100vw - 1rem, 520px);
+                padding: 0.75rem;
             }
 
-            .card-grid {
-                grid-template-columns: 1fr;
+            .actions {
+                flex-direction: column;
+            }
+
+            .btn {
+                width: 100%;
             }
         }
     </style>
 </head>
 <body>
     <div class="scene" aria-live="polite">
-        <div id="game" aria-label="404 dot shooter game">
-            <div class="hud">
-                <div class="score">SCORE <span id="score">0</span></div>
-                <div class="status" id="status">TARGET: 404</div>
+        <div class="orbit" aria-hidden="true"></div>
+
+        <main class="card">
+            <div class="badge"><span class="dot"></span> Lost in transit</div>
+            <div class="error-code">404</div>
+            <h1 class="title">このページは別の場所へ旅立ってしまいました。</h1>
+            <p class="message">
+                <strong>お探しのURL</strong>は存在しないか、移動・削除された可能性があります。<br>
+                でも心配しないでください。ホームに戻れば、きっと次の一歩を見つけられます。
+            </p>
+
+            <div class="actions">
+                <a href="/" class="btn btn-primary">ホームへ戻る</a>
+                <a href="/docs/" class="btn btn-secondary">ドキュメントを見る</a>
             </div>
 
-            <div class="target-area">
-                <div class="target-text" id="targetText" aria-hidden="true">
-                    <span>404</span>
-                </div>
-            </div>
-
-            <div class="result">
-                <div class="result-box" id="resultBox">TARGET DESTROYED</div>
-            </div>
-
-            <div class="card" id="choiceCard">
-                <div class="card-title">MISSION CLEAR</div>
-                <div class="card-grid">
-                    <button class="choice" type="button" data-route="/" data-label="ホーム">
-                        <strong>ホーム</strong>
-                        <small>安全な場所へ戻る</small>
-                    </button>
-                    <button class="choice" type="button" data-route="/docs/" data-label="ドキュメント">
-                        <strong>ドキュメント</strong>
-                        <small>知識を集める</small>
-                    </button>
-                    <button class="choice" type="button" data-route="https://fo.ryopc.org/" data-label="サポート">
-                        <strong>サポート</strong>
-                        <small>助けを求める</small>
-                    </button>
-                </div>
-            </div>
-        </div>
+            <p class="meta">
+                それでも見つからない場合は、<a href="https://fo.ryopc.org/">サポート</a>へどうぞ。
+            </p>
+        </main>
     </div>
-
-    <script>
-        const game = document.getElementById('game');
-        const targetText = document.getElementById('targetText');
-        const scoreEl = document.getElementById('score');
-        const statusEl = document.getElementById('status');
-        const resultBox = document.getElementById('resultBox');
-        const choiceCard = document.getElementById('choiceCard');
-
-        const chars = [...'404'];
-        const dotTargets = [];
-        let score = 0;
-        let playing = true;
-
-        function createDotTargets() {
-            const textWidth = targetText.getBoundingClientRect().width;
-            const textHeight = targetText.getBoundingClientRect().height;
-            const rect = targetText.getBoundingClientRect();
-            const parentRect = game.getBoundingClientRect();
-
-            targetText.innerHTML = chars.map((char, index) => {
-                return `<span style="display:inline-block; transform: translateY(${Math.sin(index) * 8}px);">${char}</span>`;
-            }).join('');
-
-            const spans = Array.from(targetText.querySelectorAll('span'));
-
-            spans.forEach((span, index) => {
-                const spanRect = span.getBoundingClientRect();
-                const x = spanRect.left - parentRect.left + spanRect.width / 2;
-                const y = spanRect.top - parentRect.top + spanRect.height / 2;
-
-                dotTargets.push({
-                    x,
-                    y,
-                    radius: 18 + index * 5,
-                    hit: false,
-                    element: span
-                });
-            });
-        }
-
-        function spawnBurst(x, y, count = 12) {
-            for (let i = 0; i < count; i++) {
-                const dot = document.createElement('div');
-                dot.className = 'dot';
-                dot.style.left = `${x}px`;
-                dot.style.top = `${y}px`;
-                const angle = (Math.PI * 2 * i) / count + Math.random() * 0.8;
-                const speed = 3 + Math.random() * 5;
-                const dx = Math.cos(angle) * speed;
-                const dy = Math.sin(angle) * speed;
-                game.appendChild(dot);
-
-                const anim = () => {
-                    const left = parseFloat(dot.style.left) + dx;
-                    const top = parseFloat(dot.style.top) + dy;
-                    dot.style.left = `${left}px`;
-                    dot.style.top = `${top}px`;
-                    dot.style.opacity = `${Math.max(0, Number(dot.style.opacity || 1) - 0.04)}`;
-
-                    if (Number(dot.style.opacity || 1) <= 0.04) {
-                        dot.remove();
-                        return;
-                    }
-                    requestAnimationFrame(anim);
-                };
-
-                dot.style.opacity = '1';
-                requestAnimationFrame(anim);
-            }
-        }
-
-        function shootAt(x, y) {
-            if (!playing) return;
-
-            let nearest = null;
-            let nearestDistance = Infinity;
-
-            dotTargets.forEach((target) => {
-                if (target.hit) return;
-                const dx = x - target.x;
-                const dy = y - target.y;
-                const dist = Math.hypot(dx, dy);
-                if (dist < target.radius && dist < nearestDistance) {
-                    nearest = target;
-                    nearestDistance = dist;
-                }
-            });
-
-            if (!nearest) {
-                return;
-            }
-
-            nearest.hit = true;
-            score += 1;
-            scoreEl.textContent = String(score);
-            nearest.element.style.opacity = '0';
-            nearest.element.style.transform = 'scale(1.8)';
-            nearest.element.style.transition = 'all 0.15s ease';
-            spawnBurst(nearest.x, nearest.y);
-
-            if (score >= dotTargets.length) {
-                playing = false;
-                statusEl.textContent = 'MISSION CLEAR';
-                resultBox.classList.add('visible');
-                setTimeout(() => {
-                    choiceCard.classList.add('visible');
-                }, 400);
-            } else {
-                statusEl.textContent = `TARGET: ${dotTargets.length - score} LEFT`;
-            }
-        }
-
-        function setupPointerShot() {
-            game.addEventListener('pointerdown', (event) => {
-                const rect = game.getBoundingClientRect();
-                const x = event.clientX - rect.left;
-                const y = event.clientY - rect.top;
-                shootAt(x, y);
-            });
-        }
-
-        function tickBackground() {
-            if (!playing) return;
-            const now = performance.now() * 0.001;
-            targetText.style.transform = `translateY(${Math.sin(now * 2) * 8}px)`;
-            requestAnimationFrame(tickBackground);
-        }
-
-        createDotTargets();
-        setupPointerShot();
-        requestAnimationFrame(tickBackground);
-
-        document.querySelectorAll('.choice').forEach((button) => {
-            button.addEventListener('click', () => {
-                const route = button.dataset.route;
-                window.location.href = route;
-            });
-        });
-    </script>
 </body>
 </html>
