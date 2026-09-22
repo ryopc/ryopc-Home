@@ -8,176 +8,426 @@ permalink: /404.html
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>404 Not Found - ryopc.org</title>
     <style>
+        :root {
+            --bg: #f5f7fb;
+            --card: rgba(255, 255, 255, 0.88);
+            --ink: #1e293b;
+            --muted: #64748b;
+            --line: rgba(148, 163, 184, 0.2);
+            --primary: #007bff;
+            --primary-strong: #005fd1;
+            --accent: #7dd3fc;
+            --glow: rgba(0, 123, 255, 0.14);
+        }
+
         * {
-            margin: 0;
-            padding: 0;
             box-sizing: border-box;
         }
 
+        html, body {
+            margin: 0;
+            min-height: 100%;
+            font-family: "Inter", "Noto Sans JP", sans-serif;
+            background:
+                radial-gradient(circle at top left, rgba(125, 211, 252, 0.32), transparent 28%),
+                radial-gradient(circle at bottom right, rgba(0, 123, 255, 0.18), transparent 30%),
+                #09111d;
+            color: var(--ink);
+        }
+
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Noto Sans JP', sans-serif;
-            background: linear-gradient(135deg, #0f1419 0%, #1a1f2e 50%, #0d0f14 100%);
-            color: #e0e0e0;
             min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            position: relative;
+            display: grid;
+            place-items: center;
             overflow: hidden;
         }
 
-        body::before {
-            content: '';
+        .scene {
+            position: relative;
+            width: min(960px, calc(100vw - 1.2rem));
+            height: min(760px, calc(100vh - 1.2rem));
+            display: grid;
+            place-items: center;
+        }
+
+        #game {
             position: absolute;
-            top: -50%;
-            right: -50%;
-            width: 200%;
-            height: 200%;
-            background: radial-gradient(circle, rgba(59, 130, 246, 0.1) 1px, transparent 1px);
-            background-size: 50px 50px;
-            animation: drift 20s linear infinite;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            border-radius: 28px;
+            overflow: hidden;
+            background: radial-gradient(circle at center, rgba(28, 60, 100, 0.8), rgba(6, 10, 18, 0.96));
+            border: 1px solid rgba(125, 211, 252, 0.22);
+            box-shadow: 0 30px 70px rgba(0, 0, 0, 0.45);
+        }
+
+        .hud {
+            position: absolute;
+            z-index: 4;
+            top: 18px;
+            left: 18px;
+            right: 18px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: rgba(255,255,255,0.9);
+            font-size: 0.8rem;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
             pointer-events: none;
         }
 
-        @keyframes drift {
-            0% { transform: translate(0, 0); }
-            100% { transform: translate(50px, 50px); }
+        .score {
+            padding: 0.55rem 0.9rem;
+            border: 1px solid rgba(125, 211, 252, 0.18);
+            background: rgba(7, 17, 29, 0.56);
+            border-radius: 999px;
         }
 
-        @keyframes float {
-            0%, 100% { transform: translateY(0px); }
-            50% { transform: translateY(-20px); }
+        .status {
+            padding: 0.55rem 0.9rem;
+            border: 1px solid rgba(125, 211, 252, 0.18);
+            background: rgba(7, 17, 29, 0.56);
+            border-radius: 999px;
         }
 
-        .container {
+        .target-area {
+            position: absolute;
+            inset: 0;
+            z-index: 1;
+            display: grid;
+            place-items: center;
+            pointer-events: none;
+        }
+
+        .target-text {
             position: relative;
-            z-index: 10;
-            text-align: center;
-            padding: 2rem;
-            max-width: 600px;
-        }
-
-        .error-icon {
-            font-size: 5rem;
-            margin-bottom: 2rem;
-            animation: float 3s ease-in-out infinite;
-        }
-
-        .error-code {
-            font-size: 8rem;
+            font-size: clamp(5rem, 16vw, 16rem);
             font-weight: 900;
-            background: linear-gradient(135deg, #8b5cf6 0%, #6366f1 100%);
+            letter-spacing: -0.08em;
+            line-height: 0.9;
+            color: rgba(255, 255, 255, 0.18);
+            text-shadow: 0 0 22px rgba(96, 165, 250, 0.22);
+            user-select: none;
+            filter: drop-shadow(0 0 18px rgba(59, 130, 246, 0.4));
+        }
+
+        .target-text::before {
+            content: "404";
+            position: absolute;
+            inset: 0;
+            display: grid;
+            place-items: center;
+            background: linear-gradient(135deg, rgba(59,130,246,0.35), rgba(125,211,252,0.12));
             -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
             background-clip: text;
-            margin: 1rem 0;
-            letter-spacing: -2px;
+            color: transparent;
+            opacity: 0.4;
         }
 
-        .error-title {
-            font-size: 1.8rem;
-            font-weight: 600;
-            margin-bottom: 1rem;
-            color: #ffffff;
+        .target-text span {
+            display: inline-block;
+            position: relative;
+            z-index: 2;
+            will-change: transform, opacity;
         }
 
-        .error-description {
-            font-size: 1rem;
-            color: #b0b0b0;
-            line-height: 1.6;
-            margin-bottom: 2.5rem;
+        .dot {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: #7dd3fc;
+            box-shadow: 0 0 14px rgba(125, 211, 252, 0.8), 0 0 22px rgba(96, 165, 250, 0.7);
+            pointer-events: none;
+            z-index: 3;
         }
 
-        .action-buttons {
+        .result {
+            position: absolute;
+            inset: auto 0 26px 0;
+            z-index: 5;
             display: flex;
-            gap: 1rem;
             justify-content: center;
-            flex-wrap: wrap;
+            pointer-events: none;
         }
 
-        .btn {
-            padding: 0.75rem 2rem;
-            border-radius: 8px;
-            border: none;
-            font-size: 1rem;
+        .result-box {
+            padding: 0.9rem 1.2rem;
+            border-radius: 999px;
+            border: 1px solid rgba(125,211,252,0.2);
+            background: rgba(6, 12, 18, 0.72);
+            color: rgba(255,255,255,0.9);
+            font-size: 0.9rem;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            opacity: 0;
+            transform: translateY(12px);
+            transition: opacity 0.2s ease, transform 0.2s ease;
+        }
+
+        .result-box.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .card {
+            position: absolute;
+            inset: auto 20px 22px 20px;
+            z-index: 6;
+            background: rgba(10, 16, 22, 0.72);
+            border: 1px solid rgba(125, 211, 252, 0.18);
+            border-radius: 20px;
+            padding: 1rem 1.2rem;
+            color: white;
+            backdrop-filter: blur(12px);
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.35s ease, transform 0.35s ease;
+        }
+
+        .card.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .card-title {
+            font-size: 0.82rem;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: rgba(125, 211, 252, 0.9);
+            margin-bottom: 0.6rem;
+        }
+
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 0.7rem;
+        }
+
+        .choice {
+            appearance: none;
+            border: 1px solid rgba(125, 211, 252, 0.2);
+            background: rgba(255,255,255,0.04);
+            color: white;
+            border-radius: 14px;
+            padding: 0.75rem 0.6rem;
             cursor: pointer;
-            transition: all 0.3s ease;
-            font-weight: 600;
+            text-align: left;
+            transition: transform 0.2s ease, border-color 0.2s ease, background 0.2s ease;
         }
 
-        .btn-primary {
-            background: linear-gradient(135deg, #8b5cf6 0%, #6366f1 100%);
-            color: #ffffff;
-        }
-
-        .btn-primary:hover {
+        .choice:hover {
             transform: translateY(-2px);
-            box-shadow: 0 8px 24px rgba(139, 92, 246, 0.4);
+            border-color: rgba(125, 211, 252, 0.55);
+            background: rgba(125, 211, 252, 0.08);
         }
 
-        .btn-secondary {
-            background: transparent;
-            border: 2px solid #8b5cf6;
-            color: #8b5cf6;
+        .choice strong {
+            display: block;
+            font-size: 0.95rem;
+            margin-bottom: 0.2rem;
         }
 
-        .btn-secondary:hover {
-            background: rgba(139, 92, 246, 0.1);
-            transform: translateY(-2px);
+        .choice small {
+            color: rgba(255,255,255,0.7);
+            font-size: 0.7rem;
         }
 
-        .footer-text {
-            margin-top: 3rem;
-            font-size: 0.85rem;
-            color: #707070;
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(1.1); opacity: 0.7; }
         }
 
-        .footer-text a {
-            color: #8b5cf6;
-            text-decoration: none;
-            border-bottom: 1px solid transparent;
-            transition: border-color 0.3s;
-        }
-
-        .footer-text a:hover {
-            border-bottom-color: #8b5cf6;
-        }
-
-        @media (max-width: 600px) {
-            .error-code {
-                font-size: 5rem;
+        @media (max-width: 640px) {
+            .scene {
+                width: min(100vw - 0.8rem, 700px);
+                height: min(90vh - 0.8rem, 700px);
             }
 
-            .error-title {
-                font-size: 1.4rem;
-            }
-
-            .action-buttons {
-                flex-direction: column;
-            }
-
-            .btn {
-                width: 100%;
+            .card-grid {
+                grid-template-columns: 1fr;
             }
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <div class="error-icon">🔍</div>
-        <div class="error-code">404</div>
-        <h1 class="error-title">ページが見つかりません</h1>
-        <p class="error-description">
-            申し訳ございません。お探しのページは存在しないか、<br>
-            移動・削除された可能性があります。
-        </p>
-        <div class="action-buttons">
-            <a href="/" class="btn btn-primary">ホームへ</a>
-            <a href="javascript:history.back()" class="btn btn-secondary">戻る</a>
+    <div class="scene" aria-live="polite">
+        <div id="game" aria-label="404 dot shooter game">
+            <div class="hud">
+                <div class="score">SCORE <span id="score">0</span></div>
+                <div class="status" id="status">TARGET: 404</div>
+            </div>
+
+            <div class="target-area">
+                <div class="target-text" id="targetText" aria-hidden="true">
+                    <span>404</span>
+                </div>
+            </div>
+
+            <div class="result">
+                <div class="result-box" id="resultBox">TARGET DESTROYED</div>
+            </div>
+
+            <div class="card" id="choiceCard">
+                <div class="card-title">MISSION CLEAR</div>
+                <div class="card-grid">
+                    <button class="choice" type="button" data-route="/" data-label="ホーム">
+                        <strong>ホーム</strong>
+                        <small>安全な場所へ戻る</small>
+                    </button>
+                    <button class="choice" type="button" data-route="/docs/" data-label="ドキュメント">
+                        <strong>ドキュメント</strong>
+                        <small>知識を集める</small>
+                    </button>
+                    <button class="choice" type="button" data-route="https://fo.ryopc.org/" data-label="サポート">
+                        <strong>サポート</strong>
+                        <small>助けを求める</small>
+                    </button>
+                </div>
+            </div>
         </div>
-        <p class="footer-text">
-            引き続きお困りの場合は、<a href="https://fo.ryopc.org/">サポートフォーラム</a>にてご相談ください。
-        </p>
     </div>
+
+    <script>
+        const game = document.getElementById('game');
+        const targetText = document.getElementById('targetText');
+        const scoreEl = document.getElementById('score');
+        const statusEl = document.getElementById('status');
+        const resultBox = document.getElementById('resultBox');
+        const choiceCard = document.getElementById('choiceCard');
+
+        const chars = [...'404'];
+        const dotTargets = [];
+        let score = 0;
+        let playing = true;
+
+        function createDotTargets() {
+            const textWidth = targetText.getBoundingClientRect().width;
+            const textHeight = targetText.getBoundingClientRect().height;
+            const rect = targetText.getBoundingClientRect();
+            const parentRect = game.getBoundingClientRect();
+
+            targetText.innerHTML = chars.map((char, index) => {
+                return `<span style="display:inline-block; transform: translateY(${Math.sin(index) * 8}px);">${char}</span>`;
+            }).join('');
+
+            const spans = Array.from(targetText.querySelectorAll('span'));
+
+            spans.forEach((span, index) => {
+                const spanRect = span.getBoundingClientRect();
+                const x = spanRect.left - parentRect.left + spanRect.width / 2;
+                const y = spanRect.top - parentRect.top + spanRect.height / 2;
+
+                dotTargets.push({
+                    x,
+                    y,
+                    radius: 18 + index * 5,
+                    hit: false,
+                    element: span
+                });
+            });
+        }
+
+        function spawnBurst(x, y, count = 12) {
+            for (let i = 0; i < count; i++) {
+                const dot = document.createElement('div');
+                dot.className = 'dot';
+                dot.style.left = `${x}px`;
+                dot.style.top = `${y}px`;
+                const angle = (Math.PI * 2 * i) / count + Math.random() * 0.8;
+                const speed = 3 + Math.random() * 5;
+                const dx = Math.cos(angle) * speed;
+                const dy = Math.sin(angle) * speed;
+                game.appendChild(dot);
+
+                const anim = () => {
+                    const left = parseFloat(dot.style.left) + dx;
+                    const top = parseFloat(dot.style.top) + dy;
+                    dot.style.left = `${left}px`;
+                    dot.style.top = `${top}px`;
+                    dot.style.opacity = `${Math.max(0, Number(dot.style.opacity || 1) - 0.04)}`;
+
+                    if (Number(dot.style.opacity || 1) <= 0.04) {
+                        dot.remove();
+                        return;
+                    }
+                    requestAnimationFrame(anim);
+                };
+
+                dot.style.opacity = '1';
+                requestAnimationFrame(anim);
+            }
+        }
+
+        function shootAt(x, y) {
+            if (!playing) return;
+
+            let nearest = null;
+            let nearestDistance = Infinity;
+
+            dotTargets.forEach((target) => {
+                if (target.hit) return;
+                const dx = x - target.x;
+                const dy = y - target.y;
+                const dist = Math.hypot(dx, dy);
+                if (dist < target.radius && dist < nearestDistance) {
+                    nearest = target;
+                    nearestDistance = dist;
+                }
+            });
+
+            if (!nearest) {
+                return;
+            }
+
+            nearest.hit = true;
+            score += 1;
+            scoreEl.textContent = String(score);
+            nearest.element.style.opacity = '0';
+            nearest.element.style.transform = 'scale(1.8)';
+            nearest.element.style.transition = 'all 0.15s ease';
+            spawnBurst(nearest.x, nearest.y);
+
+            if (score >= dotTargets.length) {
+                playing = false;
+                statusEl.textContent = 'MISSION CLEAR';
+                resultBox.classList.add('visible');
+                setTimeout(() => {
+                    choiceCard.classList.add('visible');
+                }, 400);
+            } else {
+                statusEl.textContent = `TARGET: ${dotTargets.length - score} LEFT`;
+            }
+        }
+
+        function setupPointerShot() {
+            game.addEventListener('pointerdown', (event) => {
+                const rect = game.getBoundingClientRect();
+                const x = event.clientX - rect.left;
+                const y = event.clientY - rect.top;
+                shootAt(x, y);
+            });
+        }
+
+        function tickBackground() {
+            if (!playing) return;
+            const now = performance.now() * 0.001;
+            targetText.style.transform = `translateY(${Math.sin(now * 2) * 8}px)`;
+            requestAnimationFrame(tickBackground);
+        }
+
+        createDotTargets();
+        setupPointerShot();
+        requestAnimationFrame(tickBackground);
+
+        document.querySelectorAll('.choice').forEach((button) => {
+            button.addEventListener('click', () => {
+                const route = button.dataset.route;
+                window.location.href = route;
+            });
+        });
+    </script>
 </body>
 </html>
