@@ -138,6 +138,7 @@ async function processImage(srcUrl) {
   eleventyConfig.addPassthroughCopy("fonts");
   eleventyConfig.addPassthroughCopy(".htaccess");
   eleventyConfig.addPassthroughCopy(".well-known");
+  eleventyConfig.addPassthroughCopy("favicon.ico");
 
   return {
     pathPrefix: "/",
