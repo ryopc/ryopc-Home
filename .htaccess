@@ -66,3 +66,5 @@ ErrorDocument 401 /401.html
 ErrorDocument 400 /400.html
 ErrorDocument 500 /500.html
 ErrorDocument 510 /510.html
+ErrorDocument 503 /503.html
+
