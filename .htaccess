@@ -1,26 +1,30 @@
-# ==== MAINTENANCE MODE (既存 .htaccess の最上部に貼る) ====
-# Better Stack のメンテナンスを自動同期 (sync.php を定期実行)
+# ==== MAINTENANCE MODE ====
 ErrorDocument 503 /maintenance.php
 
-<IfModule mod_rewrite.c>
+# 1. まず全員を503対象（要メンテ状態）としてマークする
+SetEnvIf Request_URI ".*" IN_MAINTENANCE=true
+
+# 2. 静的ファイルは除外（メンテ画面崩れを防ぐ）
+SetEnvIf Request_URI "\.(jpe?g|png|gif|webp|avif|svg|ico|css|js|woff2?)$" !IN_MAINTENANCE
+
+# 3. メンテ画面自体と同期スクリプトは除外
+SetEnvIf Request_URI "^/maintenance\.php$" !IN_MAINTENANCE
+SetEnvIf Request_URI "^/sync\.php$" !IN_MAINTENANCE
+
+# 4. 自分のIPは除外
+SetEnvIf HTTP:CF-Connecting-IP "^153\.191\.11\.135$" !IN_MAINTENANCE
+
+# 5. 【重要】ファイル「maintenance.txt」が存在しないなら、メンテ状態を解除する
+# ※これにより、txtを削除・リネームすれば通常画面に戻ります
+<If "! -f '%{DOCUMENT_ROOT}/maintenance.txt'">
+    UnsetEnv IN_MAINTENANCE
+</If>
+
+# 6. 最終的にマークが残っているアクセスに503を返す
+Header always set Retry-After "3600" env=IN_MAINTENANCE
 RewriteEngine On
-
-# maintenance.txt が存在するときだけ有効
-RewriteCond %{DOCUMENT_ROOT}/maintenance.txt -f
-
-# 除外: メンテ画面 / 同期スクリプト
-RewriteCond %{REQUEST_URI} !^/maintenance\.php$
-RewriteCond %{REQUEST_URI} !^/sync\.php$
-
-# 除外: 静的ファイル（背景画像・CSS・JS・フォント等）
-RewriteCond %{REQUEST_URI} !\.(jpe?g|png|gif|webp|avif|svg|ico|css|js|woff2?)$ [NC]
-
-# 除外: 自分のIP
-RewriteCond %{HTTP:CF-Connecting-IP} ^153\.191\.11\.135$
-
+RewriteCond %{ENV:IN_MAINTENANCE} true
 RewriteRule ^ - [R=503,L]
-</IfModule>
-
 # ==== /MAINTENANCE MODE ====
 SetEnvIf Request_URI ".*" Ngx_Cache_NoCacheMode=off
 SetEnvIf Request_URI ".*" Ngx_Cache_StaticMode
@@ -28,17 +32,27 @@ SetEnvIf Request_URI ".*" Ngx_Cache_StaticMode
     # インフレーム防止（既存の設定）
     Header set X-Frame-Options "SAMEORIGIN"
     Header set Content-Security-Policy "frame-ancestors 'self'"
-
     # 1. ブラウザによる悪意のあるMIMEタイプ判定（中身の改ざん）を防ぐ
     Header set X-Content-Type-Options "nosniff"
-
     # 2. リンク元URLの情報（リファラー）を必要最小限だけ送信する（プライバシー保護）
     Header set Referrer-Policy "strict-origin-when-cross-origin"
 </IfModule>
 Options -Indexes
+# ==== HTTPS REDIRECT (Cloudflare & Xserver 同期対応版) ====
 <IfModule mod_rewrite.c>
     RewriteEngine On
-    RewriteCond %{HTTPS} off
+
+    # 1. CloudflareのHTTPS識別ヘッダーをApacheの内部変数「HTTPS=on」としてマッピング
+    SetEnvIf X-Forwarded-Proto "^https$" HTTPS=on
+
+    # 2. 内部変数がonになっていない、かつ実際の通信プロトコルがhttpの場合のみリダイレクトを実行
+    RewriteCond %{ENV:HTTPS} !on
+    RewriteCond %{HTTP:X-Forwarded-Proto} =http
     RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [R=301,L]
 </IfModule>
 ErrorDocument 404 /404.html
+ErrorDocument 403 /403.html
+ErrorDocument 401 /401.html
+ErrorDocument 400 /400.html
+ErrorDocument 500 /500.html
+ErrorDocument 510 /510.html
