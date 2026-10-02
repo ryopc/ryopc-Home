@@ -1,31 +1,41 @@
 # ==== MAINTENANCE MODE ====
 ErrorDocument 503 /maintenance.php
 
-# 1. まず全員を503対象（要メンテ状態）としてマークする
-SetEnvIf Request_URI ".*" IN_MAINTENANCE=true
-
-# 2. 静的ファイルは除外（メンテ画面崩れを防ぐ）
-SetEnvIf Request_URI "\.(jpe?g|png|gif|webp|avif|svg|ico|css|js|woff2?)$" !IN_MAINTENANCE
-
-# 3. メンテ画面自体と同期スクリプトは除外
-SetEnvIf Request_URI "^/maintenance\.php$" !IN_MAINTENANCE
-SetEnvIf Request_URI "^/sync\.php$" !IN_MAINTENANCE
-
-# 4. 自分のIPは除外
-SetEnvIf HTTP:CF-Connecting-IP "^153\.191\.11\.135$" !IN_MAINTENANCE
-
-# 5. 【重要】ファイル「maintenance.txt」が存在しないなら、メンテ状態を解除する
-# ※これにより、txtを削除・リネームすれば通常画面に戻ります
-<If "! -f '%{DOCUMENT_ROOT}/maintenance.txt'">
-    UnsetEnv IN_MAINTENANCE
+# Apacheの内部リダイレクト（エラー画面転送など）がすでに発生している場合は処理をスキップ
+<If "%{ENV:REDIRECT_STATUS} =~ /^50[0-9]$/">
+    # 何もしない（ループ防止）
 </If>
+<Else>
+    # 1. まず全員を503対象（要メンテ状態）としてマークする
+    SetEnvIf Request_URI ".*" IN_MAINTENANCE=true
 
-# 6. 最終的にマークが残っているアクセスに503を返す
-Header always set Retry-After "3600" env=IN_MAINTENANCE
-RewriteEngine On
-RewriteCond %{ENV:IN_MAINTENANCE} true
-RewriteRule ^ - [R=503,L]
+    # 2. 静的ファイルは除外（メンテ画面崩れを防ぐ）
+    SetEnvIf Request_URI "\.(jpe?g|png|gif|webp|avif|svg|ico|css|js|woff2?)$" !IN_MAINTENANCE
+
+    # 3. メンテ画面自体と同期スクリプトは除外
+    SetEnvIf Request_URI "^/maintenance\.php$" !IN_MAINTENANCE
+    SetEnvIf Request_URI "^/sync\.php$" !IN_MAINTENANCE
+
+    # 4. 自分のIPは除外
+    SetEnvIf HTTP:CF-Connecting-IP "^153\.191\.11\.135$" !IN_MAINTENANCE
+
+    # 5. 【重要】ファイル「maintenance.txt」が存在しないなら、メンテ状態を解除する
+    <If "! -f '%{DOCUMENT_ROOT}/maintenance.txt'">
+        UnsetEnv IN_MAINTENANCE
+    </If>
+
+    # 6. 最終的にマークが残っているアクセスに503を返す
+    Header always set Retry-After "3600" env=IN_MAINTENANCE
+    
+    RewriteEngine On
+    # 変数が確実に "true" である場合のみ実行
+    RewriteCond %{ENV:IN_MAINTENANCE} ^true$
+    # 念のため遷移先自身へのループを2重に防止
+    RewriteCond %{REQUEST_URI} !^/maintenance\.php$
+    RewriteRule ^ - [R=503,L]
+</Else>
 # ==== /MAINTENANCE MODE ====
+
 SetEnvIf Request_URI ".*" Ngx_Cache_NoCacheMode=off
 SetEnvIf Request_URI ".*" Ngx_Cache_StaticMode
 <IfModule mod_headers.c>
