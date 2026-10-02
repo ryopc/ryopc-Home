@@ -1,6 +1,5 @@
 # ==== MAINTENANCE MODE ====
-ErrorDocument 503 /maintenance.php
-
+ErrorDocument 503 /503.html
 # Apacheの内部リダイレクト（エラー画面転送など）がすでに発生している場合は処理をスキップ
 <If "%{ENV:REDIRECT_STATUS} =~ /^50[0-9]$/">
     # 何もしない（ループ防止）
@@ -66,5 +65,4 @@ ErrorDocument 401 /401.html
 ErrorDocument 400 /400.html
 ErrorDocument 500 /500.html
 ErrorDocument 510 /510.html
-ErrorDocument 503 /503.html
 
