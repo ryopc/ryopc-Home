@@ -1,3 +1,27 @@
+# ==== MAINTENANCE MODE (既存 .htaccess の最上部に貼る) ====
+# Better Stack のメンテナンスを自動同期 (sync.php を定期実行)
+ErrorDocument 503 /maintenance.php
+
+<IfModule mod_rewrite.c>
+RewriteEngine On
+
+# maintenance.txt が存在するときだけ有効
+RewriteCond %{DOCUMENT_ROOT}/maintenance.txt -f
+
+# 除外: メンテ画面 / 同期スクリプト
+RewriteCond %{REQUEST_URI} !^/maintenance\.php$
+RewriteCond %{REQUEST_URI} !^/sync\.php$
+
+# 除外: 静的ファイル（背景画像・CSS・JS・フォント等）
+RewriteCond %{REQUEST_URI} !\.(jpe?g|png|gif|webp|avif|svg|ico|css|js|woff2?)$ [NC]
+
+# 除外: 自分のIP
+RewriteCond %{HTTP:CF-Connecting-IP} ^153\.191\.11\.135$
+
+RewriteRule ^ - [R=503,L]
+</IfModule>
+
+# ==== /MAINTENANCE MODE ====
 SetEnvIf Request_URI ".*" Ngx_Cache_NoCacheMode=off
 SetEnvIf Request_URI ".*" Ngx_Cache_StaticMode
 <IfModule mod_headers.c>
