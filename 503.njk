@@ -1,0 +1,155 @@
+---
+permalink: /503.html
+---
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex">
+<title>只今メンテナンス中です</title>
+<style>
+:root{
+  --ink:#f6f2ea; --ink-dim:rgba(246,242,234,.72); --glow:#ffd29a;
+  --glass:rgba(16,19,24,.38); --edge:rgba(255,255,255,.18);
+  --ease:cubic-bezier(.2,.7,.2,1);
+}
+*{box-sizing:border-box;margin:0}
+html,body{height:100%}
+body{
+  background:#14181d url("background.jpg") center/cover no-repeat fixed;
+  color:var(--ink);
+  font-family:system-ui,-apple-system,"Hiragino Sans","Yu Gothic UI","Segoe UI",sans-serif;
+  overflow:hidden;
+}
+/* 背景の可読性確保：下から立ち上がる暗幕 + 周辺減光 */
+body::before{
+  content:"";position:fixed;inset:0;z-index:0;
+  background:
+    linear-gradient(to top,rgba(8,10,14,.78) 0%,rgba(8,10,14,.25) 55%,rgba(8,10,14,.12) 100%),
+    radial-gradient(120% 90% at 50% 40%,transparent 50%,rgba(0,0,0,.4) 100%);
+  animation:settle 2.6s var(--ease) both;
+}
+@keyframes settle{from{opacity:0}to{opacity:1}}
+
+.stage{
+  position:relative;z-index:1;min-height:100%;display:flex;align-items:flex-end;
+  padding:clamp(20px,5vw,72px);
+  padding-bottom:max(clamp(20px,5vw,72px),env(safe-area-inset-bottom));
+}
+
+/* グラスパネル */
+.panel{
+  position:relative;width:min(560px,100%);padding:clamp(28px,4vw,44px);
+  background:var(--glass);
+  -webkit-backdrop-filter:blur(22px) saturate(140%);backdrop-filter:blur(22px) saturate(140%);
+  border:1px solid var(--edge);border-radius:24px;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.22),0 40px 90px -20px rgba(0,0,0,.6);
+  overflow:hidden;
+  animation:rise 1.2s .25s var(--ease) both;
+}
+@keyframes rise{from{opacity:0;transform:translateY(28px) scale(.985);filter:blur(8px)}to{opacity:1;transform:none;filter:none}}
+
+/* 作業中を示す走査線（文言なし） */
+.panel::before{
+  content:"";position:absolute;left:0;top:0;height:2px;width:40%;
+  background:linear-gradient(90deg,transparent,var(--glow),transparent);
+  animation:scan 3.2s 1.4s ease-in-out infinite;
+}
+@keyframes scan{0%{transform:translateX(-100%)}100%{transform:translateX(250%)}}
+
+h1{
+  font-weight:300;line-height:1.18;letter-spacing:.03em;
+  font-size:clamp(2.1rem,6.4vw,3.6rem);margin-bottom:1.1rem;
+  font-family:"Hiragino Mincho ProN","Yu Mincho","YuMincho","Noto Serif JP",serif;
+}
+html[lang="en"] h1{
+  font-family:"Iowan Old Style","Palatino Linotype",Palatino,"Book Antiqua",Georgia,serif;
+  letter-spacing:-.01em;font-size:clamp(2.3rem,7vw,4rem);
+}
+p{font-size:clamp(.95rem,2.4vw,1.05rem);line-height:1.85;color:var(--ink-dim);max-width:34em}
+
+/* 文言切り替え：ぼかしフェード + スライド */
+.sw{transition:opacity .34s var(--ease),transform .34s var(--ease),filter .34s var(--ease)}
+.sw.out{opacity:0;transform:translateY(-10px);filter:blur(6px)}
+.sw.pre{transition:none;opacity:0;transform:translateY(10px);filter:blur(6px)}
+p.sw{transition-delay:.05s}
+
+/* JA / EN スイッチ */
+.lang{
+  position:fixed;z-index:2;top:max(18px,env(safe-area-inset-top));right:clamp(18px,4vw,48px);
+  display:flex;padding:4px;border-radius:999px;
+  background:rgba(16,19,24,.4);border:1px solid var(--edge);
+  -webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);
+  animation:settle 1.4s 1s both;
+}
+.lang::before{ /* スライドするつまみ */
+  content:"";position:absolute;top:4px;bottom:4px;left:4px;width:calc(50% - 4px);border-radius:999px;
+  background:var(--ink);transition:transform .45s var(--ease);
+}
+.lang[data-l="en"]::before{transform:translateX(100%)}
+.lang button{
+  position:relative;min-width:52px;padding:8px 14px;border:0;background:none;cursor:pointer;
+  font:600 .8rem/1 system-ui,sans-serif;letter-spacing:.14em;color:var(--ink);
+  transition:color .35s,transform .25s var(--ease);
+}
+.lang button[aria-pressed="true"]{color:#14181d}
+.lang button:hover{transform:translateY(-1px)}
+.lang button:active{transform:scale(.94)}
+.lang button:focus-visible{outline:2px solid var(--glow);outline-offset:2px;border-radius:999px}
+
+@media (max-width:600px){
+  .stage{align-items:flex-end;padding:16px}
+  .panel{border-radius:20px}
+}
+@media (prefers-reduced-motion:reduce){
+  *,*::before{animation:none!important;transition-duration:.01s!important}
+}
+</style>
+</head>
+<body>
+<nav class="lang" data-l="ja" aria-label="Language">
+  <button type="button" data-set="ja" aria-pressed="true">JA</button>
+  <button type="button" data-set="en" aria-pressed="false">EN</button>
+</nav>
+
+<main class="stage">
+  <section class="panel" role="status">
+    <h1 class="sw" data-k="t">只今メンテナンス中です</h1>
+    <p class="sw" data-k="d">いつもご利用いただきありがとうございます。現在、システムメンテナンスを行っております。作業終了まで今しばらくお待ちください。</p>
+  </section>
+</main>
+
+<script>
+(function(){
+  var T={
+    ja:{t:"只今メンテナンス中です",d:"いつもご利用いただきありがとうございます。現在、システムメンテナンスを行っております。作業終了まで今しばらくお待ちください。"},
+    en:{t:"Under Maintenance",d:"Thank you for visiting. We are currently performing system maintenance. Please wait a moment until the work is completed."}
+  };
+  var nav=document.querySelector(".lang"),btns=nav.querySelectorAll("button"),
+      els=[].slice.call(document.querySelectorAll(".sw")),cur="ja",busy=false;
+
+  function paint(l){
+    cur=l;document.documentElement.lang=l;document.title=T[l].t;nav.dataset.l=l;
+    btns.forEach(function(b){b.setAttribute("aria-pressed",String(b.dataset.set===l))});
+    els.forEach(function(e){e.textContent=T[l][e.dataset.k]});
+  }
+  function set(l){
+    if(l===cur||busy)return;busy=true;
+    nav.dataset.l=l;
+    btns.forEach(function(b){b.setAttribute("aria-pressed",String(b.dataset.set===l))});
+    els.forEach(function(e,i){setTimeout(function(){e.classList.add("out")},i*60)});
+    setTimeout(function(){
+      paint(l);
+      els.forEach(function(e){e.classList.remove("out");e.classList.add("pre")});
+      void document.body.offsetHeight;                       // reflow
+      els.forEach(function(e,i){setTimeout(function(){e.classList.remove("pre")},i*70)});
+      setTimeout(function(){busy=false},500);
+    },420);
+  }
+  btns.forEach(function(b){b.addEventListener("click",function(){set(b.dataset.set)})});
+  paint((navigator.language||"ja").toLowerCase().indexOf("ja")===0?"ja":"en");
+})();
+</script>
+</body>
+</html>
