@@ -11,25 +11,25 @@ module.exports = function (eleventyConfig) {
     fs.mkdirSync("./_site/img/", { recursive: true });
   }
 
- // ==========================================
-// 💡 [共通処理] 外部URLの画像をダウンロードしてWebPに変換する関数
-// ==========================================
-async function processImage(srcUrl) {
-  if (!srcUrl) return null;
+  // ==========================================
+  // 💡 [共通処理] 外部URLの画像をダウンロードしてWebPに変換する関数
+  // ==========================================
+  async function processImage(srcUrl) {
+    if (!srcUrl) return null;
 
-  // new を付けた上で、処理の完了を待つために await します
-  return await new Image(srcUrl, {
-    widths: ["auto"],
-    formats: ["webp"],
-    outputDir: "./_site/img/",
-    urlPath: "/img/",
-    cacheOptions: {
-      duration: "1d",
-      directory: ".cache",
-      removeUrlQueryParams: false,
-    },
-  });
-}
+    // new を付けた上で、処理の完了を待つために await します
+    return await new Image(srcUrl, {
+      widths: ["auto"],
+      formats: ["webp"],
+      outputDir: "./_site/img/",
+      urlPath: "/img/",
+      cacheOptions: {
+        duration: "1d",
+        directory: ".cache",
+        removeUrlQueryParams: false,
+      },
+    });
+  }
 
   // ==========================================
   // 💡 本文の中の外部画像をダウンロードして置換する関数

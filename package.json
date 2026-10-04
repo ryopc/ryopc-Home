@@ -20,7 +20,7 @@
     "node": ">=18.18.0"
   },
   "devDependencies": {
-    "@11ty/eleventy": "^3.0.0",
+    "@11ty/eleventy": "^4.0.0-alpha.10",
     "dotenv": "^17.4.2",
     "eslint": "^9.0.0",
     "husky": "^9.1.7",
@@ -36,6 +36,7 @@
   "overrides": {
     "js-yaml": "^4.2.0",
     "sharp": "$sharp",
-    "liquidjs": "^10.29.0"
+    "liquidjs": "^10.29.0",
+    "markdown-it": "^14.3.1"
   }
 }
