@@ -15,4 +15,12 @@ export default [
       "no-unused-vars": "warn", // 使っていない変数があってもエラーではなく警告にする
     },
   },
+  {
+    files: ["js/banner-offset.js", "_site/js/banner-offset.js"],
+    languageOptions: {
+      globals: {
+        ...globals.browser,
+      },
+    },
+  },
 ];
