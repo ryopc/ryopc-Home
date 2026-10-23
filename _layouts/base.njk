@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="{{ locale | default('ja') }}">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>{{ title | default('ryopc org') }}</title>
+    <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+    
+    {% block head_extra %}{% endblock %}
+    
+    {% include "partials/head-common.njk" %}
+    
+    {% block styles %}{% endblock %}
+</head>
+<body>
+    <div id="banner"></div>
+    <script src="https://keepandroidopen.org/banner.js?id=banner"></script>
+    <script src="/js/banner-offset.js" defer></script>
+
+    <div id="scroll-progress"></div>
+
+    {% include "partials/navbar.njk" %}
+
+    {% block header %}{% endblock %}
+
+    <main class="container" id="contentContainer">
+        {% block content %}{% endblock %}
+    </main>
+
+    {% include "partials/footer.njk" %}
+
+    {% include "partials/cookie-banner.njk" %}
+    {% include "partials/chat-button.njk" %}
+
+    {% include "partials/scripts-common.njk" %}
+    
+    {% block scripts %}{% endblock %}
+</body>
+</html>

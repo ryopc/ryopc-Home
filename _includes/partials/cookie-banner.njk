@@ -1,0 +1,63 @@
+<div id="chCookieBanner" class="ch-cookie-banner ch-hidden">
+  <div class="ch-cookie-text" data-t="cookie_text">
+    <strong>About the Use of Cookies</strong><br />
+    This site uses cookies to provide chat support and improve your user experience. By agreeing, you will be able to use our chat support service.
+  </div>
+  <div class="ch-cookie-buttons">
+    <button class="ch-cookie-btn ch-btn-deny" onclick="chDenyCookie()" data-t="cookie_deny">拒否</button>
+    <button class="ch-cookie-btn ch-btn-accept" onclick="chAcceptCookie()" data-t="cookie_accept">同意して利用開始</button>
+  </div>
+</div>
+
+<style>
+  /* クッキーバナー */
+  .ch-cookie-banner {
+    position: fixed;
+    bottom: 32px;
+    left: 32px;
+    right: 32px;
+    background: var(--glass);
+    backdrop-filter: blur(15px);
+    color: var(--white);
+    padding: 24px 32px;
+    border-radius: 24px;
+    z-index: 1000000;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 24px;
+    flex-wrap: wrap;
+  }
+  .ch-cookie-banner.ch-hidden {
+    display: none !important;
+  }
+  .ch-cookie-buttons {
+    display: flex;
+    gap: 14px;
+  }
+  .ch-cookie-btn {
+    padding: 14px 28px;
+    border: none;
+    border-radius: 14px;
+    font-weight: 700;
+    cursor: pointer;
+  }
+  .ch-btn-accept {
+    background: var(--primary);
+    color: var(--white);
+  }
+  .ch-btn-deny {
+    background: rgba(255, 255, 255, 0.1);
+    color: var(--white);
+  }
+
+  @media (max-width: 900px) {
+    .ch-cookie-banner {
+      bottom: 16px;
+      left: 16px;
+      right: 16px;
+      padding: 16px;
+      gap: 16px;
+    }
+  }
+</style>

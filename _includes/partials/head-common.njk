@@ -1,0 +1,88 @@
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet" />
+
+<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin />
+<link rel="stylesheet" id="silktide-consent-manager-css" href="https://cdn.jsdelivr.net/gh/silktide/consent-manager@v2.0.0/silktide-consent-manager.css" xintegrity="sha384-IO1E/jCrQXyH5rwcI0SXP7OXw47JFqQNDQcKhbFvqnL2IunBxxwE2Ne5XyAmCqKs" crossorigin="anonymous" media="print" onload="this.media='all'" />
+<script src="https://cdn.jsdelivr.net/gh/silktide/consent-manager@v2.0.0/silktide-consent-manager.js" xintegrity="sha384-j4NIMOecmtzMWe9GJADIIe5hTlHG63aiTQ/2XorW10RNyQJg+IU+xwFVDy45wBah" crossorigin="anonymous" defer></script>
+
+<script>
+  window.silktideConsentManager.init({
+    backdrop: { show: true },
+    icon: { position: "bottomLeft" },
+    prompt: { position: "bottomRight" },
+    consentTypes: [
+      {
+        id: "essential",
+        label: "Essential",
+        description: "<p>These cookies are necessary for the website to function properly and cannot be switched off. They help with things like logging in and setting your privacy preferences.</p>",
+        required: true,
+        onAccept: function () { console.log("Essential cookies active"); }
+      },
+      {
+        id: "customer_support",
+        label: "Customer Support",
+        description: "<p>This cookie helps us provide you with the best possible support.</p>",
+        required: false,
+        scripts: [{ url: "https://rawcdn.githack.com/ryopc/Archive/fc3acd1142e5108dc5263e4b112a768988cccb4d/Channel-Talk.js", load: "async" }],
+        onAccept: function () { console.log("Channel Talk active"); }
+      }
+    ],
+    text: {
+      prompt: {
+        description: "<p>This site uses cookies to improve the user experience and provide personalized content.</p>",
+        acceptAllButtonText: "Accept all",
+        acceptAllButtonAccessibleLabel: "Accept all cookies",
+        rejectNonEssentialButtonText: "Reject non-essential",
+        rejectNonEssentialButtonAccessibleLabel: "Reject all non-essential cookies",
+        preferencesButtonText: "Preferences",
+        preferencesButtonAccessibleLabel: "Toggle preferences"
+      },
+      preferences: {
+        title: "Customize your cookie preferences",
+        description: "<p>We respect your right to privacy. You can choose not to allow some types of cookies. Your cookie preferences will apply across our website.</p>",
+        saveButtonText: "Save and close",
+        saveButtonAccessibleLabel: "Save your cookie preferences",
+        creditLinkText: "Get this banner for free",
+        creditLinkAccessibleLabel: "Get this banner for free"
+      }
+    }
+  });
+</script>
+
+<style>
+  :root {
+    --primary: #0052cc;
+    --primary-light: #0764f1;
+    --dark: #0a192f;
+    --dark-light: #172a45;
+    --accent: #00bfff;
+    --bg: #f8fafc;
+    --text: #334155;
+    --text-light: #64748b;
+    --white: #ffffff;
+    --glass: rgba(10, 25, 47, 0.9);
+    --transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+    --gradient-accent: linear-gradient(135deg, #00bfff, #0052cc);
+    --gradient-orange: linear-gradient(135deg, #ff5000, #ff8c00);
+  }
+
+  * { box-sizing: border-box; outline: none; }
+  html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+
+  body {
+    font-family: "Inter", system-ui, -apple-system, sans-serif;
+    margin: 0; padding: 0;
+    background-color: var(--bg);
+    color: var(--text);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+  }
+
+  #scroll-progress {
+    position: fixed; top: 0; left: 0; width: 0%; height: 4px;
+    background: var(--gradient-accent);
+    z-index: 1000001; transition: width 0.1s;
+  }
+</style>

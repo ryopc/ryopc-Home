@@ -1,0 +1,153 @@
+<nav class="navbar">
+  <div class="nav-logo">ryopc org</div>
+
+  <div class="nav-right">
+    <label for="langSelector" class="visually-hidden" data-t="label_language">言語選択</label>
+    <select class="lang-selector" id="langSelector" onchange="changeLanguage(this.value)">
+      <option value="ja">日本語</option>
+      <option value="en">English</option>
+      <option value="pt">Português</option>
+    </select>
+
+    <button class="menu-toggle" id="menuToggle" aria-label="Toggle Navigation">
+      <span></span><span></span><span></span>
+    </button>
+
+    <ul class="nav-links" id="navLinks">
+      <li><a href="/" data-t="nav_home">ホーム</a></li>
+      <li><a href="https://game-ryo.is-a.dev" data-t="nav_operator">運営者について</a></li>
+      <li><a href="/blog" data-t="nav_note">note</a></li>
+      <li><a href="/docs" data-t="nav_docs">ドキュメント</a></li>
+      <li><a href="https://st.ryopc.org" data-t="nav_st">ステータス</a></li>
+      <li><a href="/register" data-t="register">登録</a></li>
+      <li><a href="/login" data-t="login">ログイン</a></li>
+    </ul>
+  </div>
+</nav>
+
+<style>
+  /* --- ナビゲーションバー --- */
+  .navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background: var(--glass);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 2.5rem;
+    z-index: 100000;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  }
+  .nav-logo {
+    color: var(--white);
+    font-weight: 800;
+    font-size: 1.2rem;
+    cursor: pointer;
+  }
+
+  .nav-right {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+  }
+  .nav-links {
+    display: flex;
+    gap: 2rem;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  .nav-links a {
+    color: var(--white);
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 0.95rem;
+    transition: var(--transition);
+    opacity: 0.8;
+  }
+  .nav-links a:hover {
+    color: var(--accent);
+    opacity: 1;
+  }
+
+  /* 言語セレクター */
+  .lang-selector {
+    background: rgba(255, 255, 255, 0.1);
+    color: var(--white);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    padding: 6px 12px;
+    border-radius: 10px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: var(--transition);
+  }
+  .lang-selector:hover {
+    background: rgba(255, 255, 255, 0.2);
+  }
+  .lang-selector option {
+    background: var(--dark);
+    color: var(--white);
+  }
+
+  .menu-toggle {
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 5px;
+  }
+  .menu-toggle span {
+    display: block;
+    width: 22px;
+    height: 2px;
+    background: var(--white);
+    border-radius: 2px;
+    transition: var(--transition);
+  }
+
+  /* ハンバーガーメニューのアニメーション効果 */
+  .menu-toggle.active span:nth-child(1) {
+    transform: translateY(7px) rotate(45deg);
+  }
+  .menu-toggle.active span:nth-child(2) {
+    opacity: 0;
+  }
+  .menu-toggle.active span:nth-child(3) {
+    transform: translateY(-7px) rotate(-45deg);
+  }
+
+  @media (max-width: 900px) {
+    .navbar {
+      padding: 1rem 1.5rem;
+    }
+    .nav-right {
+      gap: 1rem;
+    }
+    .nav-links {
+      display: none;
+    }
+    .nav-links.active {
+      display: flex;
+      position: absolute;
+      top: 100%;
+      left: 0;
+      width: 100%;
+      background: var(--dark);
+      flex-direction: column;
+      padding: 2rem 0;
+      align-items: center;
+      gap: 1.5rem;
+      box-shadow: 0 10px 15px rgba(0, 0, 0, 0.3);
+    }
+    .menu-toggle {
+      display: flex;
+    }
+  }
+</style>
