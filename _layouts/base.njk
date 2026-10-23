@@ -6,11 +6,11 @@
     <title>{{ title | default('ryopc org') }}</title>
     <link rel="icon" type="image/x-icon" href="/favicon.ico" />
     
-    {% block head_extra %}{% endblock %}
+    {{ headExtra | safe }}
     
     {% include "partials/head-common.njk" %}
     
-    {% block styles %}{% endblock %}
+    {{ extraStyles | safe }}
 </head>
 <body>
     <div id="banner"></div>
@@ -21,10 +21,10 @@
 
     {% include "partials/navbar.njk" %}
 
-    {% block header %}{% endblock %}
+    {{ headerContent | safe }}
 
     <main class="container" id="contentContainer">
-        {% block content %}{% endblock %}
+        {{ mainContent | safe }}
     </main>
 
     {% include "partials/footer.njk" %}
@@ -34,6 +34,6 @@
 
     {% include "partials/scripts-common.njk" %}
     
-    {% block scripts %}{% endblock %}
+    {{ extraScripts | safe }}
 </body>
 </html>

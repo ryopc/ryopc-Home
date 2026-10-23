@@ -1,432 +1,468 @@
 ---
 layout: base.njk
 permalink: /
----
-{% block head_extra %}
+headExtra: |
   <meta name="adring-site-verification" content="adring_vrf_Wf6N_EfPgcscrbpnKKnsJY6n8dwMboKq" />
   <script src="https://code.activetk.jp/archive-today.blocker.js" defer></script>
-{% endblock %}
-
-{% block styles %}
-<style>
-  /* ヘッダー */
-  header {
-    background: radial-gradient(circle at top right, var(--dark-light), var(--dark));
-    color: var(--white);
-    padding: 12rem 1.5rem 11rem;
-    text-align: center;
-    position: relative;
-    overflow: hidden;
-  }
-
-  header h1 {
-    margin: 0;
-    font-size: clamp(2.8rem, 10vw, 4.5rem);
-    font-weight: 800;
-    background: linear-gradient(135deg, var(--white) 40%, var(--accent));
-    -webkit-background-clip: text;
-    background-clip: text;
-    -webkit-text-fill-color: transparent;
-  }
-
-  header p {
-    font-size: 1.25rem;
-    max-width: 700px;
-    margin: 2rem auto 0;
-    color: var(--text-light);
-    opacity: 0.9;
-  }
-
-  /* コンテンツ */
-  .container {
-    max-width: 900px;
-    margin: -5rem auto 6rem;
-    padding: 0 1.5rem;
-    position: relative;
-    z-index: 10;
-  }
-
-  .card {
-    background: var(--white);
-    padding: 3rem;
-    border-radius: 32px;
-    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.08);
-    margin-bottom: 2.5rem;
-    border: 1px solid rgba(226, 232, 240, 0.8);
-    transition: var(--transition);
-  }
-  .card:hover {
-    transform: translateY(-8px);
-    border-color: var(--accent);
-  }
-
-  h2 {
-    color: var(--dark);
-    font-size: 1.75rem;
-    margin-top: 0;
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-  }
-  h2::before {
-    content: "";
-    display: inline-block;
-    width: 6px;
-    height: 28px;
-    background: var(--gradient-accent);
-    border-radius: 10px;
-    flex-shrink: 0;
-  }
-
-  .docs-link-button {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 15px;
-    background: var(--dark);
-    color: var(--white) !important;
-    text-decoration: none;
-    padding: 1.5rem 2.5rem;
-    border-radius: 20px;
-    font-weight: 700;
-    font-size: 1.3rem;
-    transition: var(--transition);
-    box-shadow: 0 15px 35px rgba(10, 25, 47, 0.2);
-  }
-  .docs-link-button:hover {
-    background: var(--primary);
-    transform: translateY(-3px);
-  }
-
-  /* サービスリンク */
-  .service-links {
-    list-style: none;
-    padding: 0;
-    margin-top: 1.5rem;
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-  }
-  .service-links li a {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    color: var(--primary);
-    font-weight: 600;
-    text-decoration: none;
-    background: rgba(0, 82, 204, 0.05);
-    padding: 14px 24px;
-    border-radius: 16px;
-    width: 100%;
-    transition: var(--transition);
-    border: 1px solid rgba(0, 82, 204, 0.1);
-  }
-  .service-links li a:hover {
-    background: rgba(0, 82, 204, 0.1);
-    color: var(--primary-light);
-    transform: translateY(-2px);
-    border-color: rgba(0, 82, 204, 0.2);
-  }
-  .service-links li a span {
-    font-size: 1.2em;
-    transition: transform 0.3s ease;
-  }
-  .service-links li a:hover span {
-    transform: translateX(4px);
-  }
-
-  /* フォーム共通 */
-  .form-group {
-    margin-bottom: 1.5rem;
-    text-align: left;
-  }
-  .form-group label {
-    display: block;
-    font-weight: 700;
-    font-size: 0.9rem;
-    color: var(--dark);
-    margin-bottom: 0.5rem;
-    letter-spacing: 0.5px;
-  }
-  .form-control {
-    width: 100%;
-    padding: 1rem 1.25rem;
-    border-radius: 14px;
-    border: 1px solid rgba(226, 232, 240, 0.8);
-    background-color: var(--bg);
-    color: var(--text);
-    font-family: inherit;
-    font-size: 1rem;
-    transition: var(--transition);
-  }
-  .form-control:focus {
-    border-color: var(--accent);
-    background-color: var(--white);
-    box-shadow: 0 0 0 4px rgba(0, 191, 255, 0.15);
-  }
-  select.form-control {
-    cursor: pointer;
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    appearance: none;
-    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%23334155' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><polyline points='6 9 12 15 18 9'></polyline></svg>");
-    background-repeat: no-repeat;
-    background-position: right 1.25rem center;
-    background-size: 1rem;
-    padding-right: 3rem;
-  }
-  .form-submit-btn {
-    width: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 15px;
-    background: var(--gradient-accent);
-    color: var(--white);
-    border: none;
-    padding: 1.25rem 2.5rem;
-    border-radius: 20px;
-    font-weight: 700;
-    font-size: 1.2rem;
-    cursor: pointer;
-    transition: var(--transition);
-    box-shadow: 0 10px 25px rgba(0, 82, 204, 0.15);
-    margin-top: 2rem;
-  }
-  .form-submit-btn:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 15px 35px rgba(0, 82, 204, 0.25);
-  }
-
-  /* ニュースレター専用調整 */
-  #newsletter .form-submit-btn {
-    margin-top: 0;
-  }
-  #newsletter .form-note {
-    margin-top: 1rem;
-    font-size: 0.85rem;
-    color: var(--text-light);
-    text-align: center;
-  }
-
-  @media (max-width: 900px) {
-    .card {
-      padding: 2rem 1.5rem;
-      border-radius: 24px;
+  <!-- Turnstile -->
+  <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
+extraStyles: |
+  <style>
+    /* ヘッダー */
+    header {
+      background: radial-gradient(circle at top right, var(--dark-light), var(--dark));
+      color: var(--white);
+      padding: 12rem 1.5rem 11rem;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
     }
-  }
-</style>
-{% endblock %}
 
-{% block header %}
-<header>
-  <h1 data-t="hero_title">ryopc org</h1>
-  <p data-t="hero_desc">
-    Ensuring everyone, everywhere, has access to legitimate support for
-    digital devices.
-  </p>
-</header>
-{% endblock %}
+    header h1 {
+      margin: 0;
+      font-size: clamp(2.8rem, 10vw, 4.5rem);
+      font-weight: 800;
+      background: linear-gradient(135deg, var(--white) 40%, var(--accent));
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
 
-{% block content %}
-<!-- [ミッション] -->
-<section class="card" id="mission">
-  <h2 data-t="mission_title">Our Mission</h2>
-  <p data-t="mission_body">
-    Led by <strong>game_ryo</strong>, ryopc is a digital-first global
-    initiative. We believe that access to technology is a fundamental
-    right, and fair, transparent support is essential to maintain it. We
-    protect users from fraudulent support practices worldwide.
-  </p>
-</section>
+    header p {
+      font-size: 1.25rem;
+      max-width: 700px;
+      margin: 2rem auto 0;
+      color: var(--text-light);
+      opacity: 0.9;
+    }
 
-<!-- [サービス] -->
-<section class="card" id="services">
-  <h2 data-t="services_title">Our Services</h2>
-  <p data-t="services_body">
-    We provide a multi-layered ecosystem including legitimate device
-    guidance and digital literacy advocacy. We plan to sequentially launch
-    diverse digital solutions to meet the evolving needs of the global
-    community.
-  </p>
+    /* コンテンツ */
+    .container {
+      max-width: 900px;
+      margin: -5rem auto 6rem;
+      padding: 0 1.5rem;
+      position: relative;
+      z-index: 10;
+    }
 
-  <!-- サービスリンク -->
-  <ul class="service-links">
-    <li>
-      <a href="https://ryopc.channel.io" target="_blank" rel="noopener noreferrer">
-        Support via ChannelTalk <span>➔</span>
-      </a>
-    </li>
-    <li>
-      <a href="https://jr-it.rweb.site" target="_blank" rel="noopener noreferrer">
-        Kids IT Certification <span>➔</span>
-      </a>
-    </li>
-    <li>
-      <a href="https://www.zqls.f5.si" target="_blank" rel="noopener noreferrer">
-        ZaqLess <span>➔</span>
-      </a>
-    </li>
-    <li>
-      <a href="https://koshi.js.org" target="_blank" rel="noopener noreferrer">
-        Koshi <span>➔</span>
-      </a>
-    </li>
-    <li>
-      <a href="https://fo.ryopc.org" target="_blank" rel="noopener noreferrer">
-        ryopc forum <span>➔</span>
-      </a>
-    </li>
-    <li>
-      <a href="https://pages.ryopc.org" target="_blank" rel="noopener noreferrer">
-        ryopc pages <span>➔</span>
-      </a>
-    </li>    
-  </ul>
-</section>
+    .card {
+      background: var(--white);
+      padding: 3rem;
+      border-radius: 32px;
+      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.08);
+      margin-bottom: 2.5rem;
+      border: 1px solid rgba(226, 232, 240, 0.8);
+      transition: var(--transition);
+    }
+    .card:hover {
+      transform: translateY(-8px);
+      border-color: var(--accent);
+    }
 
-<!-- [メルマガ登録] -->
-<section class="card" id="newsletter">
-  <h2 data-t="newsletter_title">📬 メルマガ登録</h2>
-  <p data-t="newsletter_desc" style="color: var(--text-light); margin-bottom: 2rem">
-    最新のアップデートと技術情報をお届けします。
-  </p>
+    h2 {
+      color: var(--dark);
+      font-size: 1.75rem;
+      margin-top: 0;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+    h2::before {
+      content: "";
+      display: inline-block;
+      width: 6px;
+      height: 28px;
+      background: var(--gradient-accent);
+      border-radius: 10px;
+      flex-shrink: 0;
+    }
 
-  <a
-    href="https://ryopc.org/mail/lists/?p=subscribe&id=1"
-    class="form-submit-btn"
-    style="text-decoration: none"
-    aria-label="メーリングリストに登録"
-  >
-    <span data-t="btn_nl_subscribe">メルマガに登録</span> <span>➔</span>
+    .docs-link-button {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 15px;
+      background: var(--dark);
+      color: var(--white) !important;
+      text-decoration: none;
+      padding: 1.5rem 2.5rem;
+      border-radius: 20px;
+      font-weight: 700;
+      font-size: 1.3rem;
+      transition: var(--transition);
+      box-shadow: 0 15px 35px rgba(10, 25, 47, 0.2);
+    }
+    .docs-link-button:hover {
+      background: var(--primary);
+      transform: translateY(-3px);
+    }
+
+    /* サービスリンク */
+    .service-links {
+      list-style: none;
+      padding: 0;
+      margin-top: 1.5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    .service-links li a {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      color: var(--primary);
+      font-weight: 600;
+      text-decoration: none;
+      background: rgba(0, 82, 204, 0.05);
+      padding: 14px 24px;
+      border-radius: 16px;
+      width: 100%;
+      transition: var(--transition);
+      border: 1px solid rgba(0, 82, 204, 0.1);
+    }
+    .service-links li a:hover {
+      background: rgba(0, 82, 204, 0.1);
+      color: var(--primary-light);
+      transform: translateY(-2px);
+      border-color: rgba(0, 82, 204, 0.2);
+    }
+    .service-links li a span {
+      font-size: 1.2em;
+      transition: transform 0.3s ease;
+    }
+    .service-links li a:hover span {
+      transform: translateX(4px);
+    }
+
+    /* フォーム共通 */
+    .form-group {
+      margin-bottom: 1.5rem;
+      text-align: left;
+    }
+    .form-group label {
+      display: block;
+      font-weight: 700;
+      font-size: 0.9rem;
+      color: var(--dark);
+      margin-bottom: 0.5rem;
+      letter-spacing: 0.5px;
+    }
+    .form-control {
+      width: 100%;
+      padding: 1rem 1.25rem;
+      border-radius: 14px;
+      border: 1px solid rgba(226, 232, 240, 0.8);
+      background-color: var(--bg);
+      color: var(--text);
+      font-family: inherit;
+      font-size: 1rem;
+      transition: var(--transition);
+    }
+    .form-control:focus {
+      border-color: var(--accent);
+      background-color: var(--white);
+      box-shadow: 0 0 0 4px rgba(0, 191, 255, 0.15);
+    }
+    select.form-control {
+      cursor: pointer;
+      -webkit-appearance: none;
+      -moz-appearance: none;
+      appearance: none;
+      background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%23334155' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><polyline points='6 9 12 15 18 9'></polyline></svg>");
+      background-repeat: no-repeat;
+      background-position: right 1.25rem center;
+      background-size: 1rem;
+      padding-right: 3rem;
+    }
+    .form-submit-btn {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 15px;
+      background: var(--gradient-accent);
+      color: var(--white);
+      border: none;
+      padding: 1.25rem 2.5rem;
+      border-radius: 20px;
+      font-weight: 700;
+      font-size: 1.2rem;
+      cursor: pointer;
+      transition: var(--transition);
+      box-shadow: 0 10px 25px rgba(0, 82, 204, 0.15);
+      margin-top: 2rem;
+    }
+    .form-submit-btn:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 15px 35px rgba(0, 82, 204, 0.25);
+    }
+
+    /* ニュースレター専用調整 */
+    #newsletter .form-submit-btn {
+      margin-top: 0;
+    }
+    #newsletter .form-note {
+      margin-top: 1rem;
+      font-size: 0.85rem;
+      color: var(--text-light);
+      text-align: center;
+    }
+
+    @media (max-width: 900px) {
+      .card {
+        padding: 2rem 1.5rem;
+        border-radius: 24px;
+      }
+    }
+  </style>
+headerContent: |
+  <header>
+    <h1 data-t="hero_title">ryopc org</h1>
+    <p data-t="hero_desc">
+      Ensuring everyone, everywhere, has access to legitimate support for
+      digital devices.
+    </p>
+  </header>
+mainContent: |
+  <!-- [ミッション] -->
+  <section class="card" id="mission">
+    <h2 data-t="mission_title">Our Mission</h2>
+    <p data-t="mission_body">
+      Led by <strong>game_ryo</strong>, ryopc is a digital-first global
+      initiative. We believe that access to technology is a fundamental
+      right, and fair, transparent support is essential to maintain it. We
+      protect users from fraudulent support practices worldwide.
+    </p>
+  </section>
+
+  <!-- [サービス] -->
+  <section class="card" id="services">
+    <h2 data-t="services_title">Our Services</h2>
+    <p data-t="services_body">
+      We provide a multi-layered ecosystem including legitimate device
+      guidance and digital literacy advocacy. We plan to sequentially launch
+      diverse digital solutions to meet the evolving needs of the global
+      community.
+    </p>
+
+    <!-- サービスリンク -->
+    <ul class="service-links">
+      <li>
+        <a href="https://ryopc.channel.io" target="_blank" rel="noopener noreferrer">
+          Support via ChannelTalk <span>➔</span>
+        </a>
+      </li>
+      <li>
+        <a href="https://jr-it.rweb.site" target="_blank" rel="noopener noreferrer">
+          Kids IT Certification <span>➔</span>
+        </a>
+      </li>
+      <li>
+        <a href="https://www.zqls.f5.si" target="_blank" rel="noopener noreferrer">
+          ZaqLess <span>➔</span>
+        </a>
+      </li>
+      <li>
+        <a href="https://koshi.js.org" target="_blank" rel="noopener noreferrer">
+          Koshi <span>➔</span>
+        </a>
+      </li>
+      <li>
+        <a href="https://fo.ryopc.org" target="_blank" rel="noopener noreferrer">
+          ryopc forum <span>➔</span>
+        </a>
+      </li>
+      <li>
+        <a href="https://pages.ryopc.org" target="_blank" rel="noopener noreferrer">
+          ryopc pages <span>➔</span>
+        </a>
+      </li>    
+    </ul>
+  </section>
+
+  <!-- [メルマガ登録] -->
+  <section class="card" id="newsletter">
+    <h2 data-t="newsletter_title">📬 メルマガ登録</h2>
+    <p data-t="newsletter_desc" style="color: var(--text-light); margin-bottom: 2rem">
+      最新のアップデートと技術情報をお届けします。
+    </p>
+
+    <a
+      href="https://ryopc.org/mail/lists/?p=subscribe&id=1"
+      class="form-submit-btn"
+      style="text-decoration: none"
+      aria-label="メーリングリストに登録"
+    >
+      <span data-t="btn_nl_subscribe">メルマガに登録</span> <span>➔</span>
+    </a>
+
+    <p class="form-note">登録後、確認メールをお送りします。</p>
+  </section>
+
+  <!-- [お問い合わせフォーム] -->
+  <section class="card" id="contact">
+    <h2 data-t="contact_title">Contact Us</h2>
+    <p data-t="contact_body" style="color: var(--text-light); margin-bottom: 2rem">
+      プロジェクトに関するご質問やご相談は、以下のフォームよりお気軽にお問い合わせください。
+    </p>
+
+    <form
+      action="/api/contact.php"
+      method="POST"
+      id="contactForm"
+    >
+      <div class="form-group">
+        <label for="form_name" data-t="label_name">Name</label>
+        <input
+          type="text"
+          id="form_name"
+          name="お名前"
+          required
+          placeholder="Your Name"
+          class="form-control"
+        />
+      </div>
+
+      <div class="form-group">
+        <label for="form_email" data-t="label_email">Email Address</label>
+        <input
+          type="email"
+          id="form_email"
+          name="メールアドレス"
+          required
+          placeholder="your.email@example.com"
+          class="form-control"
+        />
+      </div>
+
+      <div class="form-group">
+        <label for="form_subject" data-t="label_subject">Subject</label>
+        <select id="form_subject" name="ご用件" class="form-control">
+          <option value="一般のお問い合わせ" data-t="opt_general">
+            General Inquiry
+          </option>
+          <option value="プロジェクトへの参加" data-t="opt_project">
+            Join the Project
+          </option>
+          <option value="その他" data-t="opt_other">Other</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label for="form_message" data-t="label_message">Message</label>
+        <textarea
+          id="form_message"
+          name="お問い合わせ内容"
+          required
+          placeholder="Type your message here..."
+          rows="6"
+          class="form-control"
+        ></textarea>
+      </div>
+
+      <!-- Turnstile Widget -->
+      <div class="form-group">
+        <div class="cf-turnstile" data-sitekey="0x4AAAAAAFiJ4W1mfPwrl1au" data-action="contact" data-theme="light"></div>
+      </div>
+
+      <button type="submit" class="form-submit-btn">
+        <span data-t="btn_submit">Send Message</span> <span>➔</span>
+      </button>
+    </form>
+  </section>
+
+  <a href="/docs" class="docs-link-button">
+    <span data-t="btn_docs">View Project Documentation</span> <span>➔</span>
   </a>
+extraScripts: |
+  <script>
+    // --- お問い合わせフォームの送信制御 ---
+    document
+      .getElementById("contactForm")
+      ?.addEventListener("submit", async function (e) {
+        e.preventDefault();
 
-  <p class="form-note">登録後、確認メールをお送りします。</p>
-</section>
+        const form = this;
+        const submitBtn = form.querySelector(".form-submit-btn");
+        const originalBtnHtml = submitBtn.innerHTML;
 
-<!-- [お問い合わせフォーム] -->
-<section class="card" id="contact">
-  <h2 data-t="contact_title">Contact Us</h2>
-  <p data-t="contact_body" style="color: var(--text-light); margin-bottom: 2rem">
-    プロジェクトに関するご質問やご相談は、以下のフォームよりお気軽にお問い合わせください。
-  </p>
+        submitBtn.innerHTML = "<span>Sending...</span>";
+        submitBtn.style.opacity = "0.6";
+        submitBtn.style.pointerEvents = "none";
 
-  <form
-    action="https://formsubmit.co/9ed07af3dba9707a82c1878969c186ec"
-    method="POST"
-    id="contactForm"
-  >
-    <input type="hidden" name="_redirect" value="https://ryopc.org" />
+        const formData = new FormData(form);
 
-    <div class="form-group">
-      <label for="form_name" data-t="label_name">Name</label>
-      <input
-        type="text"
-        id="form_name"
-        name="お名前"
-        required
-        placeholder="Your Name"
-        class="form-control"
-      />
-    </div>
+        try {
+          const response = await fetch(form.action, {
+            method: "POST",
+            body: formData,
+            headers: {
+              'Accept': 'application/json',
+            },
+          });
 
-    <div class="form-group">
-      <label for="form_email" data-t="label_email">Email Address</label>
-      <input
-        type="email"
-        id="form_email"
-        name="メールアドレス"
-        required
-        placeholder="your.email@example.com"
-        class="form-control"
-      />
-    </div>
+          const result = await response.json();
 
-    <div class="form-group">
-      <label for="form_subject" data-t="label_subject">Subject</label>
-      <select id="form_subject" name="ご用件" class="form-control">
-        <option value="一般のお問い合わせ" data-t="opt_general">
-          General Inquiry
-        </option>
-        <option value="プロジェクトへの参加" data-t="opt_project">
-          Join the Project
-        </option>
-        <option value="その他" data-t="opt_other">Other</option>
-      </select>
-    </div>
+          // Turnstileウィジェットをリセット（トークンは使い捨てのため）
+          if (window.turnstile) {
+            const widget = document.querySelector('.cf-turnstile');
+            if (widget && widget.dataset.widgetId) {
+              window.turnstile.reset(widget.dataset.widgetId);
+            } else {
+              // widgetIdが取れない場合は全リセット
+              window.turnstile.reset();
+            }
+          }
 
-    <div class="form-group">
-      <label for="form_message" data-t="label_message">Message</label>
-      <textarea
-        id="form_message"
-        name="お問い合わせ内容"
-        required
-        placeholder="Type your message here..."
-        rows="6"
-        class="form-control"
-      ></textarea>
-    </div>
+          if (result.success) {
+            const cardSection = document.getElementById("contact");
+            if (cardSection) {
+              cardSection.style.opacity = "0";
+              setTimeout(() => {
+                cardSection.innerHTML = `
+                        <h2 style="color: var(--primary);">Thank You!</h2>
+                        <p style="font-size: 1.1rem; margin-top: 1.5rem;">メッセージは正常に送信されました。<br>リアルタイムにコックピット（PWA）へ通知されました。</p>
+                        <div style="text-align: center; margin-top: 2rem;">
+                            <div style="display:inline-block; width: 12px; height: 12px; background: var(--accent); border-radius:50%; box-shadow: 0 0 12px var(--accent);"></div>
+                        </div>
+                    `;
+                cardSection.style.opacity = "1";
+              }, 400);
+            }
+          } else {
+            // 検証失敗時のエラー表示
+            alert(result.error || "送信に失敗しました。時間を置いて再度お試しください。");
+            submitBtn.innerHTML = originalBtnHtml;
+            submitBtn.style.opacity = "1";
+            submitBtn.style.pointerEvents = "auto";
+          }
+        } catch (error) {
+          console.error("Submission Error:", error);
+          alert(
+            "送信中にエラーが発生しました。時間を置いて再度お試しください。",
+          );
 
-    <button type="submit" class="form-submit-btn">
-      <span data-t="btn_submit">Send Message</span> <span>➔</span>
-    </button>
-  </form>
-</section>
-
-<a href="/docs" class="docs-link-button">
-  <span data-t="btn_docs">View Project Documentation</span> <span>➔</span>
-</a>
-{% endblock %}
-
-{% block scripts %}
-<script>
-  // --- お問い合わせフォームの送信制御 ---
-  document
-    .getElementById("contactForm")
-    ?.addEventListener("submit", async function (e) {
-      e.preventDefault();
-
-      const form = this;
-      const submitBtn = form.querySelector(".form-submit-btn");
-      const originalBtnHtml = submitBtn.innerHTML;
-
-      submitBtn.innerHTML = "<span>Sending...</span>";
-      submitBtn.style.opacity = "0.6";
-      submitBtn.style.pointerEvents = "none";
-
-      const formData = new FormData(form);
-
-      try {
-        const response = await fetch(form.action, {
-          method: "POST",
-          body: formData,
-          mode: "no-cors",
-        });
-
-        const cardSection = document.getElementById("contact");
-        if (cardSection) {
-          cardSection.style.opacity = "0";
-          setTimeout(() => {
-            cardSection.innerHTML = `
-                    <h2 style="color: var(--primary);">Thank You!</h2>
-                    <p style="font-size: 1.1rem; margin-top: 1.5rem;">メッセージは正常に送信されました。<br>リアルタイムにコックピット（PWA）へ通知されました。</p>
-                    <div style="text-align: center; margin-top: 2rem;">
-                        <div style="display:inline-block; width: 12px; height: 12px; background: var(--accent); border-radius:50%; box-shadow: 0 0 12px var(--accent);"></div>
-                    </div>
-                `;
-            cardSection.style.opacity = "1";
-          }, 400);
+          submitBtn.innerHTML = originalBtnHtml;
+          submitBtn.style.opacity = "1";
+          submitBtn.style.pointerEvents = "auto";
         }
-      } catch (error) {
-        console.error("Submission Error:", error);
-        alert(
-          "送信中にエラーが発生しました。時間を置いて再度お試しください。",
-        );
+      });
 
-        submitBtn.innerHTML = originalBtnHtml;
-        submitBtn.style.opacity = "1";
-        submitBtn.style.pointerEvents = "auto";
+    // Turnstileウィジェットのレンダリング完了時にwidgetIdを保存
+    window.addEventListener('load', () => {
+      if (window.turnstile) {
+        const widget = document.querySelector('.cf-turnstile');
+        if (widget) {
+          // turnstile.render() のコールバックでwidgetIdを取得
+          const originalRender = window.turnstile.render;
+          window.turnstile.render = function(container, params) {
+            const widgetId = originalRender.call(this, container, params);
+            if (container.classList.contains('cf-turnstile')) {
+              container.dataset.widgetId = widgetId;
+            }
+            return widgetId;
+          };
+        }
       }
     });
-</script>
-{% endblock %}
+  </script>

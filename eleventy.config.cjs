@@ -139,6 +139,7 @@ module.exports = function (eleventyConfig) {
   eleventyConfig.addPassthroughCopy(".htaccess");
   eleventyConfig.addPassthroughCopy(".well-known");
   eleventyConfig.addPassthroughCopy("favicon.ico");
+  eleventyConfig.addPassthroughCopy("api");
 
   return {
     pathPrefix: "/",
