@@ -404,14 +404,9 @@ extraScripts: |
           const result = await response.json();
 
           // Turnstileウィジェットをリセット（トークンは使い捨てのため）
+          // 引数なしで呼ぶとページ内の全ウィジェットをリセット
           if (window.turnstile) {
-            const widget = document.querySelector('.cf-turnstile');
-            if (widget && widget.dataset.widgetId) {
-              window.turnstile.reset(widget.dataset.widgetId);
-            } else {
-              // widgetIdが取れない場合は全リセット
-              window.turnstile.reset();
-            }
+            window.turnstile.reset();
           }
 
           if (result.success) {
@@ -421,10 +416,7 @@ extraScripts: |
               setTimeout(() => {
                 cardSection.innerHTML = `
                         <h2 style="color: var(--primary);">Thank You!</h2>
-                        <p style="font-size: 1.1rem; margin-top: 1.5rem;">メッセージは正常に送信されました。<br>リアルタイムにコックピット（PWA）へ通知されました。</p>
-                        <div style="text-align: center; margin-top: 2rem;">
-                            <div style="display:inline-block; width: 12px; height: 12px; background: var(--accent); border-radius:50%; box-shadow: 0 0 12px var(--accent);"></div>
-                        </div>
+                        <p style="font-size: 1.1rem; margin-top: 1.5rem;">メッセージは正常に送信されました。</p>
                     `;
                 cardSection.style.opacity = "1";
               }, 400);
@@ -438,31 +430,11 @@ extraScripts: |
           }
         } catch (error) {
           console.error("Submission Error:", error);
-          alert(
-            "送信中にエラーが発生しました。時間を置いて再度お試しください。",
-          );
+          alert("送信中にエラーが発生しました。");
 
           submitBtn.innerHTML = originalBtnHtml;
           submitBtn.style.opacity = "1";
           submitBtn.style.pointerEvents = "auto";
         }
       });
-
-    // Turnstileウィジェットのレンダリング完了時にwidgetIdを保存
-    window.addEventListener('load', () => {
-      if (window.turnstile) {
-        const widget = document.querySelector('.cf-turnstile');
-        if (widget) {
-          // turnstile.render() のコールバックでwidgetIdを取得
-          const originalRender = window.turnstile.render;
-          window.turnstile.render = function(container, params) {
-            const widgetId = originalRender.call(this, container, params);
-            if (container.classList.contains('cf-turnstile')) {
-              container.dataset.widgetId = widgetId;
-            }
-            return widgetId;
-          };
-        }
-      }
-    });
   </script>
