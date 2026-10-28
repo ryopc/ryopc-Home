@@ -243,7 +243,8 @@ if (preg_match('/[\r\n]/', $to . $subject)) {
 // 6. メール送信（UTF-8 / base64 で文字化けを防止）
 // ---------------------------------------------------------------------
 $encodedFromName = mb_encode_mimeheader($mailFromName, 'UTF-8', 'B');
-$mimeType = ($format === 'html') ? 'text/html' : 'text/plain';
+$encodedSubject  = mb_encode_mimeheader($subject, 'UTF-8', 'B');
+$mimeType        = ($format === 'html') ? 'text/html' : 'text/plain';
 
 $headers = implode("\r\n", [
     'From: ' . $encodedFromName . ' <' . $mailFrom . '>',
@@ -256,16 +257,4 @@ $headers = implode("\r\n", [
 
 $encodedBody = chunk_split(base64_encode($body));
 
-$sent = mb_send_mail($to, $subject, $encodedBody, $headers);
-
-if (!$sent) {
-    error_log('[send_mail] mail delivery failed (to: ' . $to . ', from: ' . $mailFrom . ', format: ' . $format . ')');
-    fail(500, 'メール送信に失敗しました');
-}
-
-respond(200, 'success', 'メールを受け付けました', [
-    'to'        => $to,
-    'from'      => $mailFrom,
-    'from_name' => $mailFromName,
-    'format'    => $format,
-]);
+$sent = mail($to, $encodedSubject, $encodedBody, $headers);
