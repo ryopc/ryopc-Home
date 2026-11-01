@@ -1,0 +1,283 @@
+/* ================================
+   ryopc org - Components
+================================ */
+
+/* Terminal label */
+.label-term {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-secondary);
+}
+
+.label-term::before {
+  content: ">";
+  color: var(--accent);
+}
+
+/* Buttons */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-family: var(--font-sans);
+  font-weight: 500;
+  font-size: 0.98rem;
+  line-height: 1;
+  padding: 0.8rem 1.2rem;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border);
+  color: var(--text-primary);
+  transition: color var(--transition-fast), border-color var(--transition-fast), background var(--transition-fast);
+  position: relative;
+  overflow: hidden;
+}
+
+.btn:hover {
+  border-color: var(--border-hover);
+  color: var(--text-primary);
+}
+
+.btn .arrow {
+  display: inline-block;
+  transition: transform var(--transition-fast);
+}
+
+.btn:hover .arrow {
+  transform: translateX(4px);
+}
+
+/* Animated border button */
+.btn-ghost {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-family: var(--font-mono);
+  font-size: 0.9rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  padding: 0.9rem 1.4rem;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border);
+  color: var(--text-primary);
+  position: relative;
+  isolation: isolate;
+}
+
+.btn-ghost::after {
+  content: "";
+  position: absolute;
+  inset: -1px;
+  border-radius: inherit;
+  background: radial-gradient(400px circle at var(--x, 50%) var(--y, 50%), var(--accent-glow), transparent 40%);
+  opacity: 0;
+  transition: opacity var(--transition-base);
+  z-index: -1;
+}
+
+.btn-ghost:hover::after {
+  opacity: 1;
+}
+
+.btn-ghost:hover {
+  border-color: var(--border-hover);
+}
+
+/* Cards */
+.card {
+  position: relative;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  background: radial-gradient(600px circle at var(--x, 50%) var(--y, 50%), rgba(0, 229, 255, 0.03), transparent 40%);
+  transition: border-color var(--transition-base), transform var(--transition-base);
+  overflow: hidden;
+}
+
+.card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(800px circle at var(--x, 50%) var(--y, 50%), var(--accent-glow), transparent 45%);
+  opacity: 0;
+  transition: opacity var(--transition-base);
+  pointer-events: none;
+}
+
+.card:hover {
+  border-color: var(--border-hover);
+  transform: translateY(-2px);
+}
+
+.card:hover::before {
+  opacity: 1;
+}
+
+.card-inner {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+  padding: clamp(1.6rem, 4vw, 2.4rem);
+  z-index: 1;
+}
+
+.card-meta {
+  font-family: var(--font-mono);
+  font-size: 0.88rem;
+  color: var(--text-tertiary);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.card-title {
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-size: clamp(1.2rem, 2.4vw, 1.6rem);
+  letter-spacing: -0.01em;
+}
+
+.card-desc {
+  color: var(--text-secondary);
+  max-width: 60ch;
+}
+
+.card-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: var(--font-mono);
+  font-size: 0.9rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-secondary);
+  margin-top: auto;
+}
+
+.card-link .arrow {
+  transition: transform var(--transition-fast);
+}
+
+.card:hover .card-link {
+  color: var(--text-primary);
+}
+
+.card:hover .card-link .arrow {
+  transform: translateX(4px);
+}
+
+/* Repo style card */
+.repo-card {
+  position: relative;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+  padding: clamp(1.4rem, 3vw, 2rem);
+  transition: border-color var(--transition-base), transform var(--transition-base);
+}
+
+.repo-card:hover {
+  border-color: var(--border-hover);
+  transform: translateY(-2px);
+}
+
+.repo-card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.repo-card-title {
+  font-family: var(--font-mono);
+  font-size: 1rem;
+  letter-spacing: -0.01em;
+}
+
+.repo-card-status {
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  color: var(--text-tertiary);
+}
+
+.repo-card-desc {
+  color: var(--text-secondary);
+  max-width: 64ch;
+}
+
+.repo-card-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: var(--font-mono);
+  font-size: 0.9rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-secondary);
+}
+
+.repo-card:hover .repo-card-link {
+  color: var(--text-primary);
+}
+
+.repo-card:hover .repo-card-link .arrow {
+  transform: translateX(4px);
+}
+
+.repo-card-link .arrow {
+  transition: transform var(--transition-fast);
+}
+
+/* List */
+.log-list {
+  display: flex;
+  flex-direction: column;
+  border-top: 1px solid var(--border);
+}
+
+.log-item {
+  display: grid;
+  grid-template-columns: minmax(120px, 160px) 1fr auto;
+  gap: clamp(1rem, 4vw, 2rem);
+  align-items: center;
+  padding: 1rem 0;
+  border-bottom: 1px solid var(--border);
+  transition: color var(--transition-fast);
+}
+
+.log-date {
+  font-family: var(--font-mono);
+  font-size: 0.9rem;
+  color: var(--text-tertiary);
+}
+
+.log-title {
+  font-size: clamp(1rem, 2vw, 1.08rem);
+}
+
+.log-arrow {
+  font-family: var(--font-mono);
+  color: var(--text-tertiary);
+  transition: transform var(--transition-fast), color var(--transition-fast);
+}
+
+.log-item:hover .log-arrow {
+  transform: translateX(4px);
+  color: var(--text-primary);
+}
+
+@media (max-width: 720px) {
+  .log-item {
+    grid-template-columns: 1fr;
+    gap: 0.4rem;
+  }
+
+  .log-arrow {
+    display: none;
+  }
+}
