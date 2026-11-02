@@ -8,8 +8,8 @@
 <link rel="stylesheet" href="/assets/css/utilities.css" />
 
 <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin />
-<link rel="stylesheet" id="silktide-consent-manager-css" href="https://cdn.jsdelivr.net/gh/silktide/consent-manager@v2.0.0/silktide-consent-manager.css" media="print" onload="this.media='all'" />
-<script src="https://cdn.jsdelivr.net/gh/silktide/consent-manager@v2.0.0/silktide-consent-manager.js" defer></script>
+<link rel="stylesheet" id="silktide-consent-manager-css" href="https://cdn.jsdelivr.net/gh/silktide/consent-manager@v2.0.0/silktide-consent-manager.css" integrity="sha384-IO1E/jCrQXyH5rwcI0SXP7OXw47JFqQNDQcKhbFvqnL2IunBxxwE2Ne5XyAmCqKs" crossorigin="anonymous" media="print" onload="this.media='all'" />
+<script src="https://cdn.jsdelivr.net/gh/silktide/consent-manager@v2.0.0/silktide-consent-manager.js" integrity="sha384-j4NIMOecmtzMWe9GJADIIe5hTlHG63aiTQ/2XorW10RNyQJg+IU+xwFVDy45wBah" crossorigin="anonymous" defer></script>
 
 <script>
   window.silktideConsentManager.init({
@@ -21,16 +21,14 @@
         id: "essential",
         label: "Essential",
         description: "<p>These cookies are necessary for the website to function properly and cannot be switched off.</p>",
-        required: true,
-        onAccept: function () {}
+        required: true
       },
       {
         id: "customer_support",
         label: "Customer Support",
         description: "<p>This cookie helps us provide you with the best possible support.</p>",
         required: false,
-        scripts: [{ url: "https://rawcdn.githack.com/ryopc/Archive/fc3acd1142e5108dc5263e4b112a768988cccb4d/Channel-Talk.js", load: "async" }],
-        onAccept: function () {}
+        scripts: [{ url: "https://rawcdn.githack.com/ryopc/Archive/fc3acd1142e5108dc5263e4b112a768988cccb4d/Channel-Talk.js", load: "async" }]
       }
     ],
     text: {
@@ -61,8 +59,8 @@
     top: 0;
     left: 0;
     width: 0%;
-    height: 1px;
-    background: linear-gradient(90deg, transparent, var(--accent), transparent);
+    height: 2px;
+    background: linear-gradient(90deg, var(--accent), var(--accent-hover));
     z-index: 1000001;
     transition: width 80ms linear;
   }
