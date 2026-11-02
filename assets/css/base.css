@@ -2,7 +2,9 @@
    ryopc org - Base
 ================================ */
 
-*, *::before, *::after {
+*,
+*::before,
+*::after {
   box-sizing: border-box;
 }
 
@@ -36,12 +38,21 @@ body::before {
   inset: 0;
   pointer-events: none;
   z-index: -2;
-  background-image: linear-gradient(var(--grid-color) 1px, transparent 1px),
+  background-image:
+    linear-gradient(var(--grid-color) 1px, transparent 1px),
     linear-gradient(90deg, var(--grid-color) 1px, transparent 1px);
   background-size: var(--grid-size) var(--grid-size);
   background-position: top center;
-  mask-image: radial-gradient(ellipse 120% 80% at 50% 0%, black 40%, transparent 100%);
-  -webkit-mask-image: radial-gradient(ellipse 120% 80% at 50% 0%, black 40%, transparent 100%);
+  mask-image: radial-gradient(
+    ellipse 120% 80% at 50% 0%,
+    black 40%,
+    transparent 100%
+  );
+  -webkit-mask-image: radial-gradient(
+    ellipse 120% 80% at 50% 0%,
+    black 40%,
+    transparent 100%
+  );
 }
 
 /* Selection */

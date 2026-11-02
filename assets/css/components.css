@@ -32,7 +32,10 @@
   border-radius: var(--radius-sm);
   border: 1px solid var(--border);
   color: var(--text-primary);
-  transition: color var(--transition-fast), border-color var(--transition-fast), background var(--transition-fast);
+  transition:
+    color var(--transition-fast),
+    border-color var(--transition-fast),
+    background var(--transition-fast);
   position: relative;
   overflow: hidden;
 }
@@ -73,7 +76,11 @@
   position: absolute;
   inset: -1px;
   border-radius: inherit;
-  background: radial-gradient(400px circle at var(--x, 50%) var(--y, 50%), var(--accent-glow), transparent 40%);
+  background: radial-gradient(
+    400px circle at var(--x, 50%) var(--y, 50%),
+    var(--accent-glow),
+    transparent 40%
+  );
   opacity: 0;
   transition: opacity var(--transition-base);
   z-index: -1;
@@ -92,8 +99,14 @@
   position: relative;
   border: 1px solid var(--border);
   border-radius: var(--radius-md);
-  background: radial-gradient(600px circle at var(--x, 50%) var(--y, 50%), rgba(0, 229, 255, 0.03), transparent 40%);
-  transition: border-color var(--transition-base), transform var(--transition-base);
+  background: radial-gradient(
+    600px circle at var(--x, 50%) var(--y, 50%),
+    rgba(0, 229, 255, 0.03),
+    transparent 40%
+  );
+  transition:
+    border-color var(--transition-base),
+    transform var(--transition-base);
   overflow: hidden;
 }
 
@@ -101,7 +114,11 @@
   content: "";
   position: absolute;
   inset: 0;
-  background: radial-gradient(800px circle at var(--x, 50%) var(--y, 50%), var(--accent-glow), transparent 45%);
+  background: radial-gradient(
+    800px circle at var(--x, 50%) var(--y, 50%),
+    var(--accent-glow),
+    transparent 45%
+  );
   opacity: 0;
   transition: opacity var(--transition-base);
   pointer-events: none;
@@ -178,7 +195,9 @@
   flex-direction: column;
   gap: 0.8rem;
   padding: clamp(1.4rem, 3vw, 2rem);
-  transition: border-color var(--transition-base), transform var(--transition-base);
+  transition:
+    border-color var(--transition-base),
+    transform var(--transition-base);
 }
 
 .repo-card:hover {
@@ -263,7 +282,9 @@
 .log-arrow {
   font-family: var(--font-mono);
   color: var(--text-tertiary);
-  transition: transform var(--transition-fast), color var(--transition-fast);
+  transition:
+    transform var(--transition-fast),
+    color var(--transition-fast);
 }
 
 .log-item:hover .log-arrow {
