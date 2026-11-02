@@ -12,43 +12,47 @@
 <script src="https://cdn.jsdelivr.net/gh/silktide/consent-manager@v2.0.0/silktide-consent-manager.js" integrity="sha384-j4NIMOecmtzMWe9GJADIIe5hTlHG63aiTQ/2XorW10RNyQJg+IU+xwFVDy45wBah" crossorigin="anonymous" defer></script>
 
 <script>
-  window.silktideConsentManager.init({
-    backdrop: { show: true },
-    icon: { position: "bottomLeft" },
-    prompt: { position: "bottomRight" },
-    consentTypes: [
-      {
-        id: "essential",
-        label: "Essential",
-        description: "<p>These cookies are necessary for the website to function properly and cannot be switched off.</p>",
-        required: true
-      },
-      {
-        id: "customer_support",
-        label: "Customer Support",
-        description: "<p>This cookie helps us provide you with the best possible support.</p>",
-        required: false,
-        scripts: [{ url: "https://rawcdn.githack.com/ryopc/Archive/fc3acd1142e5108dc5263e4b112a768988cccb4d/Channel-Talk.js", load: "async" }]
-      }
-    ],
-    text: {
-      prompt: {
-        description: "<p>This site uses cookies to improve the user experience and provide personalized content.</p>",
-        acceptAllButtonText: "Accept all",
-        acceptAllButtonAccessibleLabel: "Accept all cookies",
-        rejectNonEssentialButtonText: "Reject non-essential",
-        rejectNonEssentialButtonAccessibleLabel: "Reject all non-essential cookies",
-        preferencesButtonText: "Preferences",
-        preferencesButtonAccessibleLabel: "Toggle preferences"
-      },
-      preferences: {
-        title: "Customize your cookie preferences",
-        description: "<p>We respect your right to privacy.</p>",
-        saveButtonText: "Save and close",
-        saveButtonAccessibleLabel: "Save your cookie preferences",
-        creditLinkText: "Get this banner for free",
-        creditLinkAccessibleLabel: "Get this banner for free"
-      }
+  document.addEventListener("DOMContentLoaded", function () {
+    if (window.silktideConsentManager && typeof window.silktideConsentManager.init === "function") {
+      window.silktideConsentManager.init({
+        backdrop: { show: true },
+        icon: { position: "bottomLeft" },
+        prompt: { position: "bottomRight" },
+        consentTypes: [
+          {
+            id: "essential",
+            label: "Essential",
+            description: "<p>These cookies are necessary for the website to function properly and cannot be switched off.</p>",
+            required: true
+          },
+          {
+            id: "customer_support",
+            label: "Customer Support",
+            description: "<p>This cookie helps us provide you with the best possible support.</p>",
+            required: false,
+            scripts: [{ url: "https://rawcdn.githack.com/ryopc/Archive/fc3acd1142e5108dc5263e4b112a768988cccb4d/Channel-Talk.js", load: "async" }]
+          }
+        ],
+        text: {
+          prompt: {
+            description: "<p>This site uses cookies to improve the user experience and provide personalized content.</p>",
+            acceptAllButtonText: "Accept all",
+            acceptAllButtonAccessibleLabel: "Accept all cookies",
+            rejectNonEssentialButtonText: "Reject non-essential",
+            rejectNonEssentialButtonAccessibleLabel: "Reject all non-essential cookies",
+            preferencesButtonText: "Preferences",
+            preferencesButtonAccessibleLabel: "Toggle preferences"
+          },
+          preferences: {
+            title: "Customize your cookie preferences",
+            description: "<p>We respect your right to privacy.</p>",
+            saveButtonText: "Save and close",
+            saveButtonAccessibleLabel: "Save your cookie preferences",
+            creditLinkText: "Get this banner for free",
+            creditLinkAccessibleLabel: "Get this banner for free"
+          }
+        }
+      });
     }
   });
 </script>
