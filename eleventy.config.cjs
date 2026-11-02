@@ -5,12 +5,6 @@ const fs = require("fs");
 const { Image } = require("@11ty/eleventy-img");
 
 module.exports = function (eleventyConfig) {
-  // ryopc org: ignore dynamic/app directories
-  eleventyConfig.ignores.add("dashboard/**");
-  eleventyConfig.ignores.add("config/**");
-  eleventyConfig.ignores.add("migrations/**");
-  eleventyConfig.ignores.add("vendor/**");
-
   // 🌟 【Cloudflare Pages対策】
   // ビルド前に必ず出力先フォルダを作っておく
   if (!fs.existsSync("./_site/img/")) {
