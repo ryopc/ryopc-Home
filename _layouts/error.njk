@@ -1,112 +1,108 @@
 ---
 layout: error-base.njk
 ---
-headExtra: |
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-extraStyles: |
-  <style>
-    body {
-      min-height: 100dvh;
-      display: grid;
-      place-items: center;
-      background: var(--bg);
-      color: var(--text-primary);
-      padding: 1.6rem;
-    }
+<style>
+  body {
+    min-height: 100dvh;
+    display: grid;
+    place-items: center;
+    background: var(--bg);
+    color: var(--text-primary);
+    padding: 1.6rem;
+  }
 
-    .err-scene {
-      width: min(720px, 100%);
-      display: flex;
-      flex-direction: column;
-      gap: 2rem;
-      text-align: center;
-    }
+  .err-scene {
+    width: min(720px, 100%);
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    text-align: center;
+  }
 
-    .err-label {
-      font-family: var(--font-mono);
-      font-size: 0.9rem;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      color: var(--text-tertiary);
-    }
+  .err-label {
+    font-family: var(--font-mono);
+    font-size: 0.9rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--text-tertiary);
+  }
 
-    .err-label::before {
-      content: ">";
-      color: var(--accent);
-      margin-right: 0.5rem;
-    }
+  .err-label::before {
+    content: ">";
+    color: var(--accent);
+    margin-right: 0.5rem;
+  }
 
-    .err-code {
-      font-family: var(--font-display);
-      font-weight: 500;
-      letter-spacing: -0.08em;
-      font-size: clamp(6rem, 16vw, 12rem);
-      line-height: 0.8;
-      -webkit-text-stroke: 1px rgba(248, 250, 252, 0.9);
-      color: transparent;
-    }
+  .err-code {
+    font-family: var(--font-display);
+    font-weight: 500;
+    letter-spacing: -0.08em;
+    font-size: clamp(6rem, 16vw, 12rem);
+    line-height: 0.8;
+    -webkit-text-stroke: 1px rgba(248, 250, 252, 0.9);
+    color: transparent;
+  }
 
-    .err-title {
-      font-family: var(--font-display);
-      font-weight: 500;
-      letter-spacing: -0.02em;
-      font-size: clamp(1.8rem, 4vw, 2.8rem);
-    }
+  .err-title {
+    font-family: var(--font-display);
+    font-weight: 500;
+    letter-spacing: -0.02em;
+    font-size: clamp(1.8rem, 4vw, 2.8rem);
+  }
 
-    .err-desc {
-      color: var(--text-secondary);
-      max-width: 56ch;
-      margin: 0 auto;
-    }
+  .err-desc {
+    color: var(--text-secondary);
+    max-width: 56ch;
+    margin: 0 auto;
+  }
 
-    .err-actions {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 0.8rem;
-    }
+  .err-actions {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.8rem;
+  }
 
-    .err-meta {
-      font-family: var(--font-mono);
-      font-size: 0.88rem;
-      color: var(--text-tertiary);
-    }
+  .err-meta {
+    font-family: var(--font-mono);
+    font-size: 0.88rem;
+    color: var(--text-tertiary);
+  }
 
-    .err-meta a {
-      color: var(--text-secondary);
-    }
+  .err-meta a {
+    color: var(--text-secondary);
+  }
 
-    .err-meta a:hover {
-      color: var(--text-primary);
-    }
-  </style>
-headerContent: ""
-mainContent: |
-  <div class="err-scene">
-    <div>
-      <span class="err-label">{{ errorTitle | default('error') }}</span>
-      <div class="err-code">{{ errorCode }}</div>
-      <h1 class="err-title">{{ errorMessage }}</h1>
-      <p class="err-desc">{{ errorDescription }}</p>
-    </div>
-    <div class="err-actions">
-      <a class="btn-ghost" href="/">
-        <span>BACK TO HOME</span>
-        <span class="arrow">→</span>
-      </a>
-      {% if errorCode == "404" %}
-      <a class="btn" href="/docs">
-        <span>VIEW DOCS</span>
-        <span class="arrow">→</span>
-      </a>
-      {% else %}
-      <a class="btn" href="javascript:location.reload()">
-        <span>RELOAD</span>
-        <span class="arrow">→</span>
-      </a>
-      {% endif %}
-    </div>
-    <p class="err-meta">
-      > if this persists, <a href="https://fo.ryopc.org/">reach support</a>
-    </p>
+  .err-meta a:hover {
+    color: var(--text-primary);
+  }
+</style>
+
+<div class="err-scene">
+  <div>
+    <span class="err-label">{{ errorTitle | default('error') }}</span>
+    <div class="err-code">{{ errorCode }}</div>
+    <h1 class="err-title">{{ errorMessage }}</h1>
+    <p class="err-desc">{{ errorDescription }}</p>
   </div>
+  <div class="err-actions">
+    <a class="btn-ghost" href="/">
+      <span>BACK TO HOME</span>
+      <span class="arrow">→</span>
+    </a>
+    {% if errorCode == "404" %}
+    <a class="btn" href="/docs">
+      <span>VIEW DOCS</span>
+      <span class="arrow">→</span>
+    </a>
+    {% else %}
+    <a class="btn" href="javascript:location.reload()">
+      <span>RELOAD</span>
+      <span class="arrow">→</span>
+    </a>
+    {% endif %}
+  </div>
+  <p class="err-meta">
+    > if this persists, <a href="https://fo.ryopc.org/">reach support</a>
+  </p>
+</div>
