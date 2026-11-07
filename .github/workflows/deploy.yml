@@ -58,5 +58,6 @@ jobs:
             --filter='P /id.ryopc.org' \
             --filter='P /email' \
             --filter='P /s3' \
+            --filter='P /matomo' \
             -e "ssh -i ~/.ssh/deploy_key -p ${{ secrets.SSH_PORT }} -o StrictHostKeyChecking=no" \
             ./_site/ ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}:${{ secrets.DEPLOY_PATH }}
