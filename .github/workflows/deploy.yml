@@ -42,7 +42,7 @@ jobs:
 
       - name: 🚀 Deploy via rsync
         run: |
-          rsync -avzn --delete \
+          rsync -avz --delete \
             --filter='P /chat' \
             --filter='P /xmailinglist' \
             --filter='P /wiki' \
