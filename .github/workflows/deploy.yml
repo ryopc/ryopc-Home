@@ -42,7 +42,7 @@ jobs:
 
       - name: 🚀 Deploy via rsync
         run: |
-          rsync -avz --delete \
+          rsync -avzn --delete \
             --filter='P /chat' \
             --filter='P /xmailinglist' \
             --filter='P /wiki' \
@@ -57,5 +57,6 @@ jobs:
             --filter='P /git' \
             --filter='P /id.ryopc.org' \
             --filter='P /email' \
+            --filter='P /s3' \
             -e "ssh -i ~/.ssh/deploy_key -p ${{ secrets.SSH_PORT }} -o StrictHostKeyChecking=no" \
             ./_site/ ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}:${{ secrets.DEPLOY_PATH }}
